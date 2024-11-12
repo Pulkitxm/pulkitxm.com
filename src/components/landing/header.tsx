@@ -13,7 +13,7 @@ export default function Header() {
             src={hacktoberFest}
             className="w-full rounded-lg object-cover"
           />
-          <div className="absolute -bottom-20">
+          <div className="absolute -bottom-10">
             <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-background bg-background">
               <ImageDialog
                 src={profile.image}
@@ -26,7 +26,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <div className="mt-20 pl-5">
+      <div className="mt-12 pl-5">
         <p className="text-xl font-semibold text-white">{profile.name}</p>
         <p className="text-sm text-gray-300">{profile.caption}</p>
       </div>
