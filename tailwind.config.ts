@@ -63,6 +63,14 @@ const config: Config = {
         },
       },
       keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -81,6 +89,8 @@ const config: Config = {
         },
       },
       animation: {
+        fadeIn: "fadeIn 0.2s ease-out",
+        fadeOut: "fadeOut 0.2s ease-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

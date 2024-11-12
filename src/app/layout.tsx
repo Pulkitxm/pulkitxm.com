@@ -69,7 +69,7 @@ export default function RootLayout({
         <link rel="icon" href="./favicon.png" />
       </head>
       <body className={`${inter.className} ${GeistSans.className}`}>
-        <div className="mx-auto py-10 md:w-[800px] md:max-w-[800px]">
+        <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-14">
           <Navbar />
           {children}
         </div>
