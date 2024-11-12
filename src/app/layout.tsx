@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -68,7 +69,10 @@ export default function RootLayout({
         <link rel="icon" href="./favicon.png" />
       </head>
       <body className={`${inter.className} ${GeistSans.className}`}>
-        {children}
+        <div className="mx-auto py-10 md:w-[800px] md:max-w-[800px]">
+          <Navbar />
+          {children}
+        </div>
       </body>
       <Analytics debug={false} />
       <SpeedInsights debug={false} />

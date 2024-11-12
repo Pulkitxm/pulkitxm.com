@@ -1,5 +1,9 @@
-import React from "react";
+import Header from "@/components/landing/header";
 
 export default function page() {
-  return <div>page</div>;
+  return (
+    <div className="mt-5 border border-white p-5">
+      <Header />
+    </div>
+  );
 }
