@@ -9,7 +9,7 @@ export default function Navbar() {
         {links.map((link, index) => (
           <li
             key={index}
-            className="mx-2 inline-block text-gray-700 hover:text-gray-900"
+            className="mx-2 inline-block text-gray-300 hover:text-gray-900"
           >
             <Link href={link.url}>{link.title}</Link>
           </li>
