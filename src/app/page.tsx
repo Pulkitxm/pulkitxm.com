@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import GithubGraph from "@/components/GithubGraph";
 import Experience from "@/components/landing/Experience";
 import Header from "@/components/landing/header";
@@ -10,6 +11,7 @@ export default function LandingPage() {
       <GithubGraph />
       <Experience />
       <Projects />
+      <Footer />
     </div>
   );
 }
