@@ -3,15 +3,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Eye, ArrowUpRight, Calendar } from "lucide-react";
 import Link from "next/link";
 import { getBlogs } from "@/actions/blog";
+import profile from "@/data/profile";
 
 export default async function BlogListing() {
   const { blogs } = await getBlogs();
 
   return (
     <div className="mx-auto w-full max-w-4xl space-y-4 p-4 sm:space-y-6 sm:p-6">
-      <h1 className="mb-4 text-2xl font-bold sm:mb-8 sm:text-3xl md:text-4xl">
-        Latest Blogs
-      </h1>
+      <Link
+        href={profile.links.blogPageUrl}
+        target="_blank"
+        className="mb-4 text-2xl font-bold underline sm:mb-8 sm:text-3xl md:text-4xl"
+      >
+        Blogs
+      </Link>
 
       <div className="grid gap-4 sm:gap-6">
         {blogs.map((blog, index) => (

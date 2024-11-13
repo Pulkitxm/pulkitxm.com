@@ -1,0 +1,86 @@
+.submit-btn {
+  width: 170px;
+  height: 60px;
+  border: none;
+  outline: none;
+  background: #2f2f2f;
+  color: #fff;
+  font-size: 22px;
+  border-radius: 40px;
+  text-align: center;
+  box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.check-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  box-shadow: 0 0 12px -2px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  right: -40px;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.check-box svg {
+  width: 30px;
+}
+
+.check-box svg path {
+  stroke-width: 3;
+  stroke: #fff;
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+  stroke-linecap: round;
+}
+
+.active {
+  background: #50727b;
+  transition: 1s;
+}
+
+.active .check-box {
+  right: 0;
+  opacity: 1;
+  transition: 1s;
+}
+
+.active p {
+  margin-right: 60px;
+  transition: 1s;
+}
+
+.active svg path {
+  stroke-dashoffset: 0;
+  transition: 1s;
+  transition-delay: 1s;
+}
+
+@media screen and (max-width: 768px) {
+  .submit-btn {
+    width: 200px;
+    height: 60px;
+    font-size: 18px;
+  }
+
+  .check-box {
+    width: 60px;
+    height: 60px;
+    right: -30px;
+  }
+
+  .check-box svg {
+    width: 30px;
+    margin: 15px;
+  }
+
+  .active p {
+    margin-right: 100px;
+  }
+}

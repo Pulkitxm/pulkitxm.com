@@ -7,6 +7,10 @@ const links = [
     title: "Blogs",
     url: "/blogs",
   },
+  {
+    title: "Contact",
+    url: "/contact",
+  },
 ];
 
 export default links;

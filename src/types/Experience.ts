@@ -1,11 +1,5 @@
 import { StaticImageData } from "next/image";
 
-export type ContactLink = {
-  github: string;
-  linkedin: string;
-  twitter: string;
-};
-
 export type Experience = {
   companyName: string;
   position: string;
@@ -22,7 +16,9 @@ export type Profile = {
   caption: string;
   image: StaticImageData;
   githubUserName: string;
-  contactLinks: ContactLink;
+  links: {
+    [key: string]: string;
+  };
   experience: Experience[];
   projects: Project[];
 };

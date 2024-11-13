@@ -25,6 +25,7 @@ query Publication($id: ObjectId = "66213f8be5371b46eac0e05e") {
 `;
 
 export async function getBlogs() {
+  console.log("Fetching blogs");
   const res = await axios.post("https://gql.hashnode.com/", {
     query: GET_USER_ARTICLES,
   });

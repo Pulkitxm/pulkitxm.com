@@ -11,10 +11,11 @@ const profile: Profile = {
   caption: "Full Stack Developer & Open Source Enthusiast",
   image: myImage,
   githubUserName: "pulkitxm",
-  contactLinks: {
+  links: {
     github: "https://github.com/Pulkitxm",
     linkedin: "https://www.linkedin.com/in/pulkit-dce/",
     twitter: "https://x.com/devpulkitt",
+    blogPageUrl: "https://blogs.devpulkit.in/",
   },
   experience: [
     {
@@ -35,16 +36,16 @@ const profile: Profile = {
       location: "India",
       type: "hybrid",
       url: "https://geeksforgeeks.org/",
-      showMain: true,
+      showMain: false,
     },
     {
       companyName: "Deviators Club",
       position: "Chairperson & Web Lead",
       location: "Gurugram, India",
       type: "hybrid",
-      url: "deviatorsdce.tech",
+      url: "https://deviatorsdce.tech/",
       startDate: new Date("2024-02-01"),
-      showMain: false,
+      showMain: true,
     },
   ],
   projects: [

@@ -32,13 +32,13 @@ export default function Header() {
         <p className="text-xl font-semibold text-white">{profile.name}</p>
         <p className="text-sm text-gray-300">{profile.caption}</p>
         <div className="my-2 flex space-x-3">
-          <Link href={profile.contactLinks.linkedin} target="_blank">
+          <Link href={profile.links.linkedin} target="_blank">
             <FaLinkedinIn className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
           </Link>
-          <Link href={profile.contactLinks.github} target="_blank">
+          <Link href={profile.links.github} target="_blank">
             <FaGithub className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
           </Link>
-          <Link href={profile.contactLinks.twitter} target="_blank">
+          <Link href={profile.links.twitter} target="_blank">
             <FaTwitter className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
           </Link>
         </div>
