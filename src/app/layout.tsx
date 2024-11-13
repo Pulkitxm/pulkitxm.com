@@ -39,27 +39,30 @@ export default function RootLayout({
           property="og:description"
           content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
         />
-        {/* <meta
-          property="og:image"
-          content="https://devpulkit.in/path/to/image.jpg"
-        /> */}
+        <meta property="og:image" content="https://devpulkit.in/banner.png" />
         <meta property="og:url" content="https://devpulkit.in" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Pulkit - Developer" />
         {/* Twitter Cards */}
-        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Pulkit - Developer" />
         <meta
           name="twitter:description"
           content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
         />
-        <meta
-          name="twitter:image"
-          content="https://devpulkit.in/path/to/image.jpg"
-        />
-        <meta name="twitter:site" content="@devpulkitt" /> */}
+        <meta name="twitter:image" content="https://devpulkit.in/banner.png" />
+        <meta name="twitter:site" content="@devpulkitt" />
         {/* Canonical Tag */}
         <link rel="canonical" href="https://devpulkit.in" />
+        {/* Facebook Tag */}
+        <meta property="og:url" content="https://devpulkit.in" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Pulkit - Developer" />
+        <meta
+          property="og:description"
+          content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
+        />
+        <meta property="og:image" content="" />
         {/* Title Tag */}
         <title>Pulkit - Developer</title>
         <link
@@ -67,7 +70,7 @@ export default function RootLayout({
           href="/icon?<generated>"
           type="image/<generated>"
           sizes="<generated>"
-        />{" "}
+        />
       </head>
       <body
         className={`${inter.className} ${GeistSans.className} dark min-h-screen`}
