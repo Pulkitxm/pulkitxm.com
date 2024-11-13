@@ -6,7 +6,7 @@ import Projects from "@/components/landing/Projects";
 
 export default function LandingPage() {
   return (
-    <div className="mt-2 rounded-lg border border-gray-700 p-5">
+    <div className="mt-2 rounded-lg border-gray-700 p-5 md:border">
       <Header />
       <GithubGraph />
       <Experience />
