@@ -13,9 +13,19 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Mail, MessageSquare, Send, User } from "lucide-react";
+import {
+  Mail,
+  MessageSquare,
+  Send,
+  User,
+  Github,
+  Linkedin,
+  Twitter,
+} from "lucide-react";
+import Link from "next/link";
+import profile from "@/data/profile";
 
-export default function ContactMe() {
+export default function Component() {
   const [formInputs, setFormInputs] = useState({
     name: "",
     email: "",
@@ -58,6 +68,35 @@ export default function ContactMe() {
           <CardDescription>
             Have a question or want to work together? Drop me a message!
           </CardDescription>
+          <div className="mt-4 flex space-x-4">
+            <a
+              href={profile.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              <Github className="h-5 w-5" />
+              <span className="sr-only">GitHub</span>
+            </a>
+            <a
+              href={profile.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              <Linkedin className="h-5 w-5" />
+              <span className="sr-only">LinkedIn</span>
+            </a>
+            <Link
+              href={profile.links.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              <Twitter className="h-5 w-5" />
+              <span className="sr-only">Twitter</span>
+            </Link>
+          </div>
         </CardHeader>
 
         <CardContent className="p-6">

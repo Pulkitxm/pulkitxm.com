@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Projects() {
   return (
-    <div className="mt-8 pt-4 sm:pt-6">
+    <div>
       <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
         Projects
       </h1>

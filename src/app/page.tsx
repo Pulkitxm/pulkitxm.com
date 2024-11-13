@@ -3,6 +3,7 @@ import GithubGraph from "@/components/GithubGraph";
 import Experience from "@/components/landing/Experience";
 import Header from "@/components/landing/header";
 import Projects from "@/components/landing/Projects";
+import Skills from "@/components/landing/Skills";
 
 export default function LandingPage() {
   return (
@@ -10,6 +11,7 @@ export default function LandingPage() {
       <Header />
       <GithubGraph />
       <Experience />
+      <Skills />
       <Projects />
       <Footer />
     </div>

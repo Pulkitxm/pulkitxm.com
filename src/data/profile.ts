@@ -26,7 +26,6 @@ const profile: Profile = {
       location: "India",
       type: "remote",
       url: "https://datawavelabs.io/",
-      showMain: true,
     },
     {
       companyName: "GeeksforGeeks",
@@ -36,7 +35,6 @@ const profile: Profile = {
       location: "India",
       type: "hybrid",
       url: "https://geeksforgeeks.org/",
-      showMain: false,
     },
     {
       companyName: "Deviators Club",
@@ -45,7 +43,6 @@ const profile: Profile = {
       type: "hybrid",
       url: "https://deviatorsdce.tech/",
       startDate: new Date("2024-02-01"),
-      showMain: true,
     },
   ],
   projects: [
@@ -74,6 +71,48 @@ const profile: Profile = {
       tagline: "A simple react hook for form handling",
     },
   ],
+  skills: {
+    Languages: ["JavaScript", "TypeScript", "Python", "Java", "SQL"],
+    "Libraries & Frameworks": [
+      "React",
+      "NextJS",
+      "Express",
+      "Fast Api",
+      "HonoJs (Serverless)",
+      "NodeJs",
+      "React Native",
+      "Tailwind CSS",
+      "Bootstrap",
+      "Material UI",
+      "Jest",
+      "Cypress",
+      "React Query",
+      "GraphQL",
+      "Redux",
+      "Recoil",
+    ],
+    "Databases & ORMs": [
+      "MongoDB",
+      "Postgres",
+      "SqlAlchemy",
+      "Redis",
+      "Alembic",
+      "MySQL",
+      "Prisma",
+      "PyScopG2",
+    ],
+    "Tools & Platforms": [
+      "GitHub Actions",
+      "Serverless",
+      "ESLint",
+      "AWS S3",
+      "AWS EC2",
+      "AWS CloudFront",
+      "Azure VM",
+      "Docker",
+      "Mapbox",
+    ],
+  },
 };
 
 profile.experience.sort((a, b) => {

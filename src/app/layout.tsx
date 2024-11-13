@@ -33,7 +33,6 @@ export default function RootLayout({
         />
         <meta name="author" content="Pulkit" />
         <meta name="robots" content="index, follow" />
-
         {/* Open Graph Tags */}
         <meta property="og:title" content="Pulkit - Developer" />
         <meta
@@ -47,7 +46,6 @@ export default function RootLayout({
         <meta property="og:url" content="https://devpulkit.in" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Pulkit - Developer" />
-
         {/* Twitter Cards */}
         {/* <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Pulkit - Developer" />
@@ -60,14 +58,16 @@ export default function RootLayout({
           content="https://devpulkit.in/path/to/image.jpg"
         />
         <meta name="twitter:site" content="@devpulkitt" /> */}
-
         {/* Canonical Tag */}
         <link rel="canonical" href="https://devpulkit.in" />
-
         {/* Title Tag */}
         <title>Pulkit - Developer</title>
-
-        <link rel="icon" href="./favicon.png" />
+        <link
+          rel="icon"
+          href="/icon?<generated>"
+          type="image/<generated>"
+          sizes="<generated>"
+        />{" "}
       </head>
       <body
         className={`${inter.className} ${GeistSans.className} dark min-h-screen`}

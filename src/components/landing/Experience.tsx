@@ -5,8 +5,6 @@ import profile from "@/data/profile";
 import Link from "next/link";
 
 export default function Experience() {
-  const experiences = profile.experience.filter((exp) => exp.showMain);
-
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
       year: "numeric",
@@ -20,11 +18,11 @@ export default function Experience() {
         Work Experience
       </h1>
       <p className="mb-8 text-sm text-gray-400">
-        All my professional experiences as a software engineer
+        All my professional experiences as a shitty developer!
       </p>
 
       <div className="relative border-l-2 border-gray-700">
-        {experiences.map((exp, index) => {
+        {profile.experience.map((exp, index) => {
           const CompanyNameTag = exp.url ? Link : "h2";
           return (
             <div key={index} className="mb-5 ml-6 last:mb-0">

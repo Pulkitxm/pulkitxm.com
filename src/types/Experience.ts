@@ -8,7 +8,6 @@ export type Experience = {
   location: string;
   type: string;
   url?: string;
-  showMain: boolean;
 };
 
 export type Profile = {
@@ -21,6 +20,9 @@ export type Profile = {
   };
   experience: Experience[];
   projects: Project[];
+  skills: {
+    [key: string]: string[];
+  };
 };
 
 export type Project = {
