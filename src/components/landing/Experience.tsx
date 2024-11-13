@@ -5,10 +5,12 @@ import profile from "@/data/profile";
 import Link from "next/link";
 
 export default function Experience() {
+  const experiences = profile.experience.filter((exp) => exp.showMain);
+
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "short",
     });
   };
 
@@ -22,10 +24,10 @@ export default function Experience() {
       </p>
 
       <div className="relative border-l-2 border-gray-700">
-        {profile.experience.map((exp, index) => {
+        {experiences.map((exp, index) => {
           const CompanyNameTag = exp.url ? Link : "h2";
           return (
-            <div key={index} className="mb-8 ml-6 last:mb-0">
+            <div key={index} className="mb-5 ml-6 last:mb-0">
               <div className="absolute -left-[9px] mt-1.5 h-4 w-4 rounded-full border-2 border-gray-700" />
 
               <div className="group relative flex flex-col gap-1 rounded-lg border border-gray-800 p-4 transition-all hover:border-gray-700 sm:p-6">

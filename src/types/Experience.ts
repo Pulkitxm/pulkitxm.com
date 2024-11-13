@@ -14,12 +14,22 @@ export type Experience = {
   location: string;
   type: string;
   url?: string;
+  showMain: boolean;
 };
 
 export type Profile = {
   name: string;
   caption: string;
   image: StaticImageData;
-  contactLink: ContactLink;
+  githubUserName: string;
+  contactLinks: ContactLink;
   experience: Experience[];
+  projects: Project[];
+};
+
+export type Project = {
+  name: string;
+  image: StaticImageData;
+  url: string;
+  tagline: string;
 };
