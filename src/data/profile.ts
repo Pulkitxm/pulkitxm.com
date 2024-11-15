@@ -1,10 +1,14 @@
 import myImage from "@/assets/me.png";
 import { Profile } from "@/types/Experience";
 
+// projects
 import DeployIt from "@/assets/projects/deployit.webp";
 import ImageTweaker from "@/assets/projects/tweaker.webp";
 import VidWave from "@/assets/projects/vidwave.webp";
 import UseeForm from "@/assets/projects/useeform.webp";
+
+// certifications
+import GitHubFoundations from "@/assets/certifications/githubFoundations.png";
 
 const profile: Profile = {
   name: "Pulkit",
@@ -113,6 +117,18 @@ const profile: Profile = {
       "Mapbox",
     ],
   },
+  certifications: [
+    {
+      name: "GitHub Foundations",
+      issuedBy: {
+        name: "GitHub",
+        url: "https://www.credly.com/org/github",
+      },
+      verifyLink:
+        "https://www.credly.com/badges/0d980c06-511c-4e3d-a9a7-9973688b34ad",
+      image: GitHubFoundations,
+    },
+  ],
 };
 
 profile.experience.sort((a, b) => {

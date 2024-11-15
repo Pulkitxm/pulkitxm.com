@@ -10,6 +10,23 @@ export type Experience = {
   url?: string;
 };
 
+export type Project = {
+  name: string;
+  image: StaticImageData;
+  url: string;
+  tagline: string;
+};
+
+export type Certification = {
+  name: string;
+  issuedBy: {
+    name: string;
+    url: string;
+  };
+  verifyLink: string;
+  image: StaticImageData;
+};
+
 export type Profile = {
   name: string;
   caption: string;
@@ -23,11 +40,5 @@ export type Profile = {
   skills: {
     [key: string]: string[];
   };
-};
-
-export type Project = {
-  name: string;
-  image: StaticImageData;
-  url: string;
-  tagline: string;
+  certifications: Certification[];
 };

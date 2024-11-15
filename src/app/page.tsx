@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import GithubGraph from "@/components/GithubGraph";
+import Certifications from "@/components/landing/Certifications";
 import Experience from "@/components/landing/Experience";
 import Header from "@/components/landing/header";
 import Projects from "@/components/landing/Projects";
@@ -12,6 +13,7 @@ export default function LandingPage() {
       <GithubGraph />
       <Experience />
       <Skills />
+      <Certifications />
       <Projects />
       <Footer />
     </div>
