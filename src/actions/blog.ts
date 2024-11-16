@@ -6,9 +6,6 @@ import axios from "axios";
 const GET_USER_ARTICLES = `
 query Publication($id: ObjectId = "66213f8be5371b46eac0e05e") {
   publication(id: $id) {
-    author{
-      profilePicture
-    }
     posts(first: 50) {
       edges {
         node {
