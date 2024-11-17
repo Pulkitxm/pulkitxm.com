@@ -33,7 +33,7 @@ export default function Header() {
       <div className="mb-5 mt-12 pl-5">
         <p className="text-xl font-semibold text-white">{profile.name}</p>
         <p className="text-sm text-gray-300">{profile.caption}</p>
-        <div className="my-2 flex space-x-3">
+        <div className="my-2 flex items-center space-x-3">
           <Link href={profile.links.linkedin} target="_blank">
             <FaLinkedinIn className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
           </Link>
