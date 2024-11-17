@@ -1,10 +1,11 @@
+import profile from "@/data/profile";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
 export default function Component() {
   return (
     <Link
-      href="https://github.com"
+      href={profile.sourceCodeUrl}
       className="fixed right-4 top-4 z-50 hidden lg:block"
       aria-label="View source on GitHub"
       target="_blank"

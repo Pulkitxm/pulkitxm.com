@@ -32,6 +32,8 @@ export type Profile = {
   caption: string;
   image: StaticImageData;
   githubUserName: string;
+  resumeLink: string;
+  sourceCodeUrl: string;
   links: {
     [key: string]: string;
   };

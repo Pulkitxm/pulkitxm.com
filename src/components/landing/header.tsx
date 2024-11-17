@@ -44,7 +44,7 @@ export default function Header() {
             <FaTwitter className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
           </Link>
           <Button asChild variant="outline" size="sm">
-            <Link href="/resume.pdf" target="_blank">
+            <Link href={profile.resumeLink} target="_blank">
               <FileText className="mr-2 h-4 w-4" />
               Resume
             </Link>

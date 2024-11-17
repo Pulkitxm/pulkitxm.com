@@ -15,6 +15,8 @@ const profile: Profile = {
   caption: "Full Stack Developer & Open Source Enthusiast",
   image: myImage,
   githubUserName: "pulkitxm",
+  resumeLink: "/resume.pdf",
+  sourceCodeUrl: "https://github.com/Pulkitxm/devpulkit.in",
   links: {
     github: "https://github.com/Pulkitxm",
     linkedin: "https://www.linkedin.com/in/pulkit-dce/",
