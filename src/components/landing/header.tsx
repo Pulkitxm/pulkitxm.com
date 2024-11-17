@@ -5,6 +5,8 @@ import profile from "@/data/profile";
 import { ImageDialog } from "./ImageDialog";
 import Link from "next/link";
 import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { FileText } from "lucide-react";
 
 export default function Header() {
   return (
@@ -41,6 +43,12 @@ export default function Header() {
           <Link href={profile.links.twitter} target="_blank">
             <FaTwitter className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
           </Link>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/resume.pdf" target="_blank">
+              <FileText className="mr-2 h-4 w-4" />
+              Resume
+            </Link>
+          </Button>
         </div>
       </div>
     </>
