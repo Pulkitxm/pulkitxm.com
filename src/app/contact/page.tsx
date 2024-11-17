@@ -13,15 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-  Mail,
-  MessageSquare,
-  Send,
-  User,
-  Github,
-  Linkedin,
-  Twitter,
-} from "lucide-react";
+import { Mail, MessageSquare, Send, User } from "lucide-react";
+import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 import profile from "@/data/profile";
 
@@ -75,7 +68,7 @@ export default function Component() {
               rel="noopener noreferrer"
               className="text-muted-foreground transition-colors hover:text-primary"
             >
-              <Github className="h-5 w-5" />
+              <FaGithub className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </a>
             <a
@@ -84,7 +77,7 @@ export default function Component() {
               rel="noopener noreferrer"
               className="text-muted-foreground transition-colors hover:text-primary"
             >
-              <Linkedin className="h-5 w-5" />
+              <FaLinkedinIn className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </a>
             <Link
@@ -93,7 +86,7 @@ export default function Component() {
               rel="noopener noreferrer"
               className="text-muted-foreground transition-colors hover:text-primary"
             >
-              <Twitter className="h-5 w-5" />
+              <FaTwitter className="h-5 w-5" />
               <span className="sr-only">Twitter</span>
             </Link>
           </div>
