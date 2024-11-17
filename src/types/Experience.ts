@@ -27,6 +27,11 @@ export type Certification = {
   image: StaticImageData;
 };
 
+export type PortfolioDesign = {
+  link: string;
+  image: StaticImageData;
+};
+
 export type Profile = {
   name: string;
   caption: string;
@@ -43,4 +48,5 @@ export type Profile = {
     [key: string]: string[];
   };
   certifications: Certification[];
+  portfolioIndex: PortfolioDesign[];
 };

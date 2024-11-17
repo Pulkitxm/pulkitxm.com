@@ -10,6 +10,12 @@ import UseeForm from "@/assets/projects/useeform.webp";
 // certifications
 import GitHubFoundations from "@/assets/certifications/githubFoundations.png";
 
+// portfolio previews
+import v1 from "@/assets/portfolios/v1.png";
+import v2 from "@/assets/portfolios/v2.png";
+import v3 from "@/assets/portfolios/v3.png";
+import v4 from "@/assets/portfolios/v4.png";
+
 const profile: Profile = {
   name: "Pulkit",
   caption: "Full Stack Developer & Open Source Enthusiast",
@@ -129,6 +135,24 @@ const profile: Profile = {
       verifyLink:
         "https://www.credly.com/badges/0d980c06-511c-4e3d-a9a7-9973688b34ad",
       image: GitHubFoundations,
+    },
+  ],
+  portfolioIndex: [
+    {
+      link: "v4.devpulkit.in",
+      image: v4,
+    },
+    {
+      link: "v3.devpulkit.in",
+      image: v3,
+    },
+    {
+      link: "v2.devpulkit.in",
+      image: v2,
+    },
+    {
+      link: "v1.devpulkit.in",
+      image: v1,
     },
   ],
 };

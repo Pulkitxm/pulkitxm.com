@@ -27,10 +27,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -43,24 +39,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
-        },
       },
       keyframes: {
         fadeIn: {
@@ -71,62 +55,49 @@ const config: Config = {
           "0%": { opacity: "1" },
           "100%": { opacity: "0" },
         },
-        "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+        slideInUp: {
+          "0%": { opacity: "0", transform: "translateY(50px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        gradientX: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        accordionDown: {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        accordionUp: {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
         bump: {
-          "44%": {
-            transform: "translate(1.33%, 6.75%)",
-          },
-          "53%": {
-            transform: "translate(-16.67%, -0.54%)",
-          },
-          "61%": {
-            transform: "translate(3.66%, -2.46%)",
-          },
-          "69%": {
-            transform: "translate(-0.59%, 15.27%)",
-          },
-          "76%": {
-            transform: "translate(-1.92%, -4.68%)",
-          },
-          "83%": {
-            transform: "translate(9.38%, 0.96%)",
-          },
-          "90%": {
-            transform: "translate(-4.55%, 1.98%)",
-          },
+          "44%": { transform: "translate(1.33%, 6.75%)" },
+          "53%": { transform: "translate(-16.67%, -0.54%)" },
+          "61%": { transform: "translate(3.66%, -2.46%)" },
+          "69%": { transform: "translate(-0.59%, 15.27%)" },
+          "76%": { transform: "translate(-1.92%, -4.68%)" },
+          "83%": { transform: "translate(9.38%, 0.96%)" },
+          "90%": { transform: "translate(-4.55%, 1.98%)" },
         },
         worm: {
-          from: {
-            strokeDashoffset: "10",
-          },
-          "25%": {
-            strokeDashoffset: "295",
-          },
-          to: {
-            strokeDashoffset: "1165",
-          },
+          from: { strokeDashoffset: "10" },
+          "25%": { strokeDashoffset: "295" },
+          to: { strokeDashoffset: "1165" },
         },
       },
       animation: {
         fadeIn: "fadeIn 0.2s ease-out",
         fadeOut: "fadeOut 0.2s ease-out",
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        fadeInUp: "fadeInUp 1s ease-out",
+        slideInUp: "slideInUp 1s ease-out",
+        gradientX: "gradientX 3s ease infinite",
+        accordionDown: "accordionDown 0.2s ease-out",
+        accordionUp: "accordionUp 0.2s ease-out",
         bump: "bump 3s linear infinite",
         worm: "worm 3s cubic-bezier(0.42, 0.17, 0.75, 0.83) infinite",
       },
@@ -134,4 +105,5 @@ const config: Config = {
   },
   plugins: [tailwindcssAnimate],
 };
+
 export default config;
