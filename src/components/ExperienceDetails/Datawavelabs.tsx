@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 export default function DatawavelabsExperience() {
   return (
@@ -88,7 +89,16 @@ export default function DatawavelabsExperience() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl">Relieving Letter</CardTitle>
+          <CardTitle className="text-xl flex items-center">
+            Relieving Letter
+            <Link
+              href={datwaveLabsExp.docLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="w-5 h-5 ml-2" />
+            </Link>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <iframe

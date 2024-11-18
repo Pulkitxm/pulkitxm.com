@@ -28,6 +28,7 @@ const profile: Readonly<Profile> = {
       type: "remote",
       url: "https://datawavelabs.io/",
       slug: "datawavelabs",
+      showOnHome: true,
     },
     {
       companyName: "GeeksforGeeks",
@@ -46,7 +47,6 @@ const profile: Readonly<Profile> = {
       url: "https://deviatorsdce.tech/",
       startDate: new Date("2024-02-01"),
       slug: "deviators",
-      showOnHome: true,
     },
   ].sort((a, b) => {
     if (!a.endDate && b.endDate) return -1;

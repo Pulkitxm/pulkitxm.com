@@ -40,6 +40,14 @@ export default function Page() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                   </div>
 
+                  <Link
+                    href={`http://${item.link}`}
+                    className="mb-2 flex transform items-center justify-center rounded-lg px-6 py-3 text-lg font-semibold sm:text-base md:text-xl lg:text-2xl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.link}
+                  </Link>
                   {/* Action Buttons */}
                   <div className="flex flex-wrap justify-center gap-4">
                     <Link
