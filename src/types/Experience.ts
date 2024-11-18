@@ -8,6 +8,8 @@ export type Experience = {
   location: string;
   type: string;
   url?: string;
+  slug: string;
+  showOnHome?: boolean;
 };
 
 export type Project = {
@@ -39,14 +41,10 @@ export type Profile = {
   githubUserName: string;
   resumeLink: string;
   sourceCodeUrl: string;
-  links: {
-    [key: string]: string;
-  };
-  experience: Experience[];
-  projects: Project[];
-  skills: {
-    [key: string]: string[];
-  };
-  certifications: Certification[];
-  portfolioIndex: PortfolioDesign[];
+  links: Readonly<Record<string, string>>;
+  experience: readonly Experience[];
+  projects: readonly Project[];
+  skills: Readonly<Record<string, string[]>>;
+  certifications: readonly Certification[];
+  portfolioIndex: readonly PortfolioDesign[];
 };

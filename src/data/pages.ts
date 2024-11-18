@@ -4,6 +4,10 @@ const links = [
     url: "/",
   },
   {
+    title: "Experience",
+    url: "/exp",
+  },
+  {
     title: "Blogs",
     url: "/blogs",
   },

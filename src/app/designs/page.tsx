@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Page() {
   return (
     <div className="min-h-screen bg-black bg-[linear-gradient(to_bottom,transparent,rgb(0,0,0))]">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="mb-20 space-y-4">
           <h1 className="animate-fade-in-up bg-gradient-to-r from-white via-white to-gray-500 bg-clip-text text-center text-5xl font-bold text-transparent sm:text-6xl md:text-7xl">

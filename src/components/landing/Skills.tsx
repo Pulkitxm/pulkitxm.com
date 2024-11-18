@@ -50,7 +50,7 @@ export default function Component() {
         <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
           Skills
         </h1>
-        <div className="space-y-8">
+        <div className="space-y-4">
           {Object.entries(skillsData).map(([category, skills]) => (
             <div key={category}>
               <h3 className="mb-2 text-lg font-medium text-muted-foreground">
