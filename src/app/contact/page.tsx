@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { sendEmail } from "@/actions/email";
 import {
   Card,
@@ -17,6 +17,7 @@ import { Mail, MessageSquare, Send, User } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 import profile from "@/data/profile";
+import Magnetic from "@/components/MagneticElement";
 
 export default function Component() {
   const [formInputs, setFormInputs] = useState({
@@ -24,6 +25,7 @@ export default function Component() {
     email: "",
     message: "",
   });
+  const [isTouchable, setIsTouchable] = useState(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -51,6 +53,29 @@ export default function Component() {
     [formInputs],
   );
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setIsTouchable("ontouchstart" in window);
+  }, []);
+
+  const links = [
+    {
+      href: profile.links.github,
+      icon: FaGithub,
+      label: "GitHub",
+    },
+    {
+      href: profile.links.linkedin,
+      icon: FaLinkedinIn,
+      label: "LinkedIn",
+    },
+    {
+      href: profile.links.twitter,
+      icon: FaTwitter,
+      label: "Twitter",
+    },
+  ];
+
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <Card className="overflow-hidden">
@@ -60,36 +85,25 @@ export default function Component() {
           </CardTitle>
           <CardDescription>
             Have a question or want to work together? Drop me a message!
+            <div className="mt-4 flex space-x-4">
+              {links.map(({ href, icon: Icon, label }) => {
+                const Element = isTouchable ? Fragment : Magnetic;
+                return (
+                  <Element key={label}>
+                    <Link
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      <Icon className="h-7 w-7" />
+                      <span className="sr-only">{label}</span>
+                    </Link>
+                  </Element>
+                );
+              })}
+            </div>
           </CardDescription>
-          <div className="mt-4 flex space-x-4">
-            <a
-              href={profile.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors hover:text-primary"
-            >
-              <FaGithub className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </a>
-            <a
-              href={profile.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors hover:text-primary"
-            >
-              <FaLinkedinIn className="h-5 w-5" />
-              <span className="sr-only">LinkedIn</span>
-            </a>
-            <Link
-              href={profile.links.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors hover:text-primary"
-            >
-              <FaTwitter className="h-5 w-5" />
-              <span className="sr-only">Twitter</span>
-            </Link>
-          </div>
         </CardHeader>
 
         <CardContent className="p-6">
