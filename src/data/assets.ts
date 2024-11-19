@@ -1,6 +1,6 @@
 const assets = {
   myImage: "https://utfs.io/f/9qYKlaZjLrURsWweBlfzFY0DiBAmjrlRIXb3W7t4TdVZ9QeJ",
-  resume: "https://utfs.io/f/9qYKlaZjLrURrQ7fmb98H6DQMRtNXVCPcIdFZynfwjvlekhS",
+  resume: "https://utfs.io/f/9qYKlaZjLrURzpgwExHv54WGTKA3dypfxZncFtbJNBoi72ks",
   banner: "https://utfs.io/f/9qYKlaZjLrURsWvZjhfzFY0DiBAmjrlRIXb3W7t4TdVZ9QeJ",
   hacktoberFest:
     "https://utfs.io/f/9qYKlaZjLrURXQW1p4a7RdUGvPo4tZHKDIz5FJEjcYCWxl6i",

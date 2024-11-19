@@ -47,7 +47,12 @@ export default function Header() {
           <Link href={profile.links.twitter} target="_blank">
             <FaTwitter className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
           </Link>
-          <Button asChild variant="outline" size="sm">
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="border-gray-800 hover:bg-gray-800"
+          >
             <Link href={profile.resumeLink} target="_blank">
               <FileText className="mr-2 h-4 w-4" />
               Resume
