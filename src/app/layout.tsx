@@ -7,6 +7,7 @@ import { GeistSans } from "geist/font/sans";
 import Navbar from "@/components/Navbar";
 import Transition from "@/components/AnimateApp";
 import GithubRepo from "@/components/GithubRepo";
+import assets from "@/data/assets";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,7 +41,7 @@ export default function RootLayout({
           property="og:description"
           content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
         />
-        <meta property="og:image" content="https://devpulkit.in/banner.png" />
+        <meta property="og:image" content={assets.banner} />
         <meta property="og:url" content="https://devpulkit.in" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Pulkit - Developer" />
@@ -51,7 +52,7 @@ export default function RootLayout({
           name="twitter:description"
           content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
         />
-        <meta name="twitter:image" content="https://devpulkit.in/banner.png" />
+        <meta name="twitter:image" content={assets.banner} />
         <meta name="twitter:site" content="@devpulkitt" />
         {/* Canonical Tag */}
         <link rel="canonical" href="https://devpulkit.in" />

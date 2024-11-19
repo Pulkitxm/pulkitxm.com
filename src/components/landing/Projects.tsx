@@ -25,7 +25,10 @@ export default function Projects() {
                 src={project.image}
                 className="h-full w-full scale-110 rounded-lg brightness-90 transition-transform duration-300 group-hover:scale-100"
                 width={500}
+                height={300}
                 alt={project.name}
+                fetchPriority="high"
+                loading="eager"
               />
             </div>
             <p className="mt-2 text-lg font-bold text-gray-400">

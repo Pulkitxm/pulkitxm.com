@@ -1,16 +1,16 @@
-import myImage from "@/assets/me.png";
 import { Profile } from "@/types/Experience";
 import { portfolioIndex } from "./portfolioIndex";
 import { certifications } from "./certifications";
 import { skills } from "./skills";
 import { projects } from "./projects";
+import assets from "@/data/assets";
 
 const profile: Readonly<Profile> = {
   name: "Pulkit",
   caption: "Full Stack Developer & Open Source Enthusiast",
-  image: myImage,
+  image: assets.myImage,
   githubUserName: "pulkitxm",
-  resumeLink: "/resume.pdf",
+  resumeLink: assets.resume,
   sourceCodeUrl: "https://github.com/Pulkitxm/devpulkit.in",
   links: {
     github: "https://github.com/Pulkitxm",

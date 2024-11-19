@@ -32,10 +32,14 @@ export default function Page() {
                   <div className="relative mb-6 overflow-hidden rounded-lg">
                     <Image
                       src={item.image}
+                      width={1200}
+                      height={800}
                       alt={`Portfolio v${index + 1}`}
                       className="w-full scale-110 transform object-cover transition duration-700 group-hover:rotate-0 group-hover:scale-100"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                       priority={index === 0}
+                      fetchPriority="high"
+                      loading="eager"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                   </div>

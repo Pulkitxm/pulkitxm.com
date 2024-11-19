@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import assets from "@/data/assets";
 
 export default function DatawavelabsExperience() {
   return (
@@ -27,8 +29,10 @@ export default function DatawavelabsExperience() {
         </p>
 
         <div className="mb-8 overflow-hidden rounded-lg shadow-lg">
-          <img
-            src={datwaveLabsExp.images}
+          <Image
+            src={datwaveLabsExp.image}
+            width={1200}
+            height={800}
             alt="DatawaveLabs"
             className="w-full object-cover object-center"
           />
@@ -89,14 +93,14 @@ export default function DatawavelabsExperience() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl flex items-center">
+          <CardTitle className="flex items-center text-xl">
             Relieving Letter
             <Link
               href={datwaveLabsExp.docLink}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <ExternalLink className="w-5 h-5 ml-2" />
+              <ExternalLink className="ml-2 h-5 w-5" />
             </Link>
           </CardTitle>
         </CardHeader>
@@ -121,7 +125,7 @@ const datwaveLabsExp = {
   type: "remote",
   url: "https://datawavelabs.io/",
   slug: "datawavelabs",
-  docLink: "https://utfs.io/f/9qYKlaZjLrURVMjKOuk3rLjY4M1PytSsh50iAuVfqX2FKgHb",
+  docLink: assets.datawaveRelievingLetter,
   work: [
     {
       title: "Authentication and Authorization Systems",
@@ -206,5 +210,5 @@ const datwaveLabsExp = {
     "Postman",
     "Event Source Polyfill",
   ],
-  images: "https://utfs.io/f/9qYKlaZjLrURUe9YZltfhY9yACrlXVd2t6T1JvgwbPIF5j3q",
+  image: assets.datawaveDashboard,
 };

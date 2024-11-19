@@ -1,24 +1,21 @@
-import v1 from "@/assets/portfolios/v1.png";
-import v2 from "@/assets/portfolios/v2.png";
-import v3 from "@/assets/portfolios/v3.png";
-import v4 from "@/assets/portfolios/v4.png";
 import { PortfolioDesign } from "@/types/Experience";
+import assets from "@/data/assets";
 
 export const portfolioIndex: readonly PortfolioDesign[] = [
   {
     link: "v4.devpulkit.in",
-    image: v4,
+    image: assets.v4Portfolio,
   },
   {
     link: "v3.devpulkit.in",
-    image: v3,
+    image: assets.v3Portfolio,
   },
   {
     link: "v2.devpulkit.in",
-    image: v2,
+    image: assets.v2Portfolio,
   },
   {
     link: "v1.devpulkit.in",
-    image: v1,
+    image: assets.v1Portfolio,
   },
 ];

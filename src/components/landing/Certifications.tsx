@@ -35,11 +35,11 @@ export default function Component() {
             <Card className="h-full overflow-hidden transition-colors hover:bg-muted/50">
               <CardHeader className="border-b p-0">
                 <Image
-                  src={certification.image.src}
+                  src={certification.image}
+                  width={800}
+                  height={400}
                   alt=""
                   className="aspect-video w-full object-contain"
-                  width={certification.image.width}
-                  height={certification.image.height}
                 />
               </CardHeader>
               <CardContent className="space-y-2 p-4">

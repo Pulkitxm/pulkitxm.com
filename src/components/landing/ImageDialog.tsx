@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 export function ImageDialog({
   src: image,
@@ -9,12 +9,16 @@ export function ImageDialog({
   fill,
   rounded,
   small,
+  width,
+  height,
 }: {
-  src: StaticImageData;
+  src: string;
   className?: string;
   fill?: boolean;
   rounded?: boolean;
   small?: boolean;
+  width: number;
+  height: number;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -54,8 +58,12 @@ export function ImageDialog({
         <Image
           fill={fill}
           src={image}
+          width={fill ? undefined : width}
+          height={fill ? undefined : height}
           alt="Profile picture"
           className={`${className} transform transition duration-200`}
+          fetchPriority="high"
+          loading="eager"
         />
       </button>
 
@@ -81,7 +89,8 @@ export function ImageDialog({
                 className={`w-full transform transition duration-300 ${rounded ? "rounded-full" : ""}`}
                 width={small ? 400 : 800}
                 height={small ? 400 : rounded ? 800 : 600}
-                priority
+                fetchPriority="high"
+                loading="eager"
               />
             </div>
           </div>

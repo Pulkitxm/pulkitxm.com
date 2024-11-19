@@ -1,5 +1,3 @@
-import { StaticImageData } from "next/image";
-
 export type Experience = {
   companyName: string;
   position: string;
@@ -14,7 +12,7 @@ export type Experience = {
 
 export type Project = {
   name: string;
-  image: StaticImageData;
+  image: string;
   url: string;
   tagline: string;
 };
@@ -26,18 +24,18 @@ export type Certification = {
     url: string;
   };
   verifyLink: string;
-  image: StaticImageData;
+  image: string;
 };
 
 export type PortfolioDesign = {
   link: string;
-  image: StaticImageData;
+  image: string;
 };
 
 export type Profile = {
   name: string;
   caption: string;
-  image: StaticImageData;
+  image: string;
   githubUserName: string;
   resumeLink: string;
   sourceCodeUrl: string;
