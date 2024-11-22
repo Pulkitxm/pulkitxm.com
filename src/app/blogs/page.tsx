@@ -9,6 +9,9 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
+  ArrowUp,
+  ArrowDown,
+  Search,
 } from "lucide-react";
 import Link from "next/link";
 import { getBlogs } from "@/actions/blog";
@@ -16,10 +19,25 @@ import profile from "@/data/profile";
 import { BlogType } from "@/types/blog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+type SortOption = "publishedAt" | "readTimeInMinutes" | "views";
+type SortOrder = "asc" | "desc";
 
 export default function BlogListing() {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState<SortOption>("publishedAt");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -36,15 +54,92 @@ export default function BlogListing() {
     fetchBlogs();
   }, []);
 
+  const filteredAndSortedBlogs = blogs
+    .filter(
+      (blog) =>
+        blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        blog.brief.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        blog.url.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+    .sort((a, b) => {
+      if (sortBy === "publishedAt") {
+        return sortOrder === "asc"
+          ? new Date(a.publishedAt).getTime() -
+              new Date(b.publishedAt).getTime()
+          : new Date(b.publishedAt).getTime() -
+              new Date(a.publishedAt).getTime();
+      } else {
+        return sortOrder === "asc"
+          ? a[sortBy] - b[sortBy]
+          : b[sortBy] - a[sortBy];
+      }
+    });
+
+  const toggleSortOrder = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
   return (
-    <div className="mx-auto mt-2 w-full max-w-4xl space-y-4 rounded-lg border-gray-700 p-5 sm:space-y-6 sm:p-6 md:border">
-      <Link
-        href={profile.links.blogPageUrl}
-        target="_blank"
-        className="mb-4 text-2xl font-bold underline sm:mb-8 sm:text-3xl md:text-4xl"
-      >
-        Blogs
-      </Link>
+    <div className="mx-auto mt-2 w-full max-w-4xl space-y-4 rounded-lg border-gray-700 p-4 sm:p-6 md:border">
+      <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+        <div className="flex items-center space-x-2">
+          <Link
+            href={profile.links.blogPageUrl}
+            target="_blank"
+            className="text-2xl font-bold underline sm:text-3xl md:text-4xl"
+          >
+            Blogs
+          </Link>
+          <Badge variant="secondary" className="text-sm">
+            {filteredAndSortedBlogs.length}
+          </Badge>
+        </div>
+        <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-x-2 sm:space-y-0">
+          <div className="relative">
+            <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-500" />
+            <Input
+              type="text"
+              placeholder="Search blogs..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-8"
+            />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Select
+              value={sortBy}
+              onValueChange={(value: SortOption) => setSortBy(value)}
+            >
+              <SelectTrigger className="w-[140px] sm:w-[180px]">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem className="bg-black" value="publishedAt">
+                  Published Date
+                </SelectItem>
+                <SelectItem className="bg-black" value="readTimeInMinutes">
+                  Read Time
+                </SelectItem>
+                <SelectItem className="bg-black" value="views">
+                  Views
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleSortOrder}
+              aria-label={`Sort ${sortOrder === "asc" ? "ascending" : "descending"}`}
+            >
+              {sortOrder === "asc" ? (
+                <ArrowUp className="h-4 w-4" />
+              ) : (
+                <ArrowDown className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </div>
+      </div>
 
       <div className="grid gap-4 sm:gap-6">
         {loading ? (
@@ -68,10 +163,12 @@ export default function BlogListing() {
               </CardContent>
             </Card>
           ))
-        ) : blogs.length === 0 ? (
+        ) : filteredAndSortedBlogs.length === 0 ? (
           <p className="text-center text-gray-500">No blogs found.</p>
         ) : (
-          blogs.map((blog, index) => <Blog key={index} blog={blog} />)
+          filteredAndSortedBlogs.map((blog, index) => (
+            <Blog key={index} blog={blog} />
+          ))
         )}
       </div>
     </div>
