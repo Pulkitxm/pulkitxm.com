@@ -7,6 +7,7 @@ export const validateBlog = z.object({
   publishedAt: z.string().transform((val) => new Date(val)),
   readTimeInMinutes: z.number(),
   views: z.number(),
+  brief: z.string(),
 });
 
 export type BlogType = z.infer<typeof validateBlog>;
