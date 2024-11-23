@@ -75,9 +75,6 @@ export default function Component() {
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {filteredExperience.map((exp, index) => {
-          const isOver = exp.endDate
-            ? new Date(exp.endDate) < new Date()
-            : false;
           return (
             <motion.div
               key={exp.slug}
@@ -126,22 +123,21 @@ export default function Component() {
                     {exp.type}
                   </div>
                 </CardContent>
-                {isOver && (
-                  <CardFooter className="mt-auto pt-6">
-                    <Button
-                      className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700"
-                      asChild
+
+                <CardFooter className="mt-auto pt-6">
+                  <Button
+                    className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700"
+                    asChild
+                  >
+                    <Link
+                      href={`/exp/${exp.slug}`}
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
                     >
-                      <Link
-                        href={`/exp/${exp.slug}`}
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center"
-                      >
-                        View more
-                      </Link>
-                    </Button>
-                  </CardFooter>
-                )}
+                      View more
+                    </Link>
+                  </Button>
+                </CardFooter>
               </Card>
             </motion.div>
           );

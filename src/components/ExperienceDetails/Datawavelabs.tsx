@@ -124,7 +124,6 @@ const datwaveLabsExp = {
   location: "India",
   type: "remote",
   url: "https://datawavelabs.io/",
-  slug: "datawavelabs",
   docLink: assets.datawaveRelievingLetter,
   work: [
     {
@@ -211,4 +210,4 @@ const datwaveLabsExp = {
     "Event Source Polyfill",
   ],
   image: assets.datawaveDashboard,
-};
+} as const;

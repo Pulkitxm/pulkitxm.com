@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Transition from "@/components/AnimateApp";
 import GithubRepo from "@/components/GithubRepo";
 import assets from "@/data/assets";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="light">
-      <head>
+      <Head>
         <meta
           name="description"
           content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
@@ -73,7 +74,7 @@ export default function RootLayout({
           type="image/<generated>"
           sizes="<generated>"
         />
-      </head>
+      </Head>
       <body
         className={`${inter.className} ${GeistSans.className} dark min-h-screen`}
       >

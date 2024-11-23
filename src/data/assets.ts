@@ -8,6 +8,8 @@ const assets = {
     "https://utfs.io/f/9qYKlaZjLrURvickU0lKzOmCGkf3UBXYsI8HDZnaWA4eJFRh",
   datawaveRelievingLetter:
     "https://utfs.io/f/9qYKlaZjLrURVMjKOuk3rLjY4M1PytSsh50iAuVfqX2FKgHb",
+  geeksForGeeksLetter:
+    "https://utfs.io/f/9qYKlaZjLrURlLp0bgdPdGn2BgEiHQzSN8k5y3schuRa9efo",
   datawaveDashboard:
     "https://utfs.io/f/9qYKlaZjLrURUe9YZltfhY9yACrlXVd2t6T1JvgwbPIF5j3q",
   v4Portfolio:
