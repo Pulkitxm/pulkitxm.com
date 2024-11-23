@@ -12,6 +12,7 @@ const profile: Readonly<Profile> = {
   githubUserName: "pulkitxm",
   resumeLink: assets.resume,
   sourceCodeUrl: "https://github.com/Pulkitxm/devpulkit.in",
+  email: "kpulkit15234@gmail.com",
   links: {
     github: "https://github.com/Pulkitxm",
     linkedin: "https://www.linkedin.com/in/pulkit-dce/",

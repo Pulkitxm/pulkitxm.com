@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -196,6 +197,18 @@ export default function Component() {
             </Button>
           </form>
         </CardContent>
+
+        <CardFooter className="flex justify-center bg-gradient-to-r from-primary/5 to-primary/10 px-6 py-4">
+          <p className="text-base sm:text-lg">
+            or mail me at{" "}
+            <Link
+              href={`mailto:${profile.email}`}
+              className="font-semibold text-primary underline-offset-4 transition-colors duration-200 hover:underline"
+            >
+              {profile.email}
+            </Link>
+          </p>
+        </CardFooter>
       </Card>
     </div>
   );

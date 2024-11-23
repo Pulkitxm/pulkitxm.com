@@ -39,6 +39,7 @@ export type Profile = {
   githubUserName: string;
   resumeLink: string;
   sourceCodeUrl: string;
+  email: string;
   links: Readonly<Record<string, string>>;
   experience: readonly Experience[];
   projects: readonly Project[];
