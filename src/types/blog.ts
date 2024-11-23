@@ -8,6 +8,11 @@ export const validateBlog = z.object({
   readTimeInMinutes: z.number(),
   views: z.number(),
   brief: z.string(),
+  coverImage: z
+    .object({
+      url: z.string(),
+    })
+    .transform((val) => val.url),
 });
 
 export type BlogType = z.infer<typeof validateBlog>;

@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { LinkPreview } from "@/components/ui/link-preview";
 
 type SortOption = "publishedAt" | "readTimeInMinutes" | "views";
 type SortOrder = "asc" | "desc";
@@ -38,6 +39,7 @@ export default function BlogListing() {
   const [sortBy, setSortBy] = useState<SortOption>("publishedAt");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isTouchableDevice, setIsTouchableDevice] = useState(false);
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -52,7 +54,16 @@ export default function BlogListing() {
     }
 
     fetchBlogs();
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
+      handleResize();
+    }
   }, []);
+
+  function handleResize() {
+    setIsTouchableDevice("ontouchstart" in window);
+  }
 
   const filteredAndSortedBlogs = blogs
     .filter(
@@ -167,7 +178,11 @@ export default function BlogListing() {
           <p className="text-center text-gray-500">No blogs found.</p>
         ) : (
           filteredAndSortedBlogs.map((blog, index) => (
-            <Blog key={index} blog={blog} />
+            <Blog
+              key={index}
+              blog={blog}
+              isTouchableDevice={isTouchableDevice}
+            />
           ))
         )}
       </div>
@@ -175,7 +190,13 @@ export default function BlogListing() {
   );
 }
 
-function Blog({ blog }: { blog: BlogType }) {
+function Blog({
+  blog,
+  isTouchableDevice,
+}: {
+  blog: BlogType;
+  isTouchableDevice: boolean;
+}) {
   const [expanded, setExpanded] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const briefRef = useRef<HTMLDivElement>(null);
@@ -187,6 +208,8 @@ function Blog({ blog }: { blog: BlogType }) {
     }
   }, [blog.brief]);
 
+  const LinkComponent = isTouchableDevice ? "div" : LinkPreview;
+
   return (
     <Card className="group overflow-hidden transition-all duration-200 hover:shadow-lg">
       <CardContent className="p-4 sm:p-6">
@@ -194,9 +217,14 @@ function Blog({ blog }: { blog: BlogType }) {
           <div className="space-y-2">
             <Link href={blog.url} target="_blank" className="block">
               <div className="flex items-start justify-between gap-4">
-                <h2 className="text-lg font-semibold text-gray-300 transition-colors group-hover:text-gray-400 sm:text-xl">
-                  {blog.title}
-                </h2>
+                <LinkComponent
+                  url={blog.coverImage}
+                  className="group flex items-center gap-2"
+                >
+                  <h2 className="text-lg font-semibold text-gray-300 transition-colors group-hover:text-gray-400 sm:text-xl">
+                    {blog.title}
+                  </h2>
+                </LinkComponent>
                 <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-gray-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
               </div>
             </Link>
