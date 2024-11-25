@@ -78,7 +78,7 @@ export default function Component() {
   ];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <Card className="overflow-hidden">
         <CardHeader className="space-y-1 bg-primary/5 px-6 py-8">
           <CardTitle className="text-2xl font-bold sm:text-3xl">
@@ -210,6 +210,6 @@ export default function Component() {
           </p>
         </CardFooter>
       </Card>
-    </div>
+    </main>
   );
 }

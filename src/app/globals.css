@@ -64,3 +64,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+main {
+  animation: fadeIn 1000ms forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

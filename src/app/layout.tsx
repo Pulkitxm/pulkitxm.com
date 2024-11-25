@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
 import Navbar from "@/components/Navbar";
-import Transition from "@/components/AnimateApp";
 import GithubRepo from "@/components/GithubRepo";
 import assets from "@/data/assets";
 import Head from "next/head";
@@ -79,11 +78,9 @@ export default function RootLayout({
         className={`${inter.className} ${GeistSans.className} dark min-h-screen`}
       >
         <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
-          <Transition>
-            <Navbar />
-            <GithubRepo />
-            {children}
-          </Transition>
+          <Navbar />
+          <GithubRepo />
+          {children}
         </div>
       </body>
       <Analytics debug={false} />

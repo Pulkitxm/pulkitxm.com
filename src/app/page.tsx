@@ -8,7 +8,7 @@ import Skills from "@/components/landing/Skills";
 
 export default function LandingPage() {
   return (
-    <div className="mt-2 rounded-lg border-gray-700 p-5 md:border">
+    <main className="mt-2 rounded-lg border-gray-700 p-5 md:border">
       <Header />
       <GithubGraph />
       <Experience />
@@ -16,6 +16,6 @@ export default function LandingPage() {
       <Certifications />
       <Projects />
       <Footer />
-    </div>
+    </main>
   );
 }

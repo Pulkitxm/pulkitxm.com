@@ -35,7 +35,7 @@ export default function Component() {
   const uniqueTypes = Array.from(new Set(experience.map((exp) => exp.type)));
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <main className="container mx-auto px-4 py-8">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -143,6 +143,6 @@ export default function Component() {
           );
         })}
       </div>
-    </div>
+    </main>
   );
 }
