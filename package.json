@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "clean": "rm -rf .next && rm -rf node_modules",
     "dev:clean": "pnpm clean && pnpm install && pnpm run dev",
     "build": "next build",

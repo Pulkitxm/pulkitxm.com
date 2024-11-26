@@ -1,181 +1,107 @@
-/* eslint-disable no-unused-vars */
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface CarouselProps {
+interface HorizontalImageSliderProps {
   images: readonly string[];
+  interval?: number;
 }
 
-const variants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 1000 : -1000,
-    opacity: 0,
-    scale: 0.95,
-  }),
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1,
-    scale: 1,
-  },
-  exit: (direction: number) => ({
-    zIndex: 0,
-    x: direction < 0 ? 1000 : -1000,
-    opacity: 0,
-    scale: 0.95,
-  }),
-};
-
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset: number, velocity: number) => {
-  return Math.abs(offset) * velocity;
-};
-
-function Controls({
-  paginate,
+export default function HorizontalImageSlider({
   images,
-  setPage,
-  slideIndex,
-  resetTimeout,
-}: {
-  paginate: (newDirection: number) => void;
-  images: readonly string[];
-  setPage: React.Dispatch<React.SetStateAction<[number, number]>>;
-  slideIndex: number;
-  resetTimeout: () => void;
-}) {
+  interval = 5000,
+}: HorizontalImageSliderProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(
+    new Array(images.length).fill(false),
+  );
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  }, [images.length]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+    );
+  }, [images.length]);
+
+  useEffect(() => {
+    // Preload all images
+    images.forEach((src, index) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setImagesLoaded((prev) => {
+          const newState = [...prev];
+          newState[index] = true;
+          return newState;
+        });
+      };
+    });
+
+    const timer = setInterval(nextSlide, interval);
+    return () => clearInterval(timer);
+  }, [images, nextSlide, interval]);
+
+  const allImagesLoaded = imagesLoaded.every(Boolean);
+
+  if (!allImagesLoaded) {
+    return (
+      <div className="mx-auto aspect-[16/9] w-full max-w-4xl animate-pulse rounded-lg bg-gray-200" />
+    );
+  }
+
   return (
-    <>
-      <div className="absolute inset-0 z-10 flex items-center justify-between p-2 sm:p-4">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => {
-            resetTimeout();
-            paginate(-1);
-          }}
-          className="rounded-full bg-black/70 p-2 text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-black/90 sm:p-3"
-        >
-          <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6" />
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => {
-            resetTimeout();
-            paginate(1);
-          }}
-          className="rounded-full bg-black/70 p-2 text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-black/90 sm:p-3"
-        >
-          <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6" />
-        </motion.button>
-      </div>
-      <div className="absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 transform space-x-1.5 sm:bottom-4 sm:space-x-2">
-        {images.map((_, index) => (
-          <motion.button
+    <div className="relative mx-auto aspect-[16/9] w-full max-w-4xl overflow-hidden">
+      <div
+        className="flex h-full transition-transform duration-500 ease-out"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {images.map((src, index) => (
+          <div
             key={index}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            onClick={() => {
-              resetTimeout();
-              setPage([index, index > slideIndex ? 1 : -1]);
+            className="relative h-full w-full flex-shrink-0 rounded-lg"
+            style={{
+              backgroundImage: `url(${src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
-            className={`h-2 w-2 rounded-full shadow-lg transition-colors sm:h-3 sm:w-3 ${
-              index === slideIndex ? "bg-white" : "bg-white/50"
-            }`}
+          />
+        ))}
+      </div>
+
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
+
+      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-2">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={cn(
+              "h-3 w-3 rounded-full transition-colors",
+              index === currentIndex ? "bg-white" : "bg-white/50",
+            )}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-    </>
-  );
-}
-
-export default function ImageCarousel({ images }: CarouselProps) {
-  const [[page, direction], setPage] = useState([0, 0]);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  const slideIndex = Math.abs(page % images.length);
-
-  const paginate = useCallback(
-    (newDirection: number) => {
-      setPage([page + newDirection, newDirection]);
-    },
-    [page],
-  );
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      paginate(1);
-    }, 3000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [paginate]);
-
-  const resetTimeout = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = setInterval(() => {
-      paginate(1);
-    }, 3000);
-  }, [paginate]);
-
-  const stopInterval = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  }, []);
-
-  return (
-    <div
-      className="relative mx-auto mt-4 h-[250px] w-full max-w-4xl overflow-hidden rounded-lg sm:mt-8 sm:h-[350px] md:h-[450px] lg:h-[500px]"
-      onMouseEnter={stopInterval}
-      onMouseLeave={resetTimeout}
-    >
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.img
-          key={page}
-          src={images[slideIndex]}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 250, damping: 30, mass: 0.8 },
-            opacity: { duration: 0.4 },
-            scale: { duration: 0.4 },
-          }}
-          className="absolute h-full w-full rounded-lg object-cover"
-          alt={`Slide ${slideIndex + 1}`}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(_, info) => {
-            const swipe = swipePower(info.offset.x, info.velocity.x);
-            if (swipe < -swipeConfidenceThreshold) {
-              paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
-            }
-          }}
-        />
-      </AnimatePresence>
-      <Controls
-        paginate={paginate}
-        images={images}
-        setPage={setPage}
-        slideIndex={slideIndex}
-        resetTimeout={resetTimeout}
-      />
     </div>
   );
 }
