@@ -20,6 +20,7 @@ import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 import { InlineWidget } from "react-calendly";
 import profile from "@/data/profile";
+import Magnetic from "@/components/MagneticElement";
 
 export default function Component() {
   const [formInputs, setFormInputs] = useState({
@@ -88,7 +89,7 @@ export default function Component() {
             Have a question or want to work together? Choose an option below!
             <div className="mt-4 flex space-x-4">
               {links.map(({ href, icon: Icon, label }) => {
-                const Element = isTouchable ? Fragment : "div";
+                const Element = isTouchable ? Fragment : Magnetic;
                 return (
                   <Element key={label}>
                     <Link
