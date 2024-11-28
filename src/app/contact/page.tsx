@@ -233,14 +233,14 @@ export default function Component() {
           </Tabs>
         </CardContent>
 
-        <CardFooter className="flex justify-center border-t border-white/10 px-6 py-4">
-          <p className="text-base text-gray-400 sm:text-lg">
+        <CardFooter className="flex justify-center bg-gradient-to-r from-primary/5 to-primary/10 px-6 py-4">
+          <p className="text-base sm:text-lg">
             or mail me at{" "}
             <Link
-              href="mailto:kpulkit15234@gmail.com"
-              className="font-semibold text-white underline-offset-4 transition-colors hover:underline"
+              href={`mailto:${profile.email}`}
+              className="font-semibold text-primary underline-offset-4 transition-colors duration-200 hover:underline"
             >
-              kpulkit15234@gmail.com
+              {profile.email}
             </Link>
           </p>
         </CardFooter>

@@ -1,35 +1,46 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
 
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  const scrolWithKey = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "t") {
+        scrollToTop();
+      }
+    },
+    [scrollToTop],
+  );
+
+  const toggleVisibility = useCallback(() => {
+    if (window.scrollY > 300) {
+      setIsVisible(true);
+      window.addEventListener("keydown", scrolWithKey);
+    } else {
+      setIsVisible(false);
+      window.removeEventListener("keydown", scrolWithKey);
+    }
+  }, [scrolWithKey]);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
 
     window.addEventListener("scroll", toggleVisibility);
     toggleVisibility();
 
     return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  }, [scrolWithKey, toggleVisibility]);
 
   return (
     <Button

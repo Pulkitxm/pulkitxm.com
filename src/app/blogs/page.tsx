@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Clock,
@@ -34,6 +34,7 @@ type SortOption = "publishedAt" | "readTimeInMinutes" | "views";
 type SortOrder = "asc" | "desc";
 
 export default function BlogListing() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [blogs, setBlogs] = useState<BlogType[]>([]);
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState<SortOption>("publishedAt");
@@ -41,29 +42,39 @@ export default function BlogListing() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isTouchableDevice, setIsTouchableDevice] = useState(false);
 
-  useEffect(() => {
-    async function fetchBlogs() {
-      try {
-        const blogz = await getBlogs();
-        setBlogs(blogz);
-        setLoading(false);
-      } catch (e) {
-        console.error(e);
-        setLoading(false);
-      }
-    }
-
-    fetchBlogs();
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", handleResize);
-      handleResize();
+  const fetchBlogs = useCallback(async () => {
+    try {
+      const blogz = await getBlogs();
+      setBlogs(blogz);
+      setLoading(false);
+    } catch (e) {
+      console.error(e);
+      setLoading(false);
     }
   }, []);
 
-  function handleResize() {
+  const handleEnterControl = useCallback((e: KeyboardEvent) => {
+    if (e.key === "/" && inputRef.current) {
+      e.preventDefault();
+      inputRef.current.focus();
+    } else if (e.key === "Escape" && inputRef.current) {
+      inputRef.current.blur();
+    }
+  }, []);
+
+  const handleResize = useCallback(() => {
     setIsTouchableDevice("ontouchstart" in window);
-  }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("keydown", handleEnterControl);
+
+    handleResize();
+    fetchBlogs();
+  }, [handleResize, handleEnterControl, fetchBlogs]);
 
   const filteredAndSortedBlogs = blogs
     .filter(
@@ -114,6 +125,7 @@ export default function BlogListing() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-8"
+              ref={inputRef}
             />
           </div>
           <div className="flex items-center space-x-2">
