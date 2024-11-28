@@ -5,9 +5,9 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
 import Navbar from "@/components/Navbar";
-import GithubRepo from "@/components/GithubRepo";
 import assets from "@/data/assets";
 import Head from "next/head";
+import ScrollToTopButton from "@/components/ScrollTopTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -79,8 +79,9 @@ export default function RootLayout({
       >
         <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
           <Navbar />
-          <GithubRepo />
+          {/* <GithubRepo /> */}
           {children}
+          <ScrollToTopButton />
         </div>
       </body>
       <Analytics debug={false} />
