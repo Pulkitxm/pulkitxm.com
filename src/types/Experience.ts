@@ -36,6 +36,7 @@ export type Profile = {
   name: string;
   caption: string;
   image: string;
+  calendlyUrl: string;
   githubUserName: string;
   resumeLink: string;
   sourceCodeUrl: string;

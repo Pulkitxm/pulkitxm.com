@@ -11,6 +11,7 @@ const profile: Readonly<Profile> = {
   image: assets.myImage,
   githubUserName: "pulkitxm",
   resumeLink: assets.resume,
+  calendlyUrl: "https://cal.com/pulkitxm",
   sourceCodeUrl: "https://github.com/Pulkitxm/devpulkit.in",
   email: "kpulkit15234@gmail.com",
   links: {
