@@ -65,7 +65,8 @@
   }
 }
 
-main {
+main,
+nav {
   animation: fadeIn 1000ms forwards;
 }
 
