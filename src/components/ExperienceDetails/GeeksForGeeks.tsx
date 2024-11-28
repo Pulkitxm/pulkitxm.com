@@ -1,27 +1,9 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import ImageCarousel from "@/components/ImageCarousel";
 import assets from "@/data/assets";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
 
 export default function GeeksForGeeks() {
   return (
@@ -38,37 +20,22 @@ export default function GeeksForGeeks() {
         </Link>
       </h1>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <ImageCarousel images={geeksForGeeksExp.images} />
-      </motion.div>
+      <ImageCarousel images={geeksForGeeksExp.images} />
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="space-y-8"
-      >
+      <div className="space-y-8">
         <div>
           <div className="mb-4 text-xl font-semibold text-primary md:text-2xl">
             Key Responsibilities
           </div>
           <Card>
             <CardContent className="p-6">
-              <motion.ul className="grid gap-4 md:grid-cols-2">
+              <ul className="grid gap-4 md:grid-cols-2">
                 {geeksForGeeksExp.points.map((point, index) => (
-                  <motion.li
-                    key={index}
-                    variants={item}
-                    className="flex items-start gap-2"
-                  >
+                  <li key={index} className="flex items-start gap-2">
                     <span className="text-muted-foreground">{point}</span>
-                  </motion.li>
+                  </li>
                 ))}
-              </motion.ul>
+              </ul>
             </CardContent>
           </Card>
         </div>
@@ -90,7 +57,7 @@ export default function GeeksForGeeks() {
             className="h-60 w-full rounded-md border-0 lg:h-96"
           />
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
