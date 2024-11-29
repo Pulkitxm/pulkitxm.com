@@ -8,6 +8,7 @@ export type Experience = {
   url?: string;
   slug: string;
   showOnHome?: boolean;
+  desc: string;
 };
 
 export type Project = {

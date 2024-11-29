@@ -31,6 +31,7 @@ const profile: Readonly<Profile> = {
       url: "https://datawavelabs.io/",
       slug: "datawavelabs",
       showOnHome: true,
+      desc: "My work at Datawave Labs involved developing and integrating various systems and tools to enhance the platform's functionality and user experience. I focused on authentication, cloud integration, infrastructure automation, real-time notifications, client and server development, and DevOps practices.",
     },
     {
       companyName: "GeeksforGeeks",
@@ -40,6 +41,7 @@ const profile: Readonly<Profile> = {
       type: "hybrid",
       url: "https://geeksforgeeks.org/",
       slug: "geeksforgeeks",
+      desc: "I am responsible for managing and organizing various events, workshops, and contests for the college students. I also help students in their technical and non-technical queries and guide them in their career path.",
     },
     {
       companyName: "Deviators Club",
@@ -49,6 +51,7 @@ const profile: Readonly<Profile> = {
       url: "https://deviatorsdce.tech/",
       startDate: new Date("2024-02-01"),
       slug: "deviators",
+      desc: "I lead a team of 50+ members and manage the club's activities, events, and workshops. I also manage the club's website and other technical activities.",
     },
   ].sort((a, b) => {
     if (!a.endDate && b.endDate) return -1;

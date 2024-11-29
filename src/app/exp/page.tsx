@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { MapPin, Calendar, Briefcase } from "lucide-react";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { MapPin, Briefcase } from "lucide-react";
 import Link from "next/link";
 import {
   Card,
@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import profile from "@/data/profile";
 
 const formatDate = (date: Date) => {
@@ -24,15 +23,20 @@ const formatDate = (date: Date) => {
   });
 };
 
-export default function Component() {
-  const [selectedType, setSelectedType] = useState<string | null>(null);
+export default function ExperienceTimeline() {
   const experience = profile.experience;
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const filteredExperience = selectedType
-    ? experience.filter((exp) => exp.type === selectedType)
-    : experience;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"],
+  });
 
-  const uniqueTypes = Array.from(new Set(experience.map((exp) => exp.type)));
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -45,103 +49,89 @@ export default function Component() {
         My Experience
       </motion.h1>
 
-      <div className="mb-12 flex flex-wrap justify-center gap-3">
-        <Button
-          variant="outline"
-          size="lg"
-          className={cn(
-            "border-gray-800 text-lg hover:bg-gray-800",
-            selectedType === null && "bg-gray-800 text-white",
-          )}
-          onClick={() => setSelectedType(null)}
-        >
-          All
-        </Button>
-        {uniqueTypes.map((type) => (
-          <Button
-            key={type}
-            variant="outline"
-            size="lg"
-            className={cn(
-              "border-gray-800 text-lg hover:bg-gray-800",
-              selectedType === type && "bg-gray-800 text-white",
-            )}
-            onClick={() => setSelectedType(type)}
-          >
-            {type}
-          </Button>
-        ))}
-      </div>
+      <div className="relative" ref={containerRef}>
+        {/* Timeline line */}
+        <motion.div
+          className="absolute bottom-0 left-0 top-0 w-0.5 bg-gray-700"
+          style={{ scaleY, transformOrigin: "top" }}
+        />
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {filteredExperience.map((exp, index) => {
-          return (
-            <motion.div
-              key={exp.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-            >
-              <Card className="group relative flex h-full flex-col border-gray-800 transition-all duration-300 hover:border-gray-700 hover:shadow-xl hover:shadow-gray-900/20">
-                <CardHeader className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <Badge
-                      variant="outline"
-                      className="border-gray-700 bg-gray-800 text-white"
-                    >
-                      {exp.type}
-                    </Badge>
-                  </div>
-                  <div className="space-y-1">
-                    <CardTitle className="text-xl font-bold text-white">
-                      {exp.position}
-                    </CardTitle>
-                    <CardDescription className="text-base text-gray-400">
-                      <Link
-                        href={exp.url ?? ""}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        className="hover:underline"
-                      >
-                        {exp.companyName}
-                      </Link>
-                    </CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center text-sm text-gray-400">
-                    <MapPin className="mr-2 h-4 w-4" />
-                    {exp.location}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-400">
-                    <Calendar className="mr-2 h-4 w-4" />
+        {experience.map((exp, index) => (
+          <motion.div
+            key={exp.slug}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            className="relative mb-12 ml-8"
+          >
+            <div
+              className={`absolute -left-10 top-0 h-6 w-6 rounded-full border-4 ${
+                !exp.endDate
+                  ? "border-green-500 bg-green-100"
+                  : "border-gray-800 bg-gray-100"
+              }`}
+              title={exp.endDate ? undefined : "Ongoing"}
+            />
+            <Card className="group relative flex h-full flex-col border-gray-800 transition-all duration-300 hover:border-gray-700 hover:shadow-xl hover:shadow-gray-900/20">
+              <CardHeader className="space-y-4">
+                <div className="flex items-start justify-between">
+                  <Badge
+                    variant="outline"
+                    className="border-gray-700 bg-gray-800 text-white"
+                  >
+                    {exp.type}
+                  </Badge>
+                  <div className="text-sm text-gray-400">
                     {formatDate(exp.startDate)} -{" "}
                     {exp.endDate ? formatDate(exp.endDate) : "Present"}
                   </div>
-                  <div className="flex items-center text-sm text-gray-400">
-                    <Briefcase className="mr-2 h-4 w-4" />
-                    {exp.type}
-                  </div>
-                </CardContent>
-
-                <CardFooter className="mt-auto pt-6">
-                  <Button
-                    className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700"
-                    asChild
-                  >
+                </div>
+                <div className="space-y-1">
+                  <CardTitle className="text-xl font-bold text-white">
+                    {exp.position}
+                  </CardTitle>
+                  <CardDescription className="text-base text-gray-400">
                     <Link
-                      href={`/exp/${exp.slug}`}
+                      href={exp.url ?? ""}
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center"
+                      target="_blank"
+                      className="hover:underline"
                     >
-                      View more
+                      {exp.companyName}
                     </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          );
-        })}
+                  </CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center text-sm text-gray-400">
+                  <MapPin className="mr-2 h-4 w-4" />
+                  {exp.location}
+                </div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  {exp.type}
+                </div>
+                <div className="w-full rounded-md border p-4">
+                  <p className="text-sm text-gray-400">{exp.desc}</p>
+                </div>
+              </CardContent>
+              <CardFooter className="mt-auto pt-6">
+                <Button
+                  className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700"
+                  asChild
+                >
+                  <Link
+                    href={`/exp/${exp.slug}`}
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center"
+                  >
+                    View more
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
+        ))}
       </div>
     </main>
   );
