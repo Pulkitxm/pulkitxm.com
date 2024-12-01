@@ -54,7 +54,11 @@ function LargeMenu() {
     (event: KeyboardEvent) => {
       if (
         document.activeElement?.tagName.toLowerCase() === "input" ||
-        document.activeElement?.tagName.toLowerCase() === "textarea"
+        document.activeElement?.tagName.toLowerCase() === "textarea" ||
+        event.ctrlKey ||
+        event.altKey ||
+        event.metaKey ||
+        event.shiftKey
       )
         return;
 
