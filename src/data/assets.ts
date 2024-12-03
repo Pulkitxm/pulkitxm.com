@@ -12,14 +12,18 @@ const assets = {
     "https://utfs.io/f/9qYKlaZjLrURlLp0bgdPdGn2BgEiHQzSN8k5y3schuRa9efo",
   datawaveDashboard:
     "https://utfs.io/f/9qYKlaZjLrURUe9YZltfhY9yACrlXVd2t6T1JvgwbPIF5j3q",
-  v4Portfolio:
-    "https://utfs.io/f/9qYKlaZjLrURwXPE8tbOv2IPVHWENLwDMoCjJhZRU8epA9bk",
-  v3Portfolio:
-    "https://utfs.io/f/9qYKlaZjLrURm2beaZKHYsShzrEP9483Ha1IGBogAQWwNj0y",
-  v2Portfolio:
-    "https://utfs.io/f/9qYKlaZjLrURG8LfEapbFtQ7On91z30cgiNHYWZLumlsC6qh",
-  v1Portfolio:
-    "https://utfs.io/f/9qYKlaZjLrURgTMINEUQGef324viLws0yWMxq9Hn1pKV6AuF",
+  portfolio: {
+    v5Portfolio:
+      "https://utfs.io/f/9qYKlaZjLrURK6j3eUbThFqWkY6AEbxD8l4ZiRydLJa0UesX",
+    v4Portfolio:
+      "https://utfs.io/f/9qYKlaZjLrURwXPE8tbOv2IPVHWENLwDMoCjJhZRU8epA9bk",
+    v3Portfolio:
+      "https://utfs.io/f/9qYKlaZjLrURm2beaZKHYsShzrEP9483Ha1IGBogAQWwNj0y",
+    v2Portfolio:
+      "https://utfs.io/f/9qYKlaZjLrURG8LfEapbFtQ7On91z30cgiNHYWZLumlsC6qh",
+    v1Portfolio:
+      "https://utfs.io/f/9qYKlaZjLrURgTMINEUQGef324viLws0yWMxq9Hn1pKV6AuF",
+  },
   imageTweakerProject:
     "https://utfs.io/f/9qYKlaZjLrURmxYUOyHYsShzrEP9483Ha1IGBogAQWwNj0yF",
   useeFormProject:
