@@ -20,7 +20,16 @@ export default function GeeksForGeeks() {
         </Link>
       </h1>
 
-      <ImageCarousel images={geeksForGeeksExp.images} />
+      <ImageCarousel
+        images={geeksForGeeksExp.images}
+        autoPlay
+        allowFullscreen
+        allowRotate
+        allowZoom
+        showNavButtons
+        showNavDots
+        showPlayPause
+      />
 
       <div className="space-y-8">
         <div>
