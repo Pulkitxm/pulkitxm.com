@@ -1,9 +1,8 @@
 "use client";
 
-import profile from "@/data/profile";
+import profile, { links } from "@/data/profile";
 import { ImageDialog } from "./ImageDialog";
 import Link from "next/link";
-import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
 import assets from "@/data/assets";
@@ -38,15 +37,12 @@ export default function Header() {
         <p className="text-xl font-semibold text-white">{profile.name}</p>
         <p className="text-sm text-gray-300">{profile.caption}</p>
         <div className="my-2 flex items-center space-x-3">
-          <Link href={profile.links.linkedin} target="_blank">
-            <FaLinkedinIn className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
-          </Link>
-          <Link href={profile.links.github} target="_blank">
-            <FaGithub className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
-          </Link>
-          <Link href={profile.links.twitter} target="_blank">
-            <FaTwitter className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
-          </Link>
+          {links.map(({ href, icon: Icon }, index) => (
+            <Link key={index} href={href} target="_blank">
+              <Icon className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
+            </Link>
+          ))}
+
           <Button
             asChild
             variant="outline"

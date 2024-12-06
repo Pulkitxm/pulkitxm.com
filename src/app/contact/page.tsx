@@ -16,10 +16,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Mail, MessageSquare, Send, User, Calendar } from "lucide-react";
-import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 import { InlineWidget } from "react-calendly";
-import profile from "@/data/profile";
+import profile, { links } from "@/data/profile";
 import Magnetic from "@/components/MagneticElement";
 
 export default function Component() {
@@ -59,24 +58,6 @@ export default function Component() {
     if (typeof window === "undefined") return;
     setIsTouchable("ontouchstart" in window);
   }, []);
-
-  const links = [
-    {
-      href: "https://github.com/yourusername",
-      icon: FaGithub,
-      label: "GitHub",
-    },
-    {
-      href: "https://linkedin.com/in/yourusername",
-      icon: FaLinkedinIn,
-      label: "LinkedIn",
-    },
-    {
-      href: "https://twitter.com/yourusername",
-      icon: FaTwitter,
-      label: "Twitter",
-    },
-  ];
 
   return (
     <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">

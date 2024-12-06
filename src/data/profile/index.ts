@@ -5,6 +5,9 @@ import { skills } from "./skills";
 import { projects } from "./projects";
 import assets from "@/data/assets";
 
+// icons
+import { FaDiscord, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+
 const profile: Readonly<Profile> = {
   name: "Pulkit",
   caption: "Full Stack Developer & Open Source Enthusiast",
@@ -19,6 +22,7 @@ const profile: Readonly<Profile> = {
     linkedin: "https://www.linkedin.com/in/pulkit-dce/",
     twitter: "https://x.com/devpulkitt",
     blogPageUrl: "https://blogs.devpulkit.in/",
+    discord: "https://discord.com/users/pulkitxm",
   },
   experience: [
     {
@@ -67,3 +71,26 @@ const profile: Readonly<Profile> = {
 };
 
 export default profile;
+
+export const links = [
+  {
+    href: profile.links.github,
+    icon: FaGithub,
+    label: "GitHub",
+  },
+  {
+    href: profile.links.linkedin,
+    icon: FaLinkedinIn,
+    label: "LinkedIn",
+  },
+  {
+    href: profile.links.discord,
+    icon: FaDiscord,
+    label: "Discord",
+  },
+  {
+    href: profile.links.twitter,
+    icon: FaTwitter,
+    label: "Twitter",
+  },
+];
