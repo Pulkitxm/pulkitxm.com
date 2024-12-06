@@ -6,15 +6,43 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
 import Navbar from "@/components/Navbar";
 import assets from "@/data/assets";
-import Head from "next/head";
 import ScrollToTopButton from "@/components/ScrollTopTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pulkit - Developer",
+  title: {
+    default: "Pulkit - Developer",
+    template: "%s | Pulkit - Developer",
+  },
   description:
     "I'm Pulkit, a technology enthusiast with a passion for exploring the digital landscape. While I'm not diving into code or navigating through APIs, you'll often find me having fun with friends and family. I also enjoy watching TV shows, and I often read tech blogs. Balancing my technical skills with creativity and introspection fuels my journey in both professional and personal endeavors.",
+  openGraph: {
+    title: "Pulkit - Developer",
+    description:
+      "Explore Pulkit's portfolio, projects, and insights into web development.",
+    url: "https://devpulkit.in",
+    type: "website",
+    images: [
+      {
+        url: assets.banner.home,
+        width: 1200,
+        height: 630,
+        alt: "Pulkit's Portfolio Banner",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pulkit - Developer",
+    description:
+      "Explore Pulkit's portfolio, projects, and insights into web development.",
+    images: [assets.banner.home],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -24,68 +52,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="light">
-      <Head>
-        <meta
-          name="description"
-          content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
-        />
-        <meta
-          name="keywords"
-          content="Pulkit, Developer, Web Development, React, Portfolio"
-        />
-        <meta name="author" content="Pulkit" />
-        <meta name="robots" content="index, follow" />
-        {/* Open Graph Tags */}
-        <meta property="og:title" content="Pulkit - Developer" />
-        <meta
-          property="og:description"
-          content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
-        />
-        <meta property="og:image" content={assets.banner} />
-        <meta property="og:url" content="https://devpulkit.in" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Pulkit - Developer" />
-        {/* Twitter Cards */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Pulkit - Developer" />
-        <meta
-          name="twitter:description"
-          content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
-        />
-        <meta name="twitter:image" content={assets.banner} />
-        <meta name="twitter:site" content="@devpulkitt" />
-        {/* Canonical Tag */}
-        <link rel="canonical" href="https://devpulkit.in" />
-        {/* Facebook Tag */}
-        <meta property="og:url" content="https://devpulkit.in" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Pulkit - Developer" />
-        <meta
-          property="og:description"
-          content="Pulkit - Developer. Portfolio and projects showcasing my skills and work in web development."
-        />
-        <meta property="og:image" content="" />
-        {/* Title Tag */}
-        <title>Pulkit - Developer</title>
-        <link
-          rel="icon"
-          href="/icon?<generated>"
-          type="image/<generated>"
-          sizes="<generated>"
-        />
-      </Head>
       <body
         className={`${inter.className} ${GeistSans.className} dark min-h-screen`}
       >
         <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
           <Navbar />
-          {/* <GithubRepo /> */}
           {children}
           <ScrollToTopButton />
         </div>
+        <Analytics debug={false} />
+        <SpeedInsights debug={false} />
       </body>
-      <Analytics debug={false} />
-      <SpeedInsights debug={false} />
     </html>
   );
 }
