@@ -67,35 +67,33 @@ export function ImageDialog({
         />
       </button>
 
-      {isOpen && (
+      <div
+        className={`fixed inset-0 z-50 ${
+          isOpen ? "flex" : "hidden"
+        } items-center justify-center p-4 backdrop-blur-sm ${isClosing ? "animate-fadeOut" : "animate-fadeIn"}`}
+        onClick={handleClose}
+      >
         <div
-          className={`fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm ${isClosing ? "animate-fadeOut" : "animate-fadeIn"}`}
-          onClick={handleClose}
-        >
-          {/* Backdrop */}
-          <div
-            className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${isClosing ? "opacity-0" : "opacity-100"}`}
-          />
+          className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${isClosing ? "opacity-0" : "opacity-100"}`}
+        />
 
-          {/* Dialog content */}
-          <div
-            className={`relative z-10 transform overflow-hidden bg-black transition-all duration-300 ${small ? "max-h-[400px] max-w-sm" : "max-h-[80vh] max-w-4xl"} ${isClosing ? "opacity-0" : "opacity-100"} ${rounded ? "rounded-full" : "rounded-lg"} `}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
-          >
-            <div className="relative">
-              <Image
-                src={image}
-                alt="Profile picture"
-                className={`w-full transform transition duration-300 ${rounded ? "rounded-full" : ""}`}
-                width={small ? 400 : 800}
-                height={small ? 400 : rounded ? 800 : 600}
-                fetchPriority="high"
-                loading="eager"
-              />
-            </div>
+        <div
+          className={`relative z-10 transform overflow-hidden bg-black transition-all duration-300 ${small ? "max-h-[400px] max-w-sm" : "max-h-[80vh] max-w-4xl"} ${isClosing ? "opacity-0" : "opacity-100"} ${rounded ? "rounded-full" : "rounded-lg"} `}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="relative">
+            <Image
+              src={image}
+              alt="Profile picture"
+              className={`w-full transform transition duration-300 ${rounded ? "rounded-full" : ""}`}
+              width={small ? 400 : 800}
+              height={small ? 400 : rounded ? 800 : 600}
+              fetchPriority="high"
+              loading="eager"
+            />
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }

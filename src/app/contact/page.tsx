@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Mail, MessageSquare, Send, User, Calendar } from "lucide-react";
 import Link from "next/link";
 import { InlineWidget } from "react-calendly";
@@ -22,6 +21,7 @@ import profile, { links } from "@/data/profile";
 import Magnetic from "@/components/MagneticElement";
 
 export default function Component() {
+  const [isSelected, setIsSelected] = useState<string>("message");
   const [formInputs, setFormInputs] = useState({
     name: "",
     email: "",
@@ -53,6 +53,119 @@ export default function Component() {
     },
     [formInputs],
   );
+
+  const Tabs = [
+    {
+      id: "message",
+      label: "Send Message",
+      icon: MessageSquare,
+      content: (
+        <form onSubmit={handleSendMessage} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-gray-300">
+              Name
+            </Label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Input
+                type="text"
+                value={formInputs.name}
+                onChange={(e) =>
+                  setFormInputs((prev) => ({
+                    ...prev,
+                    name: e.target.value,
+                  }))
+                }
+                className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-gray-300">
+              Email
+            </Label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Input
+                type="email"
+                value={formInputs.email}
+                onChange={(e) =>
+                  setFormInputs((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }))
+                }
+                className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
+                placeholder="john@example.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="message" className="text-gray-300">
+              Message
+            </Label>
+            <div className="relative">
+              <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Textarea
+                value={formInputs.message}
+                onChange={(e) =>
+                  setFormInputs((prev) => ({
+                    ...prev,
+                    message: e.target.value,
+                  }))
+                }
+                className="min-h-[120px] border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
+                placeholder="Your message here..."
+                required
+              />
+            </div>
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full bg-white text-black hover:bg-white/90"
+            disabled={isSubmitting || isSubmitted}
+          >
+            {isSubmitting ? (
+              <span className="flex items-center gap-2">
+                Sending...
+                <span className="animate-spin">⏳</span>
+              </span>
+            ) : isSubmitted ? (
+              <span className="flex items-center gap-2">
+                Thanks
+                <span className="animate-pulse">✨</span>
+              </span>
+            ) : (
+              <span className="flex items-center gap-2">
+                Send Message
+                <Send className="h-4 w-4" />
+              </span>
+            )}
+          </Button>
+        </form>
+      ),
+    },
+    {
+      id: "schedule",
+      label: "Schedule Meeting",
+      icon: Calendar,
+      content: (
+        <InlineWidget
+          url={profile.calendlyUrl}
+          styles={{
+            height: "450px",
+            width: "100%",
+          }}
+        />
+      ),
+    },
+  ];
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -90,132 +203,34 @@ export default function Component() {
         </CardHeader>
 
         <CardContent>
-          <Tabs defaultValue="message" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger
-                value="message"
-                className="data-[state=active]:bg-white/10"
+          <div className="grid h-9 w-full grid-cols-2 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground">
+            {Tabs.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                type="button"
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                  isSelected === id
+                    ? "bg-[#ffffff1a] text-white"
+                    : "text-muted-foreground"
+                }`}
+                onClick={() => setIsSelected(id)}
               >
-                <MessageSquare className="mr-2 h-4 w-4" />
-                Send Message
-              </TabsTrigger>
-              <TabsTrigger
-                value="schedule"
-                className="data-[state=active]:bg-white/10"
-              >
-                <Calendar className="mr-2 h-4 w-4" />
-                Schedule Meeting
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="message" className="space-y-6">
-              <form onSubmit={handleSendMessage} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-gray-300">
-                    Name
-                  </Label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    <Input
-                      id="name"
-                      type="text"
-                      value={formInputs.name}
-                      onChange={(e) =>
-                        setFormInputs((prev) => ({
-                          ...prev,
-                          name: e.target.value,
-                        }))
-                      }
-                      className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
-                      placeholder="John Doe"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-gray-300">
-                    Email
-                  </Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formInputs.email}
-                      onChange={(e) =>
-                        setFormInputs((prev) => ({
-                          ...prev,
-                          email: e.target.value,
-                        }))
-                      }
-                      className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
-                      placeholder="john@example.com"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message" className="text-gray-300">
-                    Message
-                  </Label>
-                  <div className="relative">
-                    <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                    <Textarea
-                      id="message"
-                      value={formInputs.message}
-                      onChange={(e) =>
-                        setFormInputs((prev) => ({
-                          ...prev,
-                          message: e.target.value,
-                        }))
-                      }
-                      className="min-h-[120px] border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
-                      placeholder="Your message here..."
-                      required
-                    />
-                  </div>
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-white text-black hover:bg-white/90"
-                  disabled={isSubmitting || isSubmitted}
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      Sending...
-                      <span className="animate-spin">⏳</span>
-                    </span>
-                  ) : isSubmitted ? (
-                    <span className="flex items-center gap-2">
-                      Thanks
-                      <span className="animate-pulse">✨</span>
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Send Message
-                      <Send className="h-4 w-4" />
-                    </span>
-                  )}
-                </Button>
-              </form>
-            </TabsContent>
-
-            <TabsContent value="schedule" className="h-[600px]">
-              <InlineWidget
-                url={profile.calendlyUrl}
-                styles={{
-                  height: "100%",
-                  width: "100%",
-                }}
-              />
-            </TabsContent>
-          </Tabs>
+                <Icon className="mr-2 h-4 w-4" />
+                {label}
+              </button>
+            ))}
+          </div>
+          {Tabs.map(({ id, content }) => (
+            <div
+              key={id}
+              className={`mt-6 ${isSelected === id ? "block" : "hidden"}`}
+            >
+              {content}
+            </div>
+          ))}
         </CardContent>
 
-        <CardFooter className="flex justify-center bg-gradient-to-r from-primary/5 to-primary/10 px-6 py-4">
+        <CardFooter className="flex items-center justify-center bg-gradient-to-r from-primary/5 to-primary/10 p-6 px-6 py-4">
           <p className="text-base sm:text-lg">
             or mail me at{" "}
             <Link

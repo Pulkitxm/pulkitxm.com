@@ -47,16 +47,26 @@ export default function ImageSlider({
   const sliderRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const resetImageState = useCallback(() => {
+    setZoomLevel(1);
+    setRotation(0);
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1,
+    );
+    resetImageState();
+  }, [images.length, resetImageState]);
+
   const resetTimeout = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    if (autoPlay && !isPaused) {
-      timeoutRef.current = setTimeout(() => {
-        nextSlide();
-      }, interval);
+    if (!isPaused && autoPlay) {
+      timeoutRef.current = setTimeout(nextSlide, interval);
     }
-  }, [autoPlay, isPaused, interval]);
+  }, [nextSlide, isPaused, autoPlay, interval]);
 
   const moveToIndex = useCallback(
     (index: number) => {
@@ -66,76 +76,12 @@ export default function ImageSlider({
     [resetTimeout],
   );
 
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    resetTimeout();
-  }, [images.length, resetTimeout]);
-
   const prevSlide = useCallback(() => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + images.length) % images.length,
     );
     resetTimeout();
   }, [images.length, resetTimeout]);
-
-  useEffect(() => {
-    let loadedCount = 0;
-    const totalImages = images.length;
-    const preloadImage = (src: string) => {
-      return new Promise((resolve, reject) => {
-        const img = new window.Image();
-        img.src = src;
-        img.onload = () => {
-          loadedCount++;
-          setLoadingProgress((loadedCount / totalImages) * 100);
-          resolve(true);
-        };
-        img.onerror = reject;
-      });
-    };
-
-    Promise.all(images.map(preloadImage))
-      .then(() => {
-        setImagesLoaded(true);
-        setCurrentIndex(0);
-        resetTimeout();
-        setIsPaused(false);
-      })
-      .catch((err) => console.error("Error loading images:", err));
-  }, [images]);
-
-  useEffect(() => {
-    resetTimeout();
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, [resetTimeout]);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        prevSlide();
-      } else if (event.key === "ArrowRight") {
-        nextSlide();
-      } else if (event.key === "Escape") {
-        if (isFullscreen) {
-          document.exitFullscreen();
-        }
-        resetImageState();
-      } else if (event.key === " " || event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        togglePause();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [nextSlide, prevSlide, isFullscreen]);
 
   const togglePause = useCallback(() => {
     setIsPaused((prev) => !prev);
@@ -163,12 +109,81 @@ export default function ImageSlider({
     resetTimeout();
   }, [resetTimeout]);
 
-  const resetImageState = useCallback(() => {
-    setZoomLevel(0);
-    setRotation(0);
-    setIsFullscreen(false);
+  useEffect(() => {
+    let loadedCount = 0;
+    const totalImages = images.length;
+    const preloadImage = (src: string) => {
+      return new Promise((resolve, reject) => {
+        const img = new window.Image();
+        img.src = src;
+        img.onload = () => {
+          loadedCount++;
+          setLoadingProgress((loadedCount / totalImages) * 100);
+          resolve(true);
+        };
+        img.onerror = reject;
+      });
+    };
+
+    Promise.all(images.map(preloadImage))
+      .then(() => {
+        setImagesLoaded(true);
+        setCurrentIndex(0);
+        resetTimeout();
+        setIsPaused(false);
+      })
+      .catch((err) => console.error("Error loading images:", err));
+  }, [images, resetTimeout]);
+
+  useEffect(() => {
     resetTimeout();
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, [resetTimeout]);
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        togglePause();
+      }
+      if (e.code === "ArrowRight") {
+        nextSlide();
+      }
+      if (e.code === "Escape" && isFullscreen) {
+        resetImageState();
+      }
+    };
+
+    window.addEventListener("keypress", handleKeyPress);
+    return () => window.removeEventListener("keypress", handleKeyPress);
+  }, [togglePause, nextSlide, isFullscreen, resetImageState]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        prevSlide();
+      } else if (event.key === "ArrowRight") {
+        nextSlide();
+      } else if (event.key === "Escape") {
+        if (isFullscreen) {
+          document.exitFullscreen();
+        }
+        resetImageState();
+      } else if (event.key === " " || event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        togglePause();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [nextSlide, prevSlide, isFullscreen, togglePause, resetImageState]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {

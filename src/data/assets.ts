@@ -2,10 +2,14 @@ const assets = {
   myImage: "https://utfs.io/f/9qYKlaZjLrUR978KiHZjLrURTFfx6MEwt5Oh2zY8KiP1WVDB",
   resume: "https://utfs.io/f/9qYKlaZjLrURzpgwExHv54WGTKA3dypfxZncFtbJNBoi72ks",
   banner: {
-    home: "https://utfs.io/f/9qYKlaZjLrURfhAWuj44Ks19dr3guNViBkwjhnUaGYEoDASf",
+    home: "https://utfs.io/f/9qYKlaZjLrUR9o3AwfZjLrURTFfx6MEwt5Oh2zY8KiP1WVDB",
     contact:
-      "https://utfs.io/f/9qYKlaZjLrURUnFKONtfhY9yACrlXVd2t6T1JvgwbPIF5j3q",
-    blogs: "https://utfs.io/f/9qYKlaZjLrUR8dAHl2hO631SDa2BrHmX9ZLAUkFJNxwsQpcR",
+      "https://utfs.io/f/9qYKlaZjLrURf7bj3e44Ks19dr3guNViBkwjhnUaGYEoDASf",
+    blogs: "https://utfs.io/f/9qYKlaZjLrURMmykRCAOYXpkfHrxLiWec6G0Z5vK7b1IwtoS",
+    designs:
+      "https://utfs.io/f/9qYKlaZjLrURFZZBJqurOK3EQq6t0gRJyPLfo2sVnMlbjAU1",
+    experience:
+      "https://utfs.io/f/9qYKlaZjLrURF42J3UrOK3EQq6t0gRJyPLfo2sVnMlbjAU1I",
   },
   hacktoberFest:
     "https://utfs.io/f/9qYKlaZjLrURXQW1p4a7RdUGvPo4tZHKDIz5FJEjcYCWxl6i",
