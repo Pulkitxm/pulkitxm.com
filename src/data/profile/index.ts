@@ -22,7 +22,7 @@ const profile: Readonly<Profile> = {
     linkedin: "https://www.linkedin.com/in/pulkit-dce/",
     twitter: "https://x.com/devpulkitt",
     blogPageUrl: "https://blogs.devpulkit.in/",
-    discord: "https://discord.com/users/pulkitxm",
+    discord: "http://discordapp.com/users/790426084994187304",
   },
   experience: [
     {
