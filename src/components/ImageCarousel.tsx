@@ -48,7 +48,7 @@ export default function ImageSlider({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const resetImageState = useCallback(() => {
-    setZoomLevel(1);
+    setZoomLevel(0);
     setRotation(0);
   }, []);
 
