@@ -47,9 +47,9 @@ export default function Component() {
   return (
     <section className="w-full bg-background py-12" id="skills">
       <div className="container pr-4 md:pr-6">
-        <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+        <h2 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
           Skills
-        </h1>
+        </h2>
         <div className="space-y-4">
           {Object.entries(skillsData).map(([category, skills]) => (
             <div key={category}>

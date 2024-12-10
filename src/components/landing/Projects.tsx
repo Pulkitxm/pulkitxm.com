@@ -23,7 +23,7 @@ export default function Projects() {
             <div className="w-full flex-grow overflow-hidden rounded-lg brightness-90">
               <Image
                 src={project.image}
-                className="h-full w-full scale-110 rounded-lg brightness-90 transition-transform duration-300 group-hover:scale-100"
+                className="h-full w-full scale-110 rounded-lg object-contain brightness-90 transition-transform duration-300 group-hover:scale-100"
                 width={500}
                 height={300}
                 alt={project.name}
@@ -31,10 +31,10 @@ export default function Projects() {
                 loading="eager"
               />
             </div>
-            <p className="mt-2 text-lg font-bold text-gray-400">
+            <p className="mt-2 text-lg font-bold text-gray-200">
               {project.name}
             </p>
-            <p className="text-sm text-gray-500">{project.tagline}</p>
+            <p className="text-sm text-gray-300">{project.tagline}</p>
           </Link>
         ))}
       </div>

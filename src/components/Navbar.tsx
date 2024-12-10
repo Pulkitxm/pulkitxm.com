@@ -104,13 +104,13 @@ function LargeMenu() {
                 "relative flex items-center justify-between px-2 py-1 text-sm transition-colors duration-200",
                 index === activeIndex
                   ? "text-white"
-                  : "text-gray-400 hover:text-gray-200",
+                  : "text-[#c6c6c6] hover:text-gray-200",
               )}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(-1)}
             >
               <span>{link.title}</span>
-              <span className="ml-0.5 text-xs text-gray-500">({link.key})</span>
+              <span className="ml-0.5 text-xs">({link.key})</span>
             </Link>
           </li>
         ))}

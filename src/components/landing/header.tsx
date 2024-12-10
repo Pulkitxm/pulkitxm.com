@@ -38,7 +38,12 @@ export default function Header() {
         <p className="text-sm text-gray-300">{profile.caption}</p>
         <div className="my-2 flex items-center space-x-3">
           {links.map(({ href, icon: Icon }, index) => (
-            <Link key={index} href={href} target="_blank">
+            <Link
+              key={index}
+              href={href}
+              target="_blank"
+              aria-label={`Link to ${href}`}
+            >
               <Icon className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
             </Link>
           ))}

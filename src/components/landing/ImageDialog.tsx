@@ -85,7 +85,7 @@ export function ImageDialog({
             <Image
               src={image}
               alt="Profile picture"
-              className={`w-full transform transition duration-300 ${rounded ? "rounded-full" : ""}`}
+              className={`w-full transform object-contain transition duration-300 ${rounded ? "rounded-full" : ""}`}
               width={small ? 400 : 800}
               height={small ? 400 : rounded ? 800 : 600}
               fetchPriority="high"
