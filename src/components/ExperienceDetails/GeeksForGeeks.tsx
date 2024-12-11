@@ -22,13 +22,9 @@ export default function GeeksForGeeks() {
 
       <ImageCarousel
         images={geeksForGeeksExp.images}
-        autoPlay
-        allowFullscreen
-        allowRotate
-        allowZoom
-        showNavButtons
-        showNavDots
-        showPlayPause
+        autoMoveInterval={2000}
+        autoMove
+        showNavigation
       />
 
       <div className="space-y-8">
