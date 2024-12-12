@@ -38,7 +38,8 @@ export default function Component() {
                   src={certification.image}
                   width={800}
                   height={400}
-                  alt=""
+                  alt={certification.name}
+                  aria-label={certification.name}
                   className="aspect-video w-full object-contain"
                 />
               </CardHeader>

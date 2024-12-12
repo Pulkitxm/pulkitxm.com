@@ -10,6 +10,6 @@ export const certifications: readonly Certification[] = [
     },
     verifyLink:
       "https://www.credly.com/badges/0d980c06-511c-4e3d-a9a7-9973688b34ad",
-    image: assets.githubFoundationCertificate,
+    image: assets.githubFoundationBadge,
   },
 ];

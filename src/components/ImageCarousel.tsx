@@ -13,7 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 
 interface SimpleCarouselProps {
-  images: readonly [string, ...string[]];
+  images: string[];
   showNavigation?: boolean;
   autoMove?: boolean;
   autoMoveInterval?: number;
