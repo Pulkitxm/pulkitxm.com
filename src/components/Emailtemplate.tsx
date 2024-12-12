@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const EmailTemplate = ({
   from_name,
   message,
@@ -14,12 +16,12 @@ export const EmailTemplate = ({
     <p className="mb-2 text-gray-600">{message}</p>
     <p className="text-gray-500">
       Sender email:{" "}
-      <a
+      <Link
         href={`mailto:${sender_email}`}
         className="text-blue-500 hover:underline"
       >
         {sender_email}
-      </a>
+      </Link>
     </p>
   </div>
 );

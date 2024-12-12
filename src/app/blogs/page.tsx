@@ -227,7 +227,13 @@ function Blog({
       <CardContent className="p-4 sm:p-6">
         <div className="flex flex-col gap-4">
           <div className="space-y-2">
-            <Link href={blog.url} target="_blank" className="block">
+            <Link
+              href={blog.url}
+              target="_blank"
+              className="block"
+              rel="noopener noreferrer"
+              aria-label={`Read ${blog.title}`}
+            >
               <div className="flex items-start justify-between gap-4">
                 <LinkComponent
                   url={blog.coverImage}
@@ -241,7 +247,7 @@ function Blog({
               </div>
             </Link>
 
-            <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 sm:gap-6">
+            <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400 sm:gap-6">
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
                 <span className="whitespace-nowrap">
@@ -256,7 +262,7 @@ function Blog({
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 text-gray-500">
+              <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 <span className="whitespace-nowrap">
                   {new Date(blog.publishedAt).toLocaleDateString("en-US", {

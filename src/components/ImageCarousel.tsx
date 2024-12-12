@@ -157,6 +157,7 @@ export default function SimpleCarousel({
                 currentIndex === index ? "w-4 bg-white" : "bg-white/50",
               )}
               onClick={() => scrollTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
