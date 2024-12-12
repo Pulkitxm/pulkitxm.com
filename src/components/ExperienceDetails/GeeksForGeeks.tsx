@@ -52,6 +52,7 @@ export default function GeeksForGeeks() {
               href={geeksForGeeksExp.docLink}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Open document"
             >
               <ExternalLink className="ml-2 h-5 w-5" />
             </Link>
