@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { MapPin, Briefcase } from "lucide-react";
-import Link from "next/link";
 import {
   Card,
   CardHeader,
@@ -15,6 +14,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import profile from "@/data/profile";
+import { PreFetchUrl } from "@/components/PreFetchUrl";
+import Link from "next/link";
 
 const formatDate = (date: Date) => {
   return date.toLocaleDateString("en-US", {
@@ -50,7 +51,6 @@ export default function ExperienceTimeline() {
       </motion.h1>
 
       <div className="relative" ref={containerRef}>
-        {/* Timeline line */}
         <motion.div
           className="absolute bottom-0 left-0 top-0 w-0.5 bg-gray-700"
           style={{ scaleY, transformOrigin: "top" }}
@@ -120,13 +120,13 @@ export default function ExperienceTimeline() {
                   className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700"
                   asChild
                 >
-                  <Link
+                  <PreFetchUrl
                     href={`/exp/${exp.slug}`}
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
                   >
                     View more
-                  </Link>
+                  </PreFetchUrl>
                 </Button>
               </CardFooter>
             </Card>

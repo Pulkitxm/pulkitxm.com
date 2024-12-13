@@ -41,6 +41,7 @@ export default function Component() {
                   alt={certification.name}
                   aria-label={certification.name}
                   className="aspect-video w-full object-contain"
+                  unoptimized
                 />
               </CardHeader>
               <CardContent className="space-y-2 p-4">

@@ -2,7 +2,7 @@
 
 import { CalendarIcon, BriefcaseIcon } from "lucide-react";
 import profile from "@/data/profile";
-import Link from "next/link";
+import { PreFetchUrl } from "@/components/PreFetchUrl";
 
 export default function Experience() {
   const formatDate = (date: Date) => {
@@ -30,14 +30,14 @@ export default function Experience() {
                 <div className="absolute -left-[9px] mt-1.5 h-4 w-4 rounded-full border-2 border-gray-700" />
 
                 <div className="group relative flex flex-col gap-1 rounded-lg border border-gray-800 p-4 transition-all hover:border-gray-700 sm:p-6">
-                  <Link
+                  <PreFetchUrl
                     href={`/exp/${exp.slug}`}
                     className={`text-lg font-semibold text-white sm:text-xl ${
                       exp.url ? "underline underline-offset-4" : ""
                     }`}
                   >
                     {exp.companyName}
-                  </Link>
+                  </PreFetchUrl>
 
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
                     <div className="flex items-center text-sm text-gray-400 sm:text-base">

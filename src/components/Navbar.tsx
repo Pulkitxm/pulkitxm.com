@@ -7,8 +7,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import links from "@/data/pages";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { PreFetchUrl } from "./PreFetchUrl";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -98,7 +99,7 @@ function LargeMenu() {
       <ul ref={menuRef} className="flex items-center justify-end space-x-4">
         {links.map((link, index) => (
           <li key={index}>
-            <Link
+            <PreFetchUrl
               href={link.url}
               className={cn(
                 "relative flex items-center justify-between px-2 py-1 text-sm transition-colors duration-200",
@@ -111,7 +112,7 @@ function LargeMenu() {
             >
               <span>{link.title}</span>
               <span className="ml-0.5 text-xs">({link.key})</span>
-            </Link>
+            </PreFetchUrl>
           </li>
         ))}
       </ul>
