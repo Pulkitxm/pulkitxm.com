@@ -19,7 +19,7 @@ const profile: Readonly<Profile> = {
   email: "kpulkit15234@gmail.com",
   links: {
     github: "https://github.com/Pulkitxm",
-    linkedin: "https://www.linkedin.com/in/pulkit-dce/",
+    linkedin: "https://www.linkedin.com/in/pulkitxm",
     twitter: "https://x.com/devpulkitt",
     blogPageUrl: "https://blogs.devpulkit.in/",
     discord: "http://discordapp.com/users/790426084994187304",
