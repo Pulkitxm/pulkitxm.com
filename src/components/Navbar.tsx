@@ -3,7 +3,12 @@
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import links from "@/data/pages";
@@ -13,6 +18,19 @@ import Link from "next/link";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
+
+  const pathname = usePathname();
+  const cleanPathname = useMemo(() => pathname.replace(/\/$/, ""), [pathname]);
+
+  const isLinkActive = useCallback(
+    (linkUrl: string) => {
+      if (linkUrl === "/") {
+        return cleanPathname === "";
+      }
+      return cleanPathname.startsWith(linkUrl);
+    },
+    [cleanPathname],
+  );
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -24,14 +42,22 @@ export default function Navbar() {
   return (
     <nav className="mb-2 h-16 w-full bg-black">
       <div className={`${!isMobile ? "container" : ""} mx-auto px-4`}>
-        {isMobile ? <MobileMenu /> : <LargeMenu />}
+        {isMobile ? (
+          <MobileMenu isLinkActive={isLinkActive} />
+        ) : (
+          <LargeMenu isLinkActive={isLinkActive} />
+        )}
       </div>
     </nav>
   );
 }
 
-function LargeMenu() {
-  const pathname = usePathname();
+function LargeMenu({
+  isLinkActive,
+}: {
+  // eslint-disable-next-line no-unused-vars
+  isLinkActive: (linkUrl: string) => boolean;
+}) {
   const router = useRouter();
   const menuRef = useRef<HTMLUListElement>(null);
 
@@ -39,13 +65,9 @@ function LargeMenu() {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [underlineStyle, setUnderlineStyle] = useState({});
 
-  const cleanPathname = useMemo(() => pathname.replace(/\/$/, ""), [pathname]);
-
   const findActiveIndex = useCallback(() => {
-    return links.findIndex(
-      (link) => link.url.replace(/\/$/, "") === cleanPathname,
-    );
-  }, [cleanPathname]);
+    return links.findIndex((link) => isLinkActive(link.url));
+  }, [isLinkActive]);
 
   useEffect(() => {
     setActiveIndex(findActiveIndex());
@@ -103,7 +125,7 @@ function LargeMenu() {
               href={link.url}
               className={cn(
                 "relative flex items-center justify-between px-2 py-1 text-sm transition-colors duration-200",
-                index === activeIndex
+                isLinkActive(link.url)
                   ? "text-white"
                   : "text-[#c6c6c6] hover:text-gray-200",
               )}
@@ -126,8 +148,12 @@ function LargeMenu() {
   );
 }
 
-function MobileMenu() {
-  const pathname = usePathname();
+function MobileMenu({
+  isLinkActive,
+}: {
+  // eslint-disable-next-line no-unused-vars
+  isLinkActive: (linkUrl: string) => boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -143,6 +169,7 @@ function MobileMenu() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-[240px] bg-black p-0">
+        <SheetTitle className="bg-gray-900 p-4 text-white">Menu</SheetTitle>
         <div className="flex flex-col py-4">
           {links.map((link, index) => (
             <Link
@@ -151,7 +178,7 @@ function MobileMenu() {
               onClick={() => setIsOpen(false)}
               className={cn(
                 "px-4 py-2 text-sm transition-colors duration-200",
-                pathname.replace(/\/$/, "") === link.url.replace(/\/$/, "")
+                isLinkActive(link.url)
                   ? "bg-gray-800 text-white"
                   : "text-gray-400 hover:bg-gray-800 hover:text-gray-200",
               )}
