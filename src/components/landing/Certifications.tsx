@@ -40,8 +40,10 @@ export default function Component() {
                   height={400}
                   alt={certification.name}
                   aria-label={certification.name}
-                  className="aspect-video w-full object-contain"
-                  unoptimized
+                  className={`aspect-video w-full object-${
+                    certification.cover ? "cover" : "contain"
+                  }`}
+                  unoptimized={!certification.optimize}
                 />
               </CardHeader>
               <CardContent className="space-y-2 p-4">

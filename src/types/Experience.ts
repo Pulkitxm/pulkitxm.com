@@ -26,6 +26,8 @@ export type Certification = {
   };
   verifyLink: string;
   image: string;
+  optimize?: boolean;
+  cover?: boolean;
 };
 
 export type PortfolioDesign = {

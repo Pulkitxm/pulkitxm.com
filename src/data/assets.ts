@@ -13,8 +13,12 @@ const assets = {
   },
   hacktoberFest:
     "https://utfs.io/f/fAg0SbN5tYMawKGr0YTf0H1JXoMj5DTdB38FOVscE2yeUhwa",
-  githubFoundationBadge:
-    "https://utfs.io/f/fAg0SbN5tYMaXyjt9o4bbF2CZjE0uQWNK8A4InfelGagPHm6",
+  badges: {
+    githubFoundationBadge:
+      "https://utfs.io/f/fAg0SbN5tYMaXyjt9o4bbF2CZjE0uQWNK8A4InfelGagPHm6",
+    fullStackOpen:
+      "https://utfs.io/f/fAg0SbN5tYMa1gjjoBLh5cL2GF6vxyYsU7lk0PpijwtI9VdQ",
+  },
   datawaveRelievingLetter:
     "https://utfs.io/f/fAg0SbN5tYMaH2ktflSLom4IRAk1d3HuhsXWnlr8zY92vi6C",
   geeksForGeeksLetter:
