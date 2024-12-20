@@ -1,0 +1,77 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm run build
+
+      - name: Deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.USERNAME }}
+          SERVER_IP: ${{ secrets.HOST }}
+          PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
+          PM2_PROCESS_NAME: ${{ secrets.PM2_PROCESS_NAME }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          ssh -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}@${{ secrets.HOST }}" << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+            if ! command -v pnpm &> /dev/null; then
+              npm install -g pnpm
+            fi
+
+            if ! command -v pm2 &> /dev/null; then
+              npm install -g pm2
+            fi
+
+            export PATH="$PATH:$HOME/.local/share/pnpm"
+            export PATH="$PATH:$(npm config get prefix)/bin"
+
+            cd ${{ secrets.PROJECT_DIR }}
+            git reset --hard HEAD
+            git pull --rebase origin main
+            pnpm install --frozen-lockfile
+            pnpm run build
+            pm2 restart ${{ secrets.PM2_PROCESS_NAME }}
+          EOF

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
 import Navbar from "@/components/Navbar";
 import assets from "@/data/assets";
@@ -60,8 +58,6 @@ export default function RootLayout({
           {children}
           <ScrollToTopButton />
         </div>
-        <Analytics debug={false} />
-        <SpeedInsights debug={false} />
       </body>
     </html>
   );
