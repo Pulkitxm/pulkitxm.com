@@ -4,14 +4,27 @@ on:
   push:
     branches:
       - main
+    # Add path filters to avoid unnecessary deployments
+    paths:
+      - "**/*.{js,jsx,ts,tsx,css,scss,json,yaml,yml}"
+      - "public/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    # Add concurrency to cancel in-progress jobs
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # Shallow clone for faster checkout
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
@@ -25,23 +38,34 @@ jobs:
           node-version: "20"
           cache: "pnpm"
 
-      - name: Cache Next.js build
+      - name: Cache dependencies and build output
         uses: actions/cache@v4
         with:
           path: |
             ~/.pnpm-store
             ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+            ${{ github.workspace }}/node_modules
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.{js,jsx,ts,tsx}') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nextjs-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build application
         run: pnpm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
 
-      - name: Deploy
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy and Restart
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SERVER_USER: ${{ secrets.USERNAME }}
@@ -49,29 +73,43 @@ jobs:
           PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
           PM2_PROCESS_NAME: ${{ secrets.PM2_PROCESS_NAME }}
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
           ssh -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}@${{ secrets.HOST }}" << 'EOF'
+            set -e  # Exit on any error
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-            if ! command -v pnpm &> /dev/null; then
-              npm install -g pnpm
+            
+            # Use PATH from environment file if it exists
+            if [ -f "$HOME/.profile" ]; then
+              source "$HOME/.profile"
             fi
-
-            if ! command -v pm2 &> /dev/null; then
-              npm install -g pm2
-            fi
-
-            export PATH="$PATH:$HOME/.local/share/pnpm"
-            export PATH="$PATH:$(npm config get prefix)/bin"
 
             cd ${{ secrets.PROJECT_DIR }}
-            git reset --hard HEAD
-            git pull --rebase origin main
-            pnpm install --frozen-lockfile
-            pnpm run build
-            pm2 restart ${{ secrets.PM2_PROCESS_NAME }}
+
+            # Backup current build
+            if [ -d ".next" ]; then
+              mv .next .next.bak
+            fi
+
+            # Pull changes and install dependencies
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # Install global tools if needed
+            command -v pnpm >/dev/null || npm install -g pnpm
+            command -v pm2 >/dev/null || npm install -g pm2
+
+            # Install and build
+            pnpm install --frozen-lockfile --prefer-offline
+            NEXT_TELEMETRY_DISABLED=1 pnpm run build
+
+            # If build successful, remove backup, otherwise restore it
+            if [ $? -eq 0 ]; then
+              rm -rf .next.bak
+              pm2 restart ${{ secrets.PM2_PROCESS_NAME }} --update-env
+            else
+              rm -rf .next
+              mv .next.bak .next
+              echo "Build failed, restored previous build"
+              exit 1
+            fi
           EOF
