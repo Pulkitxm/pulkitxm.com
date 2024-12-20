@@ -31,7 +31,7 @@ const assets = {
     v4Portfolio:
       "https://utfs.io/f/fAg0SbN5tYMahQF97lL4QOUimM30H68YxJeXPrD9lvKt24IZ",
     v3Portfolio:
-      "https://utfs.io/f/9qYKlaZjLrURm2beaZKHYsShzrEP9483Ha1IGBogAQWwNj0y",
+      "https://utfs.io/f/fAg0SbN5tYMaw0UVrzTf0H1JXoMj5DTdB38FOVscE2yeUhwa",
     v2Portfolio:
       "https://utfs.io/f/fAg0SbN5tYMaGPbYsreVHyxESOu3PCwKfDdBYM20e7ZhpNrg",
     v1Portfolio:
