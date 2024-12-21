@@ -10,6 +10,8 @@ const assets = {
       "https://utfs.io/f/fAg0SbN5tYMaar2cIQmEBmvThUWCIycYQ56PoOVNfF2keMxb",
     experience:
       "https://utfs.io/f/fAg0SbN5tYMaKULJo86fSYs0OD2nFlvtXVPLbrqkjaAmMThy",
+    resumePage:
+      "https://utfs.io/f/fAg0SbN5tYMaYeWknOMJJtRu6h7VQxIskPUYwoy49Szra3Dg",
   },
   hacktoberFest:
     "https://utfs.io/f/fAg0SbN5tYMawKGr0YTf0H1JXoMj5DTdB38FOVscE2yeUhwa",
