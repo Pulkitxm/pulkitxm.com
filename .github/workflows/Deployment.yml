@@ -9,7 +9,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    # Add concurrency to cancel in-progress jobs
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -18,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1 # Shallow clone for faster checkout
+          fetch-depth: 1
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
@@ -52,51 +51,41 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
 
       - name: Deploy and Restart
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           SERVER_USER: ${{ secrets.USERNAME }}
           SERVER_IP: ${{ secrets.HOST }}
           PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
           PM2_PROCESS_NAME: ${{ secrets.PM2_PROCESS_NAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}@${{ secrets.HOST }}" << 'EOF'
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}@${{ secrets.HOST }}" << 'EOF'
             set -e  # Exit on any error
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             
-            # Use PATH from environment file if it exists
             if [ -f "$HOME/.profile" ]; then
               source "$HOME/.profile"
             fi
 
             cd ${{ secrets.PROJECT_DIR }}
 
-            # Backup current build
             if [ -d ".next" ]; then
               mv .next .next.bak
             fi
 
-            # Pull changes and install dependencies
             git fetch origin main
             git reset --hard origin/main
             
-            # Install global tools if needed
             command -v pnpm >/dev/null || npm install -g pnpm
             command -v pm2 >/dev/null || npm install -g pm2
 
-            # Install and build
             pnpm install --frozen-lockfile --prefer-offline
             NEXT_TELEMETRY_DISABLED=1 pnpm run build
 
-            # If build successful, remove backup, otherwise restore it
             if [ $? -eq 0 ]; then
               rm -rf .next.bak
               pm2 restart ${{ secrets.PM2_PROCESS_NAME }} --update-env
