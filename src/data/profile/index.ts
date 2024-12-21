@@ -13,7 +13,7 @@ const profile: Readonly<Profile> = {
   caption: "Full Stack Developer & Open Source Enthusiast",
   image: assets.myImage,
   githubUserName: "pulkitxm",
-  resumeLink: assets.resume,
+  resumeLink: assets.resumePage,
   calendlyUrl: "https://cal.com/pulkitxm",
   sourceCodeUrl: "https://github.com/Pulkitxm/devpulkit.in",
   email: "kpulkit15234@gmail.com",

@@ -1,6 +1,7 @@
 const assets = {
   myImage: "https://utfs.io/f/fAg0SbN5tYMaTLXgIwEpNYqLRVhykD54QCnw0rbWxBOIX7Ui",
   resume: "https://utfs.io/f/fAg0SbN5tYMaf7Ia3qN5tYMaHjC7hOZPJbQeSrN3cDzUVkFL",
+  resumePage: "https://resume.devpulkit.in/",
   banner: {
     home: "https://utfs.io/f/fAg0SbN5tYMae6t7wYp2XYz0SBkUCMQsWnl1jpraNu3FbRcf",
     contact:
