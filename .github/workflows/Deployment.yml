@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - main
-    # Add path filters to avoid unnecessary deployments
-    paths:
-      - "**/*.{js,jsx,ts,tsx,css,scss,json,yaml,yml}"
-      - "public/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
 
 jobs:
   build-and-deploy:
