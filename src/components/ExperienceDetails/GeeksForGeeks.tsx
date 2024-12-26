@@ -76,7 +76,7 @@ const geeksForGeeksExp = {
   url: "https://www.geeksforgeeks.org/",
   startDate: new Date("2024-04-24"),
   endDate: null,
-  docLink: assets.geeksForGeeksLetter,
+  docLink: assets.proffessionalThings.geeksForGeeksLetter,
   location: "India",
   type: "hybrid",
   points: [
@@ -86,5 +86,5 @@ const geeksForGeeksExp = {
     "Encouraged participation in GeeksforGeeks events, ensuring students were aware of opportunities for skill development.",
     "Utilized my position as a Campus Ambassador to foster a collaborative learning environment within the club and across the campus.",
   ],
-  images: assets.geekssForGeeksImages,
+  images: assets.proffessionalThings.geekssForGeeksImages,
 } as const;

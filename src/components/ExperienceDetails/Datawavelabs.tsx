@@ -125,7 +125,7 @@ const datwaveLabsExp = {
   location: "India",
   type: "remote",
   url: "https://datawavelabs.io/",
-  docLink: assets.datawaveRelievingLetter,
+  docLink: assets.proffessionalThings.datawaveRelievingLetter,
   work: [
     {
       title: "Authentication and Authorization Systems",
@@ -210,5 +210,5 @@ const datwaveLabsExp = {
     "Postman",
     "Event Source Polyfill",
   ],
-  image: assets.datawaveDashboard,
+  image: assets.proffessionalThings.datawaveDashboard,
 } as const;
