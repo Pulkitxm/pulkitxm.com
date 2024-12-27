@@ -1,27 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ContributionCalendar } from "../types/github";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import {
-  fetchGitHubContributions,
-  fetchTotalMergedPrs,
-} from "../actions/github";
+import { fetchGitHubContributions } from "../actions/github";
 import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
 
 interface ContributionGraphProps {
   initialData: ContributionCalendar;
+  prsCount: number | null;
 }
 
-export function ContributionGraph({ initialData }: ContributionGraphProps) {
+export function ContributionGraph({
+  initialData,
+  prsCount,
+}: ContributionGraphProps) {
   const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState(currentYear);
   const [data, setData] = useState<ContributionCalendar>(initialData);
   const [loading, setLoading] = useState(false);
-  const [prsCount, setPrsCount] = useState<number | null>(null);
 
   const months = [
     "Jan",
@@ -106,12 +106,6 @@ export function ContributionGraph({ initialData }: ContributionGraphProps) {
     },
     Array(12).fill(0),
   );
-
-  useEffect(() => {
-    fetchTotalMergedPrs().then((count) => {
-      setPrsCount(count);
-    });
-  }, []);
 
   return (
     <Card className="w-full overflow-hidden rounded-xl bg-white dark:bg-zinc-900">

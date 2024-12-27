@@ -1,7 +1,10 @@
 "use client";
 
 import { ContributionGraph } from "@/components/contribution-graph";
-import { fetchGitHubContributions } from "@/actions/github";
+import {
+  fetchGitHubContributions,
+  fetchTotalMergedPrs,
+} from "@/actions/github";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { ContributionCalendar } from "@/types/github";
 
@@ -18,21 +21,27 @@ export default function GithubGraph() {
     null,
   );
   const [loading, setLoading] = useState(false);
+  const [prsCount, setPrsCount] = useState<number | null>(null);
 
-  const handleFetchGitHubContributions = useCallback(async () => {
+  const handleFetchData = useCallback(async () => {
     setLoading(true);
-    fetchGitHubContributions()
-      .then((data) => {
-        setInitialData(data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const [contriData, pr] = await Promise.all([
+        fetchGitHubContributions(),
+        fetchTotalMergedPrs(),
+      ]);
+      setInitialData(contriData);
+      setPrsCount(pr);
+    } catch (error) {
+      console.error("Failed to fetch GitHub data:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
-    handleFetchGitHubContributions();
-  }, [handleFetchGitHubContributions]);
+    handleFetchData();
+  }, [handleFetchData]);
 
   if (loading) {
     return (
@@ -61,7 +70,7 @@ export default function GithubGraph() {
   return (
     <div className="container mx-auto px-4">
       <Suspense fallback={<ContributionGraphLoader />}>
-        <ContributionGraph initialData={initialData} />
+        <ContributionGraph initialData={initialData} prsCount={prsCount} />
       </Suspense>
     </div>
   );
