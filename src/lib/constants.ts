@@ -1,0 +1,2 @@
+export const CONTRIBUTION_GRAPH_SECRET =
+  process.env.CONTRIBUTION_GRAPH_SECRET ?? "";

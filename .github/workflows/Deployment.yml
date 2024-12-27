@@ -19,38 +19,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-
-      - name: Cache dependencies and build output
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.pnpm-store
-            ${{ github.workspace }}/.next/cache
-            ${{ github.workspace }}/node_modules
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.{js,jsx,ts,tsx}') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
-            ${{ runner.os }}-nextjs-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
-
-      - name: Build application
-        run: pnpm run build
-        env:
-          NEXT_TELEMETRY_DISABLED: 1
-
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
@@ -62,37 +30,39 @@ jobs:
           PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
           PM2_PROCESS_NAME: ${{ secrets.PM2_PROCESS_NAME }}
         run: |
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}@${{ secrets.HOST }}" << 'EOF'
-            set -e  # Exit on any error
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            
-            if [ -f "$HOME/.profile" ]; then
-              source "$HOME/.profile"
-            fi
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}@${{ secrets.HOST }}" << 'ENDSSH'
+          set -e  # Exit on any error
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-            cd ${{ secrets.PROJECT_DIR }}
+          if [ -f "$HOME/.profile" ]; then
+            source "$HOME/.profile"
+          fi
 
-            if [ -d ".next" ]; then
-              mv .next .next.bak
-            fi
+          cd ${{ secrets.PROJECT_DIR }}
 
-            git fetch origin main
-            git reset --hard origin/main
-            
-            command -v pnpm >/dev/null || npm install -g pnpm
-            command -v pm2 >/dev/null || npm install -g pm2
+          if [ -d ".next" ]; then
+            mv .next .next.bak
+          fi
 
-            pnpm install --frozen-lockfile --prefer-offline
-            NEXT_TELEMETRY_DISABLED=1 pnpm run build
+          git fetch origin main
+          git reset --hard origin/main
 
-            if [ $? -eq 0 ]; then
-              rm -rf .next.bak
-              pm2 restart ${{ secrets.PM2_PROCESS_NAME }} --update-env
-            else
-              rm -rf .next
-              mv .next.bak .next
-              echo "Build failed, restored previous build"
-              exit 1
-            fi
-          EOF
+          echo "CONTRIBUTION_GRAPH_SECRET=${{ secrets.CONTRIBUTION_GRAPH_SECRET }}" > .env
+
+          command -v pnpm >/dev/null || npm install -g pnpm
+          command -v pm2 >/dev/null || npm install -g pm2
+
+          pnpm install --frozen-lockfile --prefer-offline
+          NEXT_TELEMETRY_DISABLED=1 pnpm run build
+
+          if [ $? -eq 0 ]; then
+            rm -rf .next.bak
+            pm2 restart ${{ secrets.PM2_PROCESS_NAME }} --update-env
+          else
+            rm -rf .next
+            mv .next.bak .next
+            echo "Build failed, restored previous build"
+            exit 1
+          fi
+          ENDSSH
