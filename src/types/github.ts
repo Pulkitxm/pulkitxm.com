@@ -1,6 +1,6 @@
 export interface ContributionDay {
   contributionCount: number;
-  date: string;
+  timeStamp: Date;
 }
 
 export interface ContributionWeek {

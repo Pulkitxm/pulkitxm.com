@@ -64,7 +64,7 @@ export function ContributionGraph({
 
   const processedData = (() => {
     const weeks: typeof data.weeks = [];
-    const firstDate = data.weeks[0]?.contributionDays[0]?.date;
+    const firstDate = data.weeks[0]?.contributionDays[0]?.timeStamp;
 
     if (!firstDate) return { weeks };
 
@@ -95,8 +95,8 @@ export function ContributionGraph({
   const monthPositions = processedData.weeks.reduce<number[]>(
     (acc, week, weekIndex) => {
       week.contributionDays.forEach((day) => {
-        if (day.date) {
-          const date = new Date(day.date);
+        if (day.timeStamp) {
+          const date = new Date(day.timeStamp);
           if (date.getDate() === 1) {
             acc[date.getMonth()] = weekIndex;
           }
@@ -187,33 +187,38 @@ export function ContributionGraph({
                       key={weekIndex}
                       className="flex flex-col gap-1 sm:gap-[2px]"
                     >
-                      {week.contributionDays.map((day, dayIndex) => (
-                        <motion.div
-                          key={`${weekIndex}-${dayIndex}`}
-                          className={`h-[11px] w-[11px] rounded-sm sm:h-[14px] sm:w-[14px] ${
-                            day.date === TODAY.toISOString().split("T")[0]
-                              ? "bg-orange-500 dark:bg-orange-700"
-                              : ""
-                          } ${getContributionColor(day.contributionCount)}`}
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: (weekIndex * 7 + dayIndex) * 0.001,
-                          }}
-                          title={
-                            day.date
-                              ? TODAY.toISOString().split("T")[0] === day.date
-                                ? "Let me contribute today :)"
-                                : `${new Date(day.date).toLocaleDateString("en-GB")}: ${
-                                    day.contributionCount
-                                  } contribution${
-                                    day.contributionCount !== 1 ? "s" : ""
-                                  }`
-                              : "No data"
-                          }
-                        />
-                      ))}
+                      {week.contributionDays.map(
+                        (day, dayIndex) =>
+                          day.timeStamp.getDate() < TODAY.getDate() && (
+                            <motion.div
+                              key={`${weekIndex}-${dayIndex}`}
+                              className={`h-[11px] w-[11px] rounded-sm sm:h-[14px] sm:w-[14px] ${
+                                day.timeStamp.toDateString() ===
+                                TODAY.toDateString()
+                                  ? "bg-orange-500 dark:bg-orange-700"
+                                  : ""
+                              } ${getContributionColor(day.contributionCount)}`}
+                              initial={{ opacity: 0, scale: 0.5 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{
+                                duration: 0.5,
+                                delay: (weekIndex * 7 + dayIndex) * 0.001,
+                              }}
+                              title={
+                                day.timeStamp
+                                  ? TODAY.toDateString() ===
+                                    day.timeStamp.toDateString()
+                                    ? "Let me contribute today :)"
+                                    : `${new Date(day.timeStamp).toLocaleDateString("en-GB")}: ${
+                                        day.contributionCount
+                                      } contribution${
+                                        day.contributionCount !== 1 ? "s" : ""
+                                      }`
+                                  : "No data"
+                              }
+                            />
+                          ),
+                      )}
                     </div>
                   ))}
                 </motion.div>

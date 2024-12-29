@@ -24,7 +24,7 @@ export async function fetchGitHubContributions(
       selectedYear < GITHUB_START_CONTRIBUTION_YEAR ||
       selectedYear > currentYear
     ) {
-      throw new Error("Invalid year selected");
+      return null;
     }
 
     const from = new Date(selectedYear, 0, 1).toISOString();
@@ -70,7 +70,18 @@ export async function fetchGitHubContributions(
       to,
     });
 
-    return user.contributionsCollection.contributionCalendar;
+    return {
+      totalContributions:
+        user.contributionsCollection.contributionCalendar.totalContributions,
+      weeks: user.contributionsCollection.contributionCalendar.weeks.map(
+        (week) => ({
+          contributionDays: week.contributionDays.map((day) => ({
+            contributionCount: day.contributionCount,
+            timeStamp: new Date(day.date),
+          })),
+        }),
+      ),
+    };
   } catch (error) {
     console.error("Error fetching GitHub data:", error);
     return null;
