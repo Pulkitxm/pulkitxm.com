@@ -45,7 +45,6 @@ export function ContributionGraph() {
 
   const handleYearChange = async (year: number) => {
     setSelectedYear(year);
-    await fetchYearData(year);
   };
 
   const getContributionColor = (count: number) => {
