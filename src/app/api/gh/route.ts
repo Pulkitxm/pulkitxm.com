@@ -11,6 +11,7 @@ import {
 const octokit = new Octokit({
   auth: CONTRIBUTION_GRAPH_SECRET,
 });
+
 const CONTRIBUTION_QUERY = `
 query($username: String!, $from: DateTime!, $to: DateTime!) {
   user(login: $username) {
@@ -28,6 +29,7 @@ query($username: String!, $from: DateTime!, $to: DateTime!) {
   }
 }
 `;
+
 const PRS_QUERY = `
 query($username: String!) {
   user(login: $username) {
@@ -73,8 +75,13 @@ export async function GET(
       data: { login },
     } = await octokit.rest.users.getAuthenticated();
 
+    const today = new Date();
+    let toDate = new Date(selectedYear, 11, 31);
+    if (selectedYear === currentYear) {
+      toDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    }
     const from = new Date(selectedYear, 0, 1).toISOString();
-    const to = new Date(selectedYear, 11, 31).toISOString();
+    const to = toDate.toISOString();
 
     const [contributionsData, prsData] = await Promise.all([
       octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
@@ -85,20 +92,36 @@ export async function GET(
       octokit.graphql<PRS_QUERY_RESPONSE>(PRS_QUERY, { username: login }),
     ]);
 
+    const contributionsByMonth = Array.from({ length: 12 }, (_, i) => ({
+      month: i + 1,
+      days: [] as { date: string; contributionCount: number }[],
+    }));
+
+    contributionsData.user.contributionsCollection.contributionCalendar.weeks.forEach(
+      (week) => {
+        week.contributionDays.forEach((day) => {
+          const date = new Date(day.date);
+          const month = date.getMonth();
+          contributionsByMonth[month].days.push({
+            date: day.date,
+            contributionCount: day.contributionCount,
+          });
+        });
+      },
+    );
+
     return NextResponse.json({
       contributions: {
         totalContributions:
           contributionsData.user.contributionsCollection.contributionCalendar
             .totalContributions,
-        weeks:
-          contributionsData.user.contributionsCollection.contributionCalendar.weeks.map(
-            (week) => ({
-              contributionDays: week.contributionDays.map((day) => ({
-                contributionCount: day.contributionCount,
-                timeStamp: new Date(day.date),
-              })),
-            }),
-          ),
+        months: contributionsByMonth.map((month) => ({
+          ...month,
+          days: month.days.map((day) => ({
+            ...day,
+            date: new Date(day.date),
+          })),
+        })),
       },
       prs: prsData.user.pullRequests.totalCount,
       year: selectedYear,

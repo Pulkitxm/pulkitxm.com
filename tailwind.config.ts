@@ -45,6 +45,21 @@ const config: Config = {
         },
         border: "hsl(var(--border))",
         ring: "hsl(var(--ring))",
+        zinc: {
+          100: "#f4f4f5",
+          500: "#71717a",
+          900: "#18181b",
+        },
+        emerald: {
+          200: "#a7f3d0",
+          300: "#6ee7b7",
+          400: "#34d399",
+          500: "#10b981",
+          600: "#059669",
+          700: "#047857",
+          800: "#065f46",
+          900: "#064e3b",
+        },
       },
       keyframes: {
         fadeIn: {
@@ -75,20 +90,6 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        bump: {
-          "44%": { transform: "translate(1.33%, 6.75%)" },
-          "53%": { transform: "translate(-16.67%, -0.54%)" },
-          "61%": { transform: "translate(3.66%, -2.46%)" },
-          "69%": { transform: "translate(-0.59%, 15.27%)" },
-          "76%": { transform: "translate(-1.92%, -4.68%)" },
-          "83%": { transform: "translate(9.38%, 0.96%)" },
-          "90%": { transform: "translate(-4.55%, 1.98%)" },
-        },
-        worm: {
-          from: { strokeDashoffset: "10" },
-          "25%": { strokeDashoffset: "295" },
-          to: { strokeDashoffset: "1165" },
-        },
       },
       animation: {
         fadeIn: "fadeIn 0.2s ease-out",
@@ -98,8 +99,9 @@ const config: Config = {
         gradientX: "gradientX 3s ease infinite",
         accordionDown: "accordionDown 0.2s ease-out",
         accordionUp: "accordionUp 0.2s ease-out",
-        bump: "bump 3s linear infinite",
-        worm: "worm 3s cubic-bezier(0.42, 0.17, 0.75, 0.83) infinite",
+      },
+      gridTemplateColumns: {
+        53: "repeat(53, minmax(0, 1fr))",
       },
     },
   },
