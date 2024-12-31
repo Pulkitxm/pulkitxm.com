@@ -24,7 +24,7 @@ function getContributionColor(count: number) {
 }
 
 export function ContributionGraph(): React.ReactElement {
-  const currentYear = new Date().getFullYear();
+  const currentYear = TODAY.getFullYear();
   const [data, setData] = useState<CONTRIBUTION | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedYear, setSelectedYear] = useState(currentYear);
@@ -73,43 +73,42 @@ export function ContributionGraph(): React.ReactElement {
         !isLoading && month?.days?.find((d) => new Date(d.date).toDateString() === date.toDateString());
       const contributionCount = contributionDay ? contributionDay.contributionCount : 0;
 
-      if (date < TODAY)
-        cells.push(
-          <motion.div
-            key={date.toISOString()}
-            initial={{ opacity: 1 }}
-            animate={
-              isLoading
-                ? {
-                    opacity: [0.3, 0.5, 0.3],
-                    transition: {
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }
+      cells.push(
+        <motion.div
+          key={date.toISOString()}
+          initial={{ opacity: 1 }}
+          animate={
+            isLoading
+              ? {
+                  opacity: [0.3, 0.5, 0.3],
+                  transition: {
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
                   }
-                : { opacity: 1 }
+                }
+              : { opacity: 1 }
+          }
+        >
+          <div
+            className={cn(
+              "m-[1px] h-[10px] w-[10px] rounded-[2px] transition-all duration-200 ease-in-out hover:scale-125 md:h-4 md:w-4",
+              isLoading
+                ? "bg-zinc-800/50"
+                : date.toDateString() === TODAY.toDateString()
+                  ? "bg-red-600"
+                  : getContributionColor(contributionCount)
+            )}
+            title={
+              date.toDateString() === TODAY.toDateString()
+                ? "let me contribut today :)"
+                : isLoading
+                  ? "Loading..."
+                  : `${contributionCount} contribution${contributionCount !== 1 ? "s" : ""} on ${date.toDateString()}`
             }
-          >
-            <div
-              className={cn(
-                "m-[1px] h-[10px] w-[10px] rounded-[2px] transition-all duration-200 ease-in-out hover:scale-125 md:h-4 md:w-4",
-                isLoading
-                  ? "bg-zinc-800/50"
-                  : date.toDateString() === TODAY.toDateString()
-                    ? "bg-red-600"
-                    : getContributionColor(contributionCount)
-              )}
-              title={
-                date.toDateString() === TODAY.toDateString()
-                  ? "let me contribut today :)"
-                  : isLoading
-                    ? "Loading..."
-                    : `${contributionCount} contribution${contributionCount !== 1 ? "s" : ""} on ${date.toDateString()}`
-              }
-            />
-          </motion.div>
-        );
+          />
+        </motion.div>
+      );
     }
 
     const remainingCells = 42 - daysInMonth;
