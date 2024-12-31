@@ -180,7 +180,9 @@ export default function Component() {
             Get in Touch
           </CardTitle>
           <CardDescription className="text-gray-400">
-            Have a question or want to work together? Choose an option below!
+            I’m always open to exploring new collaborations and exciting
+            opportunities. Whether it’s a project idea, a job opportunity, or
+            simply a chance to connect, feel free to reach out!
             <div className="mt-4 flex space-x-4">
               {links.map(({ href, icon: Icon, label }) => {
                 const Element = isTouchable ? Fragment : Magnetic;

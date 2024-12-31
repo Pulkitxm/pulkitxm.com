@@ -7,6 +7,7 @@ import assets from "@/data/assets";
 
 // icons
 import { FaDiscord, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaHashnode } from "react-icons/fa6";
 
 const profile: Readonly<Profile> = {
   name: "Pulkit",
@@ -23,6 +24,7 @@ const profile: Readonly<Profile> = {
     twitter: "https://x.com/devpulkitt",
     blogPageUrl: "https://blogs.devpulkit.in/",
     discord: "http://discordapp.com/users/790426084994187304",
+    blogs: "https://blogs.devpulkit.in",
   },
   experience: [
     {
@@ -92,5 +94,10 @@ export const links = [
     href: profile.links.twitter,
     icon: FaTwitter,
     label: "Twitter",
+  },
+  {
+    href: profile.links.blogs,
+    icon: FaHashnode,
+    label: "Blogs",
   },
 ];
