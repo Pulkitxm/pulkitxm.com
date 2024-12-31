@@ -1,10 +1,11 @@
-import ExperienceDetails from "@/components/ExperienceDetails";
-import profile from "@/data/profile";
 import { notFound } from "next/navigation";
 import React from "react";
 
+import ExperienceDetails from "@/components/ExperienceDetails";
+import profile from "@/data/profile";
+
 export default function ExperienceDetailsPage({
-  params,
+  params
 }: {
   params: {
     expSlug: string;
@@ -12,9 +13,7 @@ export default function ExperienceDetailsPage({
 }) {
   const { expSlug } = params;
 
-  const isExperienceValid = profile.experience.some(
-    (exp) => exp.slug === expSlug,
-  );
+  const isExperienceValid = profile.experience.some((exp) => exp.slug === expSlug);
 
   if (!isExperienceValid) {
     return notFound();

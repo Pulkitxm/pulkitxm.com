@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import React from "react";
+
 import ImageCarousel from "@/components/ImageCarousel";
+import { Card, CardContent } from "@/components/ui/card";
 import assets from "@/data/assets";
 
 export default function GeeksForGeeks() {
@@ -22,18 +23,11 @@ export default function GeeksForGeeks() {
         </Link>
       </h1>
 
-      <ImageCarousel
-        images={geeksForGeeksExp.images}
-        autoMoveInterval={2000}
-        autoMove
-        showNavigation
-      />
+      <ImageCarousel images={geeksForGeeksExp.images} autoMoveInterval={2000} autoMove showNavigation />
 
       <div className="space-y-8">
         <div>
-          <div className="mb-4 text-xl font-semibold text-primary md:text-2xl">
-            Key Responsibilities
-          </div>
+          <div className="mb-4 text-xl font-semibold text-primary md:text-2xl">Key Responsibilities</div>
           <Card>
             <CardContent className="p-6">
               <ul className="grid gap-4 md:grid-cols-2">
@@ -50,12 +44,7 @@ export default function GeeksForGeeks() {
         <div>
           <div className="mb-4 flex items-center text-xl font-semibold text-primary md:text-2xl">
             Certificate of Employment
-            <Link
-              href={geeksForGeeksExp.docLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open document"
-            >
+            <Link href={geeksForGeeksExp.docLink} target="_blank" rel="noopener noreferrer" aria-label="Open document">
               <ExternalLink className="ml-2 h-5 w-5" />
             </Link>
           </div>
@@ -84,7 +73,7 @@ const geeksForGeeksExp = {
     "Organized informative sessions and workshops in collaboration with my college's club to introduce students to GeeksforGeeks and its offerings.",
     "Guided students on using GeeksforGeeks effectively for learning programming concepts, preparing for interviews, and participating in coding competitions.",
     "Encouraged participation in GeeksforGeeks events, ensuring students were aware of opportunities for skill development.",
-    "Utilized my position as a Campus Ambassador to foster a collaborative learning environment within the club and across the campus.",
+    "Utilized my position as a Campus Ambassador to foster a collaborative learning environment within the club and across the campus."
   ],
-  images: assets.proffessionalThings.geekssForGeeksImages,
+  images: assets.proffessionalThings.geekssForGeeksImages
 } as const;

@@ -1,27 +1,18 @@
 "use client";
 
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import profile from "@/data/profile";
 
 export default function Component() {
   return (
     <section className="mb-12">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-          Certifications
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          I have completed the following certifications.
-        </p>
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Certifications</h2>
+        <p className="text-sm text-muted-foreground">I have completed the following certifications.</p>
       </div>
       <div className="mt-4 grid gap-6 sm:grid-cols-2">
         {profile.certifications.map((certification, index) => (
@@ -40,9 +31,7 @@ export default function Component() {
                   height={400}
                   alt={certification.name}
                   aria-label={certification.name}
-                  className={`aspect-video w-full object-${
-                    certification.cover ? "cover" : "contain"
-                  }`}
+                  className={`aspect-video w-full object-${certification.cover ? "cover" : "contain"}`}
                   unoptimized={!certification.optimize}
                 />
               </CardHeader>

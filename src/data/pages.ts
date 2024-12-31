@@ -2,28 +2,28 @@ const links = [
   {
     title: "Home",
     url: "/",
-    key: "h",
+    key: "h"
   },
   {
     title: "Experience",
     url: "/exp",
-    key: "e",
+    key: "e"
   },
   {
     title: "Blogs",
     url: "/blogs",
-    key: "b",
+    key: "b"
   },
   {
     title: "Designs",
     url: "/designs",
-    key: "d",
+    key: "d"
   },
   {
     title: "Contact",
     url: "/contact",
-    key: "c",
-  },
+    key: "c"
+  }
 ];
 
 export default links;

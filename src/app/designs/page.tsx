@@ -1,8 +1,9 @@
-import React from "react";
 import { Github } from "lucide-react";
-import profile from "@/data/profile";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+
+import profile from "@/data/profile";
 
 export default function Page() {
   return (

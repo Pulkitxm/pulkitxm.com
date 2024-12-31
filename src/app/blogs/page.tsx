@@ -1,34 +1,19 @@
 "use client";
 
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Clock,
-  Eye,
-  ArrowUpRight,
-  Calendar,
-  ChevronDown,
-  ChevronUp,
-  ArrowUp,
-  ArrowDown,
-  Search,
-} from "lucide-react";
+import { Clock, Eye, ArrowUpRight, Calendar, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Search } from "lucide-react";
 import Link from "next/link";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+
 import { getBlogs } from "@/actions/blog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { LinkPreview } from "@/components/ui/link-preview";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import profile from "@/data/profile";
 import { BlogType } from "@/types/blog";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { LinkPreview } from "@/components/ui/link-preview";
 
 type SortOption = "publishedAt" | "readTimeInMinutes" | "views";
 type SortOrder = "asc" | "desc";
@@ -81,19 +66,15 @@ export default function BlogListing() {
       (blog) =>
         blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         blog.brief.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        blog.url.toLowerCase().includes(searchTerm.toLowerCase()),
+        blog.url.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .sort((a, b) => {
       if (sortBy === "publishedAt") {
         return sortOrder === "asc"
-          ? new Date(a.publishedAt).getTime() -
-              new Date(b.publishedAt).getTime()
-          : new Date(b.publishedAt).getTime() -
-              new Date(a.publishedAt).getTime();
+          ? new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
+          : new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
       } else {
-        return sortOrder === "asc"
-          ? a[sortBy] - b[sortBy]
-          : b[sortBy] - a[sortBy];
+        return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
       }
     });
 
@@ -129,10 +110,7 @@ export default function BlogListing() {
             />
           </div>
           <div className="flex items-center space-x-2">
-            <Select
-              value={sortBy}
-              onValueChange={(value: SortOption) => setSortBy(value)}
-            >
+            <Select value={sortBy} onValueChange={(value: SortOption) => setSortBy(value)}>
               <SelectTrigger className="w-[140px] sm:w-[180px]">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
@@ -154,11 +132,7 @@ export default function BlogListing() {
               onClick={toggleSortOrder}
               aria-label={`Sort ${sortOrder === "asc" ? "ascending" : "descending"}`}
             >
-              {sortOrder === "asc" ? (
-                <ArrowUp className="h-4 w-4" />
-              ) : (
-                <ArrowDown className="h-4 w-4" />
-              )}
+              {sortOrder === "asc" ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
             </Button>
           </div>
         </div>
@@ -190,11 +164,7 @@ export default function BlogListing() {
           <p className="text-center text-gray-500">No blogs found.</p>
         ) : (
           filteredAndSortedBlogs.map((blog, index) => (
-            <Blog
-              key={index}
-              blog={blog}
-              isTouchableDevice={isTouchableDevice}
-            />
+            <Blog key={index} blog={blog} isTouchableDevice={isTouchableDevice} />
           ))
         )}
       </div>
@@ -202,13 +172,7 @@ export default function BlogListing() {
   );
 }
 
-function Blog({
-  blog,
-  isTouchableDevice,
-}: {
-  blog: BlogType;
-  isTouchableDevice: boolean;
-}) {
+function Blog({ blog, isTouchableDevice }: { blog: BlogType; isTouchableDevice: boolean }) {
   const [expanded, setExpanded] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const briefRef = useRef<HTMLDivElement>(null);
@@ -235,10 +199,7 @@ function Blog({
               aria-label={`Read ${blog.title}`}
             >
               <div className="flex items-start justify-between gap-4">
-                <LinkComponent
-                  url={blog.coverImage}
-                  className="group flex items-center gap-2"
-                >
+                <LinkComponent url={blog.coverImage} className="group flex items-center gap-2">
                   <h2 className="text-lg font-semibold text-gray-300 transition-colors group-hover:text-gray-400 sm:text-xl">
                     {blog.title}
                   </h2>
@@ -250,16 +211,12 @@ function Blog({
             <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400 sm:gap-6">
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                <span className="whitespace-nowrap">
-                  {blog.readTimeInMinutes} min read
-                </span>
+                <span className="whitespace-nowrap">{blog.readTimeInMinutes} min read</span>
               </div>
 
               <div className="flex items-center gap-2">
                 <Eye className="h-4 w-4" />
-                <span className="whitespace-nowrap">
-                  {blog.views.toLocaleString()} views
-                </span>
+                <span className="whitespace-nowrap">{blog.views.toLocaleString()} views</span>
               </div>
 
               <div className="flex items-center gap-2">
@@ -268,7 +225,7 @@ function Blog({
                   {new Date(blog.publishedAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",
-                    day: "numeric",
+                    day: "numeric"
                   })}
                 </span>
               </div>
@@ -278,9 +235,7 @@ function Blog({
               ref={briefRef}
               className="relative overflow-hidden transition-all duration-500 ease-in-out"
               style={{
-                maxHeight: expanded
-                  ? `${contentRef.current?.scrollHeight}px`
-                  : "60px",
+                maxHeight: expanded ? `${contentRef.current?.scrollHeight}px` : "60px"
               }}
             >
               <p ref={contentRef} className="text-gray-400">

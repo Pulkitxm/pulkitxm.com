@@ -1,25 +1,22 @@
 "use client";
 
 import { CalendarIcon, BriefcaseIcon } from "lucide-react";
-import profile from "@/data/profile";
+
 import { PreFetchUrl } from "@/components/PreFetchUrl";
+import profile from "@/data/profile";
 
 export default function Experience() {
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "short",
+      month: "short"
     });
   };
 
   return (
     <div className="max-w-2xl pt-4 sm:pt-6">
-      <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-        Work Experience
-      </h1>
-      <p className="mb-8 text-sm text-gray-400">
-        All my professional experiences as a shitty developer!
-      </p>
+      <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Work Experience</h1>
+      <p className="mb-8 text-sm text-gray-400">All my professional experiences as a shitty developer!</p>
 
       <div className="relative border-l-2 border-gray-700">
         {profile.experience
@@ -48,8 +45,7 @@ export default function Experience() {
                     <div className="flex items-center text-sm text-gray-400">
                       <CalendarIcon className="mr-1.5 h-4 w-4 text-gray-500" />
                       <span>
-                        {formatDate(exp.startDate)} -{" "}
-                        {exp.endDate ? formatDate(exp.endDate) : "Present"}
+                        {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
                       </span>
                     </div>
                   </div>

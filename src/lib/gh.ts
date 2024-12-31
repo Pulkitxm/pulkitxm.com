@@ -1,5 +1,6 @@
-import { CONTRIBUTION_SCHEMA } from "@/types/github";
 import axios from "axios";
+
+import { CONTRIBUTION_SCHEMA } from "@/types/github";
 
 export async function getGithubContributionData(year?: number) {
   try {

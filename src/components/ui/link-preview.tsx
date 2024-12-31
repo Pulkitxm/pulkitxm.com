@@ -1,15 +1,11 @@
 "use client";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
+import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { encode } from "qss";
 import React from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
-import Link from "next/link";
+
 import { cn } from "@/lib/utils";
 
 type LinkPreviewProps = {
@@ -20,10 +16,7 @@ type LinkPreviewProps = {
   height?: number;
   quality?: number;
   layout?: string;
-} & (
-  | { isStatic: true; imageSrc: string }
-  | { isStatic?: false; imageSrc?: never }
-);
+} & ({ isStatic: true; imageSrc: string } | { isStatic?: false; imageSrc?: never });
 
 export const LinkPreview = ({
   children,
@@ -34,7 +27,7 @@ export const LinkPreview = ({
   quality = 50,
   layout = "fixed",
   isStatic = false,
-  imageSrc = "",
+  imageSrc = ""
 }: LinkPreviewProps) => {
   let src;
   if (!isStatic) {
@@ -47,7 +40,7 @@ export const LinkPreview = ({
       "viewport.isMobile": true,
       "viewport.deviceScaleFactor": 1,
       "viewport.width": width * 3,
-      "viewport.height": height * 3,
+      "viewport.height": height * 3
     });
     src = `https://api.microlink.io/?${params}`;
   } else {
@@ -121,13 +114,13 @@ export const LinkPreview = ({
                   transition: {
                     type: "spring",
                     stiffness: 260,
-                    damping: 20,
-                  },
+                    damping: 20
+                  }
                 }}
                 exit={{ opacity: 0, y: 20, scale: 0.6 }}
                 className="rounded-xl shadow-xl"
                 style={{
-                  x: translateX,
+                  x: translateX
                 }}
               >
                 <Link

@@ -10,14 +10,14 @@ export const validateBlog = z.object({
   brief: z.string(),
   coverImage: z
     .object({
-      url: z.string(),
+      url: z.string()
     })
-    .transform((val) => val.url),
+    .transform((val) => val.url)
 });
 
 export type BlogType = z.infer<typeof validateBlog>;
 
 export enum ICON_SIZE {
   SMALL = "sm",
-  LARGE = "lg",
+  LARGE = "lg"
 }

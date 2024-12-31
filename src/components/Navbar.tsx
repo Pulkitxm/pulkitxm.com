@@ -1,20 +1,17 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-} from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import links from "@/data/pages";
-import { useRouter } from "next/navigation";
-import { PreFetchUrl } from "./PreFetchUrl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import links from "@/data/pages";
+import { cn } from "@/lib/utils";
+
+import { PreFetchUrl } from "./PreFetchUrl";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -29,7 +26,7 @@ export default function Navbar() {
       }
       return cleanPathname.startsWith(linkUrl);
     },
-    [cleanPathname],
+    [cleanPathname]
   );
 
   useEffect(() => {
@@ -42,22 +39,13 @@ export default function Navbar() {
   return (
     <nav className="mb-2 h-16 w-full bg-black">
       <div className={`${!isMobile ? "container" : ""} mx-auto px-4`}>
-        {isMobile ? (
-          <MobileMenu isLinkActive={isLinkActive} />
-        ) : (
-          <LargeMenu isLinkActive={isLinkActive} />
-        )}
+        {isMobile ? <MobileMenu isLinkActive={isLinkActive} /> : <LargeMenu isLinkActive={isLinkActive} />}
       </div>
     </nav>
   );
 }
 
-function LargeMenu({
-  isLinkActive,
-}: {
-  // eslint-disable-next-line no-unused-vars
-  isLinkActive: (linkUrl: string) => boolean;
-}) {
+function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolean }) {
   const router = useRouter();
   const menuRef = useRef<HTMLUListElement>(null);
 
@@ -88,13 +76,12 @@ function LargeMenu({
       const link = links.find((link) => link.key === event.key.toLowerCase());
       if (link) router.push(link.url);
     },
-    [router],
+    [router]
   );
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyboardNavigation);
-    return () =>
-      window.removeEventListener("keydown", handleKeyboardNavigation);
+    return () => window.removeEventListener("keydown", handleKeyboardNavigation);
   }, [handleKeyboardNavigation]);
 
   useEffect(() => {
@@ -108,7 +95,7 @@ function LargeMenu({
         setUnderlineStyle({
           width: `${linkRect.width}px`,
           transform: `translateX(${linkRect.left - menuRect.left}px)`,
-          opacity: 1,
+          opacity: 1
         });
       } else {
         setUnderlineStyle({ opacity: 0 });
@@ -125,9 +112,7 @@ function LargeMenu({
               href={link.url}
               className={cn(
                 "relative flex items-center justify-between px-2 py-1 text-sm transition-colors duration-200",
-                isLinkActive(link.url)
-                  ? "text-white"
-                  : "text-[#c6c6c6] hover:text-gray-200",
+                isLinkActive(link.url) ? "text-white" : "text-[#c6c6c6] hover:text-gray-200"
               )}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(-1)}
@@ -139,31 +124,19 @@ function LargeMenu({
         ))}
       </ul>
       <div className="relative h-0.5 w-full">
-        <div
-          className="absolute h-full bg-white transition-all duration-300 ease-in-out"
-          style={underlineStyle}
-        />
+        <div className="absolute h-full bg-white transition-all duration-300 ease-in-out" style={underlineStyle} />
       </div>
     </div>
   );
 }
 
-function MobileMenu({
-  isLinkActive,
-}: {
-  // eslint-disable-next-line no-unused-vars
-  isLinkActive: (linkUrl: string) => boolean;
-}) {
+function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolean }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-gray-400 hover:text-white"
-        >
+        <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
           <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
@@ -180,7 +153,7 @@ function MobileMenu({
                 "px-4 py-2 text-sm transition-colors duration-200",
                 isLinkActive(link.url)
                   ? "bg-gray-800 text-white"
-                  : "text-gray-400 hover:bg-gray-800 hover:text-gray-200",
+                  : "text-gray-400 hover:bg-gray-800 hover:text-gray-200"
               )}
             >
               {link.title}

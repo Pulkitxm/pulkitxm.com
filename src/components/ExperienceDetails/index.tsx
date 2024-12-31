@@ -9,5 +9,5 @@ export default function ExperienceDetails({ expSlug }: { expSlug: string }) {
 const experienceCx: Record<string, React.FC> = {
   datawavelabs: Datawavelabs,
   geeksforgeeks: GeeksForGeeks,
-  deviators: () => null,
+  deviators: () => null
 };

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+
+import { Button } from "@/components/ui/button";
 
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,7 +11,7 @@ export default function ScrollToTopButton() {
   const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   }, []);
 
@@ -20,7 +21,7 @@ export default function ScrollToTopButton() {
         scrollToTop();
       }
     },
-    [scrollToTop],
+    [scrollToTop]
   );
 
   const toggleVisibility = useCallback(() => {

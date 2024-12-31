@@ -1,20 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CalendarDays, GitPullRequest, ChevronDown } from "lucide-react";
-import { CONTRIBUTION } from "@/types/github";
-import { getGithubContributionData } from "@/lib/gh";
-import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
+import React, { useState, useEffect } from "react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
+import { getGithubContributionData } from "@/lib/gh";
 import { cn } from "@/lib/utils";
+import { CONTRIBUTION } from "@/types/github";
 
 const contributionLevels = [
   { min: 0, color: "bg-zinc-800 dark:bg-zinc-750" },
   { min: 1, color: "bg-emerald-700 dark:bg-emerald-600" },
   { min: 5, color: "bg-emerald-500 dark:bg-emerald-400" },
   { min: 10, color: "bg-emerald-400 dark:bg-emerald-300" },
-  { min: 20, color: "bg-emerald-300 dark:bg-emerald-200" },
+  { min: 20, color: "bg-emerald-300 dark:bg-emerald-200" }
 ];
 
 function getContributionColor(count: number) {
@@ -35,10 +36,7 @@ export function ContributionGraph(): React.ReactElement {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        showYearSelect &&
-        !(e.target as HTMLElement).closest(".year-select")
-      ) {
+      if (showYearSelect && !(e.target as HTMLElement).closest(".year-select")) {
         setShowYearSelect(false);
       }
     };
@@ -59,25 +57,12 @@ export function ContributionGraph(): React.ReactElement {
     }
   };
 
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   const renderMonth = (
     month: CONTRIBUTION["contributions"]["months"][number] | undefined,
     monthIndex: number,
-    isLoading: boolean,
+    isLoading: boolean
   ) => {
     const daysInMonth = new Date(selectedYear, monthIndex + 1, 0).getDate();
     const cells: React.ReactNode[] = [];
@@ -85,13 +70,8 @@ export function ContributionGraph(): React.ReactElement {
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(selectedYear, monthIndex, day);
       const contributionDay =
-        !isLoading &&
-        month?.days?.find(
-          (d) => new Date(d.date).toDateString() === date.toDateString(),
-        );
-      const contributionCount = contributionDay
-        ? contributionDay.contributionCount
-        : 0;
+        !isLoading && month?.days?.find((d) => new Date(d.date).toDateString() === date.toDateString());
+      const contributionCount = contributionDay ? contributionDay.contributionCount : 0;
 
       if (date < TODAY)
         cells.push(
@@ -105,8 +85,8 @@ export function ContributionGraph(): React.ReactElement {
                     transition: {
                       duration: 2,
                       repeat: Infinity,
-                      ease: "easeInOut",
-                    },
+                      ease: "easeInOut"
+                    }
                   }
                 : { opacity: 1 }
             }
@@ -118,30 +98,23 @@ export function ContributionGraph(): React.ReactElement {
                   ? "bg-zinc-800/50"
                   : date.toDateString() === TODAY.toDateString()
                     ? "bg-red-600"
-                    : getContributionColor(contributionCount),
+                    : getContributionColor(contributionCount)
               )}
               title={
                 date.toDateString() === TODAY.toDateString()
                   ? "let me contribut today :)"
                   : isLoading
                     ? "Loading..."
-                    : `${contributionCount} contribution${
-                        contributionCount !== 1 ? "s" : ""
-                      } on ${date.toDateString()}`
+                    : `${contributionCount} contribution${contributionCount !== 1 ? "s" : ""} on ${date.toDateString()}`
               }
             />
-          </motion.div>,
+          </motion.div>
         );
     }
 
     const remainingCells = 42 - daysInMonth;
     for (let i = 0; i < remainingCells; i++) {
-      cells.push(
-        <div
-          key={`empty-end-${i}`}
-          className="h-[10px] w-[10px] md:h-3 md:w-3"
-        />,
-      );
+      cells.push(<div key={`empty-end-${i}`} className="h-[10px] w-[10px] md:h-3 md:w-3" />);
     }
 
     return cells;
@@ -151,9 +124,7 @@ export function ContributionGraph(): React.ReactElement {
     <Card className="w-full max-w-full border-zinc-700 bg-black/60 shadow-xl backdrop-blur-md md:max-w-6xl">
       <CardHeader className="border-b border-zinc-700 px-4 py-3 md:px-6">
         <CardTitle className="flex flex-col items-start justify-between space-y-2 md:flex-row md:items-center md:space-y-0">
-          <span className="text-xl font-bold text-zinc-100 md:text-2xl">
-            GitHub Contributions
-          </span>
+          <span className="text-xl font-bold text-zinc-100 md:text-2xl">GitHub Contributions</span>
           <div className="year-select relative">
             <button
               onClick={() => setShowYearSelect(!showYearSelect)}
@@ -172,9 +143,9 @@ export function ContributionGraph(): React.ReactElement {
                 >
                   {Array.from(
                     {
-                      length: currentYear - GITHUB_START_CONTRIBUTION_YEAR + 1,
+                      length: currentYear - GITHUB_START_CONTRIBUTION_YEAR + 1
                     },
-                    (_, i) => currentYear - i,
+                    (_, i) => currentYear - i
                   ).map((year) => (
                     <button
                       key={year}
@@ -184,9 +155,7 @@ export function ContributionGraph(): React.ReactElement {
                       }}
                       className={cn(
                         "w-full px-3 py-1.5 text-left text-sm transition-colors hover:bg-zinc-800",
-                        year === selectedYear
-                          ? "text-emerald-500"
-                          : "text-zinc-100",
+                        year === selectedYear ? "text-emerald-500" : "text-zinc-100"
                       )}
                     >
                       {year}
@@ -203,20 +172,10 @@ export function ContributionGraph(): React.ReactElement {
           <div className="-mx-4 overflow-x-auto pb-4 md:mx-0">
             <div className="flex min-w-max px-4 py-2 md:px-0">
               {months.map((month, index) => (
-                <div
-                  key={month}
-                  className="flex flex-col"
-                  style={{ minWidth: "70px" }}
-                >
-                  <div className="mb-2 px-1 text-center text-[10px] font-medium text-zinc-400 md:text-xs">
-                    {month}
-                  </div>
+                <div key={month} className="flex flex-col" style={{ minWidth: "70px" }}>
+                  <div className="mb-2 px-1 text-center text-[10px] font-medium text-zinc-400 md:text-xs">{month}</div>
                   <div className="m-1 grid grid-cols-7 gap-[2px]">
-                    {renderMonth(
-                      data?.contributions.months[index],
-                      index,
-                      loading,
-                    )}
+                    {renderMonth(data?.contributions.months[index], index, loading)}
                   </div>
                 </div>
               ))}
@@ -234,8 +193,7 @@ export function ContributionGraph(): React.ReactElement {
                 <div className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
                   <CalendarDays className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
                   <span>
-                    <strong>{data.contributions.totalContributions}</strong>{" "}
-                    contributions in {data.year}
+                    <strong>{data.contributions.totalContributions}</strong> contributions in {data.year}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">

@@ -9,14 +9,14 @@ export const CONTRIBUTION_SCHEMA = z.object({
         days: z.array(
           z.object({
             date: z.string().transform((v) => new Date(v)),
-            contributionCount: z.number(),
-          }),
-        ),
-      }),
-    ),
+            contributionCount: z.number()
+          })
+        )
+      })
+    )
   }),
   prs: z.number(),
-  year: z.number(),
+  year: z.number()
 });
 
 export type CONTRIBUTION = z.infer<typeof CONTRIBUTION_SCHEMA>;

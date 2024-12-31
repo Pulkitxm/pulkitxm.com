@@ -1,15 +1,14 @@
 "use client";
 
-import profile from "@/data/profile";
 import Image from "next/image";
 import Link from "next/link";
+
+import profile from "@/data/profile";
 
 export default function Projects() {
   return (
     <div>
-      <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-        Projects
-      </h1>
+      <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Projects</h1>
       <p className="text-sm text-gray-400">Some of my cool side projects</p>
 
       <div className="grid w-full gap-4 p-2 sm:grid-cols-2">
@@ -31,9 +30,7 @@ export default function Projects() {
                 loading="eager"
               />
             </div>
-            <p className="mt-2 text-lg font-bold text-gray-200">
-              {project.name}
-            </p>
+            <p className="mt-2 text-lg font-bold text-gray-200">{project.name}</p>
             <p className="text-sm text-gray-300">{project.tagline}</p>
           </Link>
         ))}

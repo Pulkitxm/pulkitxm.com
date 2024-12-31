@@ -1,7 +1,8 @@
 "use server";
 
-import { BlogType, validateBlog } from "@/types/blog";
 import axios from "axios";
+
+import { BlogType, validateBlog } from "@/types/blog";
 
 const GET_USER_ARTICLES = `
 query Publication($id: ObjectId = "66213f8be5371b46eac0e05e") {
@@ -28,7 +29,7 @@ query Publication($id: ObjectId = "66213f8be5371b46eac0e05e") {
 export async function getBlogs() {
   try {
     const res = await axios.post("https://gql.hashnode.com/", {
-      query: GET_USER_ARTICLES,
+      query: GET_USER_ARTICLES
     });
     const resp: BlogType[] = [];
     for (const edge of res.data.data.publication.posts.edges) {
@@ -40,10 +41,7 @@ export async function getBlogs() {
     const blogs = resp
       .sort((a, b) => b.views - a.views)
       .filter((blog) => blog.views !== 0)
-      .sort(
-        (a, b) =>
-          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-      );
+      .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
     return blogs;
   } catch (e) {

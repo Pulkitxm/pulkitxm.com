@@ -1,26 +1,20 @@
 "use client";
 
-import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { MapPin, Briefcase } from "lucide-react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import Link from "next/link";
+import { useRef } from "react";
+
+import { PreFetchUrl } from "@/components/PreFetchUrl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import profile from "@/data/profile";
-import { PreFetchUrl } from "@/components/PreFetchUrl";
-import Link from "next/link";
 
 const formatDate = (date: Date) => {
   return date.toLocaleDateString("en-US", {
     year: "numeric",
-    month: "short",
+    month: "short"
   });
 };
 
@@ -30,13 +24,13 @@ export default function ExperienceTimeline() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end end"],
+    offset: ["start end", "end end"]
   });
 
   const scaleY = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001,
+    restDelta: 0.001
   });
 
   return (
@@ -66,37 +60,24 @@ export default function ExperienceTimeline() {
           >
             <div
               className={`absolute -left-10 top-0 h-6 w-6 rounded-full border-4 ${
-                !exp.endDate
-                  ? "border-green-500 bg-green-100"
-                  : "border-gray-800 bg-gray-100"
+                !exp.endDate ? "border-green-500 bg-green-100" : "border-gray-800 bg-gray-100"
               }`}
               title={exp.endDate ? undefined : "Ongoing"}
             />
             <Card className="group relative flex h-full flex-col border-gray-800 transition-all duration-300 hover:border-gray-700 hover:shadow-xl hover:shadow-gray-900/20">
               <CardHeader className="space-y-4">
                 <div className="flex items-start justify-between">
-                  <Badge
-                    variant="outline"
-                    className="border-gray-700 bg-gray-800 text-white"
-                  >
+                  <Badge variant="outline" className="border-gray-700 bg-gray-800 text-white">
                     {exp.type}
                   </Badge>
                   <div className="text-sm text-gray-400">
-                    {formatDate(exp.startDate)} -{" "}
-                    {exp.endDate ? formatDate(exp.endDate) : "Present"}
+                    {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <CardTitle className="text-xl font-bold text-white">
-                    {exp.position}
-                  </CardTitle>
+                  <CardTitle className="text-xl font-bold text-white">{exp.position}</CardTitle>
                   <CardDescription className="text-base text-gray-400">
-                    <Link
-                      href={exp.url ?? ""}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      className="hover:underline"
-                    >
+                    <Link href={exp.url ?? ""} rel="noopener noreferrer" target="_blank" className="hover:underline">
                       {exp.companyName}
                     </Link>
                   </CardDescription>
@@ -116,10 +97,7 @@ export default function ExperienceTimeline() {
                 </div>
               </CardContent>
               <CardFooter className="mt-auto pt-6">
-                <Button
-                  className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700"
-                  asChild
-                >
+                <Button className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700" asChild>
                   <PreFetchUrl
                     href={`/exp/${exp.slug}`}
                     rel="noopener noreferrer"

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export function ImageDialog({
   src: image,
@@ -10,7 +10,7 @@ export function ImageDialog({
   rounded,
   small,
   width,
-  height,
+  height
 }: {
   src: string;
   className?: string;
@@ -51,10 +51,7 @@ export function ImageDialog({
 
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        className={`${fill ? "h-full w-full" : ""} overflow-hidden`}
-      >
+      <button onClick={() => setIsOpen(true)} className={`${fill ? "h-full w-full" : ""} overflow-hidden`}>
         <Image
           fill={fill}
           src={image}

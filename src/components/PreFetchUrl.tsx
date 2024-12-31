@@ -25,7 +25,7 @@ export function PreFetchUrl({
   className,
   onMouseEnter,
   onTouchStart,
-  onMouseLeave,
+  onMouseLeave
 }: PreFetchUrlProps) {
   const router = useRouter();
   const [isPrefetched, setIsPrefetched] = useState(false);

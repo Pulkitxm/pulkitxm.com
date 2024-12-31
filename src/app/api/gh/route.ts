@@ -1,15 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
 import { Octokit } from "@octokit/rest";
+import { NextRequest, NextResponse } from "next/server";
+
 import { GITHUB_START_CONTRIBUTION_YEAR } from "@/lib/config";
 import { CONTRIBUTION_GRAPH_SECRET } from "@/lib/constants";
-import {
-  CONTRIBUTION,
-  CONTRIBUTION_QUERY_RESPONSE,
-  PRS_QUERY_RESPONSE,
-} from "@/types/github";
+import { CONTRIBUTION, CONTRIBUTION_QUERY_RESPONSE, PRS_QUERY_RESPONSE } from "@/types/github";
 
 const octokit = new Octokit({
-  auth: CONTRIBUTION_GRAPH_SECRET,
+  auth: CONTRIBUTION_GRAPH_SECRET
 });
 
 const CONTRIBUTION_QUERY = `
@@ -40,9 +37,7 @@ query($username: String!) {
 }
 `;
 
-export async function GET(
-  request: NextRequest,
-): Promise<NextResponse<CONTRIBUTION | { error: string }>> {
+export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTION | { error: string }>> {
   try {
     const searchParams = request.nextUrl.searchParams;
     const year = searchParams.get("y");
@@ -59,20 +54,17 @@ export async function GET(
       selectedYear = new Date().getFullYear();
     }
 
-    if (
-      selectedYear < GITHUB_START_CONTRIBUTION_YEAR ||
-      selectedYear > currentYear
-    ) {
+    if (selectedYear < GITHUB_START_CONTRIBUTION_YEAR || selectedYear > currentYear) {
       return NextResponse.json(
         {
-          error: `Year must be between ${GITHUB_START_CONTRIBUTION_YEAR} and ${currentYear}`,
+          error: `Year must be between ${GITHUB_START_CONTRIBUTION_YEAR} and ${currentYear}`
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     const {
-      data: { login },
+      data: { login }
     } = await octokit.rest.users.getAuthenticated();
 
     const today = new Date();
@@ -87,51 +79,44 @@ export async function GET(
       octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
         username: login,
         from,
-        to,
+        to
       }),
-      octokit.graphql<PRS_QUERY_RESPONSE>(PRS_QUERY, { username: login }),
+      octokit.graphql<PRS_QUERY_RESPONSE>(PRS_QUERY, { username: login })
     ]);
 
     const contributionsByMonth = Array.from({ length: 12 }, (_, i) => ({
       month: i + 1,
-      days: [] as { date: string; contributionCount: number }[],
+      days: [] as { date: string; contributionCount: number }[]
     }));
 
-    contributionsData.user.contributionsCollection.contributionCalendar.weeks.forEach(
-      (week) => {
-        week.contributionDays.forEach((day) => {
-          const date = new Date(day.date);
-          const month = date.getMonth();
-          contributionsByMonth[month].days.push({
-            date: day.date,
-            contributionCount: day.contributionCount,
-          });
+    contributionsData.user.contributionsCollection.contributionCalendar.weeks.forEach((week) => {
+      week.contributionDays.forEach((day) => {
+        const date = new Date(day.date);
+        const month = date.getMonth();
+        contributionsByMonth[month].days.push({
+          date: day.date,
+          contributionCount: day.contributionCount
         });
-      },
-    );
+      });
+    });
 
     return NextResponse.json({
       contributions: {
-        totalContributions:
-          contributionsData.user.contributionsCollection.contributionCalendar
-            .totalContributions,
+        totalContributions: contributionsData.user.contributionsCollection.contributionCalendar.totalContributions,
         months: contributionsByMonth.map((month) => ({
           ...month,
           days: month.days.map((day) => ({
             ...day,
-            date: new Date(day.date),
-          })),
-        })),
+            date: new Date(day.date)
+          }))
+        }))
       },
       prs: prsData.user.pullRequests.totalCount,
-      year: selectedYear,
+      year: selectedYear
     });
   } catch (error) {
     console.error("Error fetching GitHub data:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch GitHub data" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to fetch GitHub data" }, { status: 500 });
   }
 }
 

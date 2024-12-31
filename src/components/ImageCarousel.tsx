@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
+import { useState, useEffect, useCallback, useRef } from "react";
+
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-  useCarousel,
+  useCarousel
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
@@ -23,11 +24,9 @@ export default function SimpleCarousel({
   images,
   showNavigation = true,
   autoMove = true,
-  autoMoveInterval = 5000,
+  autoMoveInterval = 5000
 }: SimpleCarouselProps) {
-  const [api, setApi] = useState<ReturnType<typeof useCarousel>["api"] | null>(
-    null,
-  );
+  const [api, setApi] = useState<ReturnType<typeof useCarousel>["api"] | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -35,8 +34,7 @@ export default function SimpleCarousel({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    isTouchDevice.current =
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    isTouchDevice.current = "ontouchstart" in window || navigator.maxTouchPoints > 0;
   }, []);
 
   const resetTimeout = useCallback(() => {
@@ -83,7 +81,7 @@ export default function SimpleCarousel({
       resetTimeout();
       startTimeout();
     },
-    [api, resetTimeout, startTimeout],
+    [api, resetTimeout, startTimeout]
   );
 
   const handleMouseEnter = useCallback(() => {
@@ -101,17 +99,13 @@ export default function SimpleCarousel({
   }, [startTimeout]);
 
   return (
-    <div
-      className="relative mx-auto w-full max-w-5xl"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="relative mx-auto w-full max-w-5xl" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Carousel
         setApi={setApi}
         className="w-full"
         opts={{
           align: "start",
-          loop: true,
+          loop: true
         }}
       >
         <CarouselContent>
@@ -154,7 +148,7 @@ export default function SimpleCarousel({
               key={index}
               className={cn(
                 "h-2 w-2 rounded-full transition-all",
-                currentIndex === index ? "w-4 bg-white" : "bg-white/50",
+                currentIndex === index ? "w-4 bg-white" : "bg-white/50"
               )}
               onClick={() => scrollTo(index)}
               aria-label={`Go to slide ${index + 1}`}

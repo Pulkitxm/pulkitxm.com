@@ -1,30 +1,24 @@
 "use client";
 
-import { Fragment, useCallback, useEffect, useState } from "react";
-import { sendEmail } from "@/actions/email";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Mail, MessageSquare, Send, User, Calendar } from "lucide-react";
 import Link from "next/link";
-import profile, { links } from "@/data/profile";
+import { Fragment, useCallback, useEffect, useState } from "react";
+
+import { sendEmail } from "@/actions/email";
 import Magnetic from "@/components/MagneticElement";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import profile, { links } from "@/data/profile";
 
 export default function Component() {
   const [isSelected, setIsSelected] = useState<string>("message");
   const [formInputs, setFormInputs] = useState({
     name: "",
     email: "",
-    message: "",
+    message: ""
   });
   const [isTouchable, setIsTouchable] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,7 +35,7 @@ export default function Component() {
         await sendEmail({
           from_name: formInputs.name,
           message: formInputs.message,
-          sender_email: formInputs.email,
+          sender_email: formInputs.email
         });
         setIsSubmitted(true);
       } catch (error) {
@@ -50,7 +44,7 @@ export default function Component() {
         setIsSubmitting(false);
       }
     },
-    [formInputs],
+    [formInputs]
   );
 
   const Tabs = [
@@ -72,7 +66,7 @@ export default function Component() {
                 onChange={(e) =>
                   setFormInputs((prev) => ({
                     ...prev,
-                    name: e.target.value,
+                    name: e.target.value
                   }))
                 }
                 className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
@@ -94,7 +88,7 @@ export default function Component() {
                 onChange={(e) =>
                   setFormInputs((prev) => ({
                     ...prev,
-                    email: e.target.value,
+                    email: e.target.value
                   }))
                 }
                 className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
@@ -115,7 +109,7 @@ export default function Component() {
                 onChange={(e) =>
                   setFormInputs((prev) => ({
                     ...prev,
-                    message: e.target.value,
+                    message: e.target.value
                   }))
                 }
                 className="min-h-[120px] border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
@@ -148,7 +142,7 @@ export default function Component() {
             )}
           </Button>
         </form>
-      ),
+      )
     },
     {
       id: "schedule",
@@ -160,11 +154,11 @@ export default function Component() {
           src="https://cal.com/pulkitxm?embed_type=Inline&amp;embed_domain=1"
           style={{
             height: "450px",
-            width: "100%",
+            width: "100%"
           }}
         />
-      ),
-    },
+      )
+    }
   ];
 
   useEffect(() => {
@@ -176,13 +170,10 @@ export default function Component() {
     <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <Card className="overflow-hidden bg-black text-white">
         <CardHeader className="space-y-1 px-6 py-8">
-          <CardTitle className="text-2xl font-bold sm:text-3xl">
-            Get in Touch
-          </CardTitle>
+          <CardTitle className="text-2xl font-bold sm:text-3xl">Get in Touch</CardTitle>
           <CardDescription className="text-gray-400">
-            I’m always open to exploring new collaborations and exciting
-            opportunities. Whether it’s a project idea, a job opportunity, or
-            simply a chance to connect, feel free to reach out!
+            I’m always open to exploring new collaborations and exciting opportunities. Whether it’s a project idea, a
+            job opportunity, or simply a chance to connect, feel free to reach out!
             <div className="mt-4 flex space-x-4">
               {links.map(({ href, icon: Icon, label }) => {
                 const Element = isTouchable ? Fragment : Magnetic;
@@ -211,9 +202,7 @@ export default function Component() {
                 key={id}
                 type="button"
                 className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                  isSelected === id
-                    ? "bg-[#ffffff1a] text-white"
-                    : "text-muted-foreground"
+                  isSelected === id ? "bg-[#ffffff1a] text-white" : "text-muted-foreground"
                 }`}
                 onClick={() => setIsSelected(id)}
               >
@@ -223,10 +212,7 @@ export default function Component() {
             ))}
           </div>
           {Tabs.map(({ id, content }) => (
-            <div
-              key={id}
-              className={`mt-6 ${isSelected === id ? "block" : "hidden"}`}
-            >
+            <div key={id} className={`mt-6 ${isSelected === id ? "block" : "hidden"}`}>
               {content}
             </div>
           ))}

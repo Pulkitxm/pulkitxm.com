@@ -16,18 +16,9 @@ export const skills: Readonly<Record<string, string[]>> = {
     "React Query",
     "GraphQL",
     "Redux",
-    "Recoil",
+    "Recoil"
   ],
-  "Databases & ORMs": [
-    "MongoDB",
-    "Postgres",
-    "SqlAlchemy",
-    "Redis",
-    "Alembic",
-    "MySQL",
-    "Prisma",
-    "PyScopG2",
-  ],
+  "Databases & ORMs": ["MongoDB", "Postgres", "SqlAlchemy", "Redis", "Alembic", "MySQL", "Prisma", "PyScopG2"],
   "Tools & Platforms": [
     "GitHub Actions",
     "Serverless",
@@ -37,6 +28,6 @@ export const skills: Readonly<Record<string, string[]>> = {
     "AWS CloudFront",
     "Azure VM",
     "Docker",
-    "Mapbox",
-  ],
+    "Mapbox"
+  ]
 };

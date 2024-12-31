@@ -1,15 +1,12 @@
 "use server";
 
-import { EmailTemplate } from "@/components/Emailtemplate";
 import { Resend } from "resend";
+
+import { EmailTemplate } from "@/components/Emailtemplate";
 
 const { RSEND_API, RESEND_TO_EMAIL, RESEND_FROM_EMAIL } = process.env;
 
-export async function sendEmail(data: {
-  from_name: string;
-  message: string;
-  sender_email: string;
-}) {
+export async function sendEmail(data: { from_name: string; message: string; sender_email: string }) {
   if (!RSEND_API || !RESEND_TO_EMAIL || !RESEND_FROM_EMAIL) {
     return { error: "Failed to send email", status: 500 };
   }
@@ -22,7 +19,7 @@ export async function sendEmail(data: {
       to: RESEND_TO_EMAIL,
       subject: "🎉New submission to your contact form!",
       html: "",
-      react: EmailTemplate(data),
+      react: EmailTemplate(data)
     });
 
     if (resp.error) {
