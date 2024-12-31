@@ -12,6 +12,7 @@ import {
   IGNORED_CONTRIBUTION_YEARS,
   TODAY
 } from "@/lib/config";
+import { months } from "@/lib/constants";
 import { getGithubContributionData } from "@/lib/gh";
 import { cn } from "@/lib/utils";
 import { CONTRIBUTION } from "@/types/github";
@@ -62,8 +63,6 @@ export function ContributionGraph(): React.ReactElement {
       setLoading(false);
     }
   };
-
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   const renderMonth = (
     month: CONTRIBUTION["contributions"]["months"][number] | undefined,

@@ -5,7 +5,7 @@ export const CONTRIBUTION_SCHEMA = z.object({
     totalContributions: z.number(),
     months: z.array(
       z.object({
-        month: z.number().min(1).max(12),
+        month: z.union([z.string(), z.number().min(1).max(12)]),
         days: z.array(
           z.object({
             date: z.string().transform((v) => new Date(v)),

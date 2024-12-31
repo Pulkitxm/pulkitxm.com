@@ -2,7 +2,7 @@
 
 import { Octokit } from "@octokit/rest";
 
-import { CONTRIBUTION_GRAPH_SECRET } from "@/lib/constants";
+import { CONTRIBUTION_GRAPH_SECRET, months } from "@/lib/constants";
 import { CONTRIBUTION, CONTRIBUTION_QUERY_RESPONSE, PRS_QUERY_RESPONSE } from "@/types/github";
 import { RES_TYPE } from "@/types/globals";
 
@@ -38,12 +38,23 @@ query($username: String!) {
 }
 `;
 
-export async function githubData({ from, to }: { from: string; to: string }): Promise<RES_TYPE<CONTRIBUTION>> {
+export async function githubData({
+  from,
+  to,
+  monthsType = "number",
+  filterNull = false
+}: {
+  from: string;
+  to: string;
+  monthsType?: "string" | "number";
+  filterNull?: boolean;
+}): Promise<RES_TYPE<CONTRIBUTION>> {
   try {
     const {
       data: { login }
     } = await octokit.rest.users.getAuthenticated();
 
+    const year = new Date(from).getFullYear(); // Derive the year from 'from'
     const [contributionsData, prsData] = await Promise.all([
       octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
         username: login,
@@ -62,28 +73,42 @@ export async function githubData({ from, to }: { from: string; to: string }): Pr
       week.contributionDays.forEach((day) => {
         const date = new Date(day.date);
         const month = date.getMonth();
-        contributionsByMonth[month].days.push({
-          date: day.date,
-          contributionCount: day.contributionCount
-        });
+        if (date.getFullYear() === year) {
+          contributionsByMonth[month].days.push({
+            date: day.date,
+            contributionCount: day.contributionCount
+          });
+        }
       });
     });
+
+    const contributions: CONTRIBUTION["contributions"] = {
+      totalContributions: contributionsData.user.contributionsCollection.contributionCalendar.totalContributions,
+      months: contributionsByMonth.map((month) => ({
+        ...month,
+        month: monthsType === "string" ? months[month.month - 1] : month.month,
+        days: month.days.map((day) => ({
+          ...day,
+          date: new Date(day.date)
+        }))
+      }))
+    };
+
+    if (filterNull) {
+      contributions.months = contributions.months
+        .map((month) => ({
+          ...month,
+          days: month.days.filter((day) => day.contributionCount > 0)
+        }))
+        .filter((month) => month.days.length > 0);
+    }
 
     return {
       status: "success",
       data: {
-        contributions: {
-          totalContributions: contributionsData.user.contributionsCollection.contributionCalendar.totalContributions,
-          months: contributionsByMonth.map((month) => ({
-            ...month,
-            days: month.days.map((day) => ({
-              ...day,
-              date: new Date(day.date)
-            }))
-          }))
-        },
+        contributions,
         prs: prsData.user.pullRequests.totalCount,
-        year: new Date(from).getFullYear()
+        year
       }
     };
   } catch (error) {
