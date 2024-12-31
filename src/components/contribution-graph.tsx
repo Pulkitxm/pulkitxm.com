@@ -5,7 +5,13 @@ import { CalendarDays, GitPullRequest, ChevronDown } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
+import {
+  GITHUB_DEFAULT_VIEW_YEAR,
+  GITHUB_JOINED_DATE,
+  GITHUB_START_CONTRIBUTION_YEAR,
+  IGNORED_CONTRIBUTION_YEARS,
+  TODAY
+} from "@/lib/config";
 import { getGithubContributionData } from "@/lib/gh";
 import { cn } from "@/lib/utils";
 import { CONTRIBUTION } from "@/types/github";
@@ -27,7 +33,7 @@ export function ContributionGraph(): React.ReactElement {
   const currentYear = TODAY.getFullYear();
   const [data, setData] = useState<CONTRIBUTION | null>(null);
   const [loading, setLoading] = useState(false);
-  const [selectedYear, setSelectedYear] = useState(currentYear);
+  const [selectedYear, setSelectedYear] = useState(GITHUB_DEFAULT_VIEW_YEAR);
   const [showYearSelect, setShowYearSelect] = useState(false);
 
   useEffect(() => {
@@ -97,14 +103,18 @@ export function ContributionGraph(): React.ReactElement {
                 ? "bg-zinc-800/50"
                 : date.toDateString() === TODAY.toDateString()
                   ? "bg-red-600"
-                  : getContributionColor(contributionCount)
+                  : date.toDateString() === GITHUB_JOINED_DATE.toDateString()
+                    ? "bg-amber-300"
+                    : getContributionColor(contributionCount)
             )}
             title={
-              date.toDateString() === TODAY.toDateString()
-                ? "let me contribut today :)"
-                : isLoading
-                  ? "Loading..."
-                  : `${contributionCount} contribution${contributionCount !== 1 ? "s" : ""} on ${date.toDateString()}`
+              date.toDateString() === GITHUB_JOINED_DATE.toDateString()
+                ? "The day I joined GitHub"
+                : date.toDateString() === TODAY.toDateString()
+                  ? "let me contribut today :)"
+                  : isLoading
+                    ? "Loading..."
+                    : `${contributionCount} contribution${contributionCount !== 1 ? "s" : ""} on ${date.toDateString()}`
             }
           />
         </motion.div>
@@ -145,21 +155,23 @@ export function ContributionGraph(): React.ReactElement {
                       length: currentYear - GITHUB_START_CONTRIBUTION_YEAR + 1
                     },
                     (_, i) => currentYear - i
-                  ).map((year) => (
-                    <button
-                      key={year}
-                      onClick={() => {
-                        setSelectedYear(year);
-                        setShowYearSelect(false);
-                      }}
-                      className={cn(
-                        "w-full px-3 py-1.5 text-left text-sm transition-colors hover:bg-zinc-800",
-                        year === selectedYear ? "text-emerald-500" : "text-zinc-100"
-                      )}
-                    >
-                      {year}
-                    </button>
-                  ))}
+                  )
+                    .filter((year) => !IGNORED_CONTRIBUTION_YEARS.includes(year))
+                    .map((year) => (
+                      <button
+                        key={year}
+                        onClick={() => {
+                          setSelectedYear(year);
+                          setShowYearSelect(false);
+                        }}
+                        className={cn(
+                          "w-full px-3 py-1.5 text-left text-sm transition-colors hover:bg-zinc-800",
+                          year === selectedYear ? "text-emerald-500" : "text-zinc-100"
+                        )}
+                      >
+                        {year}
+                      </button>
+                    ))}
                 </motion.div>
               )}
             </AnimatePresence>
