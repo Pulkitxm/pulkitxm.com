@@ -87,20 +87,17 @@ export async function githubData({
       months: contributionsByMonth.map((month) => ({
         ...month,
         month: monthsType === "string" ? months[month.month - 1] : month.month,
-        days: month.days.map((day) => ({
-          ...day,
-          date: new Date(day.date)
-        }))
+        days: month.days
+          .map((day) => ({
+            ...day,
+            date: new Date(day.date)
+          }))
+          .filter((day) => day.contributionCount > 0)
       }))
     };
 
     if (filterNull) {
-      contributions.months = contributions.months
-        .map((month) => ({
-          ...month,
-          days: month.days.filter((day) => day.contributionCount > 0)
-        }))
-        .filter((month) => month.days.length > 0);
+      contributions.months = contributions.months.filter((month) => month.days.length > 0);
     }
 
     return {
