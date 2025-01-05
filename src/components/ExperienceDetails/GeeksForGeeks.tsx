@@ -1,5 +1,3 @@
-"use client";
-
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -8,7 +6,7 @@ import ImageCarousel from "@/components/ImageCarousel";
 import { Card, CardContent } from "@/components/ui/card";
 import assets from "@/data/assets";
 
-export default function GeeksForGeeks() {
+export default async function GeeksForGeeks() {
   return (
     <div className="space-y-8">
       <h1 className="mb-4 text-lg font-bold text-primary md:text-xl lg:text-2xl">

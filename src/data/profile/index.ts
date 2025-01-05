@@ -1,3 +1,4 @@
+// icons
 import { FaDiscord, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { FaHashnode } from "react-icons/fa6";
 
@@ -9,14 +10,12 @@ import { portfolioIndex } from "./portfolioIndex";
 import { projects } from "./projects";
 import { skills } from "./skills";
 
-// icons
-
 const profile: Readonly<Profile> = {
   name: "Pulkit",
   caption: "Full Stack Developer & Open Source Enthusiast",
   image: assets.myImage,
   githubUserName: "pulkitxm",
-  resumeLink: assets.resumePage,
+  resumeLink: "http://resume.devpulkit.in",
   calendlyUrl: "https://cal.com/pulkitxm",
   sourceCodeUrl: "https://github.com/Pulkitxm/devpulkit.in",
   email: "kpulkit15234@gmail.com",
@@ -50,23 +49,15 @@ const profile: Readonly<Profile> = {
       url: "https://geeksforgeeks.org/",
       slug: "geeksforgeeks",
       desc: "I am responsible for managing and organizing various events, workshops, and contests for the college students. I also help students in their technical and non-technical queries and guide them in their career path."
-    },
-    {
-      companyName: "Deviators Club",
-      position: "Chairperson & Web Lead",
-      location: "Gurugram, India",
-      type: "hybrid",
-      url: "https://deviatorsdce.tech/",
-      startDate: new Date("2024-02-01"),
-      slug: "deviators",
-      desc: "I lead a team of 50+ members and manage the club's activities, events, and workshops. I also manage the club's website and other technical activities."
     }
-  ].sort((a, b) => {
-    if (!a.endDate && b.endDate) return -1;
-    if (!b.endDate && a.endDate) return 1;
-    if (!a.endDate && !b.endDate) return a.startDate.getTime() - b.startDate.getTime();
-    return (b.endDate?.getTime() || 0) - (a.endDate?.getTime() || 0);
-  }),
+  ]
+    .sort((a, b) => {
+      if (!a.endDate && b.endDate) return -1;
+      if (!b.endDate && a.endDate) return 1;
+      if (!a.endDate && !b.endDate) return a.startDate.getTime() - b.startDate.getTime();
+      return (b.endDate?.getTime() || 0) - (a.endDate?.getTime() || 0);
+    })
+    .sort((a) => (a.type === "remote" ? -1 : 1)),
   projects,
   skills,
   certifications,

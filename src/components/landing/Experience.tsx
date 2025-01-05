@@ -1,11 +1,9 @@
-"use client";
-
 import { CalendarIcon, BriefcaseIcon } from "lucide-react";
 
 import { PreFetchUrl } from "@/components/PreFetchUrl";
 import profile from "@/data/profile";
 
-export default function Experience() {
+export default async function Experience() {
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
       year: "numeric",
@@ -23,18 +21,17 @@ export default function Experience() {
           .filter((exp) => exp.showOnHome)
           .map((exp, index) => {
             return (
-              <div key={index} className="mb-5 ml-6 last:mb-0">
+              <PreFetchUrl href={`/exp/${exp.slug}`} key={index} className="mb-5 ml-6 block last:mb-0">
                 <div className="absolute -left-[9px] mt-1.5 h-4 w-4 rounded-full border-2 border-gray-700" />
 
                 <div className="group relative flex flex-col gap-1 rounded-lg border border-gray-800 p-4 transition-all hover:border-gray-700 sm:p-6">
-                  <PreFetchUrl
-                    href={`/exp/${exp.slug}`}
+                  <div
                     className={`text-lg font-semibold text-white sm:text-xl ${
                       exp.url ? "underline underline-offset-4" : ""
                     }`}
                   >
                     {exp.companyName}
-                  </PreFetchUrl>
+                  </div>
 
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
                     <div className="flex items-center text-sm text-gray-400 sm:text-base">
@@ -50,7 +47,7 @@ export default function Experience() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </PreFetchUrl>
             );
           })}
       </div>

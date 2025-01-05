@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { githubData } from "@/actions/gh";
+import { getGithubData } from "@/actions/gh";
 import profile from "@/data/profile";
 import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
 import { CONTRIBUTION } from "@/types/github";
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
   const contributions: CONTRIBUTION[] = [];
 
   for (const year of allowedYears) {
-    const githubContribution = await githubData({
+    const githubContribution = await getGithubData({
       from: new Date(year, 0, 1).toISOString(),
       to: new Date(year, 11, 31).toISOString(),
       monthsType: "string",

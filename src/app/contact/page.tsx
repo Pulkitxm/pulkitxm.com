@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Fragment, useCallback, useEffect, useState } from "react";
 
 import { sendEmail } from "@/actions/email";
-import Magnetic from "@/components/MagneticElement";
+import MagneticElement from "@/components/MagneticElement";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import profile, { links } from "@/data/profile";
 
-export default function Component() {
+export default function ContactPage() {
   const [isSelected, setIsSelected] = useState<string>("message");
   const [formInputs, setFormInputs] = useState({
     name: "",
@@ -176,7 +176,7 @@ export default function Component() {
             job opportunity, or simply a chance to connect, feel free to reach out!
             <div className="mt-4 flex space-x-4">
               {links.map(({ href, icon: Icon, label }) => {
-                const Element = isTouchable ? Fragment : Magnetic;
+                const Element = isTouchable ? Fragment : MagneticElement;
                 return (
                   <Element key={label}>
                     <Link

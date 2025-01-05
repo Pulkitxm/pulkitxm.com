@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-import assets from "@/data/assets";
+import profile from "@/data/profile";
 
 export default function page() {
-  return redirect(assets.resumePage);
+  return redirect(profile.resumeLink);
 }

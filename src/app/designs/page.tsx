@@ -5,11 +5,10 @@ import React from "react";
 
 import profile from "@/data/profile";
 
-export default function Page() {
+export default function DesignsPage() {
   return (
     <main className="min-h-screen bg-black bg-[linear-gradient(to_bottom,transparent,rgb(0,0,0))]">
       <div className="container mx-auto px-4 py-8">
-        {/* Hero Section */}
         <div className="mb-20 space-y-4">
           <h1 className="animate-fade-in-up bg-gradient-to-r from-white via-white to-gray-500 bg-clip-text text-center text-5xl font-bold text-transparent sm:text-6xl md:text-7xl">
             Portfolio Evolution
@@ -19,7 +18,6 @@ export default function Page() {
           </p>
         </div>
 
-        {/* Portfolio Cards */}
         <div className="mx-auto max-w-5xl space-y-12">
           {profile.portfolioIndex.map((item, index) => {
             const githubLink = `https://github.com/${profile.githubUserName}/${item.link}`;
@@ -29,7 +27,6 @@ export default function Page() {
                 className="animate-slide-in-up group relative overflow-hidden rounded-2xl bg-gradient-to-b from-gray-900 to-black p-1"
               >
                 <div className="relative rounded-xl bg-gray-900/90 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-gray-900/70">
-                  {/* Portfolio Image */}
                   <div className="relative mb-6 overflow-hidden rounded-lg">
                     <Image
                       src={item.image}
@@ -53,7 +50,6 @@ export default function Page() {
                   >
                     {item.link}
                   </Link>
-                  {/* Action Buttons */}
                   <div className="flex flex-wrap justify-center gap-4">
                     <Link
                       href={`http://${item.link}`}
@@ -75,7 +71,6 @@ export default function Page() {
                   </div>
                 </div>
 
-                {/* Animated Border Gradient */}
                 <div className="animate-gradient-x absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/40 via-cyan-500/40 to-purple-500/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               </div>
             );

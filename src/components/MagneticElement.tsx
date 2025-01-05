@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import React, { useEffect, useRef } from "react";
 
-export default function Magnetic({ children }: { children: React.ReactElement }) {
+export default function MagneticElement({ children }: { children: React.ReactElement }) {
   const magnetic = useRef<HTMLElement>(null);
 
   useEffect(() => {

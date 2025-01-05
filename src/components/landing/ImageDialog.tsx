@@ -31,7 +31,6 @@ export function ImageDialog({
     }, 200);
   };
 
-  // Close on escape key press
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose();
@@ -39,7 +38,6 @@ export function ImageDialog({
 
     if (isOpen) {
       document.addEventListener("keydown", handleEscape);
-      // Prevent scrolling when dialog is open
       document.body.style.overflow = "hidden";
     }
 

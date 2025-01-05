@@ -28,8 +28,7 @@ export async function sendEmail(data: { from_name: string; message: string; send
     }
 
     return { message: "Email sent successfully" };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
     return { error: "Failed to send email", status: 500 };
   }

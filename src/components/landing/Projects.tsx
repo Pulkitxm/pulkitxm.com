@@ -1,11 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
 import profile from "@/data/profile";
 
-export default function Projects() {
+export default async function Projects() {
   return (
     <div>
       <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Projects</h1>

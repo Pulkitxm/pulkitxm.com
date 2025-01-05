@@ -1,4 +1,4 @@
-import { ContributionGraph } from "@/components/contribution-graph";
+import { ContributionGraph } from "@/components/ContributionGraph";
 import Footer from "@/components/Footer";
 import Certifications from "@/components/landing/Certifications";
 import Experience from "@/components/landing/Experience";

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import profile from "@/data/profile";
 
-export default function Component() {
+export default function Certifications() {
   return (
     <section className="mb-12">
       <div>

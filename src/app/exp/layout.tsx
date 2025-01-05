@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: assets.banner.experience, // Your OG image path
+        url: assets.banner.experience,
         width: 1200,
         height: 630,
         alt: "Pulkit's Professional Experience"
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Experience - Pulkit",
     description: "Check out Pulkit's professional journey and career milestones in the tech industry.",
-    images: [assets.banner.experience] // Your OG image path
+    images: [assets.banner.experience]
   }
 };
 

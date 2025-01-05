@@ -118,7 +118,7 @@ export default function SimpleCarousel({
                   width={50}
                   height={50}
                   className="h-full w-full scale-110 object-cover blur-md brightness-50"
-                  priority={index === 0}
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Image

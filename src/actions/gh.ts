@@ -38,7 +38,7 @@ query($username: String!) {
 }
 `;
 
-export async function githubData({
+export async function getGithubData({
   from,
   to,
   monthsType = "number",
@@ -54,7 +54,7 @@ export async function githubData({
       data: { login }
     } = await octokit.rest.users.getAuthenticated();
 
-    const year = new Date(from).getFullYear(); // Derive the year from 'from'
+    const year = new Date(from).getFullYear();
     const [contributionsData, prsData] = await Promise.all([
       octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
         username: login,

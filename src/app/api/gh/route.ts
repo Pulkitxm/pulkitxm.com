@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { githubData } from "@/actions/gh";
+import { getGithubData } from "@/actions/gh";
 import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
 import { CONTRIBUTION } from "@/types/github";
 
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTI
     const from = new Date(selectedYear, 0, 1).toISOString();
     const to = toDate.toISOString();
 
-    const res = await githubData({ from, to, filterNull });
+    const res = await getGithubData({ from, to, filterNull });
 
     if (res.status === "error") {
       return NextResponse.json({ error: res.error }, { status: 500 });

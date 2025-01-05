@@ -1,5 +1,3 @@
-"use client";
-
 import { FileText } from "lucide-react";
 import Link from "next/link";
 
@@ -9,7 +7,7 @@ import profile, { links } from "@/data/profile";
 
 import { ImageDialog } from "./ImageDialog";
 
-export default function Header() {
+export default async function Header() {
   return (
     <>
       <div className="relative">
