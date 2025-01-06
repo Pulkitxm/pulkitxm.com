@@ -48,7 +48,19 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
 
-          echo "CONTRIBUTION_GRAPH_SECRET=${{ secrets.CONTRIBUTION_GRAPH_SECRET }}" > .env
+          ENV_VARS=(
+            "CONTRIBUTION_GRAPH_SECRET"
+            "RESEND_API"
+            "RESEND_TO_EMAIL" 
+            "RESEND_FROM_EMAIL"
+            "RESEND_USER_MAIL_SENDER_MAIL",
+            "BLOG_URL",
+            "BASE_URL",
+          )
+
+          for var in "${ENV_VARS[@]}"; do
+            echo "${var}=${{ secrets[var] }}" >> .env
+          done
 
           command -v pnpm >/dev/null || npm install -g pnpm
           command -v pm2 >/dev/null || npm install -g pm2

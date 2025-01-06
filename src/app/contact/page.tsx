@@ -16,9 +16,9 @@ import profile, { links } from "@/data/profile";
 export default function ContactPage() {
   const [isSelected, setIsSelected] = useState<string>("message");
   const [formInputs, setFormInputs] = useState({
-    name: "",
-    email: "",
-    message: ""
+    name: "Pulkit",
+    email: "kpulkit15234@gmail.com",
+    message: "Heyy"
   });
   const [isTouchable, setIsTouchable] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
