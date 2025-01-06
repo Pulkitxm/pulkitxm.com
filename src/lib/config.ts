@@ -5,3 +5,8 @@ export const IGNORED_CONTRIBUTION_YEARS = [2021, 2022];
 
 export const TODAY = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
 export const CURRENT_YEAR = TODAY.getFullYear();
+
+export const FEATURE_FLAGS = {
+  FLOATING_CTA: true,
+  SHORTCUT_NAVIGATION: true
+};

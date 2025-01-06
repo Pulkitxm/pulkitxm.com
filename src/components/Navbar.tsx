@@ -9,6 +9,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import links from "@/data/pages";
+import { FEATURE_FLAGS } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 import { PreFetchUrl } from "./PreFetchUrl";
@@ -80,6 +81,8 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
   );
 
   useEffect(() => {
+    if (!FEATURE_FLAGS.SHORTCUT_NAVIGATION) return;
+
     window.addEventListener("keydown", handleKeyboardNavigation);
     return () => window.removeEventListener("keydown", handleKeyboardNavigation);
   }, [handleKeyboardNavigation]);

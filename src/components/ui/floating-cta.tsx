@@ -5,7 +5,13 @@ import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
+import { FEATURE_FLAGS } from "@/lib/config";
+
 export default function CollabInviteLayer() {
+  if (FEATURE_FLAGS.FLOATING_CTA) return <CollabInviteLayerCX />;
+}
+
+function CollabInviteLayerCX() {
   const router = useRouter();
   const [show, setShow] = useState(false);
 

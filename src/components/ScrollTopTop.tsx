@@ -4,6 +4,7 @@ import { ArrowUp } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
+import { FEATURE_FLAGS } from "@/lib/config";
 
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,8 +36,7 @@ export default function ScrollToTopButton() {
   }, [scrolWithKey]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
+    if (!FEATURE_FLAGS.SHORTCUT_NAVIGATION || typeof window === "undefined") return;
     window.addEventListener("scroll", toggleVisibility);
     toggleVisibility();
 
