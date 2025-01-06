@@ -3,9 +3,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { FEATURE_FLAGS } from "@/lib/config";
+
+import { PreFetchUrl } from "../PreFetchUrl";
 
 export default function CollabInviteLayer() {
   if (FEATURE_FLAGS.FLOATING_CTA) return <CollabInviteLayerCX />;
@@ -16,8 +18,7 @@ function CollabInviteLayerCX() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const initialShow = localStorage.getItem("collab-invite-layer") === "false" ? false : true;
-    setShow(initialShow);
+    setTimeout(() => setShow(true), 1000);
   }, []);
 
   return (
@@ -32,27 +33,27 @@ function CollabInviteLayerCX() {
             stiffness: 260,
             damping: 20
           }}
-          className="fixed left-0 top-0 z-50 w-full cursor-pointer overflow-hidden border-b border-[#1a1a1a] bg-[#0a0a0a] shadow-lg shadow-[#00ff9580]"
-          onClick={() => router.push("/contact")}
+          className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#1a1a1a] bg-[#0a0a0a] shadow-lg shadow-[#00ff9580]"
         >
           <div className="mx-auto flex max-w-screen-xl items-center justify-between px-4 py-2 md:px-6">
             <div className="flex-1" />
-            <motion.p
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              className="text-center text-sm font-medium text-[#00ff95] md:text-base"
+            <PreFetchUrl
+              href="/contact"
+              className="cursor-pointer text-center text-sm font-medium text-[#00ff95] md:text-base"
+              onClick={() => {
+                router.push("/contact");
+                setShow(false);
+              }}
             >
               Would you like to collab with me or hire me?
-            </motion.p>
+            </PreFetchUrl>
             <div className="flex flex-1 justify-end">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  e.stopPropagation();
                   setShow(false);
-                  localStorage.setItem("collab-invite-layer", "false");
                 }}
                 className="inline-flex items-center justify-center rounded-full text-[#00ff95] transition-colors"
                 aria-label="Close banner"

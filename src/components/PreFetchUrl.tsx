@@ -10,7 +10,7 @@ interface PreFetchUrlProps {
   target?: string;
   children: React.ReactNode;
   onClick?: () => void;
-  className: string;
+  className?: string;
   onMouseEnter?: () => void;
   onTouchStart?: () => void;
   onMouseLeave?: () => void;
