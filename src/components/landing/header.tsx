@@ -15,19 +15,18 @@ export default async function Header() {
           <ImageDialog
             src={assets.hacktoberFest}
             className="w-full rounded-lg object-cover"
-            width={1920}
-            height={1080}
+            width={5000}
+            height={5000}
           />
           <div className="absolute -bottom-10">
             <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-background bg-background">
               <ImageDialog
                 src={profile.image}
                 className="rounded-full object-cover"
-                fill
                 rounded
                 small
-                width={100}
-                height={100}
+                width={1920}
+                height={1080}
               />
             </div>
           </div>

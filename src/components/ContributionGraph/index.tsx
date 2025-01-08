@@ -17,6 +17,8 @@ import { months } from "@/lib/constants";
 import { getGithubContributionData } from "@/lib/gh";
 import { CONTRIBUTION } from "@/types/github";
 
+import { PreFetchUrl } from "../PreFetchUrl";
+
 import { MonthGrid } from "./MonthGrid";
 import { YearSelector } from "./YearSelector";
 
@@ -29,22 +31,21 @@ export function ContributionGraph(): React.ReactElement {
   const [highlightedDate, setHighlightedDate] = useState<Date | null>(null);
 
   const fetchYearData = useCallback(
-    async (year: number) => {
+    (year: number) => {
       if (data[year]) return;
 
-      try {
-        setLoading(true);
-        const newData = await getGithubContributionData(year);
-        if (newData) {
-          setData((prevData) => ({ ...prevData, [year]: newData }));
+      getGithubContributionData(year)
+        .then((newData) => {
+          if (newData) setData((prevData) => ({ ...prevData, [year]: newData }));
           setAnimating(true);
           setTimeout(() => setAnimating(false), 1500);
-        }
-      } catch (error) {
-        console.error("Failed to fetch year data:", error);
-      } finally {
-        setLoading(false);
-      }
+        })
+        .catch((error) => {
+          console.error("Failed to fetch year data:", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
     [data]
   );
@@ -76,7 +77,7 @@ export function ContributionGraph(): React.ReactElement {
           <span className="text-xl font-bold text-zinc-100 md:text-2xl">GitHub Contributions</span>
           <div className="flex items-center space-x-2">
             <YearSelector selectedYear={selectedYear} onYearChange={setSelectedYear} availableYears={availableYears} />
-            <Button onClick={handleJumpToToday} variant="outline" size="sm">
+            <Button onClick={handleJumpToToday} variant="outline" size="sm" className="hover:bg-zinc-800">
               Today
             </Button>
           </div>
@@ -125,12 +126,12 @@ export function ContributionGraph(): React.ReactElement {
                         {selectedYearData.year}
                       </span>
                     </div>
-                    <div className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
+                    <PreFetchUrl href="/prs" className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
                       <GitPullRequest className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
                       <span>
                         <strong>{selectedYearData.prs}</strong> Pull Requests
                       </span>
-                    </div>
+                    </PreFetchUrl>
                   </>
                 )
               )}

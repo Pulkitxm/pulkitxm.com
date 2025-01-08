@@ -3,7 +3,7 @@
 import { Octokit } from "@octokit/rest";
 
 import { CONTRIBUTION_GRAPH_SECRET, months } from "@/lib/constants";
-import { CONTRIBUTION, CONTRIBUTION_QUERY_RESPONSE, PRS_QUERY_RESPONSE } from "@/types/github";
+import { CONTRIBUTION, CONTRIBUTION_QUERY_RESPONSE, PR } from "@/types/github";
 import { RES_TYPE } from "@/types/globals";
 
 const octokit = new Octokit({
@@ -28,16 +28,6 @@ query($username: String!, $from: DateTime!, $to: DateTime!) {
 }
 `;
 
-const PRS_QUERY = `
-query($username: String!) {
-  user(login: $username) {
-    pullRequests(states: [CLOSED, MERGED]) {
-      totalCount
-    }
-  }
-}
-`;
-
 export async function getGithubData({
   from,
   to,
@@ -55,14 +45,21 @@ export async function getGithubData({
     } = await octokit.rest.users.getAuthenticated();
 
     const year = new Date(from).getFullYear();
-    const [contributionsData, prsData] = await Promise.all([
-      octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
-        username: login,
-        from,
-        to
-      }),
-      octokit.graphql<PRS_QUERY_RESPONSE>(PRS_QUERY, { username: login })
-    ]);
+
+    const contributionsData = await octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
+      username: login,
+      from,
+      to
+    });
+
+    const resPrs = await getPrsData({ from, to, select: true });
+
+    if (resPrs.status === "error") {
+      return resPrs;
+    }
+
+    const prs = resPrs.data;
+    const prsCount = prs.length;
 
     const contributionsByMonth = Array.from({ length: 12 }, (_, i) => ({
       month: i + 1,
@@ -104,12 +101,65 @@ export async function getGithubData({
       status: "success",
       data: {
         contributions,
-        prs: prsData.user.pullRequests.totalCount,
+        prs: prsCount,
         year
       }
     };
   } catch (error) {
     console.error("Error fetching GitHub data:", error);
-    return { status: "error", error: "Failed to fetch GitHub data" };
+    return {
+      status: "error",
+      error: error instanceof Error ? error.message : "Failed to fetch GitHub data"
+    };
+  }
+}
+
+export async function getPrsData(
+  props: ({ from: string; to: string } | { all: true }) & { select?: boolean }
+): Promise<RES_TYPE<PR[]>> {
+  try {
+    const {
+      data: { login }
+    } = await octokit.rest.users.getAuthenticated();
+
+    let query = "";
+    if ("all" in props) {
+      query = `author:${login} is:pr`;
+    } else {
+      query = `author:${login} is:pr created:${props.from.split("T")[0]}..${props.to.split("T")[0]}`;
+    }
+
+    if (!props.select) {
+      query += " is:closed is:merged is:open";
+    }
+
+    const { data: pullRequests } = await octokit.rest.search.issuesAndPullRequests({
+      q: query,
+      per_page: 10000,
+      sort: "created",
+      order: "desc"
+    });
+
+    return {
+      status: "success",
+      data: pullRequests.items.map((pr) => ({
+        created_at: pr.created_at,
+        labels: pr.labels.map((label) => label.name ?? ""),
+        merged_at: pr.pull_request && pr.pull_request.merged_at ? new Date(pr.pull_request.merged_at) : new Date(),
+        title: pr.title,
+        url: pr.pull_request?.html_url ?? "",
+        state: pr.state === "closed" && pr.pull_request?.merged_at !== null ? "merged" : "closed",
+        repo: {
+          url: pr.repository_url,
+          name: pr.repository ? pr.repository.name : ""
+        }
+      }))
+    };
+  } catch (error) {
+    console.error("Error fetching PRs:", error);
+    return {
+      status: "error",
+      error: error instanceof Error ? error.message : "Failed to fetch PRs"
+    };
   }
 }

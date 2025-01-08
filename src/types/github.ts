@@ -44,3 +44,20 @@ export type PRS_QUERY_RESPONSE = {
     };
   };
 };
+
+export const PR_STATE = z.enum(["closed", "merged"]);
+export const PR_SCHEMA = z.object({
+  created_at: z.string(),
+  labels: z.array(z.string()),
+  merged_at: z.string().transform((v) => new Date(v)),
+  title: z.string(),
+  url: z.string(),
+  state: PR_STATE,
+  repo: z.object({
+    name: z.string(),
+    url: z.string()
+  })
+});
+export const PRS_SCHEMA = z.array(PR_SCHEMA);
+export type PR = z.infer<typeof PR_SCHEMA>;
+export type PR_STATE_TYPE = z.infer<typeof PR_STATE>;

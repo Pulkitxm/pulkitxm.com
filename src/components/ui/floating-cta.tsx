@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { XIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { FEATURE_FLAGS } from "@/lib/config";
@@ -14,7 +13,6 @@ export default function CollabInviteLayer() {
 }
 
 function CollabInviteLayerCX() {
-  const router = useRouter();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -41,7 +39,6 @@ function CollabInviteLayerCX() {
               href="/contact"
               className="cursor-pointer text-center text-sm font-medium text-[#00ff95] md:text-base"
               onClick={() => {
-                router.push("/contact");
                 setShow(false);
               }}
             >

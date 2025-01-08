@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export function ImageDialog({
   src: image,
   className,
-  fill,
   rounded,
   small,
   width,
@@ -14,7 +13,6 @@ export function ImageDialog({
 }: {
   src: string;
   className?: string;
-  fill?: boolean;
   rounded?: boolean;
   small?: boolean;
   width: number;
@@ -49,12 +47,11 @@ export function ImageDialog({
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className={`${fill ? "h-full w-full" : ""} overflow-hidden`}>
+      <button onClick={() => setIsOpen(true)} className="h-full w-full overflow-hidden">
         <Image
-          fill={fill}
           src={image}
-          width={fill ? undefined : width}
-          height={fill ? undefined : height}
+          width={width ? 500 : width}
+          height={height ? 500 : height}
           alt="Profile picture"
           className={`${className} transform transition duration-200`}
           fetchPriority="high"
