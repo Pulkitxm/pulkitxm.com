@@ -8,11 +8,12 @@ const assets = {
     blogs: "https://utfs.io/f/fAg0SbN5tYMaXyjIPYfbbF2CZjE0uQWNK8A4InfelGagPHm6",
     designs: "https://utfs.io/f/fAg0SbN5tYMaar2cIQmEBmvThUWCIycYQ56PoOVNfF2keMxb",
     experience: "https://utfs.io/f/fAg0SbN5tYMaKULJo86fSYs0OD2nFlvtXVPLbrqkjaAmMThy",
-    resumePage: "https://utfs.io/f/fAg0SbN5tYMaYeWknOMJJtRu6h7VQxIskPUYwoy49Szra3Dg"
+    resumePage: "https://utfs.io/f/fAg0SbN5tYMaEpJn2ZRdKCfhF9iGb2kxSzu7JvOcnUrjAV1p",
+    prsPage: "https://utfs.io/f/fAg0SbN5tYMaEGTlKfRdKCfhF9iGb2kxSzu7JvOcnUrjAV1p"
   },
   badges: {
     githubFoundationBadge: "https://utfs.io/f/fAg0SbN5tYMaXyjt9o4bbF2CZjE0uQWNK8A4InfelGagPHm6",
-    fullStackOpen: "https://utfs.io/f/fAg0SbN5tYMa1gjjoBLh5cL2GF6vxyYsU7lk0PpijwtI9VdQ"
+    fullStackOpen: "https://utfs.io/f/fAg0SbN5tYMaBfpcCHjbBpO9VRzINF2gWrmheAK8ufGQilLH"
   },
   proffessionalThings: {
     datawaveRelievingLetter: "https://utfs.io/f/fAg0SbN5tYMaH2ktflSLom4IRAk1d3HuhsXWnlr8zY92vi6C",
