@@ -24,7 +24,7 @@ function CollabInviteLayerCX() {
       {show && (
         <motion.div
           initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
+          animate={{ height: "auto", opacity: 0.9 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{
             type: "spring",
