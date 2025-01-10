@@ -33,12 +33,16 @@ const assets = {
     ],
     datawaveDashboard: "https://utfs.io/f/fAg0SbN5tYMaOXXjqQWfy2C0FdEhIViAwr1SMqL4Wab3txcY"
   },
-  portfolio: {
-    v5Portfolio: "https://utfs.io/f/fAg0SbN5tYMajzV52P75d7SvurOkxegNzHqR1TBf0bQ3mDsI",
-    v4Portfolio: "https://utfs.io/f/fAg0SbN5tYMahQF97lL4QOUimM30H68YxJeXPrD9lvKt24IZ",
-    v3Portfolio: "https://utfs.io/f/fAg0SbN5tYMaw0UVrzTf0H1JXoMj5DTdB38FOVscE2yeUhwa",
-    v2Portfolio: "https://utfs.io/f/fAg0SbN5tYMaGPbYsreVHyxESOu3PCwKfDdBYM20e7ZhpNrg",
-    v1Portfolio: "https://utfs.io/f/fAg0SbN5tYMaTy0RcEpNYqLRVhykD54QCnw0rbWxBOIX7UiF"
+  designs: {
+    deviators: "https://utfs.io/f/fAg0SbN5tYMarLjjvv7u6iHn5JWMCum2VIbRYp9xdD3gzToU",
+    eosArchitecture: "https://utfs.io/f/fAg0SbN5tYMajlO2uQ75d7SvurOkxegNzHqR1TBf0bQ3mDsI",
+    portfolio: {
+      v5Portfolio: "https://utfs.io/f/fAg0SbN5tYMajzV52P75d7SvurOkxegNzHqR1TBf0bQ3mDsI",
+      v4Portfolio: "https://utfs.io/f/fAg0SbN5tYMahQF97lL4QOUimM30H68YxJeXPrD9lvKt24IZ",
+      v3Portfolio: "https://utfs.io/f/fAg0SbN5tYMaw0UVrzTf0H1JXoMj5DTdB38FOVscE2yeUhwa",
+      v2Portfolio: "https://utfs.io/f/fAg0SbN5tYMaGPbYsreVHyxESOu3PCwKfDdBYM20e7ZhpNrg",
+      v1Portfolio: "https://utfs.io/f/fAg0SbN5tYMaTy0RcEpNYqLRVhykD54QCnw0rbWxBOIX7UiF"
+    }
   },
   projects: {
     imageTweakerProject: "https://utfs.io/f/fAg0SbN5tYMa3cDjvyauwSjTovYnIsXhRAVgmJWDl4C6tFHO",

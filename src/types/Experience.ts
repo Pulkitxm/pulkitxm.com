@@ -30,9 +30,16 @@ export type Certification = {
   cover?: boolean;
 };
 
-export type PortfolioDesign = {
+export type DesignItem = {
+  title: string;
   link: string;
   image: string;
+  githubLink: string;
+};
+
+export type Design = {
+  portfolioDesigns: DesignItem[];
+  webDesigns: DesignItem[];
 };
 
 export type Profile = {
@@ -49,5 +56,5 @@ export type Profile = {
   projects: readonly Project[];
   skills: Readonly<Record<string, string[]>>;
   certifications: readonly Certification[];
-  portfolioIndex: readonly PortfolioDesign[];
+  design: Design;
 };

@@ -6,7 +6,7 @@ import assets from "@/data/assets";
 import { Profile } from "@/types/Experience";
 
 import { certifications } from "./certifications";
-import { portfolioIndex } from "./portfolioIndex";
+import { design } from "./design";
 import { projects } from "./projects";
 import { skills } from "./skills";
 
@@ -61,7 +61,7 @@ const profile: Readonly<Profile> = {
   projects,
   skills,
   certifications,
-  portfolioIndex
+  design
 };
 
 export default profile;

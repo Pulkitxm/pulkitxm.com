@@ -1,82 +1,155 @@
-import { Github } from "lucide-react";
+"use client";
+
+import { motion } from "framer-motion";
+import { Github, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import profile from "@/data/profile";
+import { design } from "@/data/profile/design";
+import { DesignItem } from "@/types/Experience";
 
 export default function DesignsPage() {
   return (
-    <main className="min-h-screen bg-black bg-[linear-gradient(to_bottom,transparent,rgb(0,0,0))]">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-20 space-y-4">
-          <h1 className="animate-fade-in-up bg-gradient-to-r from-white via-white to-gray-500 bg-clip-text text-center text-5xl font-bold text-transparent sm:text-6xl md:text-7xl">
-            Portfolio Evolution
-          </h1>
-          <p className="animate-fade-in-up text-center text-lg text-gray-400 delay-200 sm:text-xl">
-            A journey through my web design iterations
-          </p>
+    <div className="px-4 py-16">
+      <motion.h1
+        className="mb-16 text-center text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        My <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">Designs</span>
+      </motion.h1>
+
+      <section className="mb-32">
+        <motion.h2
+          className="mb-12 text-center text-2xl font-semibold sm:text-3xl md:text-4xl"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Web <span className="text-gray-500">Design Projects</span>
+        </motion.h2>
+        <div className="grid gap-8 sm:grid-cols-2 lg:gap-12">
+          {design.webDesigns.map((item, index) => (
+            <DisplayWebDesign key={index} item={item} index={index} />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <motion.h2
+          className="mb-12 text-center text-2xl font-semibold sm:text-3xl md:text-4xl"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          Portfolio <span className="text-gray-500">Evolution</span>
+        </motion.h2>
+        <div className="space-y-16 sm:space-y-24">
+          {design.portfolioDesigns.map((item, index) => (
+            <DisplayPortfolioDesign key={index} item={item} index={index} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function DisplayWebDesign({ item, index }: { item: DesignItem; index: number }) {
+  return (
+    <motion.div
+      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-green-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="relative space-y-4 p-6">
+        <div className="relative aspect-video overflow-hidden rounded-xl">
+          <Image
+            src={item.image}
+            width={500}
+            height={500}
+            objectFit="cover"
+            alt={item.title}
+            className="transition-transform duration-700 will-change-transform group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </div>
 
-        <div className="mx-auto max-w-5xl space-y-12">
-          {profile.portfolioIndex.map((item, index) => {
-            const githubLink = `https://github.com/${profile.githubUserName}/${item.link}`;
-            return (
-              <div
-                key={index}
-                className="animate-slide-in-up group relative overflow-hidden rounded-2xl bg-gradient-to-b from-gray-900 to-black p-1"
-              >
-                <div className="relative rounded-xl bg-gray-900/90 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-gray-900/70">
-                  <div className="relative mb-6 overflow-hidden rounded-lg">
-                    <Image
-                      src={item.image}
-                      width={1200}
-                      height={800}
-                      alt={`Portfolio v${index + 1}`}
-                      className="w-full scale-110 transform object-cover transition duration-700 group-hover:rotate-0 group-hover:scale-100"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                      priority={index === 0}
-                      fetchPriority="high"
-                      loading="eager"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-                  </div>
+        <h3 className="text-xl font-semibold text-white">{item.title}</h3>
 
-                  <Link
-                    href={`http://${item.link}`}
-                    className="mb-2 flex transform items-center justify-center rounded-lg px-6 py-3 text-lg font-semibold sm:text-base md:text-xl lg:text-2xl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {item.link}
-                  </Link>
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <Link
-                      href={`http://${item.link}`}
-                      className="inline-flex transform items-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-black transition-transform hover:scale-105 hover:bg-gray-100 sm:text-base"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Visit Site
-                    </Link>
-                    <Link
-                      href={githubLink}
-                      className="inline-flex transform items-center rounded-lg bg-gray-800 px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105 hover:bg-gray-700 sm:text-base"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="mr-2 h-5 w-5" />
-                      GitHub
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="animate-gradient-x absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/40 via-cyan-500/40 to-purple-500/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              </div>
-            );
-          })}
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href={item.link}
+            className="inline-flex items-center rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:shadow-lg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ExternalLink className="mr-2 h-4 w-4" />
+            Visit Site
+          </Link>
+          <Link
+            href={item.githubLink}
+            className="inline-flex items-center rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:shadow-lg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Github className="mr-2 h-4 w-4" />
+            GitHub
+          </Link>
         </div>
       </div>
-    </main>
+    </motion.div>
+  );
+}
+
+function DisplayPortfolioDesign({ item, index }: { item: DesignItem; index: number }) {
+  return (
+    <motion.div
+      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-900"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-green-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="relative flex flex-col gap-8 p-6 sm:p-8 md:flex-row md:items-center">
+        <div className="flex-1 space-y-4">
+          <h3 className="text-xl font-semibold text-white sm:text-2xl">{item.title}</h3>
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href={item.link}
+              className="inline-flex items-center rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:shadow-lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="mr-2 h-4 w-4" />
+              Visit Site
+            </Link>
+            <Link
+              href={item.githubLink}
+              className="inline-flex items-center rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:shadow-lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="mr-2 h-4 w-4" />
+              GitHub
+            </Link>
+          </div>
+        </div>
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl md:w-1/2 lg:w-2/5">
+          <Image
+            src={item.image}
+            width={500}
+            height={300}
+            objectFit="cover"
+            alt={item.title}
+            className="transition-transform duration-700 will-change-transform group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        </div>
+      </div>
+    </motion.div>
   );
 }
