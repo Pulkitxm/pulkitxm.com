@@ -2,7 +2,8 @@
 
 import { Octokit } from "@octokit/rest";
 
-import { CONTRIBUTION_GRAPH_SECRET, months } from "@/lib/constants";
+import { TODAY } from "@/lib/config";
+import { CONTRIBUTION_GRAPH_SECRET, months, REPO_NAME } from "@/lib/constants";
 import { CONTRIBUTION, CONTRIBUTION_QUERY_RESPONSE, PR } from "@/types/github";
 import { RES_TYPE } from "@/types/globals";
 
@@ -160,6 +161,28 @@ export async function getPrsData(
     return {
       status: "error",
       error: error instanceof Error ? error.message : "Failed to fetch PRs"
+    };
+  }
+}
+
+export async function getLatestWorkflow(): Promise<{ timeStamp: Date }> {
+  try {
+    const {
+      data: { login: username }
+    } = await octokit.rest.users.getAuthenticated();
+
+    const response = await octokit.actions.listWorkflowRunsForRepo({
+      owner: username,
+      repo: REPO_NAME
+    });
+
+    return {
+      timeStamp: new Date(response.data.workflow_runs[0].updated_at)
+    };
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : "Unknown error occurred");
+    return {
+      timeStamp: TODAY
     };
   }
 }

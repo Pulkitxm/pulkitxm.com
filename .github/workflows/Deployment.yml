@@ -60,6 +60,7 @@ jobs:
           echo "Setting up environment variables"
           
           echo "CONTRIBUTION_GRAPH_SECRET=${{ secrets.CONTRIBUTION_GRAPH_SECRET }}" >> .env
+          echo "REPO_NAME=${{ secrets.REPO_NAME }}" >> .env
           echo "RESEND_API=${{ secrets.RESEND_API }}" >> .env
           echo "RESEND_TO_EMAIL=${{ secrets.RESEND_TO_EMAIL }}" >> .env
           echo "RESEND_FROM_EMAIL=${{ secrets.RESEND_FROM_EMAIL }}" >> .env

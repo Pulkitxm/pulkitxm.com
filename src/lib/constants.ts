@@ -1,4 +1,5 @@
 export const CONTRIBUTION_GRAPH_SECRET = process.env.CONTRIBUTION_GRAPH_SECRET ?? "";
+export const REPO_NAME = process.env.REPO_NAME ?? "";
 export const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 export const RESEND_API = process.env.RESEND_API ?? "";
 export const RESEND_TO_EMAIL = process.env.RESEND_TO_EMAIL ?? "";
