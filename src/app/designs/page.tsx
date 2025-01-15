@@ -78,7 +78,8 @@ function DisplayWebDesign({ item, index }: { item: DesignItem; index: number }) 
         <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl">
           <Image
             src={item.image}
-            layout="fill"
+            width={1000}
+            height={1000}
             objectFit="cover"
             alt={item.title}
             className="transition-transform duration-700 group-hover:scale-105"
