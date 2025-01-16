@@ -164,6 +164,12 @@ export default function ContactPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     setIsTouchable("ontouchstart" in window);
+
+    const query = new URLSearchParams(window.location.search);
+    const isScheduled = query.get("schedule");
+    if (isScheduled !== null) {
+      setIsSelected("schedule");
+    }
   }, []);
 
   return (
