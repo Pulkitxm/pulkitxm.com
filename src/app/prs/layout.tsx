@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: assets.banner.prsPage,
+        url: assets.banner.prs,
         width: 1200,
         height: 630,
         alt: "Pulkit's Open Source Prs"
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Prs - Pulkit",
     description: "Check out Pulkit's open source contributions, professional journey, and achievements.",
-    images: [assets.banner.prsPage]
+    images: [assets.banner.prs]
   }
 };
 

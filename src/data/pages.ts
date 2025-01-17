@@ -10,6 +10,11 @@ const links = [
     key: "e"
   },
   {
+    title: "Events",
+    url: "/events",
+    key: "v"
+  },
+  {
     title: "Blogs",
     url: "/blogs",
     key: "b"

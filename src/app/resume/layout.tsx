@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: assets.banner.resumePage,
+        url: assets.banner.resume,
         width: 1200,
         height: 630,
         alt: "Pulkit's Resume"
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Resume - Pulkit",
     description: "Explore Pulkit's professional milestones and expertise.",
-    images: [assets.banner.resumePage]
+    images: [assets.banner.resume]
   }
 };
 

@@ -159,3 +159,56 @@ export default function SimpleCarousel({
     </div>
   );
 }
+
+export function ImageFader({ images, alt }: { images: string[]; alt: string }) {
+  const TIMER = 5000;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, TIMER);
+
+    return () => clearInterval(intervalId);
+  }, [images, TIMER]);
+
+  return (
+    <div className="relative aspect-[16/9] h-full w-full overflow-hidden lg:aspect-auto">
+      {images.map((src, index) => (
+        <div
+          key={src}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentImageIndex ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <div className="relative h-full w-full">
+            <Image
+              src={src || "/placeholder.svg"}
+              alt={`Background ${index + 1}`}
+              fill
+              sizes="(min-width: 1280px) 840px, (min-width: 768px) 50vw, 100vw"
+              className="object-cover blur-md brightness-50"
+              fetchPriority="high"
+              priority={index === currentImageIndex}
+            />
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="relative h-full w-full">
+              <Image
+                src={src || "/placeholder.svg"}
+                alt={`${alt} - Image ${index + 1}`}
+                fill
+                sizes="(min-width: 1280px) 840px, (min-width: 768px) 50vw, 100vw"
+                className="object-contain"
+                fetchPriority="high"
+                priority={index === currentImageIndex}
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}

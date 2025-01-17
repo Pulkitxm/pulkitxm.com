@@ -42,6 +42,14 @@ export type Design = {
   webDesigns: DesignItem[];
 };
 
+export type Event = {
+  name: string;
+  images: string[];
+  link?: string;
+  date: Date;
+  tagline: string;
+};
+
 export type Profile = {
   name: string;
   caption: string;
@@ -54,6 +62,7 @@ export type Profile = {
   links: Readonly<Record<string, string>>;
   experience: readonly Experience[];
   projects: readonly Project[];
+  events: readonly Event[];
   skills: Readonly<Record<string, string[]>>;
   certifications: readonly Certification[];
   design: Design;

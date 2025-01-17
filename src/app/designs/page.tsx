@@ -7,7 +7,7 @@ import Link from "next/link";
 import React from "react";
 
 import { design } from "@/data/profile/design";
-import { DesignItem } from "@/types/Experience";
+import { DesignItem } from "@/types/profile";
 
 export default function DesignsPage() {
   return (

@@ -1,5 +1,5 @@
 import assets from "@/data/assets";
-import { Certification } from "@/types/Experience";
+import { Certification } from "@/types/profile";
 
 export const certifications: readonly Certification[] = [
   {

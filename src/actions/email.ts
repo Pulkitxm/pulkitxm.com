@@ -32,10 +32,7 @@ export async function sendEmail(data: { from_name: string; message: string; send
       })
     ]);
 
-    console.log(resp);
-
     if (resp.some((r) => r.error)) {
-      console.log(resp.map((r) => r.error));
       return { error: "Failed to send email", status: 500 };
     }
 

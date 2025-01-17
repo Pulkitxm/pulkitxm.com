@@ -1,5 +1,5 @@
 import assets from "@/data/assets";
-import { Design, DesignItem } from "@/types/Experience";
+import { Design, DesignItem } from "@/types/profile";
 
 const portfolioDesigns: DesignItem[] = [
   {

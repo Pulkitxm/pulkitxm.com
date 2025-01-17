@@ -3,10 +3,11 @@ import { FaDiscord, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { FaHashnode } from "react-icons/fa6";
 
 import assets from "@/data/assets";
-import { Profile } from "@/types/Experience";
+import { Profile } from "@/types/profile";
 
 import { certifications } from "./certifications";
 import { design } from "./design";
+import { events } from "./events";
 import { projects } from "./projects";
 import { skills } from "./skills";
 
@@ -61,7 +62,8 @@ const profile: Readonly<Profile> = {
   projects,
   skills,
   certifications,
-  design
+  design,
+  events
 };
 
 export default profile;
