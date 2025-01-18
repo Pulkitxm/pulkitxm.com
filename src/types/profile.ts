@@ -43,6 +43,7 @@ export type Design = {
 };
 
 export type Event = {
+  slug: string;
   name: string;
   images: string[];
   link?: string;

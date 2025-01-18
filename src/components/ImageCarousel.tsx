@@ -188,10 +188,10 @@ export function ImageFader({ images, alt }: { images: string[]; alt: string }) {
               src={src || "/placeholder.svg"}
               alt={`Background ${index + 1}`}
               fill
-              sizes="(min-width: 1280px) 840px, (min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1920px) 50vw, (min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
               className="object-cover blur-md brightness-50"
               fetchPriority="high"
-              priority={index === currentImageIndex}
+              loading="lazy"
             />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -200,10 +200,10 @@ export function ImageFader({ images, alt }: { images: string[]; alt: string }) {
                 src={src || "/placeholder.svg"}
                 alt={`${alt} - Image ${index + 1}`}
                 fill
-                sizes="(min-width: 1280px) 840px, (min-width: 768px) 50vw, 100vw"
+                sizes="(min-width: 1920px) 50vw, (min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
                 className="object-contain"
                 fetchPriority="high"
-                priority={index === currentImageIndex}
+                loading="lazy"
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 import assets from "@/data/assets";
 import { Event } from "@/types/profile";
 
-export const events: Readonly<Event>[] = [
+const eventsWithoutSlug: Omit<Event, "slug">[] = [
   {
     name: "GitHub Constellation",
     images: assets.events.constellation,
@@ -40,7 +40,7 @@ export const events: Readonly<Event>[] = [
       "I was thrilled to be felicitated by the University on the occasion of Youth Day, alongside my team, for winning the University Ideathon."
   },
   {
-    name: "Visited CSIR with College Friends & Professors",
+    name: "CSIR visit with College Friends & Professors",
     images: assets.events["npl-csir"],
     link: "https://www.linkedin.com/posts/pulkitxm_npl-delhi-csir-activity-7055041100675186688-jT-s",
     date: new Date(2023, 3, 21),
@@ -54,3 +54,14 @@ export const events: Readonly<Event>[] = [
     tagline: "ICPC Amritapuri 2024 was a national level programming contest."
   }
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
+
+export const events: Event[] = eventsWithoutSlug.map((event) => ({
+  ...event,
+  slug: event.name
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+}));

@@ -11,7 +11,7 @@ import { DesignItem } from "@/types/profile";
 
 export default function DesignsPage() {
   return (
-    <div className="px-4 py-16">
+    <main className="px-4 py-16">
       <motion.h1
         className="mb-16 text-center text-4xl font-bold dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
         initial={{ opacity: 0, y: -50 }}
@@ -62,7 +62,7 @@ export default function DesignsPage() {
           ))}
         </motion.div>
       </section>
-    </div>
+    </main>
   );
 }
 

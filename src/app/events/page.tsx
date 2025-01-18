@@ -6,7 +6,7 @@ import profile from "@/data/profile";
 
 export default function EventsPage() {
   return (
-    <div className="min-h-screen bg-[#0A0A0B]">
+    <main className="min-h-screen bg-[#0A0A0B]">
       <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="mb-12 lg:mb-16">
           <h1 className="mb-4 bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
@@ -52,14 +52,21 @@ export default function EventsPage() {
                   </div>
 
                   {event.link && (
-                    <div className="mt-8">
+                    <div className="mt-8 flex flex-wrap items-center gap-4 pt-2">
+                      <Link
+                        href={`/events/${event.slug}`}
+                        className="inline-flex items-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600 sm:px-6 sm:text-base"
+                      >
+                        View Details
+                      </Link>
+
                       <Link
                         href={event.link}
                         target="_blank"
-                        className="group/btn inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-3 text-base font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 hover:brightness-110 sm:text-lg"
+                        className="group inline-flex items-center gap-1 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300 sm:text-base"
                       >
-                        View More
-                        <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+                        Post Link
+                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:h-5 sm:w-5" />
                       </Link>
                     </div>
                   )}
@@ -69,6 +76,6 @@ export default function EventsPage() {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }
