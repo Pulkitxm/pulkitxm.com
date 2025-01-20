@@ -30,6 +30,7 @@
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "critters": "^0.0.25",
     "embla-carousel-react": "^8.5.1",
     "framer-motion": "^11.15.0",
     "geist": "^1.3.1",

@@ -25,15 +25,17 @@ export default function Certifications() {
           >
             <Card className="h-full overflow-hidden transition-colors hover:bg-muted/50">
               <CardHeader className="border-b p-0">
-                <Image
-                  src={certification.image}
-                  width={800}
-                  height={400}
-                  alt={certification.name}
-                  aria-label={certification.name}
-                  className={`aspect-video w-full object-${certification.cover ? "cover" : "contain"}`}
-                  unoptimized={!certification.optimize}
-                />
+                <div className="relative h-48 w-full sm:h-56 md:h-64">
+                  <Image
+                    src={certification.image}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    alt={certification.name}
+                    aria-label={certification.name}
+                    className={`object-${certification.cover ? "cover" : "contain"}`}
+                    unoptimized={!certification.optimize}
+                  />
+                </div>
               </CardHeader>
               <CardContent className="space-y-2 p-4">
                 <h3 className="font-semibold">{certification.name}</h3>

@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    optimizeCss: true
+  },
+  productionBrowserSourceMaps: false,
   images: {
     remotePatterns: [
       {
@@ -10,7 +14,8 @@ const nextConfig = {
         protocol: "https",
         hostname: "api.microlink.io"
       }
-    ]
+    ],
+    minimumCacheTTL: 60
   },
   async headers() {
     return [
@@ -27,6 +32,24 @@ const nextConfig = {
             key: "Access-Control-Allow-Headers",
             value:
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+          }
+        ]
+      },
+      {
+        source: "/:all*(svg|jpg|png)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable"
           }
         ]
       }

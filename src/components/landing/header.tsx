@@ -17,6 +17,8 @@ export default async function Header() {
             className="w-full rounded-lg object-cover"
             width={5000}
             height={5000}
+            alt="Hacktoberfest 2021"
+            priority
           />
           <div className="absolute -bottom-10">
             <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-background bg-background">
@@ -25,8 +27,9 @@ export default async function Header() {
                 className="rounded-full object-cover"
                 rounded
                 small
-                width={1920}
-                height={1080}
+                width={200}
+                height={200}
+                alt="Profile picture"
               />
             </div>
           </div>
