@@ -2,6 +2,7 @@ import { Calendar, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { ImageFader } from "@/components/ImageCarousel";
+import { PreFetchUrl } from "@/components/PreFetchUrl";
 import profile from "@/data/profile";
 
 export default function EventsPage() {
@@ -53,12 +54,12 @@ export default function EventsPage() {
 
                   {event.link && (
                     <div className="mt-8 flex flex-wrap items-center gap-4 pt-2">
-                      <Link
+                      <PreFetchUrl
                         href={`/events/${event.slug}`}
                         className="inline-flex items-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600 sm:px-6 sm:text-base"
                       >
                         View Details
-                      </Link>
+                      </PreFetchUrl>
 
                       <Link
                         href={event.link}

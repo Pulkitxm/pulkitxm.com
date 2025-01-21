@@ -50,6 +50,7 @@ export default function ScrollToTopButton() {
       } transition-transform duration-300`}
       onClick={scrollToTop}
       aria-label="Scroll to top"
+      type="button"
     >
       <ArrowUp className="h-5 w-5" />
     </Button>

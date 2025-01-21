@@ -83,7 +83,7 @@ export default function BlogListing() {
   };
 
   return (
-    <main className="mx-auto mt-2 w-full max-w-4xl space-y-4 rounded-lg border-gray-700 p-4 sm:p-6 md:border">
+    <main className="w-full max-w-4xl space-y-4 rounded-lg border-gray-700 p-4 sm:p-8 md:border">
       <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
         <div className="flex items-center space-x-2">
           <Link

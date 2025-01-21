@@ -37,7 +37,13 @@ export const ContributionCell: React.FC<ContributionCellProps> = React.memo(
         ? "Let me contribute today :)"
         : isLoading
           ? "Loading..."
-          : `${contributionCount} contribution${contributionCount !== 1 ? "s" : ""} on ${date.toDateString()}`;
+          : `${contributionCount} contribution${contributionCount !== 1 ? "s" : ""} on ${date.toLocaleDateString(
+              "default",
+              {
+                day: "numeric",
+                month: "short"
+              }
+            )}`;
 
     return <div className={cellClass} title={title} />;
   }

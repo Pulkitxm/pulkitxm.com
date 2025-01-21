@@ -173,7 +173,7 @@ export default function ContactPage() {
   }, []);
 
   return (
-    <main className="mx-auto max-w-4xl">
+    <main className="p-0">
       <Card className="overflow-hidden border-none text-white">
         <CardHeader className="space-y-1 px-6 py-8">
           <CardTitle className="text-2xl font-bold sm:text-3xl">Get in Touch</CardTitle>

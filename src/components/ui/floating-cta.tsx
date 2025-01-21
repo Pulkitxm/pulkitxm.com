@@ -24,14 +24,14 @@ function CollabInviteLayerCX() {
       {show && (
         <motion.div
           initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 0.9 }}
+          animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{
             type: "spring",
             stiffness: 260,
             damping: 20
           }}
-          className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#1a1a1a] bg-[#0a0a0a] shadow-lg shadow-[#00ff9580]"
+          className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#1a1a1a] bg-[#0a0a0ae3] shadow-lg shadow-[#00ff9580]"
         >
           <div className="mx-auto flex max-w-screen-xl items-center justify-between px-4 py-2 md:px-6">
             <div className="flex-1" />
