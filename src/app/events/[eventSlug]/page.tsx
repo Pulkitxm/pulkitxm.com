@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import ImageGallery from "@/components/ImageGallery";
 import profile from "@/data/profile";
 
+import "photoswipe/dist/photoswipe.css";
+
 export default function EventGalleryPage({
   params
 }: {

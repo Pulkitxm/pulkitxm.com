@@ -1,6 +1,5 @@
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
-import { Inter } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
 import ScrollToTopButton from "@/components/ScrollTopTop";
@@ -8,8 +7,6 @@ import FloatingCTA from "@/components/ui/floating-cta";
 import assets from "@/data/assets";
 
 import type { Metadata } from "next";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -51,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="light">
-      <body className={`${inter.className} ${GeistSans.className} dark min-h-screen`}>
+      <body className={`${GeistSans.className} dark min-h-screen`}>
         <FloatingCTA />
         <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
           <Navbar />
