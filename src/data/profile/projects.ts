@@ -1,4 +1,4 @@
-import assets from "@/data/assets";
+import assets from "@/assets";
 
 export const projects = [
   {

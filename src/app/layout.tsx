@@ -1,14 +1,15 @@
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 
+import assets from "@/assets";
 import Navbar from "@/components/Navbar";
 import ScrollToTopButton from "@/components/ScrollTopTop";
 import FloatingCTA from "@/components/ui/floating-cta";
-import assets from "@/data/assets";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://devpulkit.in"),
   title: {
     default: "Pulkit - Developer",
     template: "%s | Pulkit - Developer"
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: assets.banner.home,
+        url: assets.banner.home.src,
         width: 1200,
         height: 630,
         alt: "Pulkit's Portfolio Banner"
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pulkit - Developer",
     description: "Explore Pulkit's portfolio, projects, and insights into web development.",
-    images: [assets.banner.home]
+    images: [assets.banner.home.src]
   },
   robots: {
     index: true,

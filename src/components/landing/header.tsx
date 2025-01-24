@@ -1,8 +1,8 @@
 import { FileText } from "lucide-react";
 import Link from "next/link";
 
+import assets from "@/assets";
 import { Button } from "@/components/ui/button";
-import assets from "@/data/assets";
 import profile, { links } from "@/data/profile";
 
 import { ImageDialog } from "./ImageDialog";

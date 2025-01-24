@@ -30,13 +30,6 @@ export default function EventGalleryPage({
     return notFound();
   }
 
-  const galleryImages = eventWithSlug.images.map((image, index) => ({
-    src: image,
-    alt: `Image ${index + 1} from ${eventWithSlug.name}`,
-    width: 1600,
-    height: 1200
-  }));
-
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -70,7 +63,7 @@ export default function EventGalleryPage({
           {eventWithSlug.tagline}
         </motion.p>
       </div>
-      <ImageGallery images={galleryImages} />
+      <ImageGallery images={eventWithSlug.images} />
     </motion.main>
   );
 }

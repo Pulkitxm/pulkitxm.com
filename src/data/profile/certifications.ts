@@ -1,4 +1,4 @@
-import assets from "@/data/assets";
+import assets from "@/assets";
 import { Certification } from "@/types/profile";
 
 export const certifications: readonly Certification[] = [
@@ -9,6 +9,7 @@ export const certifications: readonly Certification[] = [
       url: "https://www.credly.com/org/github"
     },
     verifyLink: "https://www.credly.com/badges/0d980c06-511c-4e3d-a9a7-9973688b34ad",
+    unOptimize: true,
     image: assets.badges.githubFoundationBadge
   },
   {
@@ -19,7 +20,6 @@ export const certifications: readonly Certification[] = [
     },
     verifyLink: "https://github.com/Pulkitxm/fullstackopen/blob/main/Certificates/Pulkit%20Pulkit.pdf",
     image: assets.badges.fullStackOpen,
-    optimize: true,
     cover: true
   }
 ];

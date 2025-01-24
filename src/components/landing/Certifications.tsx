@@ -33,7 +33,7 @@ export default function Certifications() {
                     alt={certification.name}
                     aria-label={certification.name}
                     className={`object-${certification.cover ? "cover" : "contain"}`}
-                    unoptimized={!certification.optimize}
+                    unoptimized={certification.unOptimize}
                   />
                 </div>
               </CardHeader>

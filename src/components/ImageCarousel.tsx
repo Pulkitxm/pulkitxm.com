@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 import {
@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 
 interface SimpleCarouselProps {
-  images: string[];
+  images: StaticImageData[];
   showNavigation?: boolean;
   autoMove?: boolean;
   autoMoveInterval?: number;
@@ -160,7 +160,7 @@ export default function SimpleCarousel({
   );
 }
 
-export function ImageFader({ images, alt }: { images: string[]; alt: string }) {
+export function ImageFader({ images, alt }: { images: StaticImageData[]; alt: string }) {
   const TIMER = 5000;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -178,7 +178,7 @@ export function ImageFader({ images, alt }: { images: string[]; alt: string }) {
     <div className="relative aspect-[16/9] h-full w-full overflow-hidden lg:aspect-auto">
       {images.map((src, index) => (
         <div
-          key={src}
+          key={index}
           className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentImageIndex ? "opacity-100" : "opacity-0"
           }`}

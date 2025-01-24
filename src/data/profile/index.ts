@@ -1,8 +1,7 @@
-// icons
 import { FaDiscord, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { FaHashnode } from "react-icons/fa6";
 
-import assets from "@/data/assets";
+import assets from "@/assets";
 import { Profile } from "@/types/profile";
 
 import { certifications } from "./certifications";

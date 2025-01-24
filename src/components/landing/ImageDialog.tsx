@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
 
 export function ImageDialog({
@@ -13,7 +13,7 @@ export function ImageDialog({
   alt,
   priority
 }: {
-  src: string;
+  src: StaticImageData;
   className?: string;
   rounded?: boolean;
   small?: boolean;

@@ -1,4 +1,4 @@
-import assets from "@/data/assets";
+import assets from "@/assets";
 import { Event } from "@/types/profile";
 
 const eventsWithoutSlug: Omit<Event, "slug">[] = [
@@ -41,7 +41,7 @@ const eventsWithoutSlug: Omit<Event, "slug">[] = [
   },
   {
     name: "CSIR visit with College Friends & Professors",
-    images: assets.events["npl-csir"],
+    images: assets.events["nptl-csir"],
     link: "https://www.linkedin.com/posts/pulkitxm_npl-delhi-csir-activity-7055041100675186688-jT-s",
     date: new Date(2023, 3, 21),
     tagline:
@@ -51,7 +51,7 @@ const eventsWithoutSlug: Omit<Event, "slug">[] = [
     name: "ICPC Amritapuri",
     images: assets.events["icpc-amritapuri"],
     date: new Date(2024, 0, 27),
-    tagline: "ICPC Amritapuri 2024 was a national level programming contest."
+    tagline: "ICPC Amritapuri 2023 was a national level programming contest."
   }
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
 

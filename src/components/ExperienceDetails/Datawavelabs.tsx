@@ -2,9 +2,9 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import assets from "@/assets";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import assets from "@/data/assets";
 
 export default function DatawavelabsExperience() {
   return (

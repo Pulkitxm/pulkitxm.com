@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type Experience = {
   companyName: string;
   position: string;
@@ -13,7 +15,7 @@ export type Experience = {
 
 export type Project = {
   name: string;
-  image: string;
+  image: StaticImageData;
   url: string;
   tagline: string;
 };
@@ -25,15 +27,15 @@ export type Certification = {
     url: string;
   };
   verifyLink: string;
-  image: string;
-  optimize?: boolean;
+  image: StaticImageData;
+  unOptimize?: boolean;
   cover?: boolean;
 };
 
 export type DesignItem = {
   title: string;
   link: string;
-  image: string;
+  image: StaticImageData;
   githubLink: string;
 };
 
@@ -45,7 +47,7 @@ export type Design = {
 export type Event = {
   slug: string;
   name: string;
-  images: string[];
+  images: StaticImageData[];
   link?: string;
   date: Date;
   tagline: string;
@@ -54,7 +56,7 @@ export type Event = {
 export type Profile = {
   name: string;
   caption: string;
-  image: string;
+  image: StaticImageData;
   calendlyUrl: string;
   githubUserName: string;
   resumeLink: string;

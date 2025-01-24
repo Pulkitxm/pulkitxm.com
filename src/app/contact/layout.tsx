@@ -1,8 +1,9 @@
-import assets from "@/data/assets";
+import assets from "@/assets";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://devpulkit.in"),
   title: "Contact - Pulkit",
   description: "Get in touch with Pulkit, a passionate developer and tech enthusiast.",
   openGraph: {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: assets.banner.contact,
+        url: assets.banner.contact.src,
         width: 1200,
         height: 630,
         alt: "Contact Pulkit - Developer"
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact - Pulkit",
     description: "Reach out to Pulkit to discuss projects, ideas, or opportunities.",
-    images: [assets.banner.contact]
+    images: [assets.banner.contact.src]
   }
 };
 

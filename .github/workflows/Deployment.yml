@@ -58,7 +58,7 @@ jobs:
           rm -f .env
 
           echo "Setting up environment variables"
-          
+
           echo "CONTRIBUTION_GRAPH_SECRET=${{ secrets.CONTRIBUTION_GRAPH_SECRET }}" >> .env
           echo "REPO_NAME=${{ secrets.REPO_NAME }}" >> .env
           echo "RESEND_API=${{ secrets.RESEND_API }}" >> .env
