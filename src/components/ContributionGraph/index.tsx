@@ -1,17 +1,12 @@
 "use client";
 
 import { CalendarDays, GitPullRequest, Loader2 } from "lucide-react";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  GITHUB_DEFAULT_VIEW_YEAR,
-  GITHUB_START_CONTRIBUTION_YEAR,
-  IGNORED_CONTRIBUTION_YEARS,
-  TODAY
-} from "@/lib/config";
+import { GITHUB_DEFAULT_VIEW_YEAR, TODAY } from "@/lib/config";
 import { months } from "@/lib/constants";
 import { getGithubContributionData } from "@/lib/gh";
 
@@ -24,7 +19,6 @@ import type { CONTRIBUTION } from "@/types/github";
 import type React from "react";
 
 export function ContributionGraph(): React.ReactElement {
-  const currentYear = TODAY.getFullYear();
   const [data, setData] = useState<Record<number, CONTRIBUTION>>({});
   const [loading, setLoading] = useState(false);
   const [selectedYear, setSelectedYear] = useState(GITHUB_DEFAULT_VIEW_YEAR);
@@ -55,12 +49,6 @@ export function ContributionGraph(): React.ReactElement {
     setSelectedYear(TODAY.getFullYear());
   }, []);
 
-  const availableYears = useMemo(() => {
-    return Array.from({ length: currentYear - GITHUB_START_CONTRIBUTION_YEAR + 1 }, (_, i) => currentYear - i).filter(
-      (year) => !IGNORED_CONTRIBUTION_YEARS.includes(year)
-    );
-  }, [currentYear]);
-
   const selectedYearData = data[selectedYear];
 
   return (
@@ -72,7 +60,7 @@ export function ContributionGraph(): React.ReactElement {
             <Loader2 className={`text-emerald-400 ${loading ? "block" : "hidden"} md:h-6 md:w-6 md:animate-spin`} />
           </div>
           <div className="flex items-center space-x-2">
-            <YearSelector selectedYear={selectedYear} onYearChange={setSelectedYear} availableYears={availableYears} />
+            <YearSelector selectedYear={selectedYear} onYearChange={setSelectedYear} />
             <Button onClick={handleJumpToToday} variant="outline" size="sm" className="hover:bg-zinc-800">
               Today
             </Button>

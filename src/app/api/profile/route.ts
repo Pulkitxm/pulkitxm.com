@@ -1,14 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import { getGithubData } from "@/actions/gh";
 import profile from "@/data/profile";
 import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
 import { CONTRIBUTION } from "@/types/github";
 
-export async function GET(request: NextRequest) {
-  const searchParams = new URL(request.url).searchParams;
-  const filterNull = searchParams.get("y") === "";
-
+export async function GET() {
   const allowedYears: number[] = [];
 
   for (let i = GITHUB_START_CONTRIBUTION_YEAR; i <= TODAY.getFullYear(); i++) {
@@ -21,8 +18,7 @@ export async function GET(request: NextRequest) {
     const githubContribution = await getGithubData({
       from: new Date(year, 0, 1).toISOString(),
       to: new Date(year, 11, 31).toISOString(),
-      monthsType: "string",
-      filterNull
+      monthsType: "string"
     });
 
     if (githubContribution.status === "success") {

@@ -52,15 +52,15 @@ export default function EventsPage() {
                     <p className="text-base text-gray-300/90 sm:text-lg">{event.tagline}</p>
                   </div>
 
-                  {event.link && (
-                    <div className="mt-8 flex flex-wrap items-center gap-4 pt-2">
-                      <PreFetchUrl
-                        href={`/events/${event.slug}`}
-                        className="inline-flex items-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600 sm:px-6 sm:text-base"
-                      >
-                        View Details
-                      </PreFetchUrl>
+                  <div className="mt-8 flex flex-wrap items-center gap-4 pt-2">
+                    <PreFetchUrl
+                      href={`/events/${event.slug}`}
+                      className="inline-flex items-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600 sm:px-6 sm:text-base"
+                    >
+                      View Details
+                    </PreFetchUrl>
 
+                    {event.link && (
                       <Link
                         href={event.link}
                         target="_blank"
@@ -69,8 +69,8 @@ export default function EventsPage() {
                         Post Link
                         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:h-5 sm:w-5" />
                       </Link>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

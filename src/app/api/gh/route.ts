@@ -8,7 +8,6 @@ export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTI
   try {
     const searchParams = request.nextUrl.searchParams;
     const year = searchParams.get("y");
-    const filterNull = searchParams.get("y") === "";
 
     let selectedYear: number;
     const currentYear = TODAY.getFullYear();
@@ -38,7 +37,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTI
     const from = new Date(selectedYear, 0, 1).toISOString();
     const to = toDate.toISOString();
 
-    const res = await getGithubData({ from, to, filterNull });
+    const res = await getGithubData({ from, to });
 
     if (res.status === "error") {
       return NextResponse.json({ error: res.error }, { status: 500 });

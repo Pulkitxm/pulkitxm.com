@@ -32,13 +32,11 @@ query($username: String!, $from: DateTime!, $to: DateTime!) {
 export async function getGithubData({
   from,
   to,
-  monthsType = "number",
-  filterNull = false
+  monthsType = "number"
 }: {
   from: string;
   to: string;
   monthsType?: "string" | "number";
-  filterNull?: boolean;
 }): Promise<RES_TYPE<CONTRIBUTION>> {
   try {
     const {
@@ -47,13 +45,14 @@ export async function getGithubData({
 
     const year = new Date(from).getFullYear();
 
-    const contributionsData = await octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
-      username: login,
-      from,
-      to
-    });
-
-    const resPrs = await getPrsData({ from, to, select: true });
+    const [contributionsData, resPrs] = await Promise.all([
+      octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
+        username: login,
+        from,
+        to
+      }),
+      getPrsData({ from, to, select: true })
+    ]);
 
     if (resPrs.status === "error") {
       return resPrs;
@@ -93,10 +92,6 @@ export async function getGithubData({
           .filter((day) => day.contributionCount > 0)
       }))
     };
-
-    if (filterNull) {
-      contributions.months = contributions.months.filter((month) => month.days.length > 0);
-    }
 
     return {
       status: "success",
