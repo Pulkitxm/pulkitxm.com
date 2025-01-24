@@ -28,8 +28,8 @@ export type Certification = {
   };
   verifyLink: string;
   image: StaticImageData;
-  unOptimize?: boolean;
   cover?: boolean;
+  issuedAt: Date;
 };
 
 export type DesignItem = {

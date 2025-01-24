@@ -33,12 +33,14 @@ export default function Certifications() {
                     alt={certification.name}
                     aria-label={certification.name}
                     className={`object-${certification.cover ? "cover" : "contain"}`}
-                    unoptimized={certification.unOptimize}
                   />
                 </div>
               </CardHeader>
               <CardContent className="space-y-2 p-4">
                 <h3 className="font-semibold">{certification.name}</h3>
+                <p className="text-sm text-muted-foreground">
+                  Issued at: {certification.issuedAt.toLocaleDateString()}
+                </p>
                 <p className="text-sm text-muted-foreground">
                   Issued by:{" "}
                   <Link

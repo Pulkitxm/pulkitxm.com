@@ -9,8 +9,8 @@ export const certifications: readonly Certification[] = [
       url: "https://www.credly.com/org/github"
     },
     verifyLink: "https://www.credly.com/badges/0d980c06-511c-4e3d-a9a7-9973688b34ad",
-    unOptimize: true,
-    image: assets.badges.githubFoundationBadge
+    image: assets.badges.githubFoundationBadge,
+    issuedAt: new Date(2024, 10, 14)
   },
   {
     name: "Fullstackopen",
@@ -20,6 +20,7 @@ export const certifications: readonly Certification[] = [
     },
     verifyLink: "https://github.com/Pulkitxm/fullstackopen/blob/main/Certificates/Pulkit%20Pulkit.pdf",
     image: assets.badges.fullStackOpen,
-    cover: true
+    cover: true,
+    issuedAt: new Date(2024, 2, 21)
   }
 ];
