@@ -36,7 +36,7 @@ export const YearSelector: React.FC<YearSelectorProps> = ({ selectedYear, onYear
         <ChevronDown className="h-4 w-4 text-zinc-300" />
       </button>
       {showYearSelect && (
-        <div className="absolute right-0 z-50 mt-1 w-32 rounded-md border border-zinc-800 bg-zinc-900 py-1 shadow-lg">
+        <div className="absolute left-0 z-50 mt-1 w-32 rounded-md border border-zinc-800 bg-zinc-900 py-1 shadow-lg md:left-[-25%]">
           {AVAILABLE_YEARS.map((year) => (
             <button
               key={year}

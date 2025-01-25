@@ -3,10 +3,9 @@
 import { CalendarDays, GitPullRequest, Loader2 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { GITHUB_DEFAULT_VIEW_YEAR, TODAY } from "@/lib/config";
+import { CURRENT_YEAR } from "@/lib/config";
 import { months } from "@/lib/constants";
 import { getGithubContributionData } from "@/lib/gh";
 
@@ -21,7 +20,7 @@ import type React from "react";
 export function ContributionGraph(): React.ReactElement {
   const [data, setData] = useState<Record<number, CONTRIBUTION>>({});
   const [loading, setLoading] = useState(false);
-  const [selectedYear, setSelectedYear] = useState(GITHUB_DEFAULT_VIEW_YEAR);
+  const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR);
 
   const fetchYearData = useCallback(
     (year: number) => {
@@ -45,10 +44,6 @@ export function ContributionGraph(): React.ReactElement {
     fetchYearData(selectedYear);
   }, [selectedYear, fetchYearData]);
 
-  const handleJumpToToday = useCallback(() => {
-    setSelectedYear(TODAY.getFullYear());
-  }, []);
-
   const selectedYearData = data[selectedYear];
 
   return (
@@ -59,12 +54,7 @@ export function ContributionGraph(): React.ReactElement {
             GitHub Contributions
             <Loader2 className={`text-emerald-400 ${loading ? "block" : "hidden"} md:h-6 md:w-6 md:animate-spin`} />
           </div>
-          <div className="flex items-center space-x-2">
-            <YearSelector selectedYear={selectedYear} onYearChange={setSelectedYear} />
-            <Button onClick={handleJumpToToday} variant="outline" size="sm" className="hover:bg-zinc-800">
-              Today
-            </Button>
-          </div>
+          <YearSelector selectedYear={selectedYear} onYearChange={setSelectedYear} />
         </CardTitle>
       </CardHeader>
       <CardContent className="p-4 md:p-6">
