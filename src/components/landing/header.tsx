@@ -15,8 +15,10 @@ export default async function Header() {
           <ImageDialog
             src={assets.hacktoberFest}
             className="w-full rounded-lg object-cover"
-            width={5000}
-            height={5000}
+            size={{
+              height: 400,
+              width: 1200
+            }}
             alt="Hacktoberfest 2021"
             priority
           />
@@ -27,8 +29,10 @@ export default async function Header() {
                 className="rounded-full object-cover"
                 rounded
                 small
-                width={200}
-                height={200}
+                size={{
+                  height: 100,
+                  width: 100
+                }}
                 alt="Profile picture"
               />
             </div>

@@ -7,9 +7,8 @@ export function ImageDialog({
   src: image,
   className,
   rounded,
+  size,
   small,
-  width,
-  height,
   alt,
   priority
 }: {
@@ -17,8 +16,10 @@ export function ImageDialog({
   className?: string;
   rounded?: boolean;
   small?: boolean;
-  width: number;
-  height: number;
+  size: {
+    width: number;
+    height: number;
+  };
   alt: string;
   priority?: boolean;
 }) {
@@ -54,8 +55,8 @@ export function ImageDialog({
       <button onClick={() => setIsOpen(true)} className="h-full w-full overflow-hidden">
         <Image
           src={image}
-          width={width ? width : 500}
-          height={height ? height : 500}
+          width={size.width}
+          height={size.height}
           alt={alt}
           className={`${className} transform transition duration-200`}
           fetchPriority="high"
@@ -83,8 +84,7 @@ export function ImageDialog({
               src={image}
               alt="Profile picture"
               className={`w-full transform object-contain transition duration-300 ${rounded ? "rounded-full" : ""}`}
-              width={small ? 400 : 800}
-              height={small ? 400 : rounded ? 800 : 600}
+              unoptimized
               fetchPriority="high"
               loading="eager"
             />
