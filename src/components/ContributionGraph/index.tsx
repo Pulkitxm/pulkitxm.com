@@ -86,8 +86,7 @@ export function ContributionGraph(): React.ReactElement {
                   <div className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
                     <CalendarDays className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
                     <span>
-                      <strong>{selectedYearData.contributions.totalContributions}</strong> contributions in{" "}
-                      {selectedYearData.year}
+                      <strong>{selectedYearData.contributions.totalContributions}</strong> contributions
                     </span>
                   </div>
                   <PreFetchUrl href="/prs" className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">

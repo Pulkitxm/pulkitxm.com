@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# devpulkit.in
 
-## Getting Started
+This repository hosts a modern web application built with Next.js, initialized using create-next-app. The project primarily utilizes TypeScript, ensuring robust type-checking and a seamless developer experience.
 
-First, run the development server:
+## Table of Contents
+
+- [Installation](#installation)
+- [Method 1: Using Docker (Recommended)](#method-1-using-docker-recommended)
+- [Method 2: Traditional Setup](#method-2-traditional-setup)
+- [Usage](#usage)
+- [Scripts](#scripts)
+- [Project Structure](#project-structure)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+Choose one of the following installation methods:
+
+### Method 1: Using Docker (Recommended)
+
+```bash
+docker run -p 3000:3000 ghcr.io/pulkitxm/devpulkit.in:latest
+```
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+### Method 2: Traditional Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Pulkitxm/devpulkit.in.git
+   cd devpulkit.in
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` using the `.env.example` file:
+   ```bash
+    cp .env.example .env
+   ```
+
+## Usage
+
+To start the development server, run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000 in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The following npm scripts are available to streamline development and production workflows:
 
-## Learn More
+- `dev`: Starts the development server with turbo mode.
+- `clean`: Removes the `.next` and `node_modules` directories.
+- `ins:clean`: Cleans the project and installs dependencies using pnpm.
+- `dev:clean`: Cleans the project, installs dependencies, and starts the development server.
+- `build`: Builds the application for production.
+- `build:clean`: Cleans the project, installs dependencies, and builds the application.
+- `start`: Runs the built application in production mode.
+- `serve`: Builds the application and starts it in production mode.
+- `serve:clean`: Cleans, builds, and starts the application in production mode.
+- `lint`: Runs ESLint to check for linting errors.
+- `format`: Formats the codebase using Prettier.
+- `check`: Checks the code formatting using Prettier.
+- `prepare`: Prepares the project for husky.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```txt
+.
+├── .github/        # GitHub Actions workflows
+├── .husky/         # Git hooks
+├── public/         # Static assets
+├── src/
+│   ├── actions/    # Server actions
+│   ├── app/        # Next.js app router pages
+│   │   ├── api/    # API routes
+│   │   └── [...routes]/ # App routes
+│   ├── assets/     # Asset imports and configs
+│   ├── components/ # React components
+│   │   ├── ui/     # Reusable UI components
+│   │   └── [...components]/ # Feature components
+│   ├── data/       # Data and configurations
+│   ├── lib/        # Utility functions
+│   └── types/      # TypeScript types
+├── .dockerignore   # Docker ignore rules
+├── .env.example    # Environment variables example
+├── .eslintrc.json  # ESLint configuration
+├── .gitignore      # Git ignore rules
+├── .prettierrc     # Prettier configuration
+├── components.json # UI components config
+├── Dockerfile      # Docker configuration
+├── next.config.mjs # Next.js configuration
+├── package.json    # Project dependencies
+├── pnpm-lock.yaml  # pnpm lock file
+├── tailwind.config.ts # Tailwind configuration
+├── tsconfig.json   # TypeScript configuration
+└── README.md       # Project documentation
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+To deploy the application, build the project and deploy the contents of the out directory to your preferred hosting service:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch:
+
+```sh
+git checkout -b feature/your-feature
+```
+
+3. Commit your changes:
+
+```sh
+git commit -m 'Add some feature'
+```
+
+4. Push to the branch:
+
+```sh
+git push origin feature/your-feature
+```
+
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.

@@ -36,6 +36,7 @@ const eslintConfig = [
     )
   ),
   {
+    files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       prettier: fixupPluginRules(prettier),
       "@typescript-eslint": fixupPluginRules(typescriptEslint),
@@ -72,9 +73,13 @@ const eslintConfig = [
       "no-var": "error",
 
       "no-unused-vars": [
-        "warn",
+        "error",
         {
-          args: "none"
+          vars: "all",
+          args: "none",
+          caughtErrors: "all",
+          ignoreRestSiblings: false,
+          reportUsedIgnorePattern: false
         }
       ],
 
