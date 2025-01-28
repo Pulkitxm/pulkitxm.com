@@ -11,6 +11,22 @@ const octokit = new Octokit({
   auth: CONTRIBUTION_GRAPH_SECRET
 });
 
+async function isAuthenticated(_octokit: Octokit): Promise<RES_TYPE<boolean>> {
+  try {
+    const res = (await _octokit.auth()) as { type: "unauthenticated" | "token"; token?: string };
+    return {
+      status: "success",
+      data: res.type == "token"
+    };
+  } catch (error) {
+    console.log("Error checking authentication:", error);
+    return {
+      status: "error",
+      error: "Failed to check authentication"
+    };
+  }
+}
+
 const CONTRIBUTION_QUERY = `
 query($username: String!, $from: DateTime!, $to: DateTime!) {
   user(login: $username) {
@@ -39,6 +55,18 @@ export async function getGithubData({
   monthsType?: "string" | "number";
 }): Promise<RES_TYPE<CONTRIBUTION>> {
   try {
+    const res = await isAuthenticated(octokit);
+    if (res.status === "error") {
+      return res;
+    }
+
+    if (!res.data) {
+      return {
+        status: "error",
+        error: "GitHub authentication failed"
+      };
+    }
+
     const {
       data: { login }
     } = await octokit.rest.users.getAuthenticated();
@@ -114,6 +142,18 @@ export async function getPrsData(
   props: ({ from: string; to: string } | { all: true }) & { select?: boolean }
 ): Promise<RES_TYPE<PR[]>> {
   try {
+    const res = await isAuthenticated(octokit);
+    if (res.status === "error") {
+      return res;
+    }
+
+    if (!res.data) {
+      return {
+        status: "error",
+        error: "GitHub authentication failed"
+      };
+    }
+
     const {
       data: { login }
     } = await octokit.rest.users.getAuthenticated();
@@ -160,8 +200,20 @@ export async function getPrsData(
   }
 }
 
-export async function getLatestWorkflow(): Promise<{ timeStamp: Date }> {
+export async function getLatestWorkflow(): Promise<RES_TYPE<{ timeStamp: Date }>> {
   try {
+    const res = await isAuthenticated(octokit);
+    if (res.status === "error") {
+      return res;
+    }
+
+    if (!res.data) {
+      return {
+        status: "error",
+        error: "GitHub authentication failed"
+      };
+    }
+
     const {
       data: { login: username }
     } = await octokit.rest.users.getAuthenticated();
@@ -172,12 +224,14 @@ export async function getLatestWorkflow(): Promise<{ timeStamp: Date }> {
     });
 
     return {
-      timeStamp: new Date(response.data.workflow_runs[0].updated_at)
+      status: "success",
+      data: { timeStamp: new Date(response.data.workflow_runs[0].updated_at) }
     };
   } catch (error) {
     console.error(error instanceof Error ? error.message : "Unknown error occurred");
     return {
-      timeStamp: TODAY
+      status: "success",
+      data: { timeStamp: TODAY }
     };
   }
 }
