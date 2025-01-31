@@ -36,3 +36,16 @@ export function formatTimeUpdatedAgo(dateString: Date): string {
 
   return `${value} ${label}${value > 1 ? "s" : ""} ago`;
 }
+
+export function getSlug(str: string): string {
+  return str
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s(),.]+/g, "-")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}

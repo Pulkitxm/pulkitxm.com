@@ -18,6 +18,7 @@ export type Project = {
   image: StaticImageData;
   url: string;
   tagline: string;
+  slug: string;
 };
 
 export type Certification = {
@@ -30,6 +31,7 @@ export type Certification = {
   image: StaticImageData;
   cover?: boolean;
   issuedAt: Date;
+  slug: string;
 };
 
 export type DesignItem = {

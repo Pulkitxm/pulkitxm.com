@@ -2,10 +2,12 @@ import { Calendar, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { ImageFader } from "@/components/ImageCarousel";
+import JumpLink from "@/components/JumpLink";
 import { PreFetchUrl } from "@/components/PreFetchUrl";
 import profile from "@/data/profile";
 
 export default function EventsPage() {
+  const key = "event";
   return (
     <main className="min-h-screen bg-[#0A0A0B]">
       <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
@@ -23,6 +25,7 @@ export default function EventsPage() {
             <div
               key={index}
               className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm transition-all duration-300 hover:from-gray-800/50 hover:to-gray-900/50"
+              id={key + "-" + event.slug}
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-500/5 via-emerald-500/10 to-transparent" />
 
@@ -70,6 +73,16 @@ export default function EventsPage() {
                         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:h-5 sm:w-5" />
                       </Link>
                     )}
+                  </div>
+                  <div className="flex justify-end">
+                    <JumpLink
+                      path="/events"
+                      url={{ key, id: event.slug }}
+                      className={{
+                        master: "opacity-0 group-hover:opacity-100",
+                        child: "h-5 w-5 text-muted-foreground"
+                      }}
+                    />
                   </div>
                 </div>
               </div>

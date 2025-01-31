@@ -111,13 +111,13 @@ export default function SimpleCarousel({
         <CarouselContent>
           {images.map((src, index) => (
             <CarouselItem key={index}>
-              <div className="pointer-events-none relative aspect-video w-full overflow-hidden rounded-lg">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                 <Image
                   src={src}
                   alt={`Background ${index + 1}`}
                   width={50}
                   height={50}
-                  className="h-full w-full scale-110 object-cover blur-md brightness-50"
+                  className="h-full w-full scale-110 select-none object-cover blur-md brightness-50"
                   fetchPriority="high"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -126,7 +126,7 @@ export default function SimpleCarousel({
                     alt={`Slide ${index + 1}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 50vw"
-                    className="object-contain"
+                    className="select-none object-contain"
                     fetchPriority="high"
                   />
                 </div>

@@ -1,6 +1,8 @@
 import assets from "@/assets";
+import { getSlug } from "@/lib/utils";
+import { Project } from "@/types/profile";
 
-export const projects = [
+const projectsWithSlug: Omit<Project, "slug">[] = [
   {
     name: "Deployit",
     image: assets.projects.deployitProject,
@@ -26,3 +28,8 @@ export const projects = [
     tagline: "A simple react hook for form handling"
   }
 ];
+
+export const projects: readonly Project[] = projectsWithSlug.map((project) => ({
+  ...project,
+  slug: getSlug(project.name)
+}));

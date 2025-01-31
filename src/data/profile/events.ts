@@ -1,4 +1,5 @@
 import assets from "@/assets";
+import { getSlug } from "@/lib/utils";
 import { Event } from "@/types/profile";
 
 const eventsWithoutSlug: Omit<Event, "slug">[] = [
@@ -57,11 +58,5 @@ const eventsWithoutSlug: Omit<Event, "slug">[] = [
 
 export const events: Event[] = eventsWithoutSlug.map((event) => ({
   ...event,
-  slug: event.name
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "")
+  slug: getSlug(event.name)
 }));

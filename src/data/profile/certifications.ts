@@ -1,7 +1,8 @@
 import assets from "@/assets";
+import { getSlug } from "@/lib/utils";
 import { Certification } from "@/types/profile";
 
-export const certifications: readonly Certification[] = [
+const certificationsWithSlug: Omit<Certification, "slug">[] = [
   {
     name: "GitHub Foundations",
     issuedBy: {
@@ -24,3 +25,8 @@ export const certifications: readonly Certification[] = [
     issuedAt: new Date(2024, 2, 21)
   }
 ];
+
+export const certifications: readonly Certification[] = certificationsWithSlug.map((certification) => ({
+  ...certification,
+  slug: getSlug(certification.name)
+}));
