@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { getPrsData } from "@/actions/gh";
-import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
+import { getToday, GITHUB_START_CONTRIBUTION_YEAR } from "@/lib/config";
 import { PR } from "@/types/github";
 import { RES_TYPE } from "@/types/globals";
 
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<PR[] | { e
     const select = searchParams.get("select") === "all";
 
     let selectedYear: number | null = null;
-    const currentYear = TODAY.getFullYear();
+    const currentYear = getToday().getFullYear();
 
     if (year) {
       if (isNaN(Number(year))) {
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<PR[] | { e
     if (selectedYear) {
       let toDate = new Date(selectedYear, 11, 31);
       if (selectedYear === currentYear) {
-        toDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+        toDate = new Date(getToday().getFullYear(), getToday().getMonth(), getToday().getDate());
       }
       const from = new Date(selectedYear, 0, 1).toISOString();
       const to = toDate.toISOString();

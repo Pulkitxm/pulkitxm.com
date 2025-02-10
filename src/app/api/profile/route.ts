@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 
 import { getGithubData } from "@/actions/gh";
 import profile from "@/data/profile";
-import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
+import { getToday, GITHUB_START_CONTRIBUTION_YEAR } from "@/lib/config";
 import { CONTRIBUTION } from "@/types/github";
 
 export async function GET() {
   const allowedYears: number[] = [];
 
-  for (let i = GITHUB_START_CONTRIBUTION_YEAR; i <= TODAY.getFullYear(); i++) {
+  for (let i = GITHUB_START_CONTRIBUTION_YEAR; i <= getToday().getFullYear(); i++) {
     allowedYears.push(i);
   }
 

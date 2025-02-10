@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CURRENT_YEAR } from "@/lib/config";
+import { getCurrentYear } from "@/lib/config";
 import { months } from "@/lib/constants";
 import { getGithubContributionData } from "@/lib/gh";
 
@@ -20,7 +20,7 @@ import type React from "react";
 export function ContributionGraph(): React.ReactElement {
   const [data, setData] = useState<Record<number, CONTRIBUTION>>({});
   const [loading, setLoading] = useState(false);
-  const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR);
+  const [selectedYear, setSelectedYear] = useState(getCurrentYear());
 
   const fetchYearData = useCallback(
     (year: number) => {

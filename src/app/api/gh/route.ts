@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { getGithubData } from "@/actions/gh";
-import { GITHUB_START_CONTRIBUTION_YEAR, TODAY } from "@/lib/config";
+import { getToday, GITHUB_START_CONTRIBUTION_YEAR } from "@/lib/config";
 import { CONTRIBUTION } from "@/types/github";
 
 export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTION | { error: string }>> {
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTI
     const year = searchParams.get("y");
 
     let selectedYear: number;
-    const currentYear = TODAY.getFullYear();
+    const currentYear = getToday().getFullYear();
 
     if (year) {
       if (isNaN(Number(year))) {
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTI
       }
       selectedYear = Number(year);
     } else {
-      selectedYear = TODAY.getFullYear();
+      selectedYear = getToday().getFullYear();
     }
 
     if (selectedYear < GITHUB_START_CONTRIBUTION_YEAR || selectedYear > currentYear) {
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTI
 
     let toDate = new Date(selectedYear, 11, 31);
     if (selectedYear === currentYear) {
-      toDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+      toDate = new Date(getToday().getFullYear(), getToday().getMonth(), getToday().getDate());
     }
     const from = new Date(selectedYear, 0, 1).toISOString();
     const to = toDate.toISOString();

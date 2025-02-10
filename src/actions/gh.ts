@@ -2,7 +2,7 @@
 
 import { Octokit } from "@octokit/rest";
 
-import { TODAY } from "@/lib/config";
+import { getToday } from "@/lib/config";
 import { CONTRIBUTION_GRAPH_SECRET, months, REPO_NAME } from "@/lib/constants";
 import { CONTRIBUTION, CONTRIBUTION_QUERY_RESPONSE, PR } from "@/types/github";
 import { RES_TYPE } from "@/types/globals";
@@ -231,7 +231,7 @@ export async function getLatestWorkflow(): Promise<RES_TYPE<{ timeStamp: Date }>
     console.error(error instanceof Error ? error.message : "Unknown error occurred");
     return {
       status: "success",
-      data: { timeStamp: TODAY }
+      data: { timeStamp: getToday() }
     };
   }
 }

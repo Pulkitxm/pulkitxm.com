@@ -9,13 +9,13 @@ import { MdRefresh } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { GITHUB_START_CONTRIBUTION_YEAR, IGNORED_CONTRIBUTION_YEARS, TODAY } from "@/lib/config";
+import { getToday, GITHUB_START_CONTRIBUTION_YEAR, IGNORED_CONTRIBUTION_YEARS } from "@/lib/config";
 import { PR, PR_STATE, PR_STATE_TYPE, PRS_SCHEMA } from "@/types/github";
 
 import { PrListItem } from "./pr-list-item";
 import { SkeletonItem, SkeletonFilter } from "./skeleton-item";
 
-const currentYear = TODAY.getFullYear();
+const currentYear = getToday().getFullYear();
 const PR_STATES: string[] = PR_STATE.options;
 
 export default function PrsPage() {

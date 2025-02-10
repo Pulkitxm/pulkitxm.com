@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
-import { AVAILABLE_YEARS } from "@/lib/config";
+import { getAvailableYears } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 interface YearSelectorProps {
@@ -37,7 +37,7 @@ export const YearSelector: React.FC<YearSelectorProps> = ({ selectedYear, onYear
       </button>
       {showYearSelect && (
         <div className="absolute left-0 z-50 mt-1 w-32 rounded-md border border-zinc-800 bg-zinc-900 py-1 shadow-lg md:left-[-25%]">
-          {AVAILABLE_YEARS.map((year) => (
+          {getAvailableYears().map((year) => (
             <button
               key={year}
               onClick={() => {
