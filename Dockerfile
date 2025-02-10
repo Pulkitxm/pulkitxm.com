@@ -4,13 +4,13 @@ ARG PORT=3000
 FROM node:${NODE_VERSION}-alpine3.20 AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --ignore-scripts
 
 FROM node:${NODE_VERSION}-alpine3.20 AS builder
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -22,8 +22,7 @@ ARG PORT
 WORKDIR /app
 
 RUN apk add --no-cache tini && \
-    corepack enable && \
-    corepack prepare pnpm@latest --activate && \
+    npm install -g pnpm && \
     addgroup -g 1001 -S nodejs && \
     adduser -S nextjs -u 1001
 
