@@ -45,6 +45,37 @@ query($username: String!, $from: DateTime!, $to: DateTime!) {
 }
 `;
 
+export async function getGithubUsername(): Promise<RES_TYPE<string>> {
+  try {
+    const res = await isAuthenticated(octokit);
+    if (res.status === "error") {
+      return res;
+    }
+
+    if (!res.data) {
+      return {
+        status: "error",
+        error: "GitHub authentication failed"
+      };
+    }
+
+    const {
+      data: { login }
+    } = await octokit.rest.users.getAuthenticated();
+
+    return {
+      status: "success",
+      data: login
+    };
+  } catch (error) {
+    console.error("Error fetching GitHub username:", error);
+    return {
+      status: "error",
+      error: error instanceof Error ? error.message : "Failed to fetch GitHub username"
+    };
+  }
+}
+
 export async function getGithubData({
   from,
   to,
@@ -73,21 +104,27 @@ export async function getGithubData({
 
     const year = new Date(from).getFullYear();
 
-    const [contributionsData, resPrs] = await Promise.all([
+    const [contributionsData, resPrs, resFollowers] = await Promise.all([
       octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
         username: login,
         from,
         to
       }),
-      getPrsData({ from, to, select: true })
+      getPrsData({ from, to, select: true }),
+      getLatestFollowers()
     ]);
 
     if (resPrs.status === "error") {
       return resPrs;
     }
 
+    if (resFollowers.status === "error") {
+      return resFollowers;
+    }
+
     const prs = resPrs.data;
     const prsCount = prs.length;
+    const followersCount = resFollowers.data.length;
 
     const contributionsByMonth = Array.from({ length: 12 }, (_, i) => ({
       month: i + 1,
@@ -126,7 +163,8 @@ export async function getGithubData({
       data: {
         contributions,
         prs: prsCount,
-        year
+        year,
+        followers: followersCount
       }
     };
   } catch (error) {
@@ -232,6 +270,58 @@ export async function getLatestWorkflow(): Promise<RES_TYPE<{ timeStamp: Date }>
     return {
       status: "success",
       data: { timeStamp: getToday() }
+    };
+  }
+}
+
+export async function getLatestFollowers(): Promise<RES_TYPE<{ picUrl: string; username: string }[]>> {
+  try {
+    const res = await isAuthenticated(octokit);
+    if (res.status === "error") {
+      return res;
+    }
+
+    if (!res.data) {
+      return {
+        status: "error",
+        error: "GitHub authentication failed"
+      };
+    }
+
+    let followers: { username: string; picUrl: string }[] = [];
+    let page = 1;
+    const perPage = 100;
+    let hasMore = true;
+
+    while (hasMore) {
+      const response = await octokit.rest.users.listFollowersForAuthenticatedUser({
+        per_page: perPage,
+        page
+      });
+
+      followers = followers.concat(
+        response.data.map((follower) => ({
+          picUrl: follower.avatar_url,
+          username: follower.login
+        }))
+      );
+
+      if (response.data.length < perPage) {
+        hasMore = false;
+      } else {
+        page++;
+      }
+    }
+
+    return {
+      status: "success",
+      data: followers.sort((a, b) => a.username.localeCompare(b.username))
+    };
+  } catch (error) {
+    console.error("Error fetching followers:", error);
+    return {
+      status: "error",
+      error: error instanceof Error ? error.message : "Failed to fetch followers"
     };
   }
 }

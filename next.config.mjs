@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
   productionBrowserSourceMaps: false,
   images: {
     remotePatterns: [
@@ -11,6 +10,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "api.microlink.io"
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com"
       }
     ],
     minimumCacheTTL: 60,

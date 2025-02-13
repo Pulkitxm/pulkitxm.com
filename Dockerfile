@@ -14,8 +14,7 @@ RUN npm install -g pnpm
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN pnpm build && \
-    if [ ! -d .next/standalone ]; then echo "Standalone directory not created" && exit 1; fi
+RUN pnpm build
 
 FROM node:${NODE_VERSION}-alpine3.20 AS runner
 ARG PORT
@@ -26,9 +25,11 @@ RUN apk add --no-cache tini && \
     addgroup -g 1001 -S nodejs && \
     adduser -S nextjs -u 1001
 
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Copy the entire .next directory instead of just standalone
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 
 USER nextjs
 ENV NODE_ENV=production
@@ -42,4 +43,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
     CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/ || exit 1
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["node", "server.js"]
+CMD ["pnpm", "start"]

@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarDays, GitPullRequest, Loader2 } from "lucide-react";
+import { CalendarDays, GitPullRequest, Loader2, Users2 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -74,9 +74,10 @@ export function ContributionGraph(): React.ReactElement {
               ))}
             </div>
           </div>
-          <div className="flex flex-col items-start justify-between space-y-2 rounded-lg bg-zinc-800/50 p-3 md:flex-row md:items-center md:space-y-0 md:p-4">
+          <div className="flex flex-col items-start justify-between space-y-2 rounded-lg bg-zinc-800/50 p-3 min-[400px]:flex-row min-[400px]:space-y-0 md:items-center md:p-4">
             {loading ? (
               <>
+                <Skeleton className="h-6 w-48" />
                 <Skeleton className="h-6 w-48" />
                 <Skeleton className="h-6 w-36" />
               </>
@@ -89,6 +90,15 @@ export function ContributionGraph(): React.ReactElement {
                       <strong>{selectedYearData.contributions.totalContributions}</strong> contributions
                     </span>
                   </div>
+                  <PreFetchUrl
+                    href="/gh-followers"
+                    className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm"
+                  >
+                    <Users2 className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
+                    <span>
+                      <strong>{selectedYearData.followers}</strong> followers
+                    </span>
+                  </PreFetchUrl>
                   <PreFetchUrl href="/prs" className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
                     <GitPullRequest className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
                     <span>
