@@ -91,3 +91,5 @@ export default async function GhFollowers() {
     </main>
   );
 }
+
+export const dynamic = "force-dynamic";
