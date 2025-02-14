@@ -1,3 +1,4 @@
+import assets from "@/assets";
 import DatawavelabsExperience from "@/components/ExperienceDetails/Datawavelabs";
 import GeeksForGeeks from "@/components/ExperienceDetails/GeeksForGeeks";
 import { getSlug } from "@/lib/utils";
@@ -12,7 +13,8 @@ const experienceWithoutSlug: Omit<Experience, "slug">[] = [
     type: "remote",
     url: "https://www.crowdvolt.com",
     showOnHome: true,
-    desc: "I have started working at Crowdvolt as a Software Engineer. I am responsible for maintaining the web application, implementing new features, and improving the existing codebase. Excited to work with the team and learn new things."
+    desc: "I have started working at Crowdvolt as a Software Engineer. I am responsible for maintaining the web application, implementing new features, and improving the existing codebase. Excited to work with the team and learn new things.",
+    logo: assets.proffessionalThings.crowdvolt.logo
   },
   {
     companyName: "DatawaveLabs",
@@ -24,7 +26,8 @@ const experienceWithoutSlug: Omit<Experience, "slug">[] = [
     url: "https://datawavelabs.io",
     showOnHome: true,
     desc: "My work at Datawave Labs involved developing and integrating various systems and tools to enhance the platform's functionality and user experience. I focused on authentication, cloud integration, infrastructure automation, real-time notifications, client and server development, and DevOps practices.",
-    expDetails: DatawavelabsExperience
+    expDetails: DatawavelabsExperience,
+    logo: assets.proffessionalThings.datawavelabs.logo
   },
   {
     companyName: "GeeksforGeeks",
@@ -34,7 +37,8 @@ const experienceWithoutSlug: Omit<Experience, "slug">[] = [
     type: "hybrid",
     url: "https://geeksforgeeks.org",
     desc: "I am responsible for managing and organizing various events, workshops, and contests for the college students. I also help students in their technical and non-technical queries and guide them in their career path.",
-    expDetails: GeeksForGeeks
+    expDetails: GeeksForGeeks,
+    logo: assets.proffessionalThings.geeksforgeeks.logo
   }
 ].sort((a, b) => {
   if (!a.endDate && b.endDate) return -1;

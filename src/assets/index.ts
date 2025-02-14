@@ -62,7 +62,9 @@ import NPLT_CSIR_1 from "@/assets/events/nptl-csir/img_1.webp";
 import NPLT_CSIR_2 from "@/assets/events/nptl-csir/img_2.webp";
 import NPLT_CSIR_3 from "@/assets/events/nptl-csir/img_3.webp";
 import NPLT_CSIR_4 from "@/assets/events/nptl-csir/img_4.webp";
-import DATAWAVE_DASHBOARD from "@/assets/exp/datawavelabs/datawaveDashboard.webp";
+import CROWDVOLT_LOGO from "@/assets/exp/crowdvolt/logo.png";
+import DATAWAVELABS_DASHBOARD from "@/assets/exp/datawavelabs/datawaveDashboard.webp";
+import DATAWAVELABS_LOGO from "@/assets/exp/datawavelabs/logo.png";
 import GEEKSFORGEEKS_IMAGE5 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-0.webp";
 import GEEKSFORGEEKS_IMAGE6 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-1.webp";
 import GEEKSFORGEEKS_IMAGE9 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-10.webp";
@@ -75,6 +77,7 @@ import GEEKSFORGEEKS_IMAGE3 from "@/assets/exp/geeksforgeeks/geekssForGeeksImage
 import GEEKSFORGEEKS_IMAGE8 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-7.webp";
 import GEEKSFORGEEKS_IMAGE12 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-8.webp";
 import GEEKSFORGEEKS_IMAGE4 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-9.webp";
+import GEEKSFORGEEKS_LOGO from "@/assets/exp/geeksforgeeks/logo.png";
 import HACKTOBERFEST from "@/assets/hacktoberfest-2024.webp";
 import MY_IMAGE from "@/assets/me.webp";
 import V1_PORTFOLIO from "@/assets/portfolio/v1Portfolio.webp";
@@ -108,23 +111,32 @@ const assets = {
     fullStackOpen: FULL_STACK_OPEN_BADGE
   },
   proffessionalThings: {
-    datawaveRelievingLetter: "/datawave-relieving-letter.pdf",
-    geeksForGeeksLetter: "/geeksforgeeks-offer-letter.pdf",
-    geekssForGeeksImages: [
-      GEEKSFORGEEKS_IMAGE1,
-      GEEKSFORGEEKS_IMAGE2,
-      GEEKSFORGEEKS_IMAGE3,
-      GEEKSFORGEEKS_IMAGE4,
-      GEEKSFORGEEKS_IMAGE5,
-      GEEKSFORGEEKS_IMAGE6,
-      GEEKSFORGEEKS_IMAGE7,
-      GEEKSFORGEEKS_IMAGE8,
-      GEEKSFORGEEKS_IMAGE9,
-      GEEKSFORGEEKS_IMAGE10,
-      GEEKSFORGEEKS_IMAGE11,
-      GEEKSFORGEEKS_IMAGE12
-    ],
-    datawaveDashboard: DATAWAVE_DASHBOARD
+    datawavelabs: {
+      logo: DATAWAVELABS_LOGO,
+      datawaveRelievingLetter: "/datawave-relieving-letter.pdf",
+      datawaveDashboard: DATAWAVELABS_DASHBOARD
+    },
+    geeksforgeeks: {
+      logo: GEEKSFORGEEKS_LOGO,
+      geeksForGeeksLetter: "/geeksforgeeks-offer-letter.pdf",
+      images: [
+        GEEKSFORGEEKS_IMAGE1,
+        GEEKSFORGEEKS_IMAGE2,
+        GEEKSFORGEEKS_IMAGE3,
+        GEEKSFORGEEKS_IMAGE4,
+        GEEKSFORGEEKS_IMAGE5,
+        GEEKSFORGEEKS_IMAGE6,
+        GEEKSFORGEEKS_IMAGE7,
+        GEEKSFORGEEKS_IMAGE8,
+        GEEKSFORGEEKS_IMAGE9,
+        GEEKSFORGEEKS_IMAGE10,
+        GEEKSFORGEEKS_IMAGE11,
+        GEEKSFORGEEKS_IMAGE12
+      ]
+    },
+    crowdvolt: {
+      logo: CROWDVOLT_LOGO
+    }
   },
   designs: {
     deviators: DEVIATORS_DESIGN,

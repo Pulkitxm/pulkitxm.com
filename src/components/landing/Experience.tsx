@@ -1,9 +1,11 @@
 import { CalendarIcon, BriefcaseIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { ElementType } from "react";
 
 import { PreFetchUrl } from "@/components/PreFetchUrl";
 import profile from "@/data/profile";
+
+import type { ElementType } from "react";
 
 export default async function Experience() {
   const formatDate = (date: Date) => {
@@ -35,25 +37,38 @@ export default async function Experience() {
 
                 <div
                   className={
-                    "group relative flex flex-col gap-1 rounded-lg border border-gray-800 p-4 transition-all sm:p-6" +
+                    "group relative flex flex-col gap-1 rounded-lg border border-gray-800 p-2 transition-all sm:p-4" +
                     (exp.expDetails ? " hover:border-gray-700" : "")
                   }
                 >
-                  <div className="text-lg font-semibold text-white underline underline-offset-4 sm:text-xl">
-                    {exp.position}
-                  </div>
+                  <div className="flex items-center gap-3">
+                    {exp.logo && (
+                      <Image
+                        src={exp.logo || "/placeholder.svg"}
+                        alt={`${exp.companyName} logo`}
+                        width={40}
+                        height={40}
+                        className="h-10 w-10 rounded-full object-contain"
+                      />
+                    )}
+                    <div className="flex flex-col gap-2">
+                      <div className="text-lg font-semibold text-white underline underline-offset-4 sm:text-xl">
+                        {exp.position}
+                      </div>
 
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-                    <div className="flex items-center text-sm text-gray-400 sm:text-base">
-                      <BriefcaseIcon className="mr-1.5 h-4 w-4 text-gray-500" />
-                      <span>{exp.companyName}</span>
-                    </div>
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+                        <div className="flex items-center text-sm text-gray-400 sm:text-base">
+                          <BriefcaseIcon className="mr-1.5 h-4 w-4 text-gray-500" />
+                          <span>{exp.companyName}</span>
+                        </div>
 
-                    <div className="flex items-center text-sm text-gray-400">
-                      <CalendarIcon className="mr-1.5 h-4 w-4 text-gray-500" />
-                      <span>
-                        {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
-                      </span>
+                        <div className="flex items-center text-sm text-gray-400">
+                          <CalendarIcon className="mr-1.5 h-4 w-4 text-gray-500" />
+                          <span>
+                            {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

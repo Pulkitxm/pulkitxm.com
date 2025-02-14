@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { MapPin, Briefcase } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
@@ -68,13 +69,24 @@ export default function ExperienceTimeline() {
                     {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <CardTitle className="text-xl font-bold text-white">{exp.position}</CardTitle>
-                  <CardDescription className="text-base text-gray-400">
-                    <Link href={exp.url ?? ""} rel="noopener noreferrer" target="_blank" className="hover:underline">
-                      {exp.companyName}
-                    </Link>
-                  </CardDescription>
+                <div className="flex items-center space-x-4">
+                  {exp.logo && (
+                    <Image
+                      src={exp.logo || "/placeholder.svg"}
+                      alt={`${exp.companyName} logo`}
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 rounded-full object-contain"
+                    />
+                  )}
+                  <div className="space-y-1">
+                    <CardTitle className="text-xl font-bold text-white">{exp.position}</CardTitle>
+                    <CardDescription className="text-base text-gray-400">
+                      <Link href={exp.url ?? ""} rel="noopener noreferrer" target="_blank" className="hover:underline">
+                        {exp.companyName}
+                      </Link>
+                    </CardDescription>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">

@@ -13,6 +13,7 @@ export type Experience = {
   showOnHome?: boolean;
   desc: string;
   expDetails?: () => Promise<JSX.Element> | ReactElement;
+  logo: StaticImageData;
 };
 
 export type Project = {
