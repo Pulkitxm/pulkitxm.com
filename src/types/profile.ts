@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { ReactElement } from "react";
 
 export type Experience = {
   companyName: string;
@@ -7,10 +8,11 @@ export type Experience = {
   endDate?: Date;
   location: string;
   type: string;
-  url?: string;
+  url: string;
   slug: string;
   showOnHome?: boolean;
   desc: string;
+  expDetails?: () => Promise<JSX.Element> | ReactElement;
 };
 
 export type Project = {

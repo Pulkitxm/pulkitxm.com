@@ -10,13 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import profile from "@/data/profile";
-
-const formatDate = (date: Date) => {
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short"
-  });
-};
+import { formatDate } from "@/lib/utils";
 
 export default function ExperienceTimeline() {
   const experience = profile.experience;
@@ -96,17 +90,19 @@ export default function ExperienceTimeline() {
                   <p className="text-sm text-gray-400">{exp.desc}</p>
                 </div>
               </CardContent>
-              <CardFooter className="mt-auto pt-6">
-                <Button className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700" asChild>
-                  <PreFetchUrl
-                    href={`/exp/${exp.slug}`}
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center"
-                  >
-                    View more
-                  </PreFetchUrl>
-                </Button>
-              </CardFooter>
+              {exp.expDetails && (
+                <CardFooter className="mt-auto pt-6">
+                  <Button className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700" asChild>
+                    <PreFetchUrl
+                      href={`/exp/${exp.slug}`}
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
+                      View more
+                    </PreFetchUrl>
+                  </Button>
+                </CardFooter>
+              )}
             </Card>
           </motion.div>
         ))}
