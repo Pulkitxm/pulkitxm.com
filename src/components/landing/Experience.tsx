@@ -51,10 +51,8 @@ export default async function Experience() {
                         className="h-10 w-10 rounded-full object-contain"
                       />
                     )}
-                    <div className="flex flex-col gap-2">
-                      <div className="text-lg font-semibold text-white underline underline-offset-4 sm:text-xl">
-                        {exp.position}
-                      </div>
+                    <div className="flex flex-col gap-1">
+                      <div className="text-lg font-semibold text-white sm:text-xl">{exp.position}</div>
 
                       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
                         <div className="flex items-center text-sm text-gray-400 sm:text-base">
