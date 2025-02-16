@@ -296,21 +296,33 @@ export async function getLatestFollowers(): Promise<RES_TYPE<{ picUrl: string; u
     while (hasMore) {
       const response = await octokit.rest.users.listFollowersForAuthenticatedUser({
         per_page: perPage,
-        page
+        page,
+        headers: {
+          "If-None-Match": "",
+          "Cache-Control": "no-cache"
+        }
       });
+
+      if (!response.data || response.data.length === 0) {
+        break;
+      }
 
       followers = followers.concat(
         response.data.map((follower) => ({
-          picUrl: follower.avatar_url,
+          picUrl: `${follower.avatar_url}?t=${Date.now()}`,
           username: follower.login
         }))
       );
 
-      if (response.data.length < perPage) {
-        hasMore = false;
-      } else {
-        page++;
-      }
+      hasMore = response.data.length === perPage;
+      page++;
+    }
+
+    if (followers.length === 0) {
+      return {
+        status: "error",
+        error: "No followers found or unable to fetch followers"
+      };
     }
 
     return {
