@@ -95,13 +95,13 @@ export function ContributionGraph(): React.ReactElement {
                     className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm"
                   >
                     <Users2 className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
-                    <span>
+                    <span className="hover:underline">
                       <strong>{selectedYearData.followers}</strong> followers
                     </span>
                   </PreFetchUrl>
                   <PreFetchUrl href="/prs" className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
                     <GitPullRequest className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
-                    <span>
+                    <span className="hover:underline">
                       <strong>{selectedYearData.prs}</strong> Pull Requests
                     </span>
                   </PreFetchUrl>

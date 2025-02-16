@@ -4,10 +4,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devpulkit.in"),
-  title: "Gtihu Followers - Pulkit",
+  title: "Gtihub Followers - Pulkit",
   description: "Explore Pulkit's GitHub followers and their contributions to the developer community.",
   openGraph: {
-    title: "Gtihu Followers - Pulkit",
+    title: "Gtihub Followers - Pulkit",
     description: "Take a look at Pulkit's github followers and their contributions to the developer community.",
     url: "https://devpulkit.in/ghFollowers",
     type: "website",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gtihu Followers - Pulkit",
+    title: "Gtihub Followers - Pulkit",
     description: "Take a look at Pulkit's github followers and their contributions to the developer community.",
     images: [assets.banner.ghFollowers.src]
   }
