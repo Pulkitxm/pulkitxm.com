@@ -3,6 +3,7 @@ import CONTACT_BANNER from "@/assets/banner/contact-banner.webp";
 import DESIGNS_BANNER from "@/assets/banner/designs-banner.webp";
 import EVENTS_BANNER from "@/assets/banner/events-banner.webp";
 import EXPERIENCE_BANNER from "@/assets/banner/experience-banner.webp";
+import GithubFollowersBanner from "@/assets/banner/gh-followers-banner.png";
 import HOME_BANNER from "@/assets/banner/home-banner.webp";
 import PRS_BANNER from "@/assets/banner/prsPage-banner.webp";
 import RESUME_BANNER from "@/assets/banner/resumePage-banner.webp";
@@ -98,6 +99,7 @@ const assets = {
   hacktoberFest: HACKTOBERFEST,
   banner: {
     home: HOME_BANNER,
+    ghFollowers: GithubFollowersBanner,
     contact: CONTACT_BANNER,
     blogs: BLOGS_BANNER,
     designs: DESIGNS_BANNER,
