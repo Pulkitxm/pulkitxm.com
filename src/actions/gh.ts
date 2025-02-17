@@ -288,37 +288,46 @@ export async function getLatestFollowers(): Promise<RES_TYPE<{ picUrl: string; u
       };
     }
 
-    let followers: { username: string; picUrl: string }[] = [];
+    const timestamp = Date.now();
+    const followers: { username: string; picUrl: string }[] = [];
     let page = 1;
     const perPage = 100;
-    let hasMore = true;
 
-    while (hasMore) {
+    let hasMorePages = true;
+    do {
       const response = await octokit.rest.users.listFollowersForAuthenticatedUser({
         per_page: perPage,
         page,
         headers: {
           "If-None-Match": "",
-          "Cache-Control": "no-cache"
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0"
         }
       });
 
-      if (!response.data || response.data.length === 0) {
+      if (!response.data?.length) {
+        hasMorePages = false;
         break;
       }
 
-      followers = followers.concat(
-        response.data.map((follower) => ({
-          picUrl: `${follower.avatar_url}?t=${Date.now()}`,
+      followers.push(
+        ...response.data.map((follower) => ({
+          // Add timestamp to each avatar URL to force refresh
+          picUrl: `${follower.avatar_url}?t=${timestamp}`,
           username: follower.login
         }))
       );
 
-      hasMore = response.data.length === perPage;
-      page++;
-    }
+      if (response.data.length < perPage) {
+        hasMorePages = false;
+        break;
+      }
 
-    if (followers.length === 0) {
+      page++;
+    } while (hasMorePages);
+
+    if (!followers.length) {
       return {
         status: "error",
         error: "No followers found or unable to fetch followers"
