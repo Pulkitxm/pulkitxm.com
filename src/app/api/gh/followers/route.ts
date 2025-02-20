@@ -25,7 +25,6 @@ export async function GET(): Promise<NextResponse<RES_TYPE<{ picUrl: string; use
             Pragma: "no-cache",
             Expires: "0"
           },
-          next: { revalidate: 0 },
           cache: "no-store"
         }
       );
