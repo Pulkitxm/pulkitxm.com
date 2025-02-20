@@ -25,40 +25,44 @@ export function ContributionGraph(): React.ReactElement {
   const [followers, setFollowers] = useState(0);
 
   const fetchYearData = useCallback(
-    (year: number) => {
+    async (year: number) => {
       if (data[year]) return;
-      setLoading(true);
-      getGithubContributionData(year)
-        .then((newData) => {
-          if (newData) setData((prevData) => ({ ...prevData, [year]: newData }));
-        })
-        .catch((error) => {
-          console.error("Failed to fetch year data:", error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      try {
+        const newData = await getGithubContributionData(year);
+        if (newData) {
+          setData((prevData) => ({ ...prevData, [year]: newData }));
+        }
+      } catch (error) {
+        console.error("Failed to fetch year data:", error);
+      }
     },
     [data]
   );
 
   const fetchFollowers = useCallback(async () => {
-    const res = await axios.get(`${NEXT_PUBLIC_API_URL}/api/gh/followers`);
-    const resData = res.data;
-    if (resData.status === "success") {
-      setFollowers(resData.data.length);
-    }
-    if (resData.status === "error") {
-      setFollowers(0);
+    try {
+      const res = await axios.get(`${NEXT_PUBLIC_API_URL}/api/gh/followers`);
+      const resData = res.data;
+      if (resData.status === "success") {
+        setFollowers(resData.data.length);
+      }
+      if (resData.status === "error") {
+        setFollowers(0);
+      }
+    } catch (error) {
+      console.error("Failed to fetch followers:", error);
     }
   }, []);
 
+  const handleFetchData = useCallback(async () => {
+    setLoading(true);
+    await Promise.all([fetchYearData(selectedYear), fetchFollowers()]);
+    setLoading(false);
+  }, [fetchYearData, fetchFollowers, selectedYear]);
+
   useEffect(() => {
-    fetchYearData(selectedYear);
-  }, [selectedYear, fetchYearData]);
-  useEffect(() => {
-    fetchFollowers();
-  }, [fetchFollowers]);
+    handleFetchData();
+  }, [handleFetchData]);
 
   const selectedYearData = data[selectedYear];
 
