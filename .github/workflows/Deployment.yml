@@ -67,6 +67,7 @@ jobs:
           echo "RESEND_USER_MAIL_SENDER_MAIL=${{ secrets.RESEND_USER_MAIL_SENDER_MAIL }}" >> .env
           echo "BLOG_URL=${{ secrets.BLOG_URL }}" >> .env
           echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
 
           command -v pnpm >/dev/null || npm install -g pnpm
           command -v pm2 >/dev/null || npm install -g pm2

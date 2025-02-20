@@ -16,8 +16,7 @@ export const CONTRIBUTION_SCHEMA = z.object({
     )
   }),
   prs: z.number(),
-  year: z.number(),
-  followers: z.number()
+  year: z.number()
 });
 
 export type CONTRIBUTION = z.infer<typeof CONTRIBUTION_SCHEMA>;

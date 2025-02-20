@@ -7,3 +7,4 @@ export const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "";
 export const RESEND_USER_MAIL_SENDER_MAIL = process.env.RESEND_USER_MAIL_SENDER_MAIL ?? "";
 export const BASE_URL = process.env.BASE_URL ?? "";
 export const BLOG_URL = process.env.BLOG_URL ?? "";
+export const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";

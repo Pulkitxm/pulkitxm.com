@@ -1,13 +1,29 @@
+import axios from "axios";
 import { Github, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
-import { getGithubUsername, getLatestFollowers } from "@/actions/gh";
+import { getGithubUsername } from "@/actions/gh";
+import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
+import { RES_TYPE } from "@/types/globals";
 
 export default async function GhFollowers() {
-  const followersRes = await getLatestFollowers();
+  let followersRes: RES_TYPE<
+    {
+      picUrl: string;
+      username: string;
+    }[]
+  >;
   const githubUsername = await getGithubUsername();
+
+  try {
+    const res = await axios.get(`${NEXT_PUBLIC_API_URL}/api/gh/followers`);
+    followersRes = res.data;
+  } catch (e) {
+    followersRes = { status: "error", error: "Unable to load followers" };
+    console.error(e);
+  }
 
   if (followersRes.status === "error" || githubUsername.status === "error") {
     return (
@@ -20,11 +36,11 @@ export default async function GhFollowers() {
   return (
     <main className="space-y-6 p-3 sm:p-5">
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900/90 to-zinc-800/90 p-6">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-purple-500/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.1),transparent)]" />
         <div className="relative flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div className="space-y-2">
-            <div className="inline-flex items-center space-x-2 rounded-full bg-blue-500/10 px-3 py-1 text-sm text-blue-400">
+            <div className="inline-flex items-center space-x-2 rounded-full bg-green-500/10 px-3 py-1 text-sm text-green-400">
               <Github className="h-4 w-4" />
               <span>GitHub Network</span>
             </div>
@@ -34,7 +50,7 @@ export default async function GhFollowers() {
               rel="noopener noreferrer"
               className="block"
             >
-              <h2 className="text-2xl font-bold text-zinc-100 transition-colors hover:text-blue-400">My Followers</h2>
+              <h2 className="text-2xl font-bold text-zinc-100 transition-colors hover:text-green-400">My Followers</h2>
             </Link>
             <p className="text-sm text-zinc-400">
               These are the amazing people who follow my journey on GitHub. Each follower helps build a stronger
@@ -42,7 +58,7 @@ export default async function GhFollowers() {
             </p>
           </div>
           <div className="flex items-center space-x-3 rounded-full border border-zinc-700/50 bg-zinc-800/50 px-4 py-2 text-zinc-100">
-            <Users className="h-5 w-5 text-blue-400" />
+            <Users className="h-5 w-5 text-green-400" />
             <span className="text-lg font-semibold">{followersRes.data.length}</span>
             <span className="text-sm text-zinc-400">followers</span>
           </div>

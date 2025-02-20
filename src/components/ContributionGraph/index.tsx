@@ -1,12 +1,13 @@
 "use client";
 
+import axios from "axios";
 import { CalendarDays, GitPullRequest, Loader2, Users2 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCurrentYear } from "@/lib/config";
-import { months } from "@/lib/constants";
+import { months, NEXT_PUBLIC_API_URL } from "@/lib/constants";
 import { getGithubContributionData } from "@/lib/gh";
 
 import { PreFetchUrl } from "../PreFetchUrl";
@@ -21,6 +22,7 @@ export function ContributionGraph(): React.ReactElement {
   const [data, setData] = useState<Record<number, CONTRIBUTION>>({});
   const [loading, setLoading] = useState(false);
   const [selectedYear, setSelectedYear] = useState(getCurrentYear());
+  const [followers, setFollowers] = useState(0);
 
   const fetchYearData = useCallback(
     (year: number) => {
@@ -40,9 +42,23 @@ export function ContributionGraph(): React.ReactElement {
     [data]
   );
 
+  const fetchFollowers = useCallback(async () => {
+    const res = await axios.get(`${NEXT_PUBLIC_API_URL}/api/gh/followers`);
+    const resData = res.data;
+    if (resData.status === "success") {
+      setFollowers(resData.data.length);
+    }
+    if (resData.status === "error") {
+      setFollowers(0);
+    }
+  }, []);
+
   useEffect(() => {
     fetchYearData(selectedYear);
   }, [selectedYear, fetchYearData]);
+  useEffect(() => {
+    fetchFollowers();
+  }, [fetchFollowers]);
 
   const selectedYearData = data[selectedYear];
 
@@ -96,7 +112,7 @@ export function ContributionGraph(): React.ReactElement {
                   >
                     <Users2 className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
                     <span className="hover:underline">
-                      <strong>{selectedYearData.followers}</strong> followers
+                      <strong>{followers}</strong> followers
                     </span>
                   </PreFetchUrl>
                   <PreFetchUrl href="/prs" className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">

@@ -11,7 +11,13 @@ const octokit = new Octokit({
   auth: CONTRIBUTION_GRAPH_SECRET
 });
 
-async function isAuthenticated(_octokit: Octokit): Promise<RES_TYPE<boolean>> {
+export async function getAuthenticatedOcto() {
+  return new Octokit({
+    auth: CONTRIBUTION_GRAPH_SECRET
+  });
+}
+
+export async function isAuthenticated(_octokit: Octokit): Promise<RES_TYPE<boolean>> {
   try {
     const res = (await _octokit.auth()) as { type: "unauthenticated" | "token"; token?: string };
     return {
@@ -104,27 +110,21 @@ export async function getGithubData({
 
     const year = new Date(from).getFullYear();
 
-    const [contributionsData, resPrs, resFollowers] = await Promise.all([
+    const [contributionsData, resPrs] = await Promise.all([
       octokit.graphql<CONTRIBUTION_QUERY_RESPONSE>(CONTRIBUTION_QUERY, {
         username: login,
         from,
         to
       }),
-      getPrsData({ from, to, select: true }),
-      getLatestFollowers()
+      getPrsData({ from, to, select: true })
     ]);
 
     if (resPrs.status === "error") {
       return resPrs;
     }
 
-    if (resFollowers.status === "error") {
-      return resFollowers;
-    }
-
     const prs = resPrs.data;
     const prsCount = prs.length;
-    const followersCount = resFollowers.data.length;
 
     const contributionsByMonth = Array.from({ length: 12 }, (_, i) => ({
       month: i + 1,
@@ -163,8 +163,7 @@ export async function getGithubData({
       data: {
         contributions,
         prs: prsCount,
-        year,
-        followers: followersCount
+        year
       }
     };
   } catch (error) {
@@ -270,79 +269,6 @@ export async function getLatestWorkflow(): Promise<RES_TYPE<{ timeStamp: Date }>
     return {
       status: "success",
       data: { timeStamp: getToday() }
-    };
-  }
-}
-
-export async function getLatestFollowers(): Promise<RES_TYPE<{ picUrl: string; username: string }[]>> {
-  try {
-    const res = await isAuthenticated(octokit);
-    if (res.status === "error") {
-      return res;
-    }
-
-    if (!res.data) {
-      return {
-        status: "error",
-        error: "GitHub authentication failed"
-      };
-    }
-
-    const timestamp = Date.now();
-    const followers: { username: string; picUrl: string }[] = [];
-    let page = 1;
-    const perPage = 100;
-
-    let hasMorePages = true;
-    do {
-      const response = await octokit.rest.users.listFollowersForAuthenticatedUser({
-        per_page: perPage,
-        page,
-        headers: {
-          "If-None-Match": "",
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0"
-        }
-      });
-
-      if (!response.data?.length) {
-        hasMorePages = false;
-        break;
-      }
-
-      followers.push(
-        ...response.data.map((follower) => ({
-          // Add timestamp to each avatar URL to force refresh
-          picUrl: `${follower.avatar_url}?t=${timestamp}`,
-          username: follower.login
-        }))
-      );
-
-      if (response.data.length < perPage) {
-        hasMorePages = false;
-        break;
-      }
-
-      page++;
-    } while (hasMorePages);
-
-    if (!followers.length) {
-      return {
-        status: "error",
-        error: "No followers found or unable to fetch followers"
-      };
-    }
-
-    return {
-      status: "success",
-      data: followers.sort((a, b) => a.username.localeCompare(b.username))
-    };
-  } catch (error) {
-    console.error("Error fetching followers:", error);
-    return {
-      status: "error",
-      error: error instanceof Error ? error.message : "Failed to fetch followers"
     };
   }
 }
