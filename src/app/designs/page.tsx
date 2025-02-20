@@ -18,7 +18,8 @@ export default function DesignsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, type: "spring" }}
       >
-        My <span className="inline-block text-blue-400 transition-transform duration-300 hover:scale-110">Designs</span>
+        My{" "}
+        <span className="inline-block text-green-400 transition-transform duration-300 hover:scale-110">Designs</span>
       </motion.h1>
 
       <section className="mb-32">
@@ -90,7 +91,7 @@ function DisplayWebDesign({ item, index }: { item: DesignItem; index: number }) 
           <div className="flex flex-wrap gap-4">
             <Link
               href={item.link}
-              className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-blue-700"
+              className="inline-flex items-center rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-green-700"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -135,7 +136,7 @@ function DisplayPortfolioDesign({ item, index }: { item: DesignItem; index: numb
           <div className="flex flex-wrap gap-4">
             <Link
               href={item.link}
-              className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-blue-700"
+              className="inline-flex items-center rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-green-700"
               target="_blank"
               rel="noopener noreferrer"
             >
