@@ -11,11 +11,34 @@ interface ContributionCellProps {
 }
 
 const getContributionColor = (count: number) => {
-  if (count === 0) return "bg-zinc-800 dark:bg-zinc-750";
-  if (count < 5) return "bg-emerald-700 dark:bg-emerald-600";
-  if (count < 10) return "bg-emerald-500 dark:bg-emerald-400";
-  if (count < 20) return "bg-emerald-400 dark:bg-emerald-300";
-  return "bg-emerald-300 dark:bg-emerald-200";
+  let level = 0;
+
+  if (count === 0) {
+    level = 0;
+  } else if (count <= 3) {
+    level = 1;
+  } else if (count <= 6) {
+    level = 2;
+  } else if (count <= 9) {
+    level = 3;
+  } else {
+    level = 4;
+  }
+
+  switch (level) {
+    case 0:
+      return "bg-gray-100 dark:bg-gray-800";
+    case 1:
+      return "bg-green-100 dark:bg-green-900";
+    case 2:
+      return "bg-green-300 dark:bg-green-700";
+    case 3:
+      return "bg-green-500 dark:bg-green-500";
+    case 4:
+      return "bg-green-700 dark:bg-green-300";
+    default:
+      return "bg-gray-100 dark:bg-gray-800";
+  }
 };
 
 export const ContributionCell: React.FC<ContributionCellProps> = React.memo(
