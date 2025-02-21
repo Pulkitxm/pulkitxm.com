@@ -3,7 +3,7 @@
 import { Octokit } from "@octokit/rest";
 
 import { getToday } from "@/lib/config";
-import { CONTRIBUTION_GRAPH_SECRET, months, REPO_NAME } from "@/lib/constants";
+import { CONTRIBUTION_GRAPH_SECRET, MONTHS, REPO_NAME } from "@/lib/constants";
 import { CONTRIBUTION, CONTRIBUTION_QUERY_RESPONSE, PR } from "@/types/github";
 import { RES_TYPE } from "@/types/globals";
 
@@ -148,7 +148,7 @@ export async function getGithubData({
       totalContributions: contributionsData.user.contributionsCollection.contributionCalendar.totalContributions,
       months: contributionsByMonth.map((month) => ({
         ...month,
-        month: monthsType === "string" ? months[month.month - 1] : month.month,
+        month: monthsType === "string" ? MONTHS[month.month - 1] : month.month,
         days: month.days
           .map((day) => ({
             ...day,

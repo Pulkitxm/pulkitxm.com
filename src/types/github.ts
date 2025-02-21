@@ -61,3 +61,11 @@ export const PR_SCHEMA = z.object({
 export const PRS_SCHEMA = z.array(PR_SCHEMA);
 export type PR = z.infer<typeof PR_SCHEMA>;
 export type PR_STATE_TYPE = z.infer<typeof PR_STATE>;
+
+export const validateFollowers = z.array(
+  z.object({
+    picUrl: z.string(),
+    username: z.string()
+  })
+);
+export type FOLLOWERS = z.infer<typeof validateFollowers>;
