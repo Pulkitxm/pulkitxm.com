@@ -1,4 +1,4 @@
-const links = [
+export const NAVIGATION_LINKS = [
   {
     title: "Home",
     url: "/",
@@ -30,5 +30,3 @@ const links = [
     key: "c"
   }
 ];
-
-export default links;

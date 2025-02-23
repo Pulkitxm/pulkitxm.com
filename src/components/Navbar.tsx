@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import links from "@/data/pages";
+import { NAVIGATION_LINKS } from "@/data/pages";
 import { FEATURE_FLAGS } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
@@ -55,7 +55,7 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
   const [underlineStyle, setUnderlineStyle] = useState({});
 
   const findActiveIndex = useCallback(() => {
-    return links.findIndex((link) => isLinkActive(link.url));
+    return NAVIGATION_LINKS.findIndex((link) => isLinkActive(link.url));
   }, [isLinkActive]);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
       )
         return;
 
-      const link = links.find((link) => link.key === event.key.toLowerCase());
+      const link = NAVIGATION_LINKS.find((link) => link.key === event.key.toLowerCase());
       if (link) router.push(link.url);
     },
     [router]
@@ -109,7 +109,7 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
   return (
     <div className="flex flex-col">
       <ul ref={menuRef} className="flex items-center justify-end space-x-4">
-        {links.map((link, index) => (
+        {NAVIGATION_LINKS.map((link, index) => (
           <li key={index}>
             <PreFetchUrl
               href={link.url}
@@ -147,7 +147,7 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
       <SheetContent side="left" className="w-[240px] bg-black p-0">
         <SheetTitle className="bg-gray-900 p-4 text-white">Menu</SheetTitle>
         <div className="flex flex-col py-4">
-          {links.map((link, index) => (
+          {NAVIGATION_LINKS.map((link, index) => (
             <Link
               key={index}
               href={link.url}
