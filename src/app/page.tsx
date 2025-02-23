@@ -1,5 +1,6 @@
 import { ContributionGraph } from "@/components/ContributionGraph";
 import Footer from "@/components/Footer";
+import Aboutme from "@/components/landing/Aboutme";
 import Certifications from "@/components/landing/Certifications";
 import Experience from "@/components/landing/Experience";
 import Header from "@/components/landing/header";
@@ -11,6 +12,7 @@ export default function LandingPage() {
     <main className="mt-2">
       <Header />
       <ContributionGraph />
+      <Aboutme />
       <Experience />
       <Skills />
       <Certifications />

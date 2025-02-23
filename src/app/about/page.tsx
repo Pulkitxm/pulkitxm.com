@@ -1,0 +1,140 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import assets from "@/assets";
+import { HighlightComponent, LinkComponent, Section } from "@/components/AboutCx";
+import profile from "@/data/profile";
+
+export default function About() {
+  return (
+    <main className="leading-relaxed">
+      <header className="mb-10">
+        <h1 className="text-4xl font-bold">About Me</h1>
+      </header>
+      <Section>
+        Hi, I am Pulkit from India 🇮🇳. I love building stuff, and all my projects are hosted on
+        <LinkComponent href={"https://github.com/" + profile.githubUserName}>GitHub</LinkComponent>. I began my journey
+        back in 8th grade. We had basic HTML-CSS classes where we learned fundamental HTML rules, and I was amazed by
+        the wonders of the web. I used to make my all of my firend&apos;s projects. Back then, I didn&apos;t had my
+        personal laptop - we shared a basic
+        <HighlightComponent>Dell laptop</HighlightComponent>
+        between me, my mother (for her work), and my sister. We didn&apos;t even had WiFi back then, so I couldn&apos;t
+        explore much. I didn&apos;t even knew that there existed such a big tech world in tech that have so many things
+        to explore, I wish I had this exposure at that time. I focused more on academics, and things stayed pretty much
+        the same until I finished school because of the og IIT/JEE rut. Anyways by the end of school time, I had a good
+        knowledge of vanilla HTML and Python.
+      </Section>
+
+      <Section>
+        Then I entered the horrible world of engineering, I took and admission in a decent college. That&apos;s when I
+        started exploring how to get into tech. I saw people on YouTube shouting
+        <HighlightComponent>Do DSA</HighlightComponent>, so like many others, I started with that. I bought the
+        <LinkComponent href="https://www.apnacollege.in/">Alpha course from Apna College</LinkComponent> and spent 2-3
+        months grinding through it. I didn&apos;t find much interest there, like you have to focus on boring concepts
+        and just do this that number of leetcode questions. I was like, &quot;Is this all there is to tech?&quot;. I
+        started exploring other options like web, app, cyber, you name it. Since I had some experience with web
+        development, I decided to focus on that. Looking back, it was one of the best decisions I&apos;ve made.
+      </Section>
+
+      <Section>
+        I got really interested in web development and started learning from free YouTube resources by amazing creators
+        like<LinkComponent href="https://www.youtube.com/@CodeWithHarry">@CodeWithHarry</LinkComponent> and
+        <LinkComponent href="https://www.youtube.com/@apnacollegeofficial">@ApnaCollegeOfficial</LinkComponent>. Wanting
+        more structured guidance, I purchased another course from Apna College called
+        <LinkComponent href="https://www.apnacollege.in/course/delta">Delta</LinkComponent>. I spent 4-6 months(around
+        June-March 2023) learning from there. After completing it and learning how things work, I realized some concepts
+        like
+        <LinkComponent unColored href="https://ejs.co/">
+          ejs
+        </LinkComponent>{" "}
+        were getting outdated as tech keeps evolving and no one was talking about those concepts. So I kept exploring
+        and building lots of projects to maintain a good grasp on concepts. If you see my contributions graph, you will
+        see a lot of contributions in the second half of 2023.
+        <Link
+          href={
+            "https://github.com/Pulkitxm?tab=overview&from=2023-12-01&to=2023-12-31#:~:text=contributions%20in%202023"
+          }
+          target="_blank"
+        >
+          <Image src={assets.contributions2023} alt="contributions" className="my-4 rounded-md border-2" />
+        </Link>
+      </Section>
+
+      <Section>
+        It was around somewhere same in April 2023 when One of my mentors introduced me to
+        <LinkComponent href="fullstackopen.com">fullstackopen.com</LinkComponent> - a turning point in my journey. This
+        blog-based tutorial taught me great concepts from web to DevOps to testing and app development. I completed this
+        course as well, but it was tough for me to complete this course as this was not some video tutorial but a
+        reading based flow and it sucked at reading at that time. Big shoutout to one of the course creators,
+        <LinkComponent href="https://github.com/mluukkai">Matti Luukkainen</LinkComponent>. You can find all my
+        assignment solutions, certificates, and university credits at
+        <LinkComponent href="https://github.com/Pulkitxm/fullstackopen">
+          github.com/Pulkitxm/fullstackopen
+        </LinkComponent>
+        <Link href="https://github.com/Pulkitxm/fullstackopen" target="_blank">
+          <Image src={assets.fullstackopenRepo} alt="fullstackopen" className="mx-auto my-4 rounded-md border-2" />
+        </Link>
+      </Section>
+
+      <Section>
+        I discovered more awesome creators on YouTube like
+        <LinkComponent href="https://www.youtube.com/@KevinPowell">@Kevin Powell</LinkComponent> and
+        <LinkComponent href="@developedbyed">@developedbyed</LinkComponent>, improving my frontend skills while creating
+        more projects. I started following{" "}
+        <LinkComponent href="https://www.youtube.com/@harkirat1">@harkirat1</LinkComponent>,{" "}
+        <LinkComponent href="https://www.youtube.com/@piyushgargdev">@piyushgargdev</LinkComponent>,{" "}
+        <LinkComponent href="https://www.youtube.com/@HiteshCodeLab">@HiteshCodeLab</LinkComponent> and{" "}
+        <LinkComponent href="https://www.youtube.com/@KunalKushwaha">@KunalKushwaha</LinkComponent>. I got most of my
+        tech updates from them, I watched a lot project tutorials and ofcouse been through the
+        <HighlightComponent>tutorial hell</HighlightComponent>. But somemhow managed to escape and continue working on
+        my own skills
+      </Section>
+
+      <Section>
+        Looking back, I&apos;d say consistency (never taking a break since day one in college) and building projects
+        have been key to my progress. I kept my
+        <LinkComponent href="https://www.linkedin.com/in/pulkitxm">LinkedIn</LinkComponent> updated throughout my
+        journey and now ofcourse my <LinkComponent href="https://x.com/devpulkitt">X</LinkComponent> account. I also did
+        a 6 months long remote internship which I got just because of keeping my network updated with my work. I did
+        some really cool work there. After that I took some break for my 5th semester improved my portfolio and github,
+        If you&apos;d see my github contributions of 2024 that were quite improved as compared to 2023.
+        <Link
+          href="https://github.com/Pulkitxm?tab=overview&from=2024-12-01&to=2024-12-31#:~:text=contributions%20in%202024"
+          target="_blank"
+        >
+          <Image src={assets.contributions2024} alt="contributions" className="my-4 rounded-md border-2" />
+        </Link>
+      </Section>
+
+      <Section>
+        During my 5th Semester break, I approached <LinkComponent href="https://x.com/kirat_tw">Harkirat</LinkComponent>{" "}
+        in one of his cohort classes regarding a referral with this{" "}
+        <LinkComponent href="https://pulkitxm.notion.site/a1868e625280580f0bb0beff78863995e?pvs=74">
+          notion doc
+        </LinkComponent>{" "}
+        and he loved my projects and profile so much that he followed me instantly during the class. He also praised me
+        in another class. Here are the recordings of both instances
+        <div className="flex flex-col gap-y-3">
+          <iframe
+            className="my-4 h-[200px] w-full rounded-md border-2 sm:h-[400px]"
+            src="https://www.youtube-nocookie.com/embed/MqDhWAgNlpU?si=V6v_NIralNbJnhvq&amp;"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+          <iframe
+            className="my-4 h-[200px] w-full rounded-md border-2 sm:h-[400px]"
+            src="https://www.youtube-nocookie.com/embed/5E8LWWN_wPw?si=rakIHJwy5RfGP687"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+      </Section>
+    </main>
+  );
+}

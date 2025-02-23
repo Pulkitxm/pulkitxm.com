@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[70svh] items-center justify-center bg-background p-4">
+    <main className="flex min-h-[70svh] items-center justify-center bg-background p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -36,6 +36,6 @@ export default function NotFound() {
           </Button>
         </motion.div>
       </motion.div>
-    </div>
+    </main>
   );
 }

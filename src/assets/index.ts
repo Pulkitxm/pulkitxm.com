@@ -1,3 +1,6 @@
+import CONTRIBUTIONS_2023 from "@/assets/about/2023-contributions.webp";
+import CONTRIBUTIONS_2024 from "@/assets/about/2024-contributions.webp";
+import FULLSTACKOPEN_REPO from "@/assets/about/fullstackopen-repo.webp";
 import BLOGS_BANNER from "@/assets/banner/blogs-banner.webp";
 import CONTACT_BANNER from "@/assets/banner/contact-banner.webp";
 import DESIGNS_BANNER from "@/assets/banner/designs-banner.webp";
@@ -97,6 +100,9 @@ const assets = {
   myImage: MY_IMAGE,
   resume: "https://pulkitxm.github.io/Pulkitxm/resume/resume.pdf",
   hacktoberFest: HACKTOBERFEST,
+  contributions2023: CONTRIBUTIONS_2023,
+  contributions2024: CONTRIBUTIONS_2024,
+  fullstackopenRepo: FULLSTACKOPEN_REPO,
   banner: {
     home: HOME_BANNER,
     ghFollowers: GithubFollowersBanner,
