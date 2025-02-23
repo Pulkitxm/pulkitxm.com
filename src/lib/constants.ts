@@ -8,3 +8,5 @@ export const RESEND_USER_MAIL_SENDER_MAIL = process.env.RESEND_USER_MAIL_SENDER_
 export const BASE_URL = process.env.BASE_URL ?? "";
 export const BLOG_URL = process.env.BLOG_URL ?? "";
 export const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+export const GITHUB_ID = process.env.GITHUB_ID ?? "";
+export const GITHUB_SECRET = process.env.GITHUB_SECRET ?? "";

@@ -68,6 +68,9 @@ jobs:
           echo "BLOG_URL=${{ secrets.BLOG_URL }}" >> .env
           echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
           echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
+          echo "GITHUB_SECRET=${{ secrets.ENV_GITHUB_SECRET }}" >> .env
+          echo "GITHUB_ID=${{ secrets.ENV_GITHUB_ID }}" >> .env
 
           command -v pnpm >/dev/null || npm install -g pnpm
           command -v pm2 >/dev/null || npm install -g pm2

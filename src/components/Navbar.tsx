@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { Menu, PenToolIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -125,6 +125,15 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
             </PreFetchUrl>
           </li>
         ))}
+        <li>
+          <Link
+            href="/guestbook"
+            className="flex items-center rounded bg-white px-3 py-1 text-sm text-black transition-colors hover:bg-gray-200"
+          >
+            Sign my Guestbook
+            <PenToolIcon className="ml-1 inline h-4 w-4" />
+          </Link>
+        </li>
       </ul>
       <div className="relative h-0.5 w-full">
         <div className="absolute h-full bg-white transition-all duration-300 ease-in-out" style={underlineStyle} />

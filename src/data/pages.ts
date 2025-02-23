@@ -5,11 +5,6 @@ export const NAVIGATION_LINKS = [
     key: "h"
   },
   {
-    title: "About",
-    url: "/about",
-    key: "a"
-  },
-  {
     title: "Experience",
     url: "/exp",
     key: "e"
