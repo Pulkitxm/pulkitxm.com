@@ -171,6 +171,14 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
               {link.title}
             </Link>
           ))}
+          <Link
+            href="/guestbook"
+            onClick={() => setIsOpen(false)}
+            className="mt-2 flex items-center px-4 py-2 text-sm text-white transition-colors hover:bg-gray-800"
+          >
+            Sign my Guestbook
+            <PenToolIcon className="ml-1 h-4 w-4" />
+          </Link>
         </div>
       </SheetContent>
     </Sheet>
