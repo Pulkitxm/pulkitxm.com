@@ -10,3 +10,5 @@ export const BLOG_URL = process.env.BLOG_URL ?? "";
 export const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
 export const GITHUB_ID = process.env.GITHUB_ID ?? "";
 export const GITHUB_SECRET = process.env.GITHUB_SECRET ?? "";
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID ?? "";
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET ?? "";

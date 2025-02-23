@@ -1,20 +1,34 @@
-"use client";
-
-import { LogOut, Mail } from "lucide-react";
 import Image from "next/image";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { FormEvent, useState } from "react";
-import { FaGithub } from "react-icons/fa";
 
-export default function GuestbookPage() {
-  const { data: session } = useSession();
-  const [message, setMessage] = useState("");
+import { getGuestBookMessages } from "@/actions/guestbook";
+import { auth } from "@/lib/authOptions";
+import { GuestbookMessage, validateGuestbookMessageArray } from "@/types/guestbook";
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: Add your submission logic here
-    setMessage("");
-  };
+import LogoutButton, { LoginButtons } from "./AuthButton";
+import GuestBook from "./GuestBook";
+
+export default async function GuestbookPage() {
+  const session = await auth();
+
+  const messages: GuestbookMessage[] = [];
+
+  try {
+    const dbMessages = await getGuestBookMessages();
+
+    if (dbMessages.status === "error")
+      return (
+        <div>
+          <h1 className="text-3xl font-bold text-white sm:text-4xl">Error loading messages</h1>
+          <p className="mt-3 text-lg text-gray-400">Please try again later.</p>
+        </div>
+      );
+
+    const validateMessages = validateGuestbookMessageArray.safeParse(dbMessages.data);
+    if (validateMessages.success) messages.push(...validateMessages.data);
+    else console.error(validateMessages.error.issues);
+  } catch (e) {
+    console.error(e);
+  }
 
   return (
     <main className="py-12">
@@ -22,7 +36,7 @@ export default function GuestbookPage() {
         {session ? (
           <>
             <h1 className="text-3xl font-bold text-white sm:text-4xl">
-              Hi {session.user?.name?.split(" ")[0]}, thanks for stopping by!
+              Hi {session.user?.name}, thanks for stopping by!
             </h1>
             <p className="mt-3 text-lg text-gray-400">Feel free to leave a message in my guestbook.</p>
           </>
@@ -37,23 +51,10 @@ export default function GuestbookPage() {
       </div>
 
       {!session ? (
-        <div className="mt-8 flex items-center space-x-4">
-          <button
-            onClick={() => signIn("github")}
-            className="flex w-full items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700"
-          >
-            <FaGithub className="mr-2 h-5 w-5" />
-            Sign in with GitHub
-          </button>
-
-          <button
-            onClick={() => signIn("google")}
-            className="flex w-full items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700"
-          >
-            <Mail className="mr-2 h-5 w-5" />
-            Sign in with Google
-          </button>
-        </div>
+        <>
+          <LoginButtons />
+          <GuestBook messages={messages} user={null} />
+        </>
       ) : (
         <div className="mt-8">
           <div className="mb-6 flex items-center justify-between">
@@ -67,40 +68,10 @@ export default function GuestbookPage() {
               />
               <span className="font-medium text-white">{session.user?.name}</span>
             </div>
-            <button
-              onClick={() => signOut()}
-              className="flex items-center text-sm text-gray-400 transition-colors hover:text-white"
-            >
-              <LogOut className="mr-1 h-4 w-4" />
-              Sign out
-            </button>
+            <LogoutButton />
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="message" className="sr-only">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={3}
-                className="max-h-[300px] min-h-[150px] w-full rounded-md border-zinc-700 bg-zinc-800 p-3 text-white placeholder-gray-400 outline-none focus:border-green-500 focus:ring-green-500"
-                placeholder="Write a message..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
-              >
-                Sign Guestbook
-              </button>
-            </div>
-          </form>
+          <GuestBook messages={messages} user={session.user} />
 
           <div className="mt-8 space-y-6">{/* Guestbook entries would go here */}</div>
         </div>

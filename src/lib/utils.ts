@@ -49,3 +49,7 @@ export function getSlug(str: string): string {
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 }
+
+export function compareTimes(a: Date, b: Date): boolean {
+  return a.getTime() === b.getTime();
+}
