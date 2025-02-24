@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Loader2, Send, AlertCircle, Edit2 } from "lucide-react";
 import Image from "next/image";
-import { type Dispatch, type FormEvent, type SetStateAction, useState } from "react";
+import { type Dispatch, type FormEvent, type SetStateAction, useMemo, useState } from "react";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
 import { addMessageToGuestBook, deleteMessageFromGuestBook, editMessageInGuestBook } from "@/actions/guestbook";
@@ -369,6 +369,18 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
     }
   }
 
+  const guestbookMessagesInOrder = useMemo(
+    () =>
+      guestbookMessages
+        .filter((msg) => msg.user.id === userId)
+        .concat(
+          guestbookMessages
+            .filter((msg) => msg.user.id !== userId)
+            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        ),
+    [guestbookMessages, userId]
+  );
+
   return (
     <>
       {user && (
@@ -394,22 +406,20 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
         <h2 className="mb-6 text-3xl font-bold">Messages</h2>
         <div className="space-y-6">
           {guestbookMessages.length > 0 ? (
-            guestbookMessages
-              .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-              .map((message) => (
-                <MessageCard
-                  key={message.id}
-                  message={message}
-                  user={user}
-                  isSubmitting={isSubmitting}
-                  editingMessageId={editingMessageId}
-                  editMessage={editMessage}
-                  setEditingMessageId={setEditingMessageId}
-                  setEditMessage={setEditMessage}
-                  setMessages={setGuestbookMessages}
-                  handleEdit={handleEdit}
-                />
-              ))
+            guestbookMessagesInOrder.map((message) => (
+              <MessageCard
+                key={message.id}
+                message={message}
+                user={user}
+                isSubmitting={isSubmitting}
+                editingMessageId={editingMessageId}
+                editMessage={editMessage}
+                setEditingMessageId={setEditingMessageId}
+                setEditMessage={setEditMessage}
+                setMessages={setGuestbookMessages}
+                handleEdit={handleEdit}
+              />
+            ))
           ) : (
             <p className="text-muted-foreground">Be the first to leave a message in my guestbook!</p>
           )}
