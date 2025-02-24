@@ -16,7 +16,10 @@ function CollabInviteLayerCX() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setShow(true), 1000);
+    setTimeout(() => {
+      const hideCta = localStorage.getItem("hideCta") == "true";
+      setShow(!hideCta);
+    }, 1000);
   }, []);
 
   return (
@@ -42,7 +45,7 @@ function CollabInviteLayerCX() {
                 setShow(false);
               }}
             >
-              Would you like to collab with me or hire me?
+              Would you like to collab with me or hire me?{show ? "true" : "false"}
             </PreFetchUrl>
             <div className="flex flex-1 justify-end">
               <motion.button
