@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
+import profile from "@/data/profile";
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from "@/lib/constants";
 
 import { prisma } from "./prisma";
@@ -12,6 +13,7 @@ declare module "next-auth" {
       email: string;
       name?: string | null;
       image?: string | null;
+      isAdmin: boolean;
     };
   }
 }
@@ -73,7 +75,13 @@ const { auth, handlers, signIn, signOut, unstable_update } = NextAuth({
           session.user.id = dbUser.id.toString();
         }
       }
-      return session;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          isAdmin: session.user.email === profile.email
+        }
+      };
     },
     async jwt({ token, user }) {
       if (user) {

@@ -118,13 +118,19 @@ export async function deleteMessageFromGuestBook(id: number): Promise<RES_TYPE<n
 
     const msg = await prisma.message.update({
       where: {
-        id,
-        userId
+        id
       },
       data: {
         isDeleted: true
+      },
+      select: {
+        userId: true
       }
     });
+
+    if (msg.userId !== userId && !session.user.isAdmin) {
+      return { status: "error", error: ERRORS.UNAUTHORIZED };
+    }
 
     if (!msg) {
       return { status: "error", error: ERRORS.MESSAGE_NOT_FOUND };

@@ -150,13 +150,17 @@ function MessageActions({
   user,
   setEditingMessageId,
   setEditMessage,
-  setMessages
+  setMessages,
+  canUserEdit,
+  canUserDelete
 }: {
   message: GuestbookMessage;
   user: Session["user"] | null;
   setEditingMessageId: Dispatch<SetStateAction<number | null>>;
   setEditMessage: Dispatch<SetStateAction<string>>;
   setMessages: Dispatch<SetStateAction<GuestbookMessage[]>>;
+  canUserEdit: boolean;
+  canUserDelete: boolean;
 }) {
   const [loading, setLoading] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -176,19 +180,23 @@ function MessageActions({
 
   return (
     <div className="flex gap-2">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => {
-          setEditingMessageId(message.id);
-          setEditMessage(message.content);
-        }}
-      >
-        <Edit2 className="h-4 w-4" />
-      </Button>
-      <Button variant="ghost" size="icon" onClick={() => setIsDeleteDialogOpen(true)}>
-        <RiDeleteBin5Fill className="h-4 w-4" />
-      </Button>
+      {canUserEdit && (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => {
+            setEditingMessageId(message.id);
+            setEditMessage(message.content);
+          }}
+        >
+          <Edit2 className="h-4 w-4" />
+        </Button>
+      )}
+      {canUserDelete && (
+        <Button variant="ghost" size="icon" onClick={() => setIsDeleteDialogOpen(true)}>
+          <RiDeleteBin5Fill className="h-4 w-4" />
+        </Button>
+      )}
 
       <DeleteConfirmDialog
         isOpen={isDeleteDialogOpen}
@@ -250,15 +258,15 @@ function MessageCard({
               </p>
             </div>
           </div>
-          {isCurrentUser && (
-            <MessageActions
-              message={message}
-              user={user}
-              setEditingMessageId={setEditingMessageId}
-              setEditMessage={setEditMessage}
-              setMessages={setMessages}
-            />
-          )}
+          <MessageActions
+            message={message}
+            user={user}
+            setEditingMessageId={setEditingMessageId}
+            setEditMessage={setEditMessage}
+            setMessages={setMessages}
+            canUserEdit={isCurrentUser}
+            canUserDelete={isCurrentUser || (user?.isAdmin ?? false)}
+          />
         </div>
         {editingMessageId === message.id ? (
           <div className="space-y-2">
