@@ -13,6 +13,7 @@ model User {
   email     String    @unique
   image     String?
   loginJson Json
+  isBlocked Boolean   @default(false)
   messages  Message[]
 
   @@unique([id])

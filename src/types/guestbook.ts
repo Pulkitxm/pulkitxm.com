@@ -5,10 +5,12 @@ export const validateGuestbookMessage = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   id: z.number(),
+  isDeleted: z.boolean(),
   user: z.object({
     name: z.string(),
     image: z.string(),
-    id: z.number()
+    id: z.number(),
+    isBlocked: z.boolean()
   })
 });
 export type GuestbookMessage = z.infer<typeof validateGuestbookMessage>;

@@ -4,9 +4,15 @@ import { motion } from "framer-motion";
 import { Loader2, Send, AlertCircle, Edit2 } from "lucide-react";
 import Image from "next/image";
 import { type Dispatch, type FormEvent, type SetStateAction, useMemo, useState } from "react";
+import { FaBan } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
-import { addMessageToGuestBook, deleteMessageFromGuestBook, editMessageInGuestBook } from "@/actions/guestbook";
+import {
+  addMessageToGuestBook,
+  deleteMessageFromGuestBook,
+  editMessageInGuestBook,
+  toggleBlockGuestBookUser
+} from "@/actions/guestbook";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,6 +22,144 @@ import { compareTimes } from "@/lib/utils";
 
 import type { GuestbookMessage } from "@/types/guestbook";
 import type { Session } from "next-auth";
+
+type DialogType = "delete" | "block" | null;
+
+type DialogState = {
+  type: DialogType;
+  messageId: number | null;
+  userName?: string;
+};
+
+function ActionDialog({
+  isOpen,
+  onClose,
+  onConfirm,
+  loading,
+  type,
+  userName
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  loading: boolean;
+  type: DialogType;
+  userName?: string;
+}) {
+  if (!isOpen) return null;
+
+  const dialogContent = {
+    delete: {
+      title: "Confirm Delete",
+      message: "Are you sure you want to delete this message? This action cannot be undone.",
+      icon: RiDeleteBin5Fill,
+      buttonText: "Delete"
+    },
+    block: {
+      title: "Block User",
+      message: `Are you sure you want to block ${userName}? This user will no longer be able to interact with the guestbook.`,
+      icon: FaBan,
+      buttonText: "Block User"
+    }
+  }[type as "delete" | "block"];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ type: "spring", duration: 0.3 }}
+        className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800 dark:text-white"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h3 className="mb-4 text-lg font-semibold">{dialogContent.title}</h3>
+        <p className="mb-6 text-gray-600 dark:text-gray-300">{dialogContent.message}</p>
+        <div className="flex justify-end gap-3">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            disabled={loading}
+            className="hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="destructive"
+            onClick={onConfirm}
+            disabled={loading}
+            className="bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
+          >
+            {loading ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <dialogContent.icon className="mr-2 h-4 w-4" />
+            )}
+            {dialogContent.buttonText}
+          </Button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function MessageActions({
+  message,
+  user,
+  setEditingMessageId,
+  setEditMessage,
+  canUserEdit,
+  canUserDelete,
+  canUserBlock,
+  setDialogState
+}: {
+  message: GuestbookMessage;
+  user: Session["user"] | null;
+  setEditingMessageId: Dispatch<SetStateAction<number | null>>;
+  setEditMessage: Dispatch<SetStateAction<string>>;
+  setMessages: Dispatch<SetStateAction<GuestbookMessage[]>>;
+  canUserEdit: boolean;
+  canUserDelete: boolean;
+  canUserBlock: boolean;
+  setDialogState: Dispatch<SetStateAction<DialogState>>;
+}) {
+  return (
+    <div className="flex gap-2">
+      {canUserEdit && (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => {
+            setEditingMessageId(message.id);
+            setEditMessage(message.content);
+          }}
+        >
+          <Edit2 className="h-4 w-4" />
+        </Button>
+      )}
+      {canUserDelete && (
+        <Button variant="ghost" size="icon" onClick={() => setDialogState({ type: "delete", messageId: message.id })}>
+          <RiDeleteBin5Fill className="h-4 w-4" />
+        </Button>
+      )}
+      {canUserBlock && user && message.user.id !== Number(user.id) && (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setDialogState({ type: "block", messageId: message.id, userName: message.user.name })}
+        >
+          <FaBan className="h-4 w-4" />
+        </Button>
+      )}
+    </div>
+  );
+}
 
 function MessageForm({
   message,
@@ -69,9 +213,7 @@ function MessageForm({
 function UserAvatar({ image, name, isCurrentUser }: { image: string; name: string; isCurrentUser: boolean }) {
   return (
     <div
-      className={`h-10 w-10 overflow-hidden rounded-full border-4 ${
-        isCurrentUser ? "border-emerald-400" : "border-transparent"
-      }`}
+      className={`h-10 w-10 overflow-hidden rounded-full border-4 ${isCurrentUser ? "border-emerald-400" : "border-transparent"}`}
     >
       <Image
         src={image || "/placeholder.svg"}
@@ -79,130 +221,6 @@ function UserAvatar({ image, name, isCurrentUser }: { image: string; name: strin
         width={40}
         height={40}
         className="h-full w-full rounded-full"
-      />
-    </div>
-  );
-}
-
-function DeleteConfirmDialog({
-  isOpen,
-  onClose,
-  onConfirm,
-  loading
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  onConfirm: () => void;
-  loading: boolean;
-}) {
-  if (!isOpen) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
-        transition={{ type: "spring", duration: 0.3 }}
-        className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800 dark:text-white"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h3 className="mb-4 text-lg font-semibold">Confirm Delete</h3>
-        <p className="mb-6 text-gray-600 dark:text-gray-300">
-          Are you sure you want to delete this message? This action cannot be undone.
-        </p>
-        <div className="flex justify-end gap-3">
-          <Button
-            variant="outline"
-            onClick={onClose}
-            disabled={loading}
-            className="hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={onConfirm}
-            disabled={loading}
-            className="bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
-          >
-            {loading ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <RiDeleteBin5Fill className="mr-2 h-4 w-4" />
-            )}
-            Delete
-          </Button>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-function MessageActions({
-  message,
-  user,
-  setEditingMessageId,
-  setEditMessage,
-  setMessages,
-  canUserEdit,
-  canUserDelete
-}: {
-  message: GuestbookMessage;
-  user: Session["user"] | null;
-  setEditingMessageId: Dispatch<SetStateAction<number | null>>;
-  setEditMessage: Dispatch<SetStateAction<string>>;
-  setMessages: Dispatch<SetStateAction<GuestbookMessage[]>>;
-  canUserEdit: boolean;
-  canUserDelete: boolean;
-}) {
-  const [loading, setLoading] = useState(false);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-
-  const handleDelete = async () => {
-    try {
-      setLoading(true);
-      if (user) {
-        await deleteMessageFromGuestBook(message.id);
-        setMessages((prev) => prev.filter((msg) => msg.id !== message.id));
-      }
-    } finally {
-      setLoading(false);
-      setIsDeleteDialogOpen(false);
-    }
-  };
-
-  return (
-    <div className="flex gap-2">
-      {canUserEdit && (
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => {
-            setEditingMessageId(message.id);
-            setEditMessage(message.content);
-          }}
-        >
-          <Edit2 className="h-4 w-4" />
-        </Button>
-      )}
-      {canUserDelete && (
-        <Button variant="ghost" size="icon" onClick={() => setIsDeleteDialogOpen(true)}>
-          <RiDeleteBin5Fill className="h-4 w-4" />
-        </Button>
-      )}
-
-      <DeleteConfirmDialog
-        isOpen={isDeleteDialogOpen}
-        onClose={() => setIsDeleteDialogOpen(false)}
-        onConfirm={handleDelete}
-        loading={loading}
       />
     </div>
   );
@@ -217,7 +235,8 @@ function MessageCard({
   setEditingMessageId,
   setEditMessage,
   setMessages,
-  handleEdit
+  handleEdit,
+  setDialogState
 }: {
   message: GuestbookMessage;
   user: Session["user"] | null;
@@ -228,6 +247,7 @@ function MessageCard({
   setEditMessage: Dispatch<SetStateAction<string>>;
   setMessages: Dispatch<SetStateAction<GuestbookMessage[]>>;
   handleEdit: (messageId: number) => Promise<void>;
+  setDialogState: Dispatch<SetStateAction<DialogState>>;
 }) {
   const isCurrentUser = message.user.id === Number.parseInt(user?.id ?? "");
 
@@ -266,6 +286,8 @@ function MessageCard({
             setMessages={setMessages}
             canUserEdit={isCurrentUser}
             canUserDelete={isCurrentUser || (user?.isAdmin ?? false)}
+            canUserBlock={user?.isAdmin ?? false}
+            setDialogState={setDialogState}
           />
         </div>
         {editingMessageId === message.id ? (
@@ -306,6 +328,7 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
   const [error, setError] = useState("");
   const [editingMessageId, setEditingMessageId] = useState<number | null>(null);
   const [editMessage, setEditMessage] = useState("");
+  const [dialogState, setDialogState] = useState<DialogState>({ type: null, messageId: null });
 
   const userName = user?.name as string;
   const userImage = user?.image as string;
@@ -329,7 +352,8 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
         user: {
           id: userId,
           image: userImage,
-          name: userName
+          name: userName,
+          isBlocked: false
         }
       });
 
@@ -366,6 +390,30 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
       if (err) setError("An unexpected error occurred");
     } finally {
       setIsSubmitting(false);
+    }
+  }
+
+  async function handleDialogAction() {
+    if (!dialogState.messageId) return;
+
+    setIsSubmitting(true);
+    try {
+      if (dialogState.type === "delete") {
+        const res = await deleteMessageFromGuestBook(dialogState.messageId);
+        if (res.status === "success") {
+          setGuestbookMessages((prev) => prev.filter((msg) => msg.id !== dialogState.messageId));
+        }
+      } else if (dialogState.type === "block") {
+        const res = await toggleBlockGuestBookUser(dialogState.messageId);
+        if (res.status === "success") {
+          if (res.data.isBlocked) setGuestbookMessages((prev) => prev.filter((msg) => msg.user.id !== res.data.userId));
+        }
+      }
+    } catch (err) {
+      if (err) setError("An unexpected error occurred");
+    } finally {
+      setIsSubmitting(false);
+      setDialogState({ type: null, messageId: null });
     }
   }
 
@@ -418,6 +466,7 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
                 setEditMessage={setEditMessage}
                 setMessages={setGuestbookMessages}
                 handleEdit={handleEdit}
+                setDialogState={setDialogState}
               />
             ))
           ) : (
@@ -425,6 +474,15 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
           )}
         </div>
       </>
+
+      <ActionDialog
+        isOpen={dialogState.type !== null}
+        onClose={() => setDialogState({ type: null, messageId: null })}
+        onConfirm={handleDialogAction}
+        loading={isSubmitting}
+        type={dialogState.type}
+        userName={dialogState.userName}
+      />
     </>
   );
 }

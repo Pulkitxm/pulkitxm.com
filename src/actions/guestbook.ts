@@ -13,18 +13,23 @@ export async function getGuestBookMessages(): Promise<RES_TYPE<GuestbookMessage[
       select: {
         id: true,
         content: true,
+        isDeleted: true,
         user: {
           select: {
             name: true,
             image: true,
-            id: true
+            id: true,
+            isBlocked: true
           }
         },
         createdAt: true,
         updatedAt: true
       },
       where: {
-        isDeleted: false
+        isDeleted: false,
+        user: {
+          isBlocked: false
+        }
       },
       orderBy: {
         createdAt: "desc"
@@ -44,7 +49,7 @@ export async function getGuestBookMessages(): Promise<RES_TYPE<GuestbookMessage[
 }
 
 export async function addMessageToGuestBook(
-  message: Omit<GuestbookMessage, "id" | "createdAt" | "updatedAt">
+  message: Omit<GuestbookMessage, "id" | "createdAt" | "updatedAt" | "isDeleted">
 ): Promise<RES_TYPE<GuestbookMessage>> {
   try {
     const session = await auth();
@@ -61,6 +66,22 @@ export async function addMessageToGuestBook(
 
     if (message.content.length > MAX_LENGTH_MESSAGE_GUESTBOOK) {
       return { status: "error", error: ERRORS.MAX_LENGTH_MESSAGE_GUESTBOOK };
+    }
+
+    const dbUser = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        isBlocked: true
+      }
+    });
+
+    if (!dbUser) {
+      return { status: "error", error: ERRORS.USER_NOT_FOUND };
+    }
+    if (dbUser?.isBlocked) {
+      return { status: "error", error: ERRORS.USER_BLOCKED };
     }
 
     const dbMessages = await prisma.message.findMany({
@@ -89,7 +110,8 @@ export async function addMessageToGuestBook(
       select: {
         id: true,
         createdAt: true,
-        updatedAt: true
+        updatedAt: true,
+        isDeleted: true
       }
     });
     return {
@@ -98,7 +120,8 @@ export async function addMessageToGuestBook(
         ...message,
         id: res.id,
         createdAt: res.createdAt,
-        updatedAt: res.updatedAt
+        updatedAt: res.updatedAt,
+        isDeleted: res.isDeleted
       }
     };
   } catch (error) {
@@ -157,6 +180,22 @@ export async function editMessageInGuestBook(id: number, content: string): Promi
 
     const userId = Number.parseInt(session.user.id as string);
 
+    const dbUser = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        isBlocked: true
+      }
+    });
+
+    if (!dbUser) {
+      return { status: "error", error: ERRORS.USER_NOT_FOUND };
+    }
+    if (dbUser?.isBlocked) {
+      return { status: "error", error: ERRORS.USER_BLOCKED };
+    }
+
     const msg = await prisma.message.update({
       where: {
         id,
@@ -178,5 +217,66 @@ export async function editMessageInGuestBook(id: number, content: string): Promi
   } catch (error) {
     console.error("Error editing message in guestbook:", error);
     return { status: "error", error: ERRORS.FAILED_TO_UPDATE_MESSAGE };
+  }
+}
+
+export async function toggleBlockGuestBookUser(messageId: number): Promise<
+  RES_TYPE<{
+    userId: number;
+    isBlocked: boolean;
+  }>
+> {
+  try {
+    const session = await auth();
+
+    if (!session) {
+      return { status: "error", error: ERRORS.UNAUTHORIZED };
+    }
+
+    if (!session.user.isAdmin) {
+      return { status: "error", error: ERRORS.UNAUTHORIZED };
+    }
+
+    const message = await prisma.message.findUnique({
+      where: { id: messageId },
+      select: {
+        userId: true,
+        user: {
+          select: {
+            isBlocked: true
+          }
+        }
+      }
+    });
+    if (!message) {
+      return { status: "error", error: ERRORS.MESSAGE_NOT_FOUND };
+    }
+
+    const userId = message.userId;
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        isBlocked: !message.user.isBlocked
+      },
+      select: {
+        isBlocked: true
+      }
+    });
+
+    if (!updatedUser) {
+      return { status: "error", error: ERRORS.USER_NOT_FOUND };
+    }
+
+    return {
+      status: "success",
+      data: {
+        userId,
+        isBlocked: updatedUser.isBlocked
+      }
+    };
+  } catch (error) {
+    console.error("Error blocking user in guestbook:", error);
+    return { status: "error", error: ERRORS.FAILED_TO_BLOCK_USER };
   }
 }

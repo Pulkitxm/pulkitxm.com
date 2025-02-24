@@ -68,20 +68,23 @@ const { auth, handlers, signIn, signOut, unstable_update } = NextAuth({
     async session({ session }) {
       if (session.user) {
         const dbUser = await prisma.user.findUnique({
-          where: { email: session.user.email }
+          where: { email: session.user.email! },
+          select: {
+            id: true,
+            isBlocked: true
+          }
         });
 
         if (dbUser) {
           session.user.id = dbUser.id.toString();
+          session.user.isAdmin = session.user.email === profile.email;
+
+          if (dbUser.isBlocked) {
+            throw new Error("User is blocked");
+          }
         }
       }
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          isAdmin: session.user.email === profile.email
-        }
-      };
+      return session;
     },
     async jwt({ token, user }) {
       if (user) {
@@ -91,7 +94,6 @@ const { auth, handlers, signIn, signOut, unstable_update } = NextAuth({
     }
   },
   session: {
-    strategy: "jwt",
     maxAge: 15 * 60 // 15 minutes
   }
 });
