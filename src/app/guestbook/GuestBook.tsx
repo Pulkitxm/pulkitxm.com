@@ -10,12 +10,12 @@ import { addMessageToGuestBook, deleteMessageFromGuestBook, editMessageInGuestBo
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { MAX_LENGTH_MESSAGE_GUESTBOOK, MAX_NUMBER_MESSAGE_GUESTBOOK_PER_USER } from "@/lib/config";
+import { ERRORS } from "@/lib/error";
 import { compareTimes } from "@/lib/utils";
 
 import type { GuestbookMessage } from "@/types/guestbook";
 import type { Session } from "next-auth";
-
-const MAX_LENGTH = 500;
 
 function MessageForm({
   message,
@@ -30,7 +30,7 @@ function MessageForm({
   error: string;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 }) {
-  const charactersLeft = MAX_LENGTH - message.length;
+  const charactersLeft = MAX_LENGTH_MESSAGE_GUESTBOOK - message.length;
   const isOverLimit = charactersLeft < 0;
 
   return (
@@ -43,7 +43,7 @@ function MessageForm({
           placeholder="Write a message..."
           className="min-h-[100px]"
           disabled={isSubmitting}
-          maxLength={MAX_LENGTH}
+          maxLength={MAX_LENGTH_MESSAGE_GUESTBOOK}
           required
         />
         <div className="absolute bottom-2 right-2 text-sm text-muted-foreground">
@@ -266,7 +266,7 @@ function MessageCard({
               value={editMessage}
               onChange={(e) => setEditMessage(e.target.value)}
               className="min-h-[100px]"
-              maxLength={MAX_LENGTH}
+              maxLength={MAX_LENGTH_MESSAGE_GUESTBOOK}
             />
             <div className="flex justify-end gap-2">
               <Button
@@ -309,6 +309,13 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
     setError("");
 
     try {
+      const userMessages = guestbookMessages.filter((msg) => msg.user.id === userId);
+
+      if (userMessages.length >= MAX_NUMBER_MESSAGE_GUESTBOOK_PER_USER) {
+        setError(ERRORS.MAX_NUMBER_MESSAGE_GUESTBOOK_PER_USER);
+        return;
+      }
+
       const res = await addMessageToGuestBook({
         content: message.trim(),
         user: {
