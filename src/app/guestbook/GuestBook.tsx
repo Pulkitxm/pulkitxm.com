@@ -451,7 +451,37 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
       <hr className="my-8" />
 
       <>
-        <h2 className="mb-6 text-3xl font-bold">Messages</h2>
+        <div className="flex gap-2">
+          <h2 className="mb-6 text-3xl font-bold">Messages</h2>
+          <div className="flex">
+            {guestbookMessagesInOrder.length > 0 &&
+              [...guestbookMessagesInOrder]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 10)
+                .map((guest, index) => (
+                  <Image
+                    key={guest.id}
+                    src={guest.user.image}
+                    alt={guest.user.name}
+                    width={40}
+                    height={40}
+                    className="relative h-10 w-10 rounded-full border-2 border-white dark:border-gray-800"
+                    style={{
+                      marginLeft: index > 0 ? "-13px" : "0",
+                      zIndex: 10 - index
+                    }}
+                  />
+                ))}
+            {guestbookMessagesInOrder.length > 10 && (
+              <div
+                className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-sm font-medium dark:bg-gray-700"
+                style={{ marginLeft: "-15px", zIndex: 0 }}
+              >
+                +{guestbookMessagesInOrder.length - 10}
+              </div>
+            )}
+          </div>
+        </div>
         <div className="space-y-6">
           {guestbookMessages.length > 0 ? (
             guestbookMessagesInOrder.map((message) => (
