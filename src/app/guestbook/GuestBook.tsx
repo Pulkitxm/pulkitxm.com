@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Loader2, Send, AlertCircle, Edit2 } from "lucide-react";
 import Image from "next/image";
-import { type Dispatch, type FormEvent, type SetStateAction, useMemo, useState } from "react";
+import { type Dispatch, type FormEvent, type SetStateAction, useEffect, useMemo, useState } from "react";
 import { FaBan } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
@@ -321,6 +321,63 @@ function MessageCard({
   );
 }
 
+function UserImages({ guestbookMessagesInOrder }: { guestbookMessagesInOrder: GuestbookMessage[] }) {
+  const [imagesToShow, setImagesToShow] = useState(10);
+
+  const randomizeArray = useMemo(
+    () => [...guestbookMessagesInOrder].sort(() => Math.random() - 0.5),
+    [guestbookMessagesInOrder]
+  );
+
+  useEffect(() => {
+    const updateImageCount = () => {
+      if (window.innerWidth < 640) {
+        setImagesToShow(3);
+      } else if (window.innerWidth < 768) {
+        setImagesToShow(5);
+      } else if (window.innerWidth < 1024) {
+        setImagesToShow(7);
+      } else {
+        setImagesToShow(10);
+      }
+    };
+
+    updateImageCount();
+
+    window.addEventListener("resize", updateImageCount);
+
+    return () => window.removeEventListener("resize", updateImageCount);
+  }, []);
+
+  return (
+    <div className="flex">
+      {randomizeArray.length > 0 &&
+        randomizeArray.slice(0, imagesToShow).map((guest, index) => (
+          <Image
+            key={guest.id}
+            src={guest.user.image}
+            alt={guest.user.name}
+            width={40}
+            height={40}
+            className="relative h-8 w-8 rounded-full border-2 border-white dark:border-gray-800 sm:h-9 sm:w-9 md:h-10 md:w-10"
+            style={{
+              marginLeft: index > 0 ? "-13px" : "0",
+              zIndex: 10 - index
+            }}
+          />
+        ))}
+      {guestbookMessagesInOrder.length > imagesToShow && (
+        <div
+          className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200 sm:h-9 sm:w-9 md:h-10 md:w-10"
+          style={{ marginLeft: "-13px", zIndex: 0 }}
+        >
+          <span className="text-xs sm:text-sm">+{guestbookMessagesInOrder.length - imagesToShow}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function GuestForm({ messages, user }: { messages: GuestbookMessage[]; user: Session["user"] | null }) {
   const [message, setMessage] = useState("");
   const [guestbookMessages, setGuestbookMessages] = useState<GuestbookMessage[]>(messages);
@@ -453,34 +510,7 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
       <>
         <div className="flex gap-2">
           <h2 className="mb-6 text-3xl font-bold">Messages</h2>
-          <div className="flex">
-            {guestbookMessagesInOrder.length > 0 &&
-              [...guestbookMessagesInOrder]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 10)
-                .map((guest, index) => (
-                  <Image
-                    key={guest.id}
-                    src={guest.user.image}
-                    alt={guest.user.name}
-                    width={40}
-                    height={40}
-                    className="relative h-10 w-10 rounded-full border-2 border-white dark:border-gray-800"
-                    style={{
-                      marginLeft: index > 0 ? "-13px" : "0",
-                      zIndex: 10 - index
-                    }}
-                  />
-                ))}
-            {guestbookMessagesInOrder.length > 10 && (
-              <div
-                className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-sm font-medium dark:bg-gray-700"
-                style={{ marginLeft: "-15px", zIndex: 0 }}
-              >
-                +{guestbookMessagesInOrder.length - 10}
-              </div>
-            )}
-          </div>
+          <UserImages guestbookMessagesInOrder={guestbookMessagesInOrder} />
         </div>
         <div className="space-y-6">
           {guestbookMessages.length > 0 ? (

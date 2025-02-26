@@ -53,3 +53,6 @@ export function getSlug(str: string): string {
 export function compareTimes(a: Date, b: Date): boolean {
   return a.getTime() === b.getTime();
 }
+
+export const sleep = (time: number, MAX_SLEEP_TIME: number) =>
+  new Promise((resolve) => setTimeout(resolve, Math.min(time, MAX_SLEEP_TIME)));
