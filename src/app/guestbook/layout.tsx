@@ -5,14 +5,14 @@ import { SessionProviderWrapper } from "./SessionProvider";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devpulkit.in"),
+  metadataBase: new URL("https://pulkitxm.com"),
   title: "GuestBook - Pulkit",
   description: "Discover Pulkit's professional journey, roles, achievements, and the skills honed along the way.",
   openGraph: {
     title: "GuestBook - Pulkit",
     description:
       "Explore Pulkit's career highlights, including roles, projects, and key contributions in the tech industry.",
-    url: "https://devpulkit.in/guestbook",
+    url: "https://pulkitxm.com/guestbook",
     type: "website",
     images: [
       {

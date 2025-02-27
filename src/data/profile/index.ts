@@ -16,17 +16,17 @@ const profile: Readonly<Profile> = {
   caption: "Full Stack Developer & Open Source Enthusiast",
   image: assets.myImage,
   githubUserName: "pulkitxm",
-  resumeLink: "http://resume.devpulkit.in",
+  resumeLink: "http://resume.pulkitxm.com",
   calendlyUrl: "https://cal.com/pulkitxm",
-  sourceCodeUrl: "https://github.com/Pulkitxm/devpulkit.in",
+  sourceCodeUrl: "https://github.com/Pulkitxm/pulkitxm.com",
   email: "kpulkit15234@gmail.com",
   links: {
     github: "https://github.com/Pulkitxm",
     linkedin: "https://www.linkedin.com/in/pulkitxm",
     twitter: "https://x.com/devpulkitt",
-    blogPageUrl: "https://blogs.devpulkit.in/",
+    blogPageUrl: "https://blogs.pulkitxm.com/",
     discord: "http://discordapp.com/users/790426084994187304",
-    blogs: "https://blogs.devpulkit.in"
+    blogs: "https://blogs.pulkitxm.com"
   },
   experience,
   projects,

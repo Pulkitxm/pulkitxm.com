@@ -44,7 +44,7 @@ export function UserMailTemplate({ from_name, user_message }: UserMailTemplatePr
             Pulkit
             <br />
             <Link href={BASE_URL} style={link}>
-              devpulkit.in
+              pulkitxm.com
             </Link>
           </Text>
         </Container>

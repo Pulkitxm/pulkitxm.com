@@ -3,33 +3,33 @@ import { Design, DesignItem } from "@/types/profile";
 
 const portfolioDesigns: DesignItem[] = [
   {
-    title: "v5.devpulkit.in",
-    link: "https://v5.devpulkit.in",
-    githubLink: "https://github.com/pulkitxm/devpulkit.in",
+    title: "v5.pulkitxm.com",
+    link: "https://v5.pulkitxm.com",
+    githubLink: "https://github.com/pulkitxm/pulkitxm.com",
     image: assets.designs.portfolio.v5Portfolio
   },
   {
-    title: "v4.devpulkit.in",
-    link: "https://v4.devpulkit.in",
-    githubLink: "https://github.com/pulkitxm/v4.devpulkit.in",
+    title: "v4.pulkitxm.com",
+    link: "https://v4.pulkitxm.com",
+    githubLink: "https://github.com/pulkitxm/v4.pulkitxm.com",
     image: assets.designs.portfolio.v4Portfolio
   },
   {
-    title: "v3.devpulkit.in",
-    link: "https://v3.devpulkit.in",
-    githubLink: "https://github.com/pulkitxm/v3.devpulkit.in",
+    title: "v3.pulkitxm.com",
+    link: "https://v3.pulkitxm.com",
+    githubLink: "https://github.com/pulkitxm/v3.pulkitxm.com",
     image: assets.designs.portfolio.v3Portfolio
   },
   {
-    title: "v2.devpulkit.in",
-    link: "https://v2.devpulkit.in",
-    githubLink: "https://github.com/pulkitxm/v2.devpulkit.in",
+    title: "v2.pulkitxm.com",
+    link: "https://v2.pulkitxm.com",
+    githubLink: "https://github.com/pulkitxm/v2.pulkitxm.com",
     image: assets.designs.portfolio.v2Portfolio
   },
   {
-    title: "v1.devpulkit.in",
-    link: "https://v1.devpulkit.in",
-    githubLink: "https://github.com/pulkitxm/v1.devpulkit.in",
+    title: "v1.pulkitxm.com",
+    link: "https://v1.pulkitxm.com",
+    githubLink: "https://github.com/pulkitxm/v1.pulkitxm.com",
     image: assets.designs.portfolio.v1Portfolio
   }
 ];

@@ -11,7 +11,7 @@ const projectsWithSlug: Omit<Project, "slug">[] = [
   },
   {
     name: "Image Tweaker",
-    url: "https://image-tweaker.devpulkit.in/",
+    url: "https://image-tweaker.pulkitxm.com/",
     image: assets.projects.imageTweakerProject,
     tagline: "dynamic url based image editor"
   },

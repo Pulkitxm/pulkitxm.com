@@ -9,7 +9,7 @@ import FloatingCTA from "@/components/ui/floating-cta";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devpulkit.in"),
+  metadataBase: new URL("https://pulkitxm.com"),
   title: {
     default: "Pulkit - Developer",
     template: "%s | Pulkit - Developer"
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pulkit - Developer",
     description: "Explore Pulkit's portfolio, projects, and insights into web development.",
-    url: "https://devpulkit.in",
+    url: "https://pulkitxm.com",
     type: "website",
     images: [
       {

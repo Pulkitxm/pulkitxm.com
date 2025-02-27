@@ -3,14 +3,14 @@ import assets from "@/assets";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devpulkit.in"),
+  metadataBase: new URL("https://pulkitxm.com"),
   title: "Experience - Pulkit",
   description: "Discover Pulkit's professional journey, roles, achievements, and the skills honed along the way.",
   openGraph: {
     title: "Experience - Pulkit",
     description:
       "Explore Pulkit's career highlights, including roles, projects, and key contributions in the tech industry.",
-    url: "https://devpulkit.in/experience",
+    url: "https://pulkitxm.com/experience",
     type: "website",
     images: [
       {
