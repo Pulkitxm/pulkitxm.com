@@ -1,5 +1,5 @@
 {
-  "name": "@pulkitxm/devpulkit.in",
+  "name": "@pulkitxm/pulkitxm.com",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,8 @@
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,mjs,js,jsx,md,mdx,css,yaml,yml}\"",
     "check": "prettier --check \"**/*.{ts,tsx,mjs,js,jsx,md,mdx,css,yaml,yml}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@octokit/rest": "^21.0.2",

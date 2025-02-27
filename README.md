@@ -1,18 +1,20 @@
-# devpulkit.in
+# pulkitxm.com
 
 This repository hosts a modern web application built with Next.js, initialized using create-next-app. The project primarily utilizes TypeScript, ensuring robust type-checking and a seamless developer experience.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Method 1: Using Docker (Recommended)](#method-1-using-docker-recommended)
-- [Method 2: Traditional Setup](#method-2-traditional-setup)
-- [Usage](#usage)
-- [Scripts](#scripts)
-- [Project Structure](#project-structure)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
+- [pulkitxm.com](#pulkitxmcom)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Method 1: Using Docker (Recommended)](#method-1-using-docker-recommended)
+    - [Method 2: Traditional Setup](#method-2-traditional-setup)
+  - [Usage](#usage)
+  - [Scripts](#scripts)
+  - [Project Structure](#project-structure)
+  - [Deployment](#deployment)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Installation
 
@@ -21,7 +23,7 @@ Choose one of the following installation methods:
 ### Method 1: Using Docker (Recommended)
 
 ```bash
-docker run -p 3000:3000 ghcr.io/pulkitxm/devpulkit.in:latest
+docker run -p 3000:3000 ghcr.io/pulkitxm/pulkitxm.com:latest
 ```
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
@@ -31,8 +33,8 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser to see 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Pulkitxm/devpulkit.in.git
-   cd devpulkit.in
+   git clone https://github.com/Pulkitxm/pulkitxm.com.git
+   cd pulkitxm.com
    ```
 
 2. Install the dependencies:
