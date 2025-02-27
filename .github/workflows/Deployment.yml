@@ -19,18 +19,21 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy and Restart
         env:
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           SERVER_USER: ${{ secrets.USERNAME }}
           SERVER_IP: ${{ secrets.HOST }}
           PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
           PM2_PROCESS_NAME: ${{ secrets.PM2_PROCESS_NAME }}
         run: |
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}@${{ secrets.HOST }}" << 'ENDSSH'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'ENDSSH'
           set -e  # Exit on any error
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -58,22 +61,21 @@ jobs:
           rm -f .env
 
           echo "Setting up environment variables"
-
-            echo "CONTRIBUTION_GRAPH_SECRET=${{ secrets.CONTRIBUTION_GRAPH_SECRET }}" >> .env
-            echo "REPO_NAME=${{ secrets.REPO_NAME }}" >> .env
-            echo "RESEND_API=${{ secrets.RESEND_API }}" >> .env
-            echo "RESEND_TO_EMAIL=${{ secrets.RESEND_TO_EMAIL }}" >> .env
-            echo "RESEND_FROM_EMAIL=${{ secrets.RESEND_FROM_EMAIL }}" >> .env
-            echo "RESEND_USER_MAIL_SENDER_MAIL=${{ secrets.RESEND_USER_MAIL_SENDER_MAIL }}" >> .env
-            echo "BLOG_URL=${{ secrets.BLOG_URL }}" >> .env
-            echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
-            echo "NEXTAUTH_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
-            echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
-            echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
-            echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
-            echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
-            echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-            echo "AUTH_TRUST_HOST=true" >> .env
+          echo "CONTRIBUTION_GRAPH_SECRET=${{ secrets.CONTRIBUTION_GRAPH_SECRET }}" >> .env
+          echo "REPO_NAME=${{ secrets.REPO_NAME }}" >> .env
+          echo "RESEND_API=${{ secrets.RESEND_API }}" >> .env
+          echo "RESEND_TO_EMAIL=${{ secrets.RESEND_TO_EMAIL }}" >> .env
+          echo "RESEND_FROM_EMAIL=${{ secrets.RESEND_FROM_EMAIL }}" >> .env
+          echo "RESEND_USER_MAIL_SENDER_MAIL=${{ secrets.RESEND_USER_MAIL_SENDER_MAIL }}" >> .env
+          echo "BLOG_URL=${{ secrets.BLOG_URL }}" >> .env
+          echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+          echo "NEXTAUTH_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
+          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "AUTH_TRUST_HOST=true" >> .env
 
           command -v pnpm >/dev/null || npm install -g pnpm
           command -v pm2 >/dev/null || npm install -g pm2
@@ -92,3 +94,4 @@ jobs:
             exit 1
           fi
           ENDSSH
+          rm -rf ~/.ssh/id_rsa

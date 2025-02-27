@@ -1,9 +1,9 @@
-import { ExternalLink } from "lucide-react";
-import Link from "next/link";
+import { LiaLinkSolid } from "react-icons/lia";
 
 import profile from "@/data/profile";
 
 import { LinkComponent } from "../AboutCx";
+import { PreFetchUrl } from "../PreFetchUrl";
 
 export default function Aboutme() {
   return (
@@ -23,13 +23,13 @@ export default function Aboutme() {
           I&apos;m working remotely with exciting technologies and always looking to learn more.
         </p>
 
-        <Link
+        <PreFetchUrl
           href="/about"
-          className="mt-2 inline-flex items-center font-medium text-cyan-400 transition-colors hover:text-cyan-300"
+          className="mt-2 inline-flex items-center font-medium text-cyan-400 transition-colors hover:text-cyan-300 hover:underline"
         >
           Read more about my journey
-          <ExternalLink className="ml-2 h-5 w-5" />
-        </Link>
+          <LiaLinkSolid className="h-5 w-5" />
+        </PreFetchUrl>
       </div>
     </section>
   );
