@@ -27,6 +27,7 @@ export default async function Header() {
               <ImageDialog
                 src={profile.image}
                 className="rounded-full object-cover"
+                bg="#2d852d"
                 rounded
                 small
                 size={{

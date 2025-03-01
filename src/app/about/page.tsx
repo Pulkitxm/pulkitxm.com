@@ -26,7 +26,7 @@ export default function About() {
       </Section>
 
       <Section>
-        Then I entered the horrible world of engineering, I took and admission in a decent college. That&apos;s when I
+        Then I entered the horrible world of engineering, I took admission in a decent college. That&apos;s when I
         started exploring how to get into tech. I saw people on YouTube shouting
         <HighlightComponent>Do DSA</HighlightComponent>, so like many others, I started with that. I bought the
         <LinkComponent href="https://www.apnacollege.in/">Alpha course from Apna College</LinkComponent> and spent 2-3

@@ -10,7 +10,8 @@ export function ImageDialog({
   size,
   small,
   alt,
-  priority
+  priority,
+  bg
 }: {
   src: StaticImageData;
   className?: string;
@@ -22,6 +23,7 @@ export function ImageDialog({
   };
   alt: string;
   priority?: boolean;
+  bg?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -52,7 +54,13 @@ export function ImageDialog({
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className="h-full w-full overflow-hidden">
+      <button
+        onClick={() => setIsOpen(true)}
+        className="h-full w-full overflow-hidden"
+        style={{
+          backgroundColor: bg
+        }}
+      >
         <Image
           src={image}
           width={size.width}
@@ -78,6 +86,9 @@ export function ImageDialog({
         <div
           className={`relative z-10 transform overflow-hidden bg-black transition-all duration-300 ${small ? "max-h-[400px] max-w-sm" : "max-h-[80vh] max-w-4xl"} ${isClosing ? "opacity-0" : "opacity-100"} ${rounded ? "rounded-full" : "rounded-lg"} `}
           onClick={(e) => e.stopPropagation()}
+          style={{
+            backgroundColor: bg
+          }}
         >
           <div className="relative">
             <Image
