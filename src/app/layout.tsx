@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 
 import assets from "@/assets";
 import Navbar from "@/components/Navbar";
+import RedirectPopup from "@/components/RedirectPopup";
 import ScrollToTopButton from "@/components/ScrollTopTop";
 import FloatingCTA from "@/components/ui/floating-cta";
 
@@ -55,6 +56,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <ScrollToTopButton />
+          <RedirectPopup />
         </div>
       </body>
     </html>
