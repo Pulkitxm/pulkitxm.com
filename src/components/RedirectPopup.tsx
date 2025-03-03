@@ -21,18 +21,10 @@ export default function RedirectPopup() {
 
     if (fromRedirect || isPreviousDomain) {
       setIsVisible(true);
-
-      const timer = setTimeout(() => {
-        setIsVisible(false);
-      }, 12000);
-
-      return () => clearTimeout(timer);
     }
   }, []);
 
-  const closePopup = () => {
-    setIsVisible(false);
-  };
+  const closePopup = () => setIsVisible(false);
 
   return (
     <AnimatePresence>
