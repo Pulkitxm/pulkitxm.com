@@ -74,15 +74,16 @@ export default async function GhFollowers() {
             rel="noopener noreferrer"
             className="group flex flex-col items-center rounded-lg bg-zinc-900/50 p-4 transition hover:bg-zinc-800/50"
           >
-            <ImageComponent
-              src={follower.picUrl || "/placeholder.svg"}
-              alt={`${follower.username}'s profile`}
-              width={150}
-              height={150}
-              objectFit="cover"
-              className="grayscale transition duration-300 group-hover:grayscale-0"
-              containerClassName="relative size-24 overflow-hidden rounded-full sm:size-28"
-            />
+            <div className="relative size-24 overflow-hidden rounded-full sm:size-28">
+              <ImageComponent
+                src={follower.picUrl || "/placeholder.svg"}
+                alt={`${follower.username}'s profile`}
+                width={112}
+                height={112}
+                priority={index < 8}
+                className="object-cover grayscale transition duration-300 group-hover:grayscale-0"
+              />
+            </div>
 
             <div className="mt-3 flex w-full flex-wrap items-center justify-center gap-0.5">
               <FaGithub className="h-4 w-4 group-hover:text-green-400" />

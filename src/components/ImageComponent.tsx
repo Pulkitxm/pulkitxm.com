@@ -18,6 +18,7 @@ interface ImageComponentProps {
   priority?: boolean;
   quality?: number;
   sizes?: string;
+  fill?: boolean;
 }
 
 export function ImageComponent({

@@ -4,11 +4,20 @@ import profile from "@/data/profile";
 
 import { LinkComponent } from "../AboutCx";
 import { PreFetchUrl } from "../PreFetchUrl";
+import YouTubeEmbed from "../YoutubeEmbed";
 
 export default function Aboutme() {
   return (
     <section className="mb-6 mt-12 rounded-xl">
       <h2 className="mb-3 text-3xl font-bold tracking-tight text-white">About me</h2>
+
+      <div className="mb-6 mt-4">
+        <YouTubeEmbed
+          videoId="tmITb7u662M"
+          title="My Podcast with Harkirat Singh"
+          className="my-4 h-[200px] w-full sm:h-[400px]"
+        />
+      </div>
 
       <div className="space-y-4">
         <p className="leading-relaxed text-slate-200">

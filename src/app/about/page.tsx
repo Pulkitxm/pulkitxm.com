@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import assets from "@/assets";
 import { HighlightComponent, LinkComponent, Section } from "@/components/AboutCx";
+import YoutubeEmbed from "@/components/YoutubeEmbed";
 import profile from "@/data/profile";
 
 export default function About() {
@@ -11,6 +12,7 @@ export default function About() {
       <header className="mb-10">
         <h1 className="text-4xl font-bold">About Me</h1>
       </header>
+
       <Section>
         Hi, I am Pulkit from India 🇮🇳. I love building stuff, and all my projects are hosted on
         <LinkComponent href={"https://github.com/" + profile.githubUserName}>GitHub</LinkComponent>. I began my journey
@@ -115,23 +117,17 @@ export default function About() {
         and he loved my projects and profile so much that he followed me instantly during the class. He also praised me
         in another class. Here are the recordings of both instances
         <div className="flex flex-col gap-y-3">
-          <iframe
-            className="my-4 h-[200px] w-full rounded-md border-2 sm:h-[400px]"
-            src="https://www.youtube-nocookie.com/embed/MqDhWAgNlpU?si=V6v_NIralNbJnhvq&amp;"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
+          <YoutubeEmbed
+            videoId="MqDhWAgNlpU"
+            title="Cohort's Class in which I got the referral"
+            className="my-4 h-[200px] w-full sm:h-[400px]"
           />
-          <iframe
-            className="my-4 h-[200px] w-full rounded-md border-2 sm:h-[400px]"
-            src="https://www.youtube-nocookie.com/embed/5E8LWWN_wPw?si=rakIHJwy5RfGP687"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
+        </div>
+        <div className="flex flex-col gap-y-3">
+          <YoutubeEmbed
+            videoId="tmITb7u662M"
+            title="My Podcast with Harkirat Singh"
+            className="my-4 h-[200px] w-full sm:h-[400px]"
           />
         </div>
       </Section>
