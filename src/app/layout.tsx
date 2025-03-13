@@ -1,5 +1,6 @@
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
+import NextTopLoader from "nextjs-toploader";
 
 import assets from "@/assets";
 import Navbar from "@/components/Navbar";
@@ -52,6 +53,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="light">
       <body className={`${GeistSans.className} dark min-h-screen`}>
         <FloatingCTA />
+        <NextTopLoader
+          color="#00d72d"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+        />
         <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
           <Navbar />
           {children}

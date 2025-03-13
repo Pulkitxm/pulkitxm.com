@@ -2,27 +2,17 @@ import Image from "next/image";
 
 import { getGuestBookMessages } from "@/actions/guestbook";
 import { auth } from "@/lib/authOptions";
-import { sleep } from "@/lib/utils";
 import { GuestbookMessage, validateGuestbookMessageArray } from "@/types/guestbook";
 
 import LogoutButton, { LoginButtons } from "./AuthButton";
 import GuestBook from "./GuestBook";
 
-const MAX_SLEEP_TIME = 2000;
-
 export default async function GuestbookPage() {
-  const START_TIME = new Date().getTime();
-
   const session = await auth();
-
   const messages: GuestbookMessage[] = [];
 
   try {
     const dbMessages = await getGuestBookMessages();
-
-    const END_TIME = new Date().getTime();
-    await sleep(MAX_SLEEP_TIME, MAX_SLEEP_TIME - (END_TIME - START_TIME));
-
     if (dbMessages.status === "error")
       return (
         <div>
@@ -35,8 +25,6 @@ export default async function GuestbookPage() {
     if (validateMessages.success) messages.push(...validateMessages.data);
     else console.error(validateMessages.error.issues);
   } catch (e) {
-    const END_TIME = new Date().getTime();
-    await sleep(MAX_SLEEP_TIME, MAX_SLEEP_TIME - (END_TIME - START_TIME));
     console.error(e);
   }
 
