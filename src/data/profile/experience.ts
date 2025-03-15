@@ -1,10 +1,13 @@
 import assets from "@/assets";
+import CrowdVolt from "@/components/ExperienceDetails/CrowdVolt";
 import DatawavelabsExperience from "@/components/ExperienceDetails/Datawavelabs";
 import GeeksForGeeks from "@/components/ExperienceDetails/GeeksForGeeks";
 import { getSlug } from "@/lib/utils";
 import { Experience } from "@/types/profile";
 
-const experienceWithoutSlug: Omit<Experience, "slug">[] = [
+const experienceWithoutSlug: (Omit<Experience, "slug"> & {
+  slug?: Experience["slug"];
+})[] = [
   {
     companyName: "CrowdVolt (YC W24)",
     position: "Software Engineer",
@@ -14,8 +17,10 @@ const experienceWithoutSlug: Omit<Experience, "slug">[] = [
     type: "remote",
     url: "https://www.crowdvolt.com",
     showOnHome: true,
-    desc: "I have started working at Crowdvolt as a Software Engineer. I am responsible for maintaining the web application, implementing new features, and improving the existing codebase. Excited to work with the team and learn new things.",
-    logo: assets.proffessionalThings.crowdvolt.logo
+    desc: "Worked at CrowdVolt as a Software Engineer, responsible for maintaining the web application, implementing new features, and improving the existing codebase. Grateful for the experience and the opportunity to learn and grow with the team.",
+    expDetails: CrowdVolt,
+    logo: assets.proffessionalThings.crowdVolt.logo,
+    slug: "crowdvolt"
   },
   {
     companyName: "DatawaveLabs",
@@ -56,5 +61,5 @@ const experienceWithoutSlug: Omit<Experience, "slug">[] = [
 
 export const experience: Experience[] = experienceWithoutSlug.map((exp) => ({
   ...exp,
-  slug: getSlug(exp.companyName)
+  slug: exp.slug || getSlug(exp.companyName)
 }));

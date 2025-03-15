@@ -1,5 +1,4 @@
 import { StaticImageData } from "next/image";
-import { ReactElement } from "react";
 
 export type Experience = {
   companyName: string;
@@ -12,7 +11,7 @@ export type Experience = {
   slug: string;
   showOnHome?: boolean;
   desc: string;
-  expDetails?: () => Promise<JSX.Element> | ReactElement;
+  expDetails?: ({ exp }: { exp: Experience }) => JSX.Element | Promise<JSX.Element>;
   logo: StaticImageData;
 };
 

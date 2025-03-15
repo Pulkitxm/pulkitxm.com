@@ -5,19 +5,20 @@ import Link from "next/link";
 import assets from "@/assets";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Experience } from "@/types/profile";
 
-export default function DatawavelabsExperience() {
+export default function DatawavelabsExperience({ exp }: { exp: Experience }) {
   return (
     <div>
       <h1 className="mb-4 text-lg font-bold text-primary md:text-xl lg:text-2xl">
-        <span className="underline">{datwaveLabsExp.position}</span>@
+        <span className="underline">{exp.position}</span>@
         <Link
-          href={datwaveLabsExp.url}
+          href={exp.url}
           className="hover:text-primary-dark transition-colors duration-200 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {datwaveLabsExp.companyName}
+          {exp.companyName}
         </Link>
       </h1>
 
@@ -30,7 +31,7 @@ export default function DatawavelabsExperience() {
 
         <div className="mb-8 overflow-hidden rounded-lg shadow-lg">
           <Image
-            src={datwaveLabsExp.image}
+            src={assets.proffessionalThings.datawavelabs.datawaveDashboard}
             width={1200}
             height={800}
             alt="DatawaveLabs"
@@ -84,14 +85,19 @@ export default function DatawavelabsExperience() {
         <CardHeader>
           <CardTitle className="flex items-center text-xl">
             Relieving Letter
-            <Link href={datwaveLabsExp.docLink} target="_blank" rel="noopener noreferrer" aria-label="Open document">
+            <Link
+              href={assets.proffessionalThings.datawavelabs.datawaveRelievingLetter}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open document"
+            >
               <ExternalLink className="ml-2 h-5 w-5" />
             </Link>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <iframe
-            src={datwaveLabsExp.docLink}
+            src={assets.proffessionalThings.datawavelabs.datawaveRelievingLetter}
             title="Relieving Letter"
             className="h-60 w-full rounded-md border-0 lg:h-96"
           />
@@ -102,14 +108,6 @@ export default function DatawavelabsExperience() {
 }
 
 const datwaveLabsExp = {
-  companyName: "DatawaveLabs",
-  position: "Full Stack Engineer",
-  startDate: new Date("2024-04-01"),
-  endDate: new Date("2024-09-30"),
-  location: "India",
-  type: "remote",
-  url: "https://datawavelabs.io/",
-  docLink: assets.proffessionalThings.datawavelabs.datawaveRelievingLetter,
   work: [
     {
       title: "Authentication and Authorization Systems",
@@ -190,6 +188,5 @@ const datwaveLabsExp = {
     "GCP SDK",
     "Postman",
     "Event Source Polyfill"
-  ],
-  image: assets.proffessionalThings.datawavelabs.datawaveDashboard
+  ]
 } as const;

@@ -68,6 +68,7 @@ import NPLT_CSIR_2 from "@/assets/events/nptl-csir/img_2.webp";
 import NPLT_CSIR_3 from "@/assets/events/nptl-csir/img_3.webp";
 import NPLT_CSIR_4 from "@/assets/events/nptl-csir/img_4.webp";
 import CROWDVOLT_LOGO from "@/assets/exp/crowdvolt/logo.webp";
+import CROWDVOLT_WEBSITE from "@/assets/exp/crowdvolt/website.webp";
 import DATAWAVELABS_DASHBOARD from "@/assets/exp/datawavelabs/datawaveDashboard.webp";
 import DATAWAVELABS_LOGO from "@/assets/exp/datawavelabs/logo.webp";
 import GEEKSFORGEEKS_IMAGE5 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-0.webp";
@@ -145,8 +146,10 @@ const assets = {
         GEEKSFORGEEKS_IMAGE12
       ]
     },
-    crowdvolt: {
-      logo: CROWDVOLT_LOGO
+    crowdVolt: {
+      logo: CROWDVOLT_LOGO,
+      crowdVoltOfferLetter: "/crowdvolt-offer-letter.pdf",
+      website: CROWDVOLT_WEBSITE
     }
   },
   designs: {
