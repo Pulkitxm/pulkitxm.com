@@ -92,6 +92,7 @@ import V4_PORTFOLIO from "@/assets/portfolio/v4Portfolio.webp";
 import V5_PORTFOLIO from "@/assets/portfolio/v5Portfolio.webp";
 import DEPLOYIT_PROJECT from "@/assets/projects/deployitProject.webp";
 import DEVIATORS_DESIGN from "@/assets/projects/deviators.webp";
+import DEVOLYMPUS_DEVIATORS_DESIGN from "@/assets/projects/devolympus.webp";
 import EOS_ARCHITECTURE_DESIGN from "@/assets/projects/eosArchitecture.webp";
 import IMAGE_TWEAKER_PROJECT from "@/assets/projects/imageTweakerProject.webp";
 import USEE_FORM_PROJECT from "@/assets/projects/useeFormProject.webp";
@@ -150,6 +151,7 @@ const assets = {
   },
   designs: {
     deviators: DEVIATORS_DESIGN,
+    devolympusDeviators: DEVOLYMPUS_DEVIATORS_DESIGN,
     eosArchitecture: EOS_ARCHITECTURE_DESIGN,
     portfolio: {
       v5Portfolio: V5_PORTFOLIO,

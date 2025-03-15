@@ -42,6 +42,12 @@ export const webDesigns: DesignItem[] = [
     image: assets.designs.deviators
   },
   {
+    title: "Devolympus Hackathon",
+    link: "https://devolympus.deviatorsdce.tech/",
+    githubLink: "https://github.com/deviatorsclub/DevOlympus",
+    image: assets.designs.devolympusDeviators
+  },
+  {
     title: "eosdesignstudio.in",
     link: "https://www.eosdesignstudio.in",
     githubLink: "https://github.com/Pulkitxm/freelance/tree/eos-architecture",
