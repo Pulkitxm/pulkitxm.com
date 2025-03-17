@@ -3,7 +3,7 @@ import CrowdVolt from "@/components/ExperienceDetails/CrowdVolt";
 import DatawavelabsExperience from "@/components/ExperienceDetails/Datawavelabs";
 import GeeksForGeeks from "@/components/ExperienceDetails/GeeksForGeeks";
 import { getSlug } from "@/lib/utils";
-import { Experience } from "@/types/profile";
+import { Experience, EXP_TYPE } from "@/types/profile";
 
 const experienceWithoutSlug: (Omit<Experience, "slug"> & {
   slug?: Experience["slug"];
@@ -20,7 +20,8 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     desc: "Worked at CrowdVolt as a Software Engineer, responsible for maintaining the web application, implementing new features, and improving the existing codebase. Grateful for the experience and the opportunity to learn and grow with the team.",
     expDetails: CrowdVolt,
     logo: assets.proffessionalThings.crowdVolt.logo,
-    slug: "crowdvolt"
+    slug: "crowdvolt",
+    expType: EXP_TYPE.JOB
   },
   {
     companyName: "DatawaveLabs",
@@ -33,7 +34,8 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     showOnHome: true,
     desc: "My work at Datawave Labs involved developing and integrating various systems and tools to enhance the platform's functionality and user experience. I focused on authentication, cloud integration, infrastructure automation, real-time notifications, client and server development, and DevOps practices.",
     expDetails: DatawavelabsExperience,
-    logo: assets.proffessionalThings.datawavelabs.logo
+    logo: assets.proffessionalThings.datawavelabs.logo,
+    expType: EXP_TYPE.INTERNSHIP
   },
   {
     companyName: "GeeksforGeeks",
@@ -45,9 +47,13 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     url: "https://geeksforgeeks.org",
     desc: "I am responsible for managing and organizing various events, workshops, and contests for the college students. I also help students in their technical and non-technical queries and guide them in their career path.",
     expDetails: GeeksForGeeks,
-    logo: assets.proffessionalThings.geeksforgeeks.logo
+    logo: assets.proffessionalThings.geeksforgeeks.logo,
+    expType: EXP_TYPE.VOLUNTEER
   }
 ].sort((a, b) => {
+  if (a.expType === EXP_TYPE.VOLUNTEER && b.expType !== EXP_TYPE.VOLUNTEER) return 1;
+  if (a.expType !== EXP_TYPE.VOLUNTEER && b.expType === EXP_TYPE.VOLUNTEER) return -1;
+
   if (!a.endDate && b.endDate) return -1;
   if (!b.endDate && a.endDate) return 1;
   if (!a.endDate && !b.endDate) {

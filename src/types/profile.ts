@@ -1,4 +1,12 @@
+/* eslint-disable no-unused-vars */
+
 import { StaticImageData } from "next/image";
+
+export enum EXP_TYPE {
+  JOB = "job",
+  INTERNSHIP = "internship",
+  VOLUNTEER = "volunteer"
+}
 
 export type Experience = {
   companyName: string;
@@ -13,6 +21,7 @@ export type Experience = {
   desc: string;
   expDetails?: ({ exp }: { exp: Experience }) => JSX.Element | Promise<JSX.Element>;
   logo: StaticImageData;
+  expType: EXP_TYPE;
 };
 
 export type Project = {
