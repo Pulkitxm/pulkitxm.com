@@ -116,7 +116,10 @@ export async function getGithubData({
         from,
         to
       }),
-      getPrsData({ from, to, select: true })
+      getPrsData({
+        all: true,
+        select: true
+      })
     ]);
 
     if (resPrs.status === "error") {
@@ -212,6 +215,8 @@ export async function getPrsData(
       sort: "created",
       order: "desc"
     });
+
+    console.log("Pull Requests:", pullRequests.items.length, query);
 
     return {
       status: "success",
