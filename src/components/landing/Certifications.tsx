@@ -1,5 +1,3 @@
-"use client";
-
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +8,7 @@ import { Certification } from "@/types/profile";
 
 import JumpLink from "../JumpLink";
 
-export default function Certifications() {
+export default async function Certifications() {
   return (
     <section className="mb-12">
       <div>
@@ -58,7 +56,6 @@ function Certificate({ certification }: { certification: Certification }) {
             <Link
               href={certification.issuedBy.url}
               className="underline-offset-4 hover:underline"
-              onClick={(e) => e.stopPropagation()}
               target="_blank"
               rel="noopener noreferrer"
             >

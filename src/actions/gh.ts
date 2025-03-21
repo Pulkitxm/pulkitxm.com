@@ -216,8 +216,6 @@ export async function getPrsData(
       order: "desc"
     });
 
-    console.log("Pull Requests:", pullRequests.items.length, query);
-
     return {
       status: "success",
       data: pullRequests.items.map((pr) => ({

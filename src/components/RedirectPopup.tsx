@@ -13,12 +13,6 @@ export default function RedirectPopup() {
     const urlParams = new URLSearchParams(window.location.search);
     const fromRedirect = urlParams.get("from") === "devpulkit.in";
 
-    console.log({
-      referrer,
-      isPreviousDomain,
-      fromRedirect
-    });
-
     if (fromRedirect || isPreviousDomain) {
       setIsVisible(true);
     }

@@ -1,34 +1,20 @@
-"use client";
+import { getLatestWorkflow } from "@/actions/gh";
+import { formatTimeUpdatedAgo } from "@/lib/utils";
 
-import axios from "axios";
-import { useEffect, useState } from "react";
+export default async function Footer() {
+  const res = await getLatestWorkflow();
 
-import { RES_TYPE } from "@/types/globals";
+  let lastUpdated = new Date();
 
-export default function Footer() {
-  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
-
-  useEffect(() => {
-    axios
-      .get<RES_TYPE<string>>("/api/gh/last-updated")
-      .then((resp) => {
-        const res = resp.data;
-        if (res.status === "error") {
-          setLastUpdated(null);
-        } else {
-          setLastUpdated(res.data);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  if (res.status === "success") {
+    lastUpdated = res.data.timeStamp;
+  }
 
   return (
     <div className="mt-8 border-t border-gray-500 py-3 text-center opacity-70">
       <p>Made with ❤️ by Pulkit</p>
       <p className={`mt-1 text-sm text-gray-300 ${lastUpdated === null ? "opacity-0" : ""}`}>
-        Last updated {lastUpdated}
+        Last updated {formatTimeUpdatedAgo(lastUpdated)}
       </p>
     </div>
   );

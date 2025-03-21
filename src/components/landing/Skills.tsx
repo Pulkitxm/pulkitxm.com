@@ -1,38 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-
-const skillsData = {
-  Languages: ["JavaScript", "TypeScript", "Python", "Java", "SQL"],
-  "Libraries & Frameworks": [
-    "React",
-    "NextJS",
-    "Express",
-    "Fast Api",
-    "HonoJs (Serverless)",
-    "NodeJs",
-    "React Native",
-    "Tailwind CSS",
-    "Bootstrap",
-    "Material UI",
-    "Jest",
-    "Cypress",
-    "React Query",
-    "GraphQL",
-    "Redux",
-    "Recoil"
-  ],
-  "Databases & ORMs": ["MongoDB", "Postgres", "SqlAlchemy", "Redis", "Alembic", "MySQL", "Prisma", "PyScopG2"],
-  "Tools & Platforms": [
-    "GitHub Actions",
-    "Serverless",
-    "ESLint",
-    "AWS S3",
-    "AWS EC2",
-    "AWS CloudFront",
-    "Azure VM",
-    "Docker",
-    "Mapbox"
-  ]
-};
+import profile from "@/data/profile";
 
 export default function Component() {
   return (
@@ -40,13 +7,14 @@ export default function Component() {
       <div className="container pr-4 md:pr-6">
         <h2 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Skills</h2>
         <div className="space-y-4">
-          {Object.entries(skillsData).map(([category, skills]) => (
+          {Object.entries(profile.skills).map(([category, skills]) => (
             <div key={category}>
               <h3 className="mb-2 text-lg font-medium text-muted-foreground">{category}</h3>
               <div className="flex flex-wrap gap-2">
-                {skills.map((skill) => (
+                {skills.map((skill, index) => (
                   <span key={skill} className="text-sm text-foreground">
-                    {skill},
+                    {skill}
+                    {index === skills.length - 1 ? "" : ","}
                   </span>
                 ))}
               </div>
