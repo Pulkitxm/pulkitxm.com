@@ -174,7 +174,7 @@ export default function ContactPage() {
     const transformValue = index * 100;
 
     setSliderStyle({
-      width: "50%", // Each tab takes 50% of the width (2 tabs)
+      width: "50%",
       transform: `translateX(${transformValue}%)`
     });
   }, [Tabs, isSelected]);

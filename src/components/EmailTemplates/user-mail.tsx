@@ -1,7 +1,7 @@
 import { Body, Container, Head, Heading, Html, Link, Preview, Section, Text, Img } from "@react-email/components";
 import * as React from "react";
 
-import { BASE_URL, BLOG_URL } from "@/lib/constants";
+import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 
 interface UserMailTemplateProps {
   from_name: string;
@@ -15,7 +15,7 @@ export function UserMailTemplate({ from_name, user_message }: UserMailTemplatePr
       <Preview>Thank you for your message, {from_name}!</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Img src={BASE_URL + "/icon.png"} alt="Pulkit's Logo" style={logo} />
+          <Img src={NEXT_PUBLIC_API_URL + "/icon.png"} width="64" height="64" alt="Logo" style={logo} />
           <Heading style={h1}>Thank you for reaching out, {from_name}!</Heading>
           <Text style={text}>
             I&apos;ve received your message and I appreciate you taking the time to contact me. Here&apos;s what you
@@ -31,10 +31,10 @@ export function UserMailTemplate({ from_name, user_message }: UserMailTemplatePr
             In the meantime, feel free to check out my latest projects and blog posts on my portfolio.
           </Text>
           <Section style={ctaSection}>
-            <Link href={BASE_URL} style={button}>
+            <Link href={NEXT_PUBLIC_API_URL} style={button}>
               Visit My Portfolio
             </Link>
-            <Link href={BLOG_URL} style={button}>
+            <Link href={"https://blogs.pulkitxm.com"} style={button}>
               Visit My Blog
             </Link>
           </Section>
@@ -43,7 +43,7 @@ export function UserMailTemplate({ from_name, user_message }: UserMailTemplatePr
             <br />
             Pulkit
             <br />
-            <Link href={BASE_URL} style={link}>
+            <Link href={NEXT_PUBLIC_API_URL} style={link}>
               pulkitxm.com
             </Link>
           </Text>

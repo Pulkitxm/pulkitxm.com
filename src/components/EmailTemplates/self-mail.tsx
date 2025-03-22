@@ -1,7 +1,7 @@
 import { Body, Container, Head, Heading, Html, Link, Preview, Section, Text, Img } from "@react-email/components";
 import * as React from "react";
 
-import { BASE_URL } from "@/lib/constants";
+import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 
 interface EmailTemplateProps {
   from_name: string;
@@ -16,7 +16,7 @@ export function SelfMailTemplate({ from_name, message, sender_email }: EmailTemp
       <Preview>New message from {from_name}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Img src={BASE_URL + "/icon.png"} width="64" height="64" alt="Logo" style={logo} />
+          <Img src={NEXT_PUBLIC_API_URL + "/icon.png"} width="64" height="64" alt="Logo" style={logo} />
           <Heading style={heading}>New Contact Form Submission</Heading>
 
           <Section style={section}>
@@ -47,8 +47,8 @@ export function SelfMailTemplate({ from_name, message, sender_email }: EmailTemp
 
           <Text style={footer}>
             This message was sent from the contact form on{" "}
-            <Link href={BASE_URL} style={link}>
-              {BASE_URL.replace("https://", "")}
+            <Link href={NEXT_PUBLIC_API_URL} style={link}>
+              {NEXT_PUBLIC_API_URL.replace("https://", "")}
             </Link>
           </Text>
         </Container>
