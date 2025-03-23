@@ -1,6 +1,5 @@
 import assets from "@/assets";
-
-import { SessionProviderWrapper } from "./SessionProvider";
+import { SessionProviderWrapper } from "@/providers/session";
 
 import type { Metadata } from "next";
 

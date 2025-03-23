@@ -66,6 +66,8 @@ jobs:
           GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
           DATABASE_URL=${{ secrets.DATABASE_URL }}
           AUTH_TRUST_HOST=${{ secrets.AUTH_TRUST_HOST }}
+          NEXT_PUBLIC_POSTHOG_KEY=${{ secrets.NEXT_PUBLIC_POSTHOG_KEY }}
+          NEXT_PUBLIC_POSTHOG_HOST=${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
           EOT
 
           echo "Installing dependencies"

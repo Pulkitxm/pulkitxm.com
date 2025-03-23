@@ -45,6 +45,7 @@
     "next-auth": "5.0.0-beta.25",
     "nextjs-toploader": "^3.7.15",
     "photoswipe": "^5.4.4",
+    "posthog-js": "^1.232.4",
     "prisma": "^6.4.1",
     "qss": "^3.0.0",
     "react": "^18.3.1",
