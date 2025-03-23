@@ -1,32 +1,16 @@
 import assets from "@/assets";
+import { createMetadata } from "@/lib/utils";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://pulkitxm.com"),
-  title: "Contact - Pulkit",
-  description: "Get in touch with Pulkit, a passionate developer and tech enthusiast.",
-  openGraph: {
-    title: "Contact - Pulkit",
-    description: "Reach out to Pulkit to discuss projects, ideas, or opportunities.",
-    url: "https://pulkitxm.com/contact",
-    type: "website",
-    images: [
-      {
-        url: assets.banner.contact.src,
-        width: 1200,
-        height: 630,
-        alt: "Contact Pulkit - Developer"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact - Pulkit",
-    description: "Reach out to Pulkit to discuss projects, ideas, or opportunities.",
-    images: [assets.banner.contact.src]
-  }
-};
+export const metadata: Metadata = createMetadata({
+  title: "Contact",
+  description:
+    "Get in touch with Pulkit. Whether you have questions, feedback, or just want to say hi, feel free to reach out!",
+  image: assets.banner.contact.src,
+  path: "contact",
+  keywords: ["Pulkit", "contact", "web development", "technology", "tutorials", "articles"]
+});
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
   return children;

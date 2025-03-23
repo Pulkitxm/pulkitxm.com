@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
+import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
+
 export default function RedirectPopup() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -115,7 +117,7 @@ export default function RedirectPopup() {
                     delay: 0.6
                   }}
                 >
-                  pulkitxm.com
+                  {NEXT_PUBLIC_API_URL.replace("https://", "").replace("http://", "").replace("www.", "")}
                 </motion.span>
               </motion.div>
 

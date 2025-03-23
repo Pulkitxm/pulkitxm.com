@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 
 import { NAVIGATION_LINKS } from "@/data/pages";
 import profile from "@/data/profile";
+import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 
 type Route = {
   url: string;
@@ -11,7 +12,7 @@ type Route = {
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://pulkitxm.com";
+  const baseUrl = NEXT_PUBLIC_API_URL;
 
   const priorityMap: Record<string, number> = {
     "": 1.0,

@@ -8,42 +8,75 @@ import Navbar from "@/components/Navbar";
 import RedirectPopup from "@/components/RedirectPopup";
 import ScrollToTopButton from "@/components/ScrollTopTop";
 import FloatingCTA from "@/components/ui/floating-cta";
+import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 import { PostHogProvider } from "@/providers/posthog";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pulkitxm.com"),
+  metadataBase: new URL(NEXT_PUBLIC_API_URL),
   title: {
-    default: "Pulkit - Developer",
+    default: "Pulkit | Full-Stack Developer & Tech Enthusiast",
     template: "%s | Pulkit - Developer"
   },
   description:
-    "I'm Pulkit, a technology enthusiast with a passion for exploring the digital landscape. While I'm not diving into code or navigating through APIs, you'll often find me having fun with friends and family. I also enjoy watching TV shows, and I often read tech blogs. Balancing my technical skills with creativity and introspection fuels my journey in both professional and personal endeavors.",
+    "I'm Pulkit, a full-stack developer specializing in modern web technologies. Explore my portfolio featuring React, TypeScript, and API integration projects. Outside coding, I enjoy connecting with friends and staying updated with the latest tech trends.",
+  keywords: [
+    "Pulkit",
+    "web developer",
+    "full-stack developer",
+    "React developer",
+    "TypeScript",
+    "JavaScript",
+    "portfolio",
+    "tech projects"
+  ],
+  authors: [{ name: "Pulkit" }],
+  creator: "Pulkit",
+  publisher: "Pulkit",
   openGraph: {
-    title: "Pulkit - Developer",
-    description: "Explore Pulkit's portfolio, projects, and insights into web development.",
-    url: "https://pulkitxm.com",
+    title: "Pulkit | Full-Stack Developer & Tech Enthusiast",
+    description: "Explore Pulkit's portfolio showcasing innovative web development projects and technical expertise.",
+    url: NEXT_PUBLIC_API_URL,
+    siteName: "Pulkit's Portfolio",
+    locale: "en_US",
     type: "website",
     images: [
       {
         url: assets.banner.home.src,
         width: 1200,
         height: 630,
-        alt: "Pulkit's Portfolio Banner"
+        alt: "Pulkit's Developer Portfolio"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pulkit - Developer",
-    description: "Explore Pulkit's portfolio, projects, and insights into web development.",
+    title: "Pulkit | Full-Stack Developer & Tech Enthusiast",
+    description: "Explore Pulkit's portfolio showcasing innovative web development projects and technical expertise.",
+    creator: "@pulkitxm",
     images: [assets.banner.home.src]
   },
   robots: {
     index: true,
-    follow: true
-  }
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  },
+  alternates: {
+    canonical: NEXT_PUBLIC_API_URL
+  },
+  verification: {
+    // Add your verification tokens if available
+    // google: "your-google-verification-token",
+    // yandex: "your-yandex-verification-token",
+  },
+  category: "technology"
 };
 
 export default function RootLayout({

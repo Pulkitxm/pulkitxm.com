@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/private/"]
     },
-    sitemap: "https://pulkitxm.com/sitemap.xml"
+    sitemap: NEXT_PUBLIC_API_URL + "/sitemap.xml"
   };
 }

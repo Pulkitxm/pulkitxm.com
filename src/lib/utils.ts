@@ -1,6 +1,10 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import { NEXT_PUBLIC_API_URL } from "./constants";
+
+import type { Metadata } from "next";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -52,3 +56,47 @@ export function getSlug(str: string): string {
 export function compareTimes(a: Date, b: Date): boolean {
   return a.getTime() === b.getTime();
 }
+
+type MetadataParams = {
+  title: string;
+  description: string;
+  path: string;
+  image: string;
+  keywords?: string[];
+};
+
+export const createMetadata = ({ title, description, path, image, keywords = [] }: MetadataParams): Metadata => {
+  const url = NEXT_PUBLIC_API_URL + "/" + path;
+
+  return {
+    title,
+    description,
+    keywords,
+    alternates: {
+      canonical: url
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      siteName: "Pulkit's Portfolio",
+      locale: "en_US",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `${title} - Pulkit's Portfolio`
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      creator: "@pulkitxm",
+      images: [image]
+    }
+  };
+};

@@ -1,6 +1,7 @@
 import CONTRIBUTIONS_2023 from "@/assets/about/2023-contributions.webp";
 import CONTRIBUTIONS_2024 from "@/assets/about/2024-contributions.webp";
 import FULLSTACKOPEN_REPO from "@/assets/about/fullstackopen-repo.webp";
+import About_BANNER from "@/assets/banner/about-banner.webp";
 import BLOGS_BANNER from "@/assets/banner/blogs-banner.webp";
 import CONTACT_BANNER from "@/assets/banner/contact-banner.webp";
 import DESIGNS_BANNER from "@/assets/banner/designs-banner.webp";
@@ -108,6 +109,7 @@ const assets = {
   fullstackopenRepo: FULLSTACKOPEN_REPO,
   banner: {
     home: HOME_BANNER,
+    about: About_BANNER,
     ghFollowers: GithubFollowersBanner,
     guestbook: GUESTBOOKBANNER,
     contact: CONTACT_BANNER,
