@@ -1,6 +1,7 @@
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import NextTopLoader from "nextjs-toploader";
+import { Fragment } from "react";
 
 import assets from "@/assets";
 import Navbar from "@/components/Navbar";
@@ -50,10 +51,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isDevMode = process.env.NODE_ENV === "development";
+  const Wrapper = isDevMode ? Fragment : PostHogProvider;
   return (
     <html lang="en" suppressHydrationWarning className="light">
       <body className={`${GeistSans.className} dark min-h-screen`}>
-        <PostHogProvider>
+        <Wrapper>
           <FloatingCTA />
           <NextTopLoader
             color="#00d72d"
@@ -72,7 +75,7 @@ export default function RootLayout({
             <ScrollToTopButton />
             <RedirectPopup />
           </div>
-        </PostHogProvider>
+        </Wrapper>
       </body>
     </html>
   );
