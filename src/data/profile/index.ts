@@ -1,5 +1,6 @@
 import { FaDiscord, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { FaHashnode } from "react-icons/fa6";
+import { RiNpmjsFill } from "react-icons/ri";
 
 import assets from "@/assets";
 import { Profile } from "@/types/profile";
@@ -26,7 +27,8 @@ const profile: Readonly<Profile> = {
     twitter: "https://x.com/devpulkitt",
     blogPageUrl: "https://blogs.pulkitxm.com/",
     discord: "http://discordapp.com/users/790426084994187304",
-    blogs: "https://blogs.pulkitxm.com"
+    blogs: "https://blogs.pulkitxm.com",
+    npm: "https://www.npmjs.com/~pulkitxm"
   },
   experience,
   projects,
@@ -62,6 +64,11 @@ export const links = [
   {
     href: profile.links.blogs,
     icon: FaHashnode,
+    label: "Blogs"
+  },
+  {
+    href: profile.links.npm,
+    icon: RiNpmjsFill,
     label: "Blogs"
   }
 ];

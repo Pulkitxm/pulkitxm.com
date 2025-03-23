@@ -1,5 +1,8 @@
-import { FileText } from "lucide-react";
+"use client";
+
+import { Check, Copy, FileText, Terminal } from "lucide-react";
 import Link from "next/link";
+import { useState, useCallback } from "react";
 
 import assets from "@/assets";
 import { Button } from "@/components/ui/button";
@@ -7,7 +10,15 @@ import profile, { links } from "@/data/profile";
 
 import { ImageDialog } from "./ImageDialog";
 
-export default async function Header() {
+export default function Header() {
+  const [copied, setCopied] = useState<boolean>(false);
+
+  const copyCommand = useCallback(() => {
+    navigator.clipboard.writeText("npx pulkitxm");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, []);
+
   return (
     <>
       <div className="relative">
@@ -15,10 +26,7 @@ export default async function Header() {
           <ImageDialog
             src={assets.hacktoberFest}
             className="w-full rounded-lg object-cover"
-            size={{
-              height: 400,
-              width: 1200
-            }}
+            size={{ height: 400, width: 1200 }}
             alt="Hacktoberfest 2021"
             priority
           />
@@ -30,19 +38,17 @@ export default async function Header() {
                 bg="#2d852d"
                 rounded
                 small
-                size={{
-                  height: 100,
-                  width: 100
-                }}
+                size={{ height: 100, width: 100 }}
                 alt="Profile picture"
               />
             </div>
           </div>
         </div>
       </div>
+
       <div className="mb-5 mt-12 pl-5">
-        <div className="mb-1 flex items-center gap-2">
-          <p className="text-xl font-semibold text-white">{profile.name}</p>{" "}
+        <div className="mb-1 flex flex-wrap items-center gap-2">
+          <p className="text-xl font-semibold text-white">{profile.name}</p>
           <Link
             href={`https://github.com/sponsors/${profile.githubUserName}`}
             target="_blank"
@@ -65,8 +71,10 @@ export default async function Header() {
             Sponsor
           </Link>
         </div>
+
         <p className="text-sm text-gray-300">{profile.caption}</p>
-        <div className="my-2 flex items-center space-x-3">
+
+        <div className="my-3 flex flex-wrap items-center gap-3">
           {links.map(({ href, icon: Icon }, index) => (
             <Link key={index} href={href} target="_blank" aria-label={`Link to ${href}`}>
               <Icon className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
@@ -79,6 +87,22 @@ export default async function Header() {
               Resume
             </Link>
           </Button>
+        </div>
+      </div>
+
+      <div
+        onClick={copyCommand}
+        className="mx-5 mb-6 cursor-pointer rounded border border-green-900 bg-gray-900/50 px-4 py-2 transition-colors hover:bg-gray-800/60"
+      >
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Terminal className="h-4 w-4 text-green-400" />
+            <code className="font-mono text-sm text-green-400">npx pulkitxm</code>
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-gray-400">Try my interactive CLI</span>
+            {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4 text-gray-400" />}
+          </div>
         </div>
       </div>
     </>
