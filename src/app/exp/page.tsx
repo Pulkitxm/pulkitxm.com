@@ -63,7 +63,7 @@ export default function ExperienceTimeline() {
               <CardHeader className="space-y-4">
                 <div className="flex items-start justify-between">
                   <Badge variant="outline" className="border-gray-700 bg-gray-800 text-white">
-                    {exp.type}
+                    {exp.roleType}
                   </Badge>
                   <div className="text-sm text-gray-400">
                     {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
@@ -96,7 +96,7 @@ export default function ExperienceTimeline() {
                 </div>
                 <div className="flex items-center text-sm text-gray-400">
                   <Briefcase className="mr-2 h-4 w-4" />
-                  {exp.type}
+                  {exp.roleType}
                 </div>
                 <div className="w-full rounded-md border p-4">
                   <p className="text-sm text-gray-400">{exp.desc}</p>

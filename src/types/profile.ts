@@ -14,7 +14,7 @@ export type Experience = {
   startDate: Date;
   endDate?: Date;
   location: string;
-  type: string;
+  roleType: string;
   url: string;
   slug: string;
   showOnHome?: boolean;

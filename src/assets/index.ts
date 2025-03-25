@@ -85,6 +85,7 @@ import GEEKSFORGEEKS_IMAGE8 from "@/assets/exp/geeksforgeeks/geekssForGeeksImage
 import GEEKSFORGEEKS_IMAGE12 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-8.webp";
 import GEEKSFORGEEKS_IMAGE4 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-9.webp";
 import GEEKSFORGEEKS_LOGO from "@/assets/exp/geeksforgeeks/logo.webp";
+import NOVEUM_LOGO from "@/assets/exp/noveum/logo.webp";
 import HACKTOBERFEST from "@/assets/hacktoberfest-2024.webp";
 import MY_IMAGE from "@/assets/me.webp";
 import V1_PORTFOLIO from "@/assets/portfolio/v1Portfolio.webp";
@@ -125,6 +126,9 @@ const assets = {
     fullStackOpen: FULL_STACK_OPEN_BADGE
   },
   proffessionalThings: {
+    noveum: {
+      logo: NOVEUM_LOGO
+    },
     datawavelabs: {
       logo: DATAWAVELABS_LOGO,
       datawaveRelievingLetter: "/datawave-relieving-letter.pdf",
