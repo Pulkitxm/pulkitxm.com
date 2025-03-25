@@ -1,14 +1,13 @@
 "use client";
 
 import { Check, Copy, FileText, Terminal } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback } from "react";
 
 import assets from "@/assets";
 import { Button } from "@/components/ui/button";
 import profile, { links } from "@/data/profile";
-
-import { ImageDialog } from "./ImageDialog";
 
 export default function Header() {
   const [copied, setCopied] = useState<boolean>(false);
@@ -23,23 +22,21 @@ export default function Header() {
     <>
       <div className="relative">
         <div className="block">
-          <ImageDialog
+          <Image
             src={assets.hacktoberFest}
             className="w-full rounded-lg object-cover"
-            size={{ height: 400, width: 1200 }}
             alt="Hacktoberfest 2021"
             priority
+            unoptimized
           />
           <div className="absolute -bottom-10">
             <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-background bg-background">
-              <ImageDialog
+              <Image
                 src={profile.image}
                 className="rounded-full object-cover"
-                bg="#2d852d"
-                rounded
-                small
-                size={{ height: 100, width: 100 }}
                 alt="Profile picture"
+                width={96}
+                height={96}
               />
             </div>
           </div>

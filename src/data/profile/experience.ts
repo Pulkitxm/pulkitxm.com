@@ -18,7 +18,6 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     showOnHome: true,
     desc: "Started my career at Noveum.ai as a Software Engineer.",
     logo: assets.proffessionalThings.noveum.logo,
-    slug: "crowdvolt",
     expType: EXP_TYPE.JOB
   },
   {
