@@ -4,9 +4,9 @@ import NextTopLoader from "nextjs-toploader";
 import { Fragment } from "react";
 
 import assets from "@/assets";
+import ChatWidget from "@/components/ChatWidget";
 import Navbar from "@/components/Navbar";
 import RedirectPopup from "@/components/RedirectPopup";
-import ScrollToTopButton from "@/components/ScrollTopTop";
 import FloatingCTA from "@/components/ui/floating-cta";
 import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 import { PostHogProvider } from "@/providers/posthog";
@@ -104,8 +104,8 @@ export default function RootLayout({
           />
           <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
             <Navbar />
+            <ChatWidget />
             {children}
-            <ScrollToTopButton />
             <RedirectPopup />
           </div>
         </Wrapper>

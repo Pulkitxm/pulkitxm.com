@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { parseStringPromise } from "xml2js";
 
 import { NEXT_PUBLIC_API_URL } from "./constants";
 
@@ -100,3 +101,40 @@ export const createMetadata = ({ title, description, path, image, keywords = [] 
     }
   };
 };
+
+export async function getSitemapUrls(): Promise<string[]> {
+  try {
+    const sitemapUrl = `${process.env.NEXT_PUBLIC_API_URL}/sitemap.xml`;
+
+    const response = await fetch(sitemapUrl, {
+      next: { revalidate: 3600 }
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch sitemap: ${response.status}`);
+      return ["/"];
+    }
+
+    const sitemapContent = await response.text();
+    const result = await parseStringPromise(sitemapContent);
+
+    if (result.urlset && result.urlset.url) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return result.urlset.url.map((urlObj: any) => {
+        const fullUrl = urlObj.loc[0];
+
+        try {
+          const url = new URL(fullUrl);
+          return `${process.env.NEXT_PUBLIC_API_URL}${url.pathname}`;
+        } catch (e) {
+          if (e) return `${process.env.NEXT_PUBLIC_API_URL}${fullUrl}`;
+        }
+      });
+    }
+
+    return ["/"];
+  } catch (error) {
+    console.error("Error fetching or parsing sitemap:", error);
+    return ["/"];
+  }
+}
