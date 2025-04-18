@@ -64,10 +64,11 @@ export default function About() {
 
       <Section>
         It was around somewhere same in April 2023 when One of my mentors introduced me to
-        <LinkComponent href="fullstackopen.com">fullstackopen.com</LinkComponent> - a turning point in my journey. This
-        blog-based tutorial taught me great concepts from web to DevOps to testing and app development. I completed this
-        course as well, but it was tough for me to complete this course as this was not some video tutorial but a
-        reading based flow and it sucked at reading at that time. Big shoutout to one of the course creators,
+        <LinkComponent href="https://www.fullstackopen.com">fullstackopen.com</LinkComponent> - a turning point in my
+        journey. This blog-based tutorial taught me great concepts from web to DevOps to testing and app development. I
+        completed this course as well, but it was tough for me to complete this course as this was not some video
+        tutorial but a reading based flow and it sucked at reading at that time. Big shoutout to one of the course
+        creators,
         <LinkComponent href="https://github.com/mluukkai">Matti Luukkainen</LinkComponent>. You can find all my
         assignment solutions, certificates, and university credits at
         <LinkComponent href="https://github.com/Pulkitxm/fullstackopen">

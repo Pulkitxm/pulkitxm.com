@@ -4,6 +4,12 @@ import { Project } from "@/types/profile";
 
 const projectsWithSlug: Omit<Project, "slug">[] = [
   {
+    name: "DevOlympus Hackathon Website",
+    image: assets.designs.devolympusDeviators,
+    url: "https://devolympus.deviatorsdce.tech/",
+    tagline: "Hackathon website for Deviators DCE"
+  },
+  {
     name: "Deployit",
     image: assets.projects.deployitProject,
     url: "https://deployit.live/",
@@ -20,12 +26,6 @@ const projectsWithSlug: Omit<Project, "slug">[] = [
     url: "https://github.com/Pulkitxm/vidwave",
     image: assets.projects.vidWaveProject,
     tagline: "A simple video streaming server"
-  },
-  {
-    name: "useeForm React hook(npm library)",
-    url: "https://www.npmjs.com/package/useeform",
-    image: assets.projects.useeFormProject,
-    tagline: "A simple react hook for form handling"
   }
 ];
 
