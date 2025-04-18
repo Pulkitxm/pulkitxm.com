@@ -1,7 +1,6 @@
 "use client";
 
 import { ExternalLink, Play } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useState, memo } from "react";
 
@@ -30,14 +29,11 @@ export default memo(
               aria-label={`Play ${title}`}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/10" />
-              <Image
+              <img
                 src={thumbnailUrl}
                 alt={`Thumbnail for ${title}`}
-                fill
                 sizes="(min-width: 1024px) 50vw, (min-width: 768px) 70vw, 100vw"
                 className="object-cover transition-transform duration-300 hover:scale-105"
-                quality={80}
-                priority
               />
 
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">

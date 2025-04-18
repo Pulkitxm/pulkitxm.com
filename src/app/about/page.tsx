@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import assets from "@/assets";
@@ -58,7 +57,7 @@ export default function About() {
           }
           target="_blank"
         >
-          <Image src={assets.contributions2023} alt="contributions" className="my-4 rounded-md border-2" />
+          <img src={assets.contributions2023.src} alt="contributions" className="my-4 rounded-md border-2" />
         </Link>
       </Section>
 
@@ -75,7 +74,7 @@ export default function About() {
           github.com/Pulkitxm/fullstackopen
         </LinkComponent>
         <Link href="https://github.com/Pulkitxm/fullstackopen" target="_blank">
-          <Image src={assets.fullstackopenRepo} alt="fullstackopen" className="mx-auto my-4 rounded-md border-2" />
+          <img src={assets.fullstackopenRepo.src} alt="fullstackopen" className="mx-auto my-4 rounded-md border-2" />
         </Link>
       </Section>
 
@@ -105,7 +104,7 @@ export default function About() {
           href="https://github.com/Pulkitxm?tab=overview&from=2024-12-01&to=2024-12-31#:~:text=contributions%20in%202024"
           target="_blank"
         >
-          <Image src={assets.contributions2024} alt="contributions" className="my-4 rounded-md border-2" />
+          <img src={assets.contributions2024.src} alt="contributions" className="my-4 rounded-md border-2" />
         </Link>
       </Section>
 

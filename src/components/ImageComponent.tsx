@@ -1,7 +1,6 @@
 "use client";
 
 import { User2Icon } from "lucide-react";
-import Image from "next/image";
 import { ReactNode, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -16,7 +15,6 @@ interface ImageComponentProps {
   objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
   placeholderIcon?: ReactNode;
   priority?: boolean;
-  quality?: number;
   sizes?: string;
   fill?: boolean;
 }
@@ -31,7 +29,6 @@ export function ImageComponent({
   objectFit = "cover",
   placeholderIcon = <User2Icon className="h-1/5 w-1/5 text-muted-foreground" />,
   priority = false,
-  quality,
   sizes,
   ...props
 }: ImageComponentProps) {
@@ -56,7 +53,7 @@ export function ImageComponent({
       role="img"
       aria-label={alt}
     >
-      <Image
+      <img
         src={src || "/placeholder.svg"}
         alt={alt}
         width={width}
@@ -70,8 +67,6 @@ export function ImageComponent({
         onLoad={() => setStatus("loaded")}
         onError={() => setStatus("error")}
         loading={priority ? "eager" : "lazy"}
-        priority={priority}
-        quality={quality}
         sizes={sizes}
         {...props}
       />

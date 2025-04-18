@@ -1,5 +1,4 @@
 import { CalendarIcon, BriefcaseIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { PreFetchUrl } from "@/components/PreFetchUrl";
@@ -43,8 +42,8 @@ export default async function Experience() {
                 >
                   <div className="flex items-center gap-3">
                     {exp.logo && (
-                      <Image
-                        src={exp.logo || "/placeholder.svg"}
+                      <img
+                        src={exp.logo.src || "/placeholder.svg"}
                         alt={`${exp.companyName} logo`}
                         width={40}
                         height={40}

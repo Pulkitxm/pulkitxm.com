@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import profile from "@/data/profile";
@@ -32,13 +31,12 @@ function Project({ project }: { project: ProjectType }) {
       id={key + "-" + project.slug}
     >
       <div className="w-full flex-grow overflow-hidden rounded-lg brightness-90">
-        <Image
-          src={project.image}
+        <img
+          src={project.image.src}
           className="h-full w-full scale-110 rounded-lg object-contain brightness-90 transition-transform duration-300 group-hover:scale-100"
           width={500}
           height={300}
           alt={project.name}
-          fetchPriority="high"
           loading="eager"
         />
       </div>

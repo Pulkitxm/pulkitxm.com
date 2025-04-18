@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { FC } from "react";
 
 type ChatLauncherButtonProps = {
@@ -22,8 +22,8 @@ export const ChatLauncherButton: FC<ChatLauncherButtonProps> = ({ profileImage, 
       title="Chat with Pukbot"
     >
       <div className="relative">
-        <Image
-          src={profileImage || "/placeholder.svg"}
+        <img
+          src={profileImage.src || "/placeholder.svg"}
           alt="Pukbot"
           width={44}
           height={44}

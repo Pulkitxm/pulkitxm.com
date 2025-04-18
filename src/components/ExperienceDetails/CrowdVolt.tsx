@@ -1,5 +1,4 @@
 import { ExternalLink } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 import assets from "@/assets";
@@ -37,8 +36,8 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
         </p>
 
         <div className="mb-8 overflow-hidden rounded-lg shadow-lg">
-          <Image
-            src={crowdVoltExp.image}
+          <img
+            src={crowdVoltExp.image.src}
             width={1200}
             height={800}
             alt="CrowdVolt Website"

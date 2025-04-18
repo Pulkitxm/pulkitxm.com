@@ -1,6 +1,6 @@
 "use client";
 
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 import {
@@ -112,23 +112,15 @@ export default function SimpleCarousel({
           {images.map((src, index) => (
             <CarouselItem key={index}>
               <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-                <Image
-                  src={src}
+                <img
+                  src={src.src}
                   alt={`Background ${index + 1}`}
                   width={50}
                   height={50}
                   className="h-full w-full scale-110 select-none object-cover blur-md brightness-50"
-                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Image
-                    src={src}
-                    alt={`Slide ${index + 1}`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 50vw"
-                    className="select-none object-contain"
-                    fetchPriority="high"
-                  />
+                  <img src={src.src} alt={`Slide ${index + 1}`} className="h-full w-full select-none object-contain" />
                 </div>
               </div>
             </CarouselItem>
@@ -184,26 +176,18 @@ export function ImageFader({ images, alt }: { images: StaticImageData[]; alt: st
           }`}
         >
           <div className="relative h-full w-full">
-            <Image
-              src={src || "/placeholder.svg"}
+            <img
+              src={src.src || "/placeholder.svg"}
               alt={`Background ${index + 1}`}
-              fill
-              sizes="(min-width: 1920px) 50vw, (min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
-              className="object-cover blur-md brightness-50"
-              fetchPriority="high"
-              loading="lazy"
+              className="h-full w-full object-cover blur-md brightness-50"
             />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative h-full w-full">
-              <Image
-                src={src || "/placeholder.svg"}
+              <img
+                src={src.src || "/placeholder.svg"}
                 alt={`${alt} - Image ${index + 1}`}
-                fill
-                sizes="(min-width: 1920px) 50vw, (min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
-                className="object-contain"
-                fetchPriority="high"
-                loading="lazy"
+                className="h-full w-full object-contain"
               />
             </div>
           </div>

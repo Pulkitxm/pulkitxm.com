@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { useRef } from "react";
 import { Gallery, Item } from "react-photoswipe-gallery";
 
@@ -43,15 +43,12 @@ function ParallaxImage({ image, index }: { image: StaticImageData; index: number
       <motion.div style={{ y }} className="absolute inset-0">
         <Item thumbnail={image.src} original={image.src} width={image.width} height={image.height}>
           {({ ref, open }) => (
-            <Image
+            <img
               src={image.src}
               alt={`Gallery Image ${index + 1}`}
               ref={ref}
               onClick={open}
-              fill
-              sizes="(min-width: 1024px) calc(33vw - 2rem), (min-width: 640px) calc(50vw - 1rem), 100vw"
               className="-translate-x-[5%] -translate-y-[5%] scale-125 cursor-pointer object-cover"
-              priority
             />
           )}
         </Item>

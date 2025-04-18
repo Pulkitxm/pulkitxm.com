@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -77,12 +76,10 @@ function DisplayWebDesign({ item, index }: { item: DesignItem; index: number }) 
     >
       <div className="relative">
         <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl">
-          <Image
-            src={item.image}
-            fill
-            objectFit="cover"
+          <img
+            src={item.image.src}
             alt={item.title}
-            className="transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </div>
@@ -123,12 +120,10 @@ function DisplayPortfolioDesign({ item, index }: { item: DesignItem; index: numb
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className="relative aspect-[4/3]">
-        <Image
-          src={item.image}
-          layout="fill"
-          objectFit="cover"
+        <img
+          src={item.image.src}
           alt={item.title}
-          className="transition-transform duration-700 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="absolute inset-0 flex flex-col justify-end p-6 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">

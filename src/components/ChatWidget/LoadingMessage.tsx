@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { FC } from "react";
 
 type LoadingMessageProps = {
@@ -11,8 +11,8 @@ export const LoadingMessage: FC<LoadingMessageProps> = ({ profileImage, loadingT
   return (
     <div className="flex items-start">
       <div className="mr-2 flex h-8 w-8 shrink-0 items-start justify-center">
-        <Image
-          src={profileImage || "/placeholder.svg"}
+        <img
+          src={profileImage.src || "/placeholder.svg"}
           alt="typing"
           width={32}
           height={32}

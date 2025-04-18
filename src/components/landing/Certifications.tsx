@@ -1,5 +1,4 @@
 import { ExternalLink } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -38,10 +37,8 @@ function Certificate({ certification }: { certification: Certification }) {
       <Card className="h-full overflow-hidden transition-colors hover:bg-muted/50">
         <CardHeader className="border-b p-0">
           <div className="relative h-48 w-full sm:h-56 md:h-64">
-            <Image
-              src={certification.image}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            <img
+              src={certification.image.src}
               alt={certification.name}
               aria-label={certification.name}
               className={`object-${certification.cover ? "cover" : "contain"}`}

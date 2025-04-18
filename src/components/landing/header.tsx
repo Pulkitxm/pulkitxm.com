@@ -1,7 +1,6 @@
 "use client";
 
 import { Check, Copy, FileText, Terminal } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback } from "react";
 
@@ -22,17 +21,11 @@ export default function Header() {
     <>
       <div className="relative">
         <div className="block">
-          <Image
-            src={assets.hacktoberFest}
-            className="w-full rounded-lg object-cover"
-            alt="Hacktoberfest 2021"
-            priority
-            unoptimized
-          />
+          <img src={assets.hacktoberFest.src} className="w-full rounded-lg object-cover" alt="Hacktoberfest 2021" />
           <div className="absolute -bottom-10">
             <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-background bg-background">
-              <Image
-                src={profile.image}
+              <img
+                src={profile.image.src}
                 className="rounded-full object-cover"
                 alt="Profile picture"
                 width={96}

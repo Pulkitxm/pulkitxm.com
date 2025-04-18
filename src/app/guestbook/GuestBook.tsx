@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Loader2, Send, AlertCircle, Edit2 } from "lucide-react";
-import Image from "next/image";
 import { type Dispatch, type FormEvent, type SetStateAction, useEffect, useMemo, useState } from "react";
 import { FaBan } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -215,13 +214,7 @@ function UserAvatar({ image, name, isCurrentUser }: { image: string; name: strin
     <div
       className={`h-10 w-10 overflow-hidden rounded-full border-4 ${isCurrentUser ? "border-emerald-400" : "border-transparent"}`}
     >
-      <Image
-        src={image || "/placeholder.svg"}
-        alt={name}
-        width={40}
-        height={40}
-        className="h-full w-full rounded-full"
-      />
+      <img src={image || "/placeholder.svg"} alt={name} width={40} height={40} className="h-full w-full rounded-full" />
     </div>
   );
 }
@@ -353,7 +346,7 @@ function UserImages({ guestbookMessagesInOrder }: { guestbookMessagesInOrder: Gu
     <div className="flex">
       {randomizeArray.length > 0 &&
         randomizeArray.slice(0, imagesToShow).map((guest, index) => (
-          <Image
+          <img
             key={guest.id}
             src={guest.user.image}
             alt={guest.user.name}

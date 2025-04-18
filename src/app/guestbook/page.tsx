@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { getGuestBookMessages } from "@/actions/guestbook";
 import { auth } from "@/lib/authOptions";
 import { GuestbookMessage, validateGuestbookMessageArray } from "@/types/guestbook";
@@ -57,7 +55,7 @@ export default async function GuestbookPage() {
         <div className="mt-8">
           <div className="mb-6 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Image
+              <img
                 src={session.user?.image || "/api/placeholder/32/32"}
                 alt={session.user?.name || "Avatar"}
                 className="h-8 w-8 rounded-full"

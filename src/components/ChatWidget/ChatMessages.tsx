@@ -1,5 +1,5 @@
 import { User } from "lucide-react";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { FC } from "react";
 
 import { renderMessage } from "@/lib/chatUtils";
@@ -19,8 +19,8 @@ export const ChatMessage: FC<ChatMessageProps> = ({ message, profileImage, isSam
     <div className={cn("flex w-full", role === "user" ? "justify-end" : "justify-start")}>
       {role === "assistant" && (
         <div className="mr-2 flex h-8 w-8 shrink-0 items-start justify-center">
-          <Image
-            src={profileImage || "/placeholder.svg"}
+          <img
+            src={profileImage.src || "/placeholder.svg"}
             alt="Pukbot"
             width={32}
             height={32}

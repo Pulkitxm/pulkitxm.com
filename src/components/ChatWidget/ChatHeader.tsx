@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Trash2, X } from "lucide-react";
 import { Zap } from "lucide-react";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { FC } from "react";
 
 type ChatHeaderProps = {
@@ -18,8 +18,8 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ profileImage, onClose, onClear
     <div className="flex items-center justify-between border-b border-green-600/50 bg-green-800/90 px-4 py-3">
       <div className="flex items-center space-x-3">
         <div className="relative">
-          <Image
-            src={profileImage || "/placeholder.svg"}
+          <img
+            src={profileImage.src || "/placeholder.svg"}
             alt="Pukbot"
             width={40}
             height={40}

@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { MapPin, Briefcase } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
@@ -71,8 +70,8 @@ export default function ExperienceTimeline() {
                 </div>
                 <div className="flex items-center space-x-4">
                   {exp.logo && (
-                    <Image
-                      src={exp.logo || "/placeholder.svg"}
+                    <img
+                      src={exp.logo.src || "/placeholder.svg"}
                       alt={`${exp.companyName} logo`}
                       width={40}
                       height={40}
