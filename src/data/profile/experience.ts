@@ -9,14 +9,14 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
   slug?: Experience["slug"];
 })[] = [
   {
-    companyName: "Noveum.ai",
+    companyName: "API.market",
     position: "Software Engineer",
     startDate: new Date("2025-03-25"),
-    location: "Bangalore, India",
+    location: "San Francisco, CA, USA",
     roleType: "remote",
-    url: "https://noveum.ai",
+    url: "https://api.market",
     showOnHome: true,
-    desc: "Started my career at Noveum.ai as a Software Engineer.",
+    desc: "Started my career at API.market as a Software Engineer.",
     logo: assets.proffessionalThings.noveum.logo,
     expType: EXP_TYPE.JOB
   },

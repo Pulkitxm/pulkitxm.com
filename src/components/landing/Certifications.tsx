@@ -41,7 +41,7 @@ function Certificate({ certification }: { certification: Certification }) {
               src={certification.image.src}
               alt={certification.name}
               aria-label={certification.name}
-              className={`object-${certification.cover ? "cover" : "contain"}`}
+              className={`object-${certification.cover ? "cover" : "contain"} size-full`}
             />
           </div>
         </CardHeader>
