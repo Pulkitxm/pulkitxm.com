@@ -221,7 +221,7 @@ export async function getPrsData(
       data: pullRequests.items.map((pr) => ({
         created_at: pr.created_at,
         labels: pr.labels.map((label) => label.name ?? ""),
-        merged_at: pr.pull_request && pr.pull_request.merged_at ? new Date(pr.pull_request.merged_at) : new Date(),
+        merged_at: pr.pull_request && pr.pull_request.merged_at ? new Date(pr.pull_request.merged_at) : getToday(),
         title: pr.title,
         url: pr.pull_request?.html_url ?? "",
         state: pr.state === "closed" && pr.pull_request?.merged_at !== null ? "merged" : "closed",

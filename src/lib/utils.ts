@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { parseStringPromise } from "xml2js";
 
+import { getToday } from "./config";
 import { NEXT_PUBLIC_API_URL } from "./constants";
 
 import type { Metadata } from "next";
@@ -18,10 +19,39 @@ export function formatDate(dateString: string | Date): string {
   });
 }
 
+export function formatDuration(duration: number): string {
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const msPerMonth = msPerDay * 30.44;
+  const msPerYear = msPerDay * 365.25;
+
+  if (duration >= msPerYear) {
+    const years = Math.floor(duration / msPerYear);
+    const remainingMs = duration % msPerYear;
+    const months = Math.floor(remainingMs / msPerMonth);
+
+    if (months > 0) {
+      return `${years} year${years > 1 ? "s" : ""} ${months} month${months > 1 ? "s" : ""}`;
+    } else {
+      return `${years} year${years > 1 ? "s" : ""}`;
+    }
+  }
+
+  if (duration >= msPerMonth) {
+    const months = Math.floor(duration / msPerMonth);
+    return `${months} month${months > 1 ? "s" : ""}`;
+  }
+
+  if (duration >= msPerDay) {
+    const days = Math.floor(duration / msPerDay);
+    return `${days} day${days > 1 ? "s" : ""}`;
+  }
+
+  return "less than a day";
+}
+
 export function formatTimeUpdatedAgo(dateString: Date): string {
   const date = new Date(dateString);
-  const now = new Date();
-  const diff = now.getTime() - date.getTime();
+  const diff = getToday().getTime() - date.getTime();
   const units = [
     { label: "second", value: 1000 },
     { label: "minute", value: 1000 * 60 },

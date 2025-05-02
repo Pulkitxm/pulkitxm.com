@@ -3,7 +3,8 @@ export const GITHUB_JOINED_DATE = new Date(2020, 4, 20);
 export const IGNORED_CONTRIBUTION_YEARS = [2021, 2022];
 
 export const getToday = () => {
-  return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  const today = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate());
 };
 export const getCurrentYear = () => getToday().getFullYear();
 

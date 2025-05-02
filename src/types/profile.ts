@@ -3,9 +3,9 @@
 import { StaticImageData } from "next/image";
 
 export enum EXP_TYPE {
-  JOB = "job",
-  INTERNSHIP = "internship",
-  VOLUNTEER = "volunteer"
+  FULL_TIME = "Full time",
+  INTERNSHIP = "Internship",
+  VOLUNTEER = "Volunteer"
 }
 
 export type Experience = {

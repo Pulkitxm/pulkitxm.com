@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 
 import { NAVIGATION_LINKS } from "@/data/pages";
 import profile from "@/data/profile";
+import { getToday } from "@/lib/config";
 import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 
 type Route = {
@@ -29,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return {
       url: `${baseUrl}/${path}`,
-      lastModified: new Date(),
+      lastModified: getToday(),
       changeFrequency: "weekly",
       priority: priorityMap[path] || 0.5
     };
@@ -38,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (!NAVIGATION_LINKS.some((link) => link.url === "/" || link.url === "")) {
     navigationRoutes.unshift({
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: getToday(),
       changeFrequency: "weekly",
       priority: 1.0
     });
@@ -53,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const experienceRoutes: Route[] = profile.experience.map((exp) => ({
     url: `${baseUrl}/experience/${exp.slug}`,
-    lastModified: new Date(),
+    lastModified: getToday(),
     changeFrequency: "monthly",
     priority: 0.7
   }));
@@ -68,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     if (!NAVIGATION_LINKS.some((link) => link.url === `/${path}` || link.url === path)) {
       navigationRoutes.push({
         url: `${baseUrl}/${path}`,
-        lastModified: new Date(),
+        lastModified: getToday(),
         changeFrequency: "weekly",
         priority
       });

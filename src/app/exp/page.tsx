@@ -10,7 +10,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import profile from "@/data/profile";
-import { formatDate } from "@/lib/utils";
+import { getToday } from "@/lib/config";
+import { formatDate, formatDuration } from "@/lib/utils";
+import { EXP_TYPE } from "@/types/profile";
 
 export default function ExperienceTimeline() {
   const experience = profile.experience;
@@ -27,15 +29,31 @@ export default function ExperienceTimeline() {
     restDelta: 0.001
   });
 
+  const totalExperience = experience
+    .filter((exp) => exp.expType !== EXP_TYPE.VOLUNTEER)
+    .reduce((total, exp) => {
+      const startDate = exp.startDate;
+      const endDate = exp.endDate || getToday();
+
+      let duration = endDate.getTime() - startDate.getTime();
+
+      if (duration < 0) {
+        duration = Math.abs(duration);
+      }
+
+      return total + duration;
+    }, 0);
+
   return (
     <main className="container mx-auto sm:p-10">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="mb-16 text-center text-5xl font-bold tracking-tight"
+        className="mb-16 flex flex-col items-center justify-center gap-2 text-center text-5xl font-bold tracking-tight"
       >
-        My Experience
+        <span className="text-primary">My Experience</span>
+        <span className="text-xl text-gray-400">Total Professional Experience: {formatDuration(totalExperience)}</span>
       </motion.h1>
 
       <div className="relative" ref={containerRef}>
@@ -62,7 +80,7 @@ export default function ExperienceTimeline() {
               <CardHeader className="space-y-4">
                 <div className="flex items-start justify-between">
                   <Badge variant="outline" className="border-gray-700 bg-gray-800 text-white">
-                    {exp.roleType}
+                    {exp.expType.valueOf()}
                   </Badge>
                   <div className="text-sm text-gray-400">
                     {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
@@ -121,3 +139,5 @@ export default function ExperienceTimeline() {
     </main>
   );
 }
+
+export const dynamic = "force-dynamic";

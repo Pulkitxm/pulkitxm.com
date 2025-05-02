@@ -11,20 +11,20 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
   {
     companyName: "API.market",
     position: "Software Engineer",
-    startDate: new Date("2025-03-25"),
+    startDate: new Date("2025-03-25"), // 2025-03-25
     location: "San Francisco, CA, USA",
     roleType: "remote",
     url: "https://api.market",
     showOnHome: true,
-    desc: "Started my career at API.market as a Software Engineer.",
+    desc: "Working at API.market as a Software Engineer. Responsible for improveing user experience on the marketplace. Adding new features and improving the existing codebase. Implementing best practices and following the code quality standards.",
     logo: assets.proffessionalThings.noveum.logo,
-    expType: EXP_TYPE.JOB
+    expType: EXP_TYPE.INTERNSHIP
   },
   {
     companyName: "CrowdVolt (YC W24)",
     position: "Software Engineer",
-    startDate: new Date("2025-02-03"),
-    endDate: new Date("2025-03-14"),
+    startDate: new Date("2025-02-03"), // 2025-02-03
+    endDate: new Date("2025-03-14"), // 2025-03-14
     location: "NYC, USA",
     roleType: "remote",
     url: "https://www.crowdvolt.com",
@@ -33,13 +33,13 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     expDetails: CrowdVolt,
     logo: assets.proffessionalThings.crowdVolt.logo,
     slug: "crowdvolt",
-    expType: EXP_TYPE.JOB
+    expType: EXP_TYPE.FULL_TIME
   },
   {
     companyName: "DatawaveLabs",
     position: "Full Stack Engineer",
-    startDate: new Date("2024-04-01"),
-    endDate: new Date("2024-09-30"),
+    startDate: new Date("2024-04-01"), // 2024-04-01
+    endDate: new Date("2024-09-30"), // 2024-09-30
     location: "India",
     roleType: "remote",
     url: "https://datawavelabs.io",
@@ -52,8 +52,8 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
   {
     companyName: "GeeksforGeeks",
     position: "Campus Mantri",
-    startDate: new Date("2024-04-01"),
-    endDate: new Date("2025-04-01"),
+    startDate: new Date("2024-04-01"), // 2024-04-01
+    endDate: new Date("2025-04-01"), // 2025-04-01
     location: "India",
     roleType: "hybrid",
     url: "https://geeksforgeeks.org",

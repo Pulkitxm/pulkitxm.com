@@ -68,6 +68,7 @@ import NPLT_CSIR_1 from "@/assets/events/nptl-csir/img_1.webp";
 import NPLT_CSIR_2 from "@/assets/events/nptl-csir/img_2.webp";
 import NPLT_CSIR_3 from "@/assets/events/nptl-csir/img_3.webp";
 import NPLT_CSIR_4 from "@/assets/events/nptl-csir/img_4.webp";
+import NOVEUM_LOGO from "@/assets/exp/api.market/logo.webp";
 import CROWDVOLT_LOGO from "@/assets/exp/crowdvolt/logo.webp";
 import CROWDVOLT_WEBSITE from "@/assets/exp/crowdvolt/website.webp";
 import DATAWAVELABS_DASHBOARD from "@/assets/exp/datawavelabs/datawaveDashboard.webp";
@@ -85,7 +86,6 @@ import GEEKSFORGEEKS_IMAGE8 from "@/assets/exp/geeksforgeeks/geekssForGeeksImage
 import GEEKSFORGEEKS_IMAGE12 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-8.webp";
 import GEEKSFORGEEKS_IMAGE4 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-9.webp";
 import GEEKSFORGEEKS_LOGO from "@/assets/exp/geeksforgeeks/logo.webp";
-import NOVEUM_LOGO from "@/assets/exp/noveum/logo.webp";
 import HEADER from "@/assets/header.webp";
 import MY_IMAGE from "@/assets/me.jpeg";
 import V1_PORTFOLIO from "@/assets/portfolio/v1Portfolio.webp";
