@@ -86,8 +86,8 @@ import GEEKSFORGEEKS_IMAGE12 from "@/assets/exp/geeksforgeeks/geekssForGeeksImag
 import GEEKSFORGEEKS_IMAGE4 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-9.webp";
 import GEEKSFORGEEKS_LOGO from "@/assets/exp/geeksforgeeks/logo.webp";
 import NOVEUM_LOGO from "@/assets/exp/noveum/logo.webp";
-import HACKTOBERFEST from "@/assets/hacktoberfest-2024.webp";
-import MY_IMAGE from "@/assets/me.webp";
+import HEADER from "@/assets/header.webp";
+import MY_IMAGE from "@/assets/me.jpeg";
 import V1_PORTFOLIO from "@/assets/portfolio/v1Portfolio.webp";
 import V2_PORTFOLIO from "@/assets/portfolio/v2Portfolio.webp";
 import V3_PORTFOLIO from "@/assets/portfolio/v3Portfolio.webp";
@@ -104,7 +104,7 @@ import VIDWAVE_PROJECT from "@/assets/projects/vidWaveProject.webp";
 const assets = {
   myImage: MY_IMAGE,
   resume: "https://pulkitxm.github.io/Pulkitxm/resume/resume.pdf",
-  hacktoberFest: HACKTOBERFEST,
+  header: HEADER,
   contributions2023: CONTRIBUTIONS_2023,
   contributions2024: CONTRIBUTIONS_2024,
   fullstackopenRepo: FULLSTACKOPEN_REPO,

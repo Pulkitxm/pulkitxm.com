@@ -21,22 +21,16 @@ export default function Header() {
     <>
       <div className="relative">
         <div className="block">
-          <img src={assets.hacktoberFest.src} className="w-full rounded-lg object-cover" alt="Hacktoberfest 2021" />
-          <div className="absolute -bottom-10">
-            <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-background bg-background">
-              <img
-                src={profile.image.src}
-                className="rounded-full object-cover"
-                alt="Profile picture"
-                width={96}
-                height={96}
-              />
+          <img src={assets.header.src} className="w-full rounded-lg object-cover" alt="Hacktoberfest 2021" />
+          <div className="absolute -bottom-20 left-5">
+            <div className="relative size-40 overflow-hidden rounded-full border-4 border-background bg-background">
+              <img src={profile.image.src} className="rounded-full object-cover" alt="Profile picture" />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mb-5 mt-12 pl-5">
+      <div className="mb-5 mt-24 pl-5">
         <div className="mb-1 flex flex-wrap items-center gap-2">
           <p className="text-xl font-semibold text-white">{profile.name}</p>
           <Link
