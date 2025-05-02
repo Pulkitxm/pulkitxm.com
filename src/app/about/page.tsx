@@ -96,10 +96,10 @@ export default function About() {
         Looking back, I&apos;d say consistency (never taking a break since day one in college) and building projects
         have been key to my progress. I kept my
         <LinkComponent href="https://www.linkedin.com/in/pulkitxm">LinkedIn</LinkComponent> updated throughout my
-        journey and now ofcourse my <LinkComponent href="https://x.com/devpulkitt">X</LinkComponent> account. I also did
-        a 6 months long remote internship which I got just because of keeping my network updated with my work. I did
-        some really cool work there. After that I took some break for my 5th semester improved my portfolio and github,
-        If you&apos;d see my github contributions of 2024 that were quite improved as compared to 2023.
+        journey and now ofcourse my <LinkComponent href={profile.links.x}>X</LinkComponent> account. I also did a 6
+        months long remote internship which I got just because of keeping my network updated with my work. I did some
+        really cool work there. After that I took some break for my 5th semester improved my portfolio and github, If
+        you&apos;d see my github contributions of 2024 that were quite improved as compared to 2023.
         <Link
           href="https://github.com/Pulkitxm?tab=overview&from=2024-12-01&to=2024-12-31#:~:text=contributions%20in%202024"
           target="_blank"

@@ -2,7 +2,6 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { parseStringPromise } from "xml2js";
 
-import { getToday } from "./config";
 import { NEXT_PUBLIC_API_URL } from "./constants";
 
 import type { Metadata } from "next";
@@ -51,7 +50,8 @@ export function formatDuration(duration: number): string {
 
 export function formatTimeUpdatedAgo(dateString: Date): string {
   const date = new Date(dateString);
-  const diff = getToday().getTime() - date.getTime();
+  const diff = new Date().getTime() - date.getTime();
+  console.log("diff", diff);
   const units = [
     { label: "second", value: 1000 },
     { label: "minute", value: 1000 * 60 },
