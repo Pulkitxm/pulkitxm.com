@@ -66,6 +66,15 @@ export type Event = {
   tagline: string;
 };
 
+export interface SetupItem {
+  name: string;
+  description?: string;
+  x: number;
+  y: number;
+  zoom: number;
+  link: string;
+}
+
 export type Profile = {
   name: string;
   caption: string;
@@ -82,4 +91,5 @@ export type Profile = {
   skills: Readonly<Record<string, string[]>>;
   certifications: readonly Certification[];
   design: Design;
+  setupItems: readonly SetupItem[];
 };

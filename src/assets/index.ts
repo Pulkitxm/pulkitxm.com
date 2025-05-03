@@ -87,7 +87,7 @@ import GEEKSFORGEEKS_IMAGE12 from "@/assets/exp/geeksforgeeks/geekssForGeeksImag
 import GEEKSFORGEEKS_IMAGE4 from "@/assets/exp/geeksforgeeks/geekssForGeeksImages-9.webp";
 import GEEKSFORGEEKS_LOGO from "@/assets/exp/geeksforgeeks/logo.webp";
 import HEADER from "@/assets/header.webp";
-import MY_IMAGE from "@/assets/me.jpeg";
+import MY_IMAGE from "@/assets/me.webp";
 import V1_PORTFOLIO from "@/assets/portfolio/v1Portfolio.webp";
 import V2_PORTFOLIO from "@/assets/portfolio/v2Portfolio.webp";
 import V3_PORTFOLIO from "@/assets/portfolio/v3Portfolio.webp";
@@ -100,9 +100,11 @@ import EOS_ARCHITECTURE_DESIGN from "@/assets/projects/eosArchitecture.webp";
 import IMAGE_TWEAKER_PROJECT from "@/assets/projects/imageTweakerProject.webp";
 import USEE_FORM_PROJECT from "@/assets/projects/useeFormProject.webp";
 import VIDWAVE_PROJECT from "@/assets/projects/vidWaveProject.webp";
+import SETUP from "@/assets/setup.jpg";
 
 const assets = {
   myImage: MY_IMAGE,
+  setup: SETUP,
   resume: "https://pulkitxm.github.io/Pulkitxm/resume/resume.pdf",
   header: HEADER,
   contributions2023: CONTRIBUTIONS_2023,

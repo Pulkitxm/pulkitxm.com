@@ -72,6 +72,10 @@ export default function Header() {
             </Link>
           </Button>
         </div>
+
+        <Link href="/my-setup" className="text-green-400 hover:underline">
+          View my setup
+        </Link>
       </div>
 
       <div
