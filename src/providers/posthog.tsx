@@ -4,23 +4,33 @@ import { usePathname, useSearchParams } from "next/navigation";
 import posthog from "posthog-js";
 import { usePostHog } from "posthog-js/react";
 import { PostHogProvider as PHProvider } from "posthog-js/react";
-import { useEffect, Suspense } from "react";
+import { useEffect, Suspense, useState } from "react";
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
+  const [shouldTrack, setShouldTrack] = useState(false);
+
   useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY as string, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
-      person_profiles: "identified_only",
-      capture_pageview: false
-    });
+    if (localStorage.getItem("posthog") !== "false") {
+      setShouldTrack(true);
+
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY as string, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+        person_profiles: "identified_only",
+        capture_pageview: false
+      });
+    }
   }, []);
 
-  return (
-    <PHProvider client={posthog}>
-      <SuspendedPostHogPageView />
-      {children}
-    </PHProvider>
-  );
+  if (shouldTrack) {
+    return (
+      <PHProvider client={posthog}>
+        <SuspendedPostHogPageView />
+        {children}
+      </PHProvider>
+    );
+  }
+
+  return children;
 }
 
 function PostHogPageView() {
@@ -42,9 +52,6 @@ function PostHogPageView() {
   return null;
 }
 
-// Wrap PostHogPageView in Suspense to avoid the useSearchParams usage above
-// from de-opting the whole app into client-side rendering
-// See: https://nextjs.org/docs/messages/deopted-into-client-rendering
 function SuspendedPostHogPageView() {
   return (
     <Suspense fallback={null}>
