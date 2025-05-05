@@ -51,7 +51,6 @@ export function formatDuration(duration: number): string {
 export function formatTimeUpdatedAgo(dateString: Date): string {
   const date = new Date(dateString);
   const diff = new Date().getTime() - date.getTime();
-  console.log("diff", diff);
   const units = [
     { label: "second", value: 1000 },
     { label: "minute", value: 1000 * 60 },

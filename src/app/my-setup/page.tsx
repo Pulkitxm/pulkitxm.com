@@ -65,6 +65,7 @@ export default function Setup() {
       zoomToElement(targetElement, item.zoom, 800);
     }
 
+    // scroll to top
     window.scrollTo({
       top: 0,
       behavior: "smooth"

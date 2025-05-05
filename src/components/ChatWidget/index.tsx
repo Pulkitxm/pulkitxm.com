@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useFeatureFlagEnabled } from "posthog-js/react";
 import { useState, useRef, useEffect, useCallback, KeyboardEvent, ChangeEvent } from "react";
 
 import { getChatResponse, getSuggestionsForChat } from "@/actions/chat";
@@ -18,7 +19,14 @@ import { SuggestionsBar } from "./SuggestionsBar";
 
 const springTransition = { type: "spring", stiffness: 400, damping: 30 };
 
-export default function ChatLauncher() {
+export default function ChatWidget() {
+  const showChatWidget = useFeatureFlagEnabled("chat-widget");
+  if (!showChatWidget) return null;
+
+  return <ChatLauncher />;
+}
+
+export function ChatLauncher() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");

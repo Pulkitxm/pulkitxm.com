@@ -2,14 +2,16 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { XIcon } from "lucide-react";
+import { useFeatureFlagEnabled } from "posthog-js/react";
 import { useEffect, useState } from "react";
-
-import { FEATURE_FLAGS } from "@/lib/config";
 
 import { PreFetchUrl } from "../PreFetchUrl";
 
 export default function CollabInviteLayer() {
-  if (FEATURE_FLAGS.FLOATING_CTA) return <CollabInviteLayerCX />;
+  const showFloatingCTA = useFeatureFlagEnabled("floating-cta");
+  if (!showFloatingCTA) return null;
+
+  return <CollabInviteLayerCX />;
 }
 
 function CollabInviteLayerCX() {

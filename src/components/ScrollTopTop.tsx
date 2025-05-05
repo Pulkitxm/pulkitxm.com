@@ -1,12 +1,13 @@
 "use client";
 
 import { ArrowUp } from "lucide-react";
+import { useFeatureFlagEnabled } from "posthog-js/react";
 import { useState, useEffect, useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
-import { FEATURE_FLAGS } from "@/lib/config";
 
 export default function ScrollToTopButton() {
+  const showScrollTopButton = useFeatureFlagEnabled("scroll-top-button");
   const [isVisible, setIsVisible] = useState(false);
 
   const scrollToTop = useCallback(() => {
@@ -36,17 +37,17 @@ export default function ScrollToTopButton() {
   }, [scrolWithKey]);
 
   useEffect(() => {
-    if (!FEATURE_FLAGS.SHORTCUT_NAVIGATION || typeof window === "undefined") return;
+    if (!showScrollTopButton || typeof window === "undefined") return;
     window.addEventListener("scroll", toggleVisibility);
     toggleVisibility();
 
     return () => window.removeEventListener("scroll", toggleVisibility);
-  }, [scrolWithKey, toggleVisibility]);
+  }, [scrolWithKey, toggleVisibility, showScrollTopButton]);
 
   return (
     <Button
       className={`fixed bottom-4 right-4 z-50 rounded-full p-2 ${
-        isVisible ? "" : "pointer-events-none translate-y-[200px]"
+        isVisible && showScrollTopButton ? "" : "pointer-events-none translate-y-[200px]"
       } transition-transform duration-300`}
       onClick={scrollToTop}
       aria-label="Scroll to top"
