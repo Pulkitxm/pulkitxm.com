@@ -35,8 +35,8 @@ export default async function GhFollowers() {
 
   return (
     <main className="space-y-6 p-3 sm:p-5">
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900/90 to-zinc-800/90 p-6">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-purple-500/10" />
+      <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-zinc-900/90 to-zinc-800/90 p-6">
+        <div className="absolute inset-0 bg-linear-to-br from-green-500/10 to-purple-500/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.1),transparent)]" />
         <div className="relative flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div className="space-y-2">
@@ -107,5 +107,3 @@ export default async function GhFollowers() {
     </main>
   );
 }
-
-export const dynamic = "force-dynamic";

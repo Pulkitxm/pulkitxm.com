@@ -189,13 +189,13 @@ function MessageForm({
           maxLength={MAX_LENGTH_MESSAGE_GUESTBOOK}
           required
         />
-        <div className="absolute bottom-2 right-2 text-sm text-muted-foreground">
+        <div className="text-muted-foreground absolute right-2 bottom-2 text-sm">
           <span className={isOverLimit ? "text-destructive" : ""}>{charactersLeft}</span>
         </div>
       </div>
 
       {error && (
-        <div className="flex items-center rounded-md border border-destructive bg-destructive/10 p-2 text-destructive">
+        <div className="border-destructive bg-destructive/10 text-destructive flex items-center rounded-md border p-2">
           <AlertCircle className="mr-2 h-4 w-4" />
           {error}
         </div>
@@ -245,8 +245,8 @@ function MessageCard({
   const isCurrentUser = message.user.id === Number.parseInt(user?.id ?? "");
 
   return (
-    <Card className="group transition-all hover:shadow-md">
-      <CardContent className="pt-6">
+    <Card className="group bg-background transition-all hover:shadow-md">
+      <CardContent className="py-3">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <UserAvatar image={message.user.image} name={message.user.name} isCurrentUser={isCurrentUser} />
@@ -256,10 +256,10 @@ function MessageCard({
                   {message.user.name}
                 </p>
                 {!compareTimes(message.createdAt, message.updatedAt) && (
-                  <span className="ml-1 text-sm text-muted-foreground">(edited)</span>
+                  <span className="text-muted-foreground ml-1 text-sm">(edited)</span>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 {new Date(message.updatedAt).toLocaleString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -352,7 +352,7 @@ function UserImages({ guestbookMessagesInOrder }: { guestbookMessagesInOrder: Gu
             alt={guest.user.name}
             width={40}
             height={40}
-            className="relative h-8 w-8 rounded-full border-2 border-white dark:border-gray-800 sm:h-9 sm:w-9 md:h-10 md:w-10"
+            className="relative h-8 w-8 rounded-full border-2 border-white sm:h-9 sm:w-9 md:h-10 md:w-10 dark:border-gray-800"
             style={{
               marginLeft: index > 0 ? "-13px" : "0",
               zIndex: 10 - index
@@ -361,7 +361,7 @@ function UserImages({ guestbookMessagesInOrder }: { guestbookMessagesInOrder: Gu
         ))}
       {guestbookMessagesInOrder.length > imagesToShow && (
         <div
-          className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200 sm:h-9 sm:w-9 md:h-10 md:w-10"
+          className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 font-medium text-gray-800 sm:h-9 sm:w-9 md:h-10 md:w-10 dark:bg-gray-700 dark:text-gray-200"
           style={{ marginLeft: "-13px", zIndex: 0 }}
         >
           <span className="text-xs sm:text-sm">+{guestbookMessagesInOrder.length - imagesToShow}</span>
@@ -482,7 +482,7 @@ export default function GuestForm({ messages, user }: { messages: GuestbookMessa
   return (
     <>
       {user && (
-        <Card className="mb-8">
+        <Card className="bg-background mb-8">
           <CardHeader>
             <CardTitle>Sign the Guestbook</CardTitle>
           </CardHeader>

@@ -9,7 +9,7 @@ import { Experience } from "@/types/profile";
 export default function DatawavelabsExperience({ exp }: { exp: Experience }) {
   return (
     <div>
-      <h1 className="mb-4 text-lg font-bold text-primary md:text-xl lg:text-2xl">
+      <h1 className="text-primary mb-4 text-lg font-bold md:text-xl lg:text-2xl">
         <span className="underline">{exp.position}</span>@
         <Link
           href={exp.url}
@@ -22,7 +22,7 @@ export default function DatawavelabsExperience({ exp }: { exp: Experience }) {
       </h1>
 
       <section className="mb-12">
-        <p className="mb-6 text-lg text-muted-foreground">
+        <p className="text-muted-foreground mb-6 text-lg">
           My internship at Datawave Labs provided a hands-on experience as a Full Stack Engineer, immersing me in the
           development of a scalable, cloud-driven data intelligence platform. Below are detailed insights into the work
           I accomplished.
@@ -44,7 +44,7 @@ export default function DatawavelabsExperience({ exp }: { exp: Experience }) {
               <CardTitle className="text-xl font-semibold">{section.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-4 text-muted-foreground">{section.description}</p>
+              <p className="text-muted-foreground mb-4">{section.description}</p>
               <ul className="list-disc space-y-2 pl-6">
                 {section.items.map((item, itemIndex) => (
                   <li key={itemIndex} className="text-muted-foreground">
@@ -58,8 +58,8 @@ export default function DatawavelabsExperience({ exp }: { exp: Experience }) {
       </section>
 
       <section className="mb-12">
-        <h3 className="mb-4 text-2xl font-bold text-primary sm:text-3xl">Technologies and Tools</h3>
-        <p className="mb-4 text-muted-foreground">
+        <h3 className="text-primary mb-4 text-2xl font-bold sm:text-3xl">Technologies and Tools</h3>
+        <p className="text-muted-foreground mb-4">
           My work involved a diverse set of technologies and tools that are integral to modern full-stack development:
         </p>
         <div className="flex flex-wrap gap-2">
@@ -72,7 +72,7 @@ export default function DatawavelabsExperience({ exp }: { exp: Experience }) {
       </section>
 
       <section className="mb-12">
-        <h3 className="mb-4 text-2xl font-bold text-primary sm:text-3xl">Conclusion</h3>
+        <h3 className="text-primary mb-4 text-2xl font-bold sm:text-3xl">Conclusion</h3>
         <p className="text-muted-foreground">
           This internship was a comprehensive learning experience, blending practical development with exposure to
           modern technologies. It equipped me with a solid understanding of cloud integrations, real-time systems, and

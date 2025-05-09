@@ -3,10 +3,6 @@ import { NextResponse } from "next/server";
 import { CONTRIBUTION_GRAPH_SECRET } from "@/lib/constants";
 import { RES_TYPE } from "@/types/globals";
 
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
-
 export async function GET(): Promise<NextResponse<RES_TYPE<{ picUrl: string; username: string }[]>>> {
   try {
     const followers: { username: string; picUrl: string }[] = [];

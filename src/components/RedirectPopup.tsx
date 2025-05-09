@@ -26,7 +26,7 @@ export default function RedirectPopup() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
+          className="bg-opacity-80 fixed inset-0 z-50 flex items-center justify-center bg-black p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -55,7 +55,7 @@ export default function RedirectPopup() {
             onClick={(e) => e.stopPropagation()}
           >
             <motion.div
-              className="absolute right-2 top-2"
+              className="absolute top-2 right-2"
               whileHover={{ rotate: 90 }}
               transition={{ type: "spring", stiffness: 300, damping: 10 }}
             >

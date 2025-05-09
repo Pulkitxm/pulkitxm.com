@@ -23,14 +23,14 @@ export default function Header() {
         <div className="block">
           <img src={assets.header.src} className="w-full rounded-lg object-cover" alt="Hacktoberfest 2021" />
           <div className="absolute -bottom-10 left-5 md:-bottom-20">
-            <div className="relative size-20 overflow-hidden rounded-full border-4 border-background bg-background md:size-40">
+            <div className="border-background bg-background relative size-20 overflow-hidden rounded-full border-4 md:size-40">
               <img src={profile.image.src} className="rounded-full object-cover" alt="Profile picture" />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mb-5 mt-12 pl-5 md:mt-24">
+      <div className="mt-12 mb-5 pl-5 md:mt-24">
         <div className="mb-1 flex flex-wrap items-center gap-2">
           <p className="text-xl font-semibold text-white">{profile.name}</p>
           <Link

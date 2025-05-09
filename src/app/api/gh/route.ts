@@ -49,5 +49,3 @@ export async function GET(request: NextRequest): Promise<NextResponse<CONTRIBUTI
     return NextResponse.json({ error: "Failed to fetch GitHub data" }, { status: 500 });
   }
 }
-
-export const dynamic = "force-dynamic";

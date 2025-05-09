@@ -7,7 +7,7 @@ import { PreFetchUrl } from "../PreFetchUrl";
 
 export default function Aboutme() {
   return (
-    <section className="mb-6 mt-12 rounded-xl">
+    <section className="mt-12 mb-6 rounded-xl">
       <h2 className="mb-3 text-3xl font-bold tracking-tight text-white">About me</h2>
       <div className="space-y-4">
         <p className="leading-relaxed text-slate-200">

@@ -15,7 +15,7 @@ const crowdVoltExp = {
 export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
   return (
     <div className="space-y-8">
-      <h1 className="text-lg font-bold text-primary md:text-xl lg:text-2xl">
+      <h1 className="text-primary text-lg font-bold md:text-xl lg:text-2xl">
         <span className="underline">{exp.position}</span>@
         <Link
           href={exp.url}
@@ -28,7 +28,7 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
       </h1>
 
       <section>
-        <p className="mb-6 text-lg text-muted-foreground">
+        <p className="text-muted-foreground mb-6 text-lg">
           At CrowdVolt, I focused on maintaining and enhancing their web platform, resolving critical bugs, implementing
           new features, and improving the overall user experience. I introduced clean code practices by implementing
           ESLint and Prettier configurations, significantly improving code quality and consistency. Additionally, I
@@ -47,8 +47,8 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
       </section>
 
       <section>
-        <h3 className="mb-4 text-2xl font-bold text-primary sm:text-3xl">Technologies and Tools</h3>
-        <p className="mb-4 text-muted-foreground">
+        <h3 className="text-primary mb-4 text-2xl font-bold sm:text-3xl">Technologies and Tools</h3>
+        <p className="text-muted-foreground mb-4">
           My work involved a diverse set of technologies and tools essential for modern web development:
         </p>
         <div className="flex flex-wrap gap-2">
@@ -61,8 +61,8 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
       </section>
 
       <section>
-        <h3 className="mb-4 text-2xl font-bold text-primary sm:text-3xl">Key Contributions</h3>
-        <ul className="space-y-2 text-muted-foreground">
+        <h3 className="text-primary mb-4 text-2xl font-bold sm:text-3xl">Key Contributions</h3>
+        <ul className="text-muted-foreground space-y-2">
           <li>• Implemented code quality tools (ESLint, Prettier) to enforce consistent coding standards</li>
           <li>• Resolved critical bugs affecting user experience and platform stability</li>
           <li>• Enhanced website performance through code optimization and lazy loading techniques</li>
@@ -72,7 +72,7 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
       </section>
 
       <section>
-        <h3 className="mb-4 text-2xl font-bold text-primary sm:text-3xl">Conclusion</h3>
+        <h3 className="text-primary mb-4 text-2xl font-bold sm:text-3xl">Conclusion</h3>
         <p className="text-muted-foreground">
           My experience at CrowdVolt equipped me with valuable insights into maintaining and improving production-level
           web applications. Working with a YC-backed startup provided exposure to fast-paced development cycles and the

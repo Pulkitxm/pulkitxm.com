@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-[70svh] items-center justify-center bg-background p-4">
+    <main className="bg-background flex min-h-[70svh] items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -20,11 +20,11 @@ export default function NotFound() {
           transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2, ease: "easeInOut" }}
           className="inline-block"
         >
-          <Frown className="mx-auto h-24 w-24 text-muted-foreground" />
+          <Frown className="text-muted-foreground mx-auto h-24 w-24" />
         </motion.div>
-        <h1 className="text-4xl font-bold text-foreground">404</h1>
-        <p className="text-xl text-muted-foreground">Oops! Page not found</p>
-        <p className="mx-auto max-w-md text-muted-foreground">
+        <h1 className="text-foreground text-4xl font-bold">404</h1>
+        <p className="text-muted-foreground text-xl">Oops! Page not found</p>
+        <p className="text-muted-foreground mx-auto max-w-md">
           The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

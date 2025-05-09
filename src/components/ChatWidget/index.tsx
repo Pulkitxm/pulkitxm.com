@@ -42,7 +42,6 @@ export function ChatLauncher() {
   const chatInitialized = useRef(false);
   const suggestionsLoaded = useRef(false);
 
-  // Default suggestions based on current page
   const getDefaultSuggestions = useCallback(() => {
     const pageSuggestion =
       pathname === "/" ? "Pulkit's skills?" : pathname.includes("/projects") ? "Recent projects?" : "About this page?";
@@ -95,7 +94,6 @@ export function ChatLauncher() {
     setLoadingText(getRandomLoadingText());
 
     try {
-      // Only load messages from localStorage if not already initialized
       if (!chatInitialized.current) {
         const storedMessages = localStorage.getItem("chatMessages");
         if (storedMessages) {
@@ -103,7 +101,6 @@ export function ChatLauncher() {
           setMessages(parsedMessages);
           chatInitialized.current = true;
 
-          // Load suggestions if chat is open
           if (!suggestionsLoaded.current) {
             generateSuggestions();
           }
@@ -112,7 +109,6 @@ export function ChatLauncher() {
         }
       }
 
-      // If no stored messages or first time initialization
       const introPrompt =
         "You are Pukbot, an AI assistant for Pulkit's portfolio. Introduce yourself in a wild, unhinged way. Keep it short and crisp. Make it clear you are PUKBOT, not Pulkit.";
 
@@ -126,7 +122,6 @@ export function ChatLauncher() {
       setMessages([formattedMessage]);
       chatInitialized.current = true;
 
-      // Load suggestions if chat is open
       if (!suggestionsLoaded.current) {
         generateSuggestions();
       }
@@ -217,28 +212,24 @@ export function ChatLauncher() {
     [send]
   );
 
-  // Initialize chat when opened
   useEffect(() => {
     if (open && !chatInitialized.current) {
       initializeChat();
     }
   }, [open, initializeChat]);
 
-  // Load suggestions when chat is opened
   useEffect(() => {
     if (open && !suggestionsLoaded.current && messages.length > 0) {
       generateSuggestions();
     }
   }, [open, generateSuggestions, messages]);
 
-  // Save messages to localStorage when they change
   useEffect(() => {
     if (messages.length > 0) {
       localStorage.setItem("chatMessages", JSON.stringify(messages));
     }
   }, [messages]);
 
-  // Scroll to bottom when messages change
   useEffect(() => {
     if (scrollRef.current) {
       const scrollElement = scrollRef.current;
@@ -252,7 +243,6 @@ export function ChatLauncher() {
     }
   }, [messages, loading, open]);
 
-  // Focus input when chat opens
   useEffect(() => {
     if (open && inputRef.current) {
       requestAnimationFrame(() => {
@@ -261,7 +251,6 @@ export function ChatLauncher() {
     }
   }, [open]);
 
-  // Update loading text
   useEffect(() => {
     if (loading) {
       setLoadingText(getRandomLoadingText());
@@ -277,7 +266,7 @@ export function ChatLauncher() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={springTransition}
-            className="fixed inset-0 z-50 flex flex-col overflow-hidden border border-green-600/50 bg-gray-900/95 shadow-xl md:bottom-24 md:left-auto md:right-6 md:top-auto md:h-[70vh] md:max-h-[600px] md:w-full md:max-w-md md:rounded-xl"
+            className="fixed inset-0 z-50 flex flex-col overflow-hidden border border-green-600/50 bg-gray-900/95 shadow-xl md:top-auto md:right-6 md:bottom-24 md:left-auto md:h-[70vh] md:max-h-[600px] md:w-full md:max-w-md md:rounded-xl"
           >
             <ChatHeader
               profileImage={profile.image || "/placeholder.svg"}

@@ -97,9 +97,9 @@ export default function BlogListing() {
             {filteredAndSortedBlogs.length}
           </Badge>
         </div>
-        <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-x-2 sm:space-y-0">
+        <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
           <div className="relative">
-            <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-500" />
+            <Search className="absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2 transform text-gray-500" />
             <Input
               type="text"
               placeholder="Search blogs..."
@@ -141,7 +141,7 @@ export default function BlogListing() {
       <div className="grid gap-4 sm:gap-6">
         {loading ? (
           Array.from({ length: 3 }).map((_, index) => (
-            <Card key={index} className="overflow-hidden">
+            <Card key={index} className="overflow-hidden bg-black">
               <CardContent className="p-4 sm:p-6">
                 <div className="flex flex-col gap-4">
                   <div className="space-y-2">
@@ -187,7 +187,7 @@ function Blog({ blog, isTouchableDevice }: { blog: BlogType; isTouchableDevice: 
   const LinkComponent = isTouchableDevice ? "div" : LinkPreview;
 
   return (
-    <Card className="group overflow-hidden transition-all duration-200 hover:shadow-lg">
+    <Card className="group bg-background overflow-hidden transition-all duration-200 hover:shadow-lg">
       <CardContent className="p-4 sm:p-6">
         <div className="flex flex-col gap-4">
           <div className="space-y-2">
@@ -204,7 +204,7 @@ function Blog({ blog, isTouchableDevice }: { blog: BlogType; isTouchableDevice: 
                     {blog.title}
                   </h2>
                 </LinkComponent>
-                <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-gray-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                <ArrowUpRight className="h-5 w-5 shrink-0 text-gray-400 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
             </Link>
 
@@ -242,7 +242,7 @@ function Blog({ blog, isTouchableDevice }: { blog: BlogType; isTouchableDevice: 
                 {blog.brief}
               </p>
               {!expanded && showButton && (
-                <div className="absolute bottom-0 left-0 h-12 w-full bg-gradient-to-t from-background to-transparent" />
+                <div className="from-background absolute bottom-0 left-0 h-12 w-full bg-linear-to-t to-transparent" />
               )}
             </div>
 
@@ -250,7 +250,7 @@ function Blog({ blog, isTouchableDevice }: { blog: BlogType; isTouchableDevice: 
               <Button
                 variant="ghost"
                 size="sm"
-                className="mt-2 flex items-center text-blue-400 transition-all duration-300 ease-in-out hover:text-blue-500 focus:text-blue-500"
+                className="mt-2 flex cursor-pointer items-center text-blue-400 transition-all duration-300 ease-in-out hover:text-blue-500 focus:text-blue-500"
                 onClick={() => setExpanded(!expanded)}
               >
                 <span>{expanded ? "Read less" : "Read more"}</span>

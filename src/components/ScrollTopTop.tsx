@@ -46,7 +46,7 @@ export default function ScrollToTopButton() {
 
   return (
     <Button
-      className={`fixed bottom-4 right-4 z-50 rounded-full p-2 ${
+      className={`fixed right-4 bottom-4 z-50 rounded-full p-2 ${
         isVisible && showScrollTopButton ? "" : "pointer-events-none translate-y-[200px]"
       } transition-transform duration-300`}
       onClick={scrollToTop}

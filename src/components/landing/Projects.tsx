@@ -30,7 +30,7 @@ function Project({ project }: { project: ProjectType }) {
       rel="noopener noreferrer"
       id={key + "-" + project.slug}
     >
-      <div className="w-full flex-grow overflow-hidden rounded-lg brightness-90">
+      <div className="w-full grow overflow-hidden rounded-lg brightness-90">
         <img
           src={project.image.src}
           className="h-full w-full scale-110 rounded-lg object-contain brightness-90 transition-transform duration-300 group-hover:scale-100"
@@ -50,7 +50,7 @@ function Project({ project }: { project: ProjectType }) {
           url={{ key, id: project.slug }}
           className={{
             master: "opacity-0 group-hover:opacity-100",
-            child: "h-5 w-5 text-muted-foreground"
+            child: "text-muted-foreground h-5 w-5"
           }}
         />
       </div>

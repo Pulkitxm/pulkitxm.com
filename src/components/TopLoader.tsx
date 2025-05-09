@@ -25,12 +25,10 @@ export default function TopLoader() {
   const startProgressSimulation = useCallback(() => {
     if (progressInterval.current) clearInterval(progressInterval.current);
 
-    // Start with a small initial progress
     setProgress(5);
 
     progressInterval.current = setInterval(() => {
       setProgress((currentProgress) => {
-        // Slow down as we approach higher percentages
         if (currentProgress < 30) return currentProgress + 1;
         if (currentProgress < 60) return currentProgress + 0.5;
         if (currentProgress < 80) return currentProgress + 0.2;
@@ -75,11 +73,9 @@ export default function TopLoader() {
     if (progressInterval.current) clearInterval(progressInterval.current);
     if (observer.current) observer.current.disconnect();
 
-    // Ensure we reach 100%
     setProgress(100);
     setState("complete");
 
-    // Reset after animation completes
     setTimeout(() => {
       setState("idle");
       setProgress(0);
@@ -87,7 +83,6 @@ export default function TopLoader() {
   }, []);
 
   useEffect(() => {
-    // Skip the initial load
     if (!initialLoadDone.current) {
       initialLoadDone.current = true;
       return;
@@ -95,7 +90,6 @@ export default function TopLoader() {
 
     startLoading();
 
-    // Fallback to complete if no resources detected within reasonable time
     const timeoutId = setTimeout(() => {
       completeLoading();
     }, 3000);
@@ -110,7 +104,7 @@ export default function TopLoader() {
   if (state === "idle") return null;
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-50 h-1">
+    <div className="fixed top-0 right-0 left-0 z-50 h-1">
       <div className="h-full bg-blue-500 transition-all duration-300 ease-out" style={{ width: `${progress}%` }} />
     </div>
   );

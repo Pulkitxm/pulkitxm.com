@@ -2,10 +2,9 @@
 
 import { Mail, MessageSquare, Send, User, Calendar } from "lucide-react";
 import Link from "next/link";
-import { Fragment, useCallback, useEffect, useState, useRef, useMemo } from "react";
+import { useCallback, useEffect, useState, useRef, useMemo } from "react";
 
 import { sendEmail } from "@/actions/email";
-import MagneticElement from "@/components/MagneticElement";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -20,7 +19,6 @@ export default function ContactPage() {
     email: "",
     message: ""
   });
-  const [isTouchable, setIsTouchable] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -65,7 +63,7 @@ export default function ContactPage() {
                 Name
               </Label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
                 <Input
                   type="text"
                   value={formInputs.name}
@@ -87,7 +85,7 @@ export default function ContactPage() {
                 Email
               </Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
                 <Input
                   type="email"
                   value={formInputs.email}
@@ -109,7 +107,7 @@ export default function ContactPage() {
                 Message
               </Label>
               <div className="relative">
-                <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <MessageSquare className="absolute top-3 left-3 h-4 w-4 text-gray-400" />
                 <Textarea
                   value={formInputs.message}
                   onChange={(e) =>
@@ -181,7 +179,6 @@ export default function ContactPage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    setIsTouchable("ontouchstart" in window);
 
     const query = new URLSearchParams(window.location.search);
     const isScheduled = query.get("schedule");
@@ -192,7 +189,7 @@ export default function ContactPage() {
 
   return (
     <main className="p-0">
-      <Card className="overflow-hidden border-none text-white">
+      <Card className="bg-background overflow-hidden border-none text-white">
         <CardHeader className="space-y-1 px-6 py-8">
           <CardTitle className="text-2xl font-bold sm:text-3xl">Get in Touch</CardTitle>
           <CardDescription className="text-gray-400">
@@ -200,19 +197,17 @@ export default function ContactPage() {
             idea, a job opportunity, or simply a chance to connect, feel free to reach out!
             <div className="mt-4 flex space-x-4">
               {links.map(({ href, icon: Icon, label }) => {
-                const Element = isTouchable ? Fragment : MagneticElement;
                 return (
-                  <Element key={label}>
-                    <Link
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 transition-colors hover:text-white"
-                    >
-                      <Icon className="h-7 w-7" />
-                      <span className="sr-only">{label}</span>
-                    </Link>
-                  </Element>
+                  <Link
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 transition-colors hover:text-white"
+                  >
+                    <Icon className="h-7 w-7" />
+                    <span className="sr-only">{label}</span>
+                  </Link>
                 );
               })}
             </div>
@@ -221,21 +216,19 @@ export default function ContactPage() {
 
         <CardContent>
           <div
-            className="relative grid h-9 w-full grid-cols-2 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground"
+            className="bg-muted text-muted-foreground relative grid h-9 w-full grid-cols-2 items-center justify-center rounded-lg p-1"
             ref={tabsRef}
           >
-            {/* Sliding background element */}
             <div
-              className="absolute bottom-1 top-1 rounded-md bg-[#ffffff1a] transition-all duration-300 ease-in-out"
+              className="absolute top-1 bottom-1 rounded-md bg-[#ffffff1a] transition-all duration-300 ease-in-out"
               style={sliderStyle}
             ></div>
 
-            {/* Tab buttons */}
             {Tabs.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
                 type="button"
-                className={`z-10 inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                className={`ring-offset-background focus-visible:ring-ring z-10 inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
                   isSelected === id ? "text-white" : "text-muted-foreground"
                 }`}
                 onClick={() => setIsSelected(id)}
@@ -252,12 +245,12 @@ export default function ContactPage() {
           ))}
         </CardContent>
 
-        <CardFooter className="flex items-center justify-center bg-gradient-to-r from-primary/5 to-primary/10 p-6 px-6 py-4">
+        <CardFooter className="from-primary/5 to-primary/10 flex items-center justify-center bg-linear-to-r p-6 px-6 py-4">
           <p className="text-base sm:text-lg">
             or mail me at{" "}
             <Link
               href={`mailto:${profile.email}`}
-              className="font-semibold text-primary underline-offset-4 transition-colors duration-200 hover:underline"
+              className="text-primary font-semibold underline-offset-4 transition-colors duration-200 hover:underline"
             >
               {profile.email}
             </Link>

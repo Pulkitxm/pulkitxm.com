@@ -69,7 +69,7 @@ export default async function GuestbookPage() {
 
           <GuestBook messages={messages} user={session.user} />
 
-          <div className="mt-8 space-y-6">{/* Guestbook entries would go here */}</div>
+          <div className="mt-8 space-y-6"></div>
         </div>
       )}
     </main>

@@ -28,7 +28,7 @@ export default memo(
               className="relative h-full w-full"
               aria-label={`Play ${title}`}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/10" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-black/10" />
               <img
                 src={thumbnailUrl}
                 alt={`Thumbnail for ${title}`}
@@ -42,7 +42,7 @@ export default memo(
                 </div>
               </div>
             </button>
-            <div className="group absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-lg border border-white/25 bg-black/80 px-3 py-2 backdrop-blur-sm sm:bottom-4 sm:left-4 sm:right-4 sm:px-4 sm:py-3">
+            <div className="group absolute right-3 bottom-3 left-3 flex items-center justify-between rounded-lg border border-white/25 bg-black/80 px-3 py-2 backdrop-blur-sm sm:right-4 sm:bottom-4 sm:left-4 sm:px-4 sm:py-3">
               <Link
                 href={`https://youtu.be/${videoId}`}
                 target="_blank"
@@ -57,7 +57,7 @@ export default memo(
                 href={`https://youtu.be/${videoId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-black/80 text-white transition-colors duration-300 hover:bg-black/90 sm:h-8 sm:w-8"
+                className="ml-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/80 text-white transition-colors duration-300 hover:bg-black/90 sm:h-8 sm:w-8"
                 aria-label={`Open ${title} on YouTube`}
                 onClick={(e) => e.stopPropagation()}
               >

@@ -35,7 +35,7 @@ export function PrListItem({ pr }: { pr: PR }) {
               {pr.labels.map((label, index) => (
                 <Badge
                   variant="outline"
-                  className="text-xs transition-colors duration-200 ease-in-out hover:bg-primary hover:text-primary-foreground"
+                  className="hover:bg-primary hover:text-primary-foreground text-xs transition-colors duration-200 ease-in-out"
                   key={index}
                 >
                   {label}

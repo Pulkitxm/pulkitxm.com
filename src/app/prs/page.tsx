@@ -73,18 +73,18 @@ export default function PrsPage() {
         <SkeletonFilter />
       ) : (
         <div className="mb-6 flex flex-col gap-4 transition-all duration-300 ease-in-out sm:flex-row">
-          <div className="relative flex-grow">
-            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 transform text-gray-400" />
+          <div className="relative grow">
+            <FaSearch className="absolute top-1/2 left-3 -translate-y-1/2 transform text-gray-400" />
             <Input
               placeholder="Search PRs..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 transition-all duration-200 ease-in-out focus:ring-2 focus:ring-primary"
+              className="focus:ring-primary pl-10 transition-all duration-200 ease-in-out focus:ring-2"
             />
           </div>
           <div className="flex flex-wrap gap-2 sm:flex-nowrap">
             <Select value={prState} onValueChange={(e) => setPrState(e as PR_STATE_TYPE)}>
-              <SelectTrigger className="w-full transition-all duration-200 ease-in-out focus:ring-2 focus:ring-primary sm:w-[150px]">
+              <SelectTrigger className="focus:ring-primary w-full transition-all duration-200 ease-in-out focus:ring-2 sm:w-[150px]">
                 <FaFilter className="mr-2" />
                 <SelectValue placeholder="State" />
               </SelectTrigger>
@@ -100,7 +100,7 @@ export default function PrsPage() {
               </SelectContent>
             </Select>
             <Select value={String(year)} onValueChange={(e) => setYear(e === "all" ? "all" : Number(e))}>
-              <SelectTrigger className="w-full transition-all duration-200 ease-in-out focus:ring-2 focus:ring-primary sm:w-[150px]">
+              <SelectTrigger className="focus:ring-primary w-full transition-all duration-200 ease-in-out focus:ring-2 sm:w-[150px]">
                 <FaFilter className="mr-2" />
                 <SelectValue placeholder="Year" />
               </SelectTrigger>

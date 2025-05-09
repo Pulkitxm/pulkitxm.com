@@ -9,7 +9,7 @@ import {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-  useCarousel
+  CarouselApi
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +26,7 @@ export default function SimpleCarousel({
   autoMove = true,
   autoMoveInterval = 5000
 }: SimpleCarouselProps) {
-  const [api, setApi] = useState<ReturnType<typeof useCarousel>["api"] | null>(null);
+  const [api, setApi] = useState<CarouselApi | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -117,10 +117,10 @@ export default function SimpleCarousel({
                   alt={`Background ${index + 1}`}
                   width={50}
                   height={50}
-                  className="h-full w-full scale-110 select-none object-cover blur-md brightness-50"
+                  className="h-full w-full scale-110 object-cover blur-md brightness-50 select-none"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <img src={src.src} alt={`Slide ${index + 1}`} className="h-full w-full select-none object-contain" />
+                  <img src={src.src} alt={`Slide ${index + 1}`} className="h-full w-full object-contain select-none" />
                 </div>
               </div>
             </CarouselItem>
@@ -134,7 +134,7 @@ export default function SimpleCarousel({
         )}
       </Carousel>
       {showNavigation && (
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+        <div className="absolute right-0 bottom-4 left-0 flex justify-center space-x-2">
           {images.map((_, index) => (
             <button
               key={index}
@@ -167,7 +167,7 @@ export function ImageFader({ images, alt }: { images: StaticImageData[]; alt: st
   }, [images, TIMER]);
 
   return (
-    <div className="relative aspect-[16/9] h-full w-full overflow-hidden lg:aspect-auto">
+    <div className="relative aspect-video h-full w-full overflow-hidden lg:aspect-auto">
       {images.map((src, index) => (
         <div
           key={index}

@@ -72,11 +72,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: NEXT_PUBLIC_API_URL
   },
-  verification: {
-    // Add your verification tokens if available
-    // google: "your-google-verification-token",
-    // yandex: "your-yandex-verification-token",
-  },
   category: "technology"
 };
 

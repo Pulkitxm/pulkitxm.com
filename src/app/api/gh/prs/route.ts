@@ -54,5 +54,3 @@ export async function GET(request: NextRequest): Promise<NextResponse<PR[] | { e
     return NextResponse.json({ error: "Failed to fetch PRs" }, { status: 500 });
   }
 }
-
-export const dynamic = "force-dynamic";

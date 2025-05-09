@@ -38,7 +38,7 @@ function CollabInviteLayerCX() {
           }}
           className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#1a1a1a] border-b-[#4fa17f80] bg-[#0a0a0ae3] shadow-2xl shadow-[#4fa17f80]"
         >
-          <div className="mx-auto flex max-w-screen-xl items-center justify-between px-4 py-2 md:px-6">
+          <div className="mx-auto flex max-w-(--breakpoint-xl) items-center justify-between px-4 py-2 md:px-6">
             <div className="flex-1" />
             <PreFetchUrl
               href="/contact"

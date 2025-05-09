@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { StaticImageData } from "next/image";
+import { JSX } from "react";
 
 export enum EXP_TYPE {
   FULL_TIME = "Full time",

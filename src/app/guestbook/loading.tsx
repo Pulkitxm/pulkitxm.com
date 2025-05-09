@@ -3,9 +3,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
-    <div className="bg-gradient-to-b from-background to-background/80 p-4 md:p-8">
+    <div className="from-background to-background/80 bg-linear-to-b p-4 md:p-8">
       <div className="mx-auto max-w-2xl space-y-8">
-        <Card className="space-y-6 border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 p-8 text-center">
+        <Card className="border-primary/20 from-primary/10 to-primary/5 bg-background space-y-6 bg-linear-to-br p-8 text-center">
           <div className="space-y-4">
             <Skeleton className="mx-auto h-8 w-3/4" />
             <Skeleton className="mx-auto h-5 w-2/3" />

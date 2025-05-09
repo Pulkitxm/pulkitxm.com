@@ -25,7 +25,7 @@ export function SkeletonItem() {
 export function SkeletonFilter() {
   return (
     <div className="mb-6 flex animate-pulse flex-col gap-4 sm:flex-row">
-      <div className="relative flex-grow">
+      <div className="relative grow">
         <Skeleton className="h-10 w-full" />
       </div>
       <div className="flex flex-wrap gap-2 sm:flex-nowrap">

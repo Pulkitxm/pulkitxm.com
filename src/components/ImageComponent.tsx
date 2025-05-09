@@ -27,7 +27,7 @@ export function ImageComponent({
   className,
   containerClassName,
   objectFit = "cover",
-  placeholderIcon = <User2Icon className="h-1/5 w-1/5 text-muted-foreground" />,
+  placeholderIcon = <User2Icon className="text-muted-foreground h-1/5 w-1/5" />,
   priority = false,
   sizes,
   ...props
@@ -44,7 +44,7 @@ export function ImageComponent({
 
   return (
     <div
-      className={cn(containerClassName, "relative overflow-hidden", status === "loading" && "animate-pulse bg-muted")}
+      className={cn(containerClassName, "relative overflow-hidden", status === "loading" && "bg-muted animate-pulse")}
       style={{
         width: width || "100%",
         height: height || "auto"

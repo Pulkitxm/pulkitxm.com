@@ -25,12 +25,12 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ profileImage, onClose, onClear
             height={40}
             className="rounded-full border border-green-400"
           />
-          <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-400 text-xs font-bold text-black">
+          <span className="absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-400 text-xs font-bold text-black">
             <Zap size={12} />
           </span>
         </div>
         <div>
-          <h2 className="text-lg font-black uppercase tracking-wide text-green-400">Pukbot</h2>
+          <h2 className="text-lg font-black tracking-wide text-green-400 uppercase">Pukbot</h2>
           <p className="text-xs font-bold text-green-300">Unhinged & Unfiltered</p>
         </div>
       </div>

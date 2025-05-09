@@ -3,14 +3,8 @@ import React from "react";
 
 import profile from "@/data/profile";
 
-export default function ExperienceDetailsPage({
-  params
-}: {
-  params: {
-    expSlug: string;
-  };
-}) {
-  const { expSlug } = params;
+export default async function ExperienceDetailsPage({ params }: { params: Promise<{ expSlug: string }> }) {
+  const { expSlug } = await params;
 
   const exp = profile.experience.find((exp) => exp.slug === expSlug);
 

@@ -10,7 +10,7 @@ import { Experience } from "@/types/profile";
 export default async function GeeksForGeeks({ exp }: { exp: Experience }) {
   return (
     <div className="space-y-8">
-      <h1 className="mb-4 text-lg font-bold text-primary md:text-xl lg:text-2xl">
+      <h1 className="text-primary mb-4 text-lg font-bold md:text-xl lg:text-2xl">
         <span className="underline">{exp.position}</span>@
         <Link
           href={exp.url}
@@ -31,7 +31,7 @@ export default async function GeeksForGeeks({ exp }: { exp: Experience }) {
 
       <div className="space-y-8">
         <div>
-          <div className="mb-4 text-xl font-semibold text-primary md:text-2xl">Key Responsibilities</div>
+          <div className="text-primary mb-4 text-xl font-semibold md:text-2xl">Key Responsibilities</div>
           <Card>
             <CardContent className="p-6">
               <ul className="grid gap-4 md:grid-cols-2">
@@ -46,7 +46,7 @@ export default async function GeeksForGeeks({ exp }: { exp: Experience }) {
         </div>
 
         <div>
-          <div className="mb-4 flex items-center text-xl font-semibold text-primary md:text-2xl">
+          <div className="text-primary mb-4 flex items-center text-xl font-semibold md:text-2xl">
             Certificate of Employment
             <Link
               href={assets.proffessionalThings.geeksforgeeks.geeksForGeeksLetter}

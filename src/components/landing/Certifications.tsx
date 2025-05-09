@@ -12,7 +12,7 @@ export default async function Certifications() {
     <section className="mb-12">
       <div>
         <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Certifications</h2>
-        <p className="text-sm text-muted-foreground">I have completed the following certifications.</p>
+        <p className="text-muted-foreground text-sm">I have completed the following certifications.</p>
       </div>
       <div className="mt-4 grid gap-6 sm:grid-cols-2">
         {profile.certifications.map((certification, index) => (
@@ -34,7 +34,7 @@ function Certificate({ certification }: { certification: Certification }) {
       rel="noopener noreferrer"
       id={key + "-" + certification.slug}
     >
-      <Card className="h-full overflow-hidden transition-colors hover:bg-muted/50">
+      <Card className="hover:bg-muted/50 h-full overflow-hidden transition-colors">
         <CardHeader className="border-b p-0">
           <div className="relative h-48 w-full sm:h-56 md:h-64">
             <img
@@ -47,8 +47,8 @@ function Certificate({ certification }: { certification: Certification }) {
         </CardHeader>
         <CardContent className="space-y-2 p-4">
           <h3 className="font-semibold">{certification.name}</h3>
-          <p className="text-sm text-muted-foreground">Issued at: {certification.issuedAt.toLocaleDateString()}</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">Issued at: {certification.issuedAt.toLocaleDateString()}</p>
+          <p className="text-muted-foreground text-sm">
             Issued by:{" "}
             <Link
               href={certification.issuedBy.url}
@@ -61,7 +61,7 @@ function Certificate({ certification }: { certification: Certification }) {
           </p>
         </CardContent>
         <CardFooter className="flex justify-between p-4 pt-0">
-          <span className="flex items-center gap-1 text-sm text-muted-foreground underline-offset-4 group-hover:underline">
+          <span className="text-muted-foreground flex items-center gap-1 text-sm underline-offset-4 group-hover:underline">
             Verify Certificate
             <ExternalLink className="h-3 w-3" />
           </span>
@@ -70,7 +70,7 @@ function Certificate({ certification }: { certification: Certification }) {
             url={{ key, id: certification.slug }}
             className={{
               master: "opacity-0 group-hover:opacity-100",
-              child: "h-5 w-5 text-muted-foreground"
+              child: "text-muted-foreground h-5 w-5"
             }}
           />
         </CardFooter>

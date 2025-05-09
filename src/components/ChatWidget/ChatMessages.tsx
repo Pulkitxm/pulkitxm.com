@@ -30,7 +30,7 @@ export const ChatMessage: FC<ChatMessageProps> = ({ message, profileImage, isSam
       )}
       <div
         className={cn(
-          "max-w-[80%] whitespace-pre-wrap break-words rounded-lg px-3 py-2 text-sm font-medium",
+          "max-w-[80%] rounded-lg px-3 py-2 text-sm font-medium break-words whitespace-pre-wrap",
           role === "user" ? "rounded-br-none bg-gray-600 text-white" : "rounded-bl-none bg-green-600 text-white"
         )}
       >

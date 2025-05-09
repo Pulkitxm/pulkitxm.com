@@ -31,5 +31,3 @@ export async function GET() {
     contributions
   });
 }
-
-export const dynamic = "force-dynamic";

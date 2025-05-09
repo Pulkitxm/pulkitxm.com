@@ -17,7 +17,7 @@ export const ChatLauncherButton: FC<ChatLauncherButtonProps> = ({ profileImage, 
       onClick={onClick}
       whileHover={buttonHoverAnimation}
       whileTap={buttonTapAnimation}
-      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-green-600 shadow-md focus:outline-none"
+      className="fixed right-6 bottom-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-green-600 shadow-md focus:outline-none"
       aria-label="Open chat"
       title="Chat with Pukbot"
     >
@@ -38,7 +38,7 @@ export const ChatLauncherButton: FC<ChatLauncherButtonProps> = ({ profileImage, 
               duration: 1.5,
               repeatType: "reverse"
             }}
-            className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-400 text-[10px] font-black text-black"
+            className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-400 text-[10px] font-black text-black"
           >
             !?
           </motion.span>

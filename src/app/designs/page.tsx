@@ -12,7 +12,7 @@ export default function DesignsPage() {
   return (
     <main className="px-10 py-16">
       <motion.h1
-        className="mb-16 text-center text-4xl font-bold dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
+        className="mb-16 text-center text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl dark:text-white"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, type: "spring" }}
@@ -23,7 +23,7 @@ export default function DesignsPage() {
 
       <section className="mb-32">
         <motion.h2
-          className="mb-12 text-center text-2xl font-semibold dark:text-gray-200 sm:text-3xl md:text-4xl"
+          className="mb-12 text-center text-2xl font-semibold sm:text-3xl md:text-4xl dark:text-gray-200"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -44,7 +44,7 @@ export default function DesignsPage() {
 
       <section>
         <motion.h2
-          className="mb-12 text-center text-2xl font-semibold dark:text-gray-200 sm:text-3xl md:text-4xl"
+          className="mb-12 text-center text-2xl font-semibold sm:text-3xl md:text-4xl dark:text-gray-200"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -75,15 +75,15 @@ function DisplayWebDesign({ item, index }: { item: DesignItem; index: number }) 
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className="relative">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl">
+        <div className="relative aspect-video overflow-hidden rounded-t-2xl">
           <img
             src={item.image.src}
             alt={item.title}
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </div>
-        <div className="absolute bottom-0 left-0 right-0 translate-y-full transform p-6 text-white transition-transform duration-300 group-hover:translate-y-0">
+        <div className="absolute right-0 bottom-0 left-0 translate-y-full transform p-6 text-white transition-transform duration-300 group-hover:translate-y-0">
           <h3 className="mb-2 text-2xl font-bold">{item.title}</h3>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -119,13 +119,13 @@ function DisplayPortfolioDesign({ item, index }: { item: DesignItem; index: numb
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="relative aspect-[4/3]">
+      <div className="relative aspect-4/3">
         <img
           src={item.image.src}
           alt={item.title}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="absolute inset-0 flex flex-col justify-end p-6 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <h3 className="mb-2 text-2xl font-bold">{item.title}</h3>
           <div className="flex flex-wrap gap-4">

@@ -65,7 +65,6 @@ export default function Setup() {
       zoomToElement(targetElement, item.zoom, 800);
     }
 
-    // scroll to top
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -97,7 +96,7 @@ export default function Setup() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 p-4 text-slate-100">
+    <main className="min-h-screen bg-linear-to-b from-slate-900 to-slate-950 p-4 text-slate-100">
       <div className="mx-auto max-w-6xl">
         <h1 className="mb-6 text-center text-4xl font-bold tracking-tight text-white">My Setup</h1>
 
@@ -131,7 +130,7 @@ export default function Setup() {
                 <>
                   <TransformComponent
                     wrapperClass={cn(
-                      "!h-full !w-full transition-opacity duration-500",
+                      "h-full! w-full! transition-opacity duration-500",
                       isLoaded ? "opacity-100" : "opacity-0"
                     )}
                     contentClass="h-full w-full"
@@ -255,7 +254,7 @@ export default function Setup() {
             </TransformWrapper>
 
             {showMinimap && isLoaded && (
-              <div className="pointer-events-none absolute bottom-4 right-4 z-20 h-24 w-24 overflow-hidden rounded-lg border border-slate-700 bg-black/60 shadow-lg backdrop-blur-md sm:h-28 sm:w-28">
+              <div className="pointer-events-none absolute right-4 bottom-4 z-20 h-24 w-24 overflow-hidden rounded-lg border border-slate-700 bg-black/60 shadow-lg backdrop-blur-md sm:h-28 sm:w-28">
                 <img src={assets.setup.src} alt="Minimap" className="h-full w-full object-cover opacity-70" />
                 {imageSize.width > 0 && (
                   <div className="absolute inset-0 border-2 border-red-500/50">
@@ -314,7 +313,7 @@ export default function Setup() {
                 </div>
               </div>
 
-              <div className="absolute inset-0 -z-10 bg-gradient-to-r from-green-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+              <div className="absolute inset-0 -z-10 bg-linear-to-r from-green-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
             </div>
           ))}
         </div>

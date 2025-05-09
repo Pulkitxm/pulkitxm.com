@@ -9,7 +9,6 @@ export class InMemoryVectorStore {
     this.docs.push({ id: uuidv4(), text, embedding });
   }
 
-  // cosine similarity
   private similarity(a: number[], b: number[]) {
     const dot = a.reduce((sum, ai, i) => sum + ai * b[i], 0);
     const magA = Math.sqrt(a.reduce((s, x) => s + x * x, 0));
@@ -17,7 +16,6 @@ export class InMemoryVectorStore {
     return dot / (magA * magB);
   }
 
-  // return top k texts
   nearest(embedding: number[], k = 5) {
     return this.docs
       .map((doc) => ({ ...doc, score: this.similarity(doc.embedding, embedding) }))
