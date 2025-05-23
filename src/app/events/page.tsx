@@ -6,10 +6,12 @@ import JumpLink from "@/components/JumpLink";
 import { PreFetchUrl } from "@/components/PreFetchUrl";
 import profile from "@/data/profile";
 
-export default function EventsPage() {
+export default async function EventsPage() {
   const key = "event";
+  const events = await profile.events;
+
   return (
-    <main className="min-h-screen bg-[#0A0A0B]">
+    <main>
       <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="mb-12 lg:mb-16">
           <h1 className="mb-4 bg-linear-to-r from-emerald-400 via-emerald-500 to-teal-500 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
@@ -21,7 +23,7 @@ export default function EventsPage() {
         </div>
 
         <div className="space-y-12 sm:space-y-16 lg:space-y-24">
-          {profile.events.map((event, index) => (
+          {events.map((event, index) => (
             <div
               key={index}
               className="group relative overflow-hidden rounded-2xl bg-linear-to-b from-gray-800/40 to-gray-900/40 backdrop-blur-sm transition-all duration-300 hover:from-gray-800/50 hover:to-gray-900/50"

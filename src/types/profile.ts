@@ -88,7 +88,7 @@ export type Profile = {
   links: Readonly<Record<string, string>>;
   experience: readonly Experience[];
   projects: readonly Project[];
-  events: readonly Event[];
+  events: Promise<Event[]>;
   skills: Readonly<Record<string, string[]>>;
   certifications: readonly Certification[];
   design: Design;

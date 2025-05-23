@@ -7,7 +7,7 @@ import { Profile } from "@/types/profile";
 
 import { certifications } from "./certifications";
 import { design } from "./design";
-import { events } from "./events";
+import { getEvents } from "./events";
 import { experience } from "./experience";
 import { projects } from "./projects";
 import { setupItems } from "./setup";
@@ -36,7 +36,7 @@ const profile: Readonly<Profile> = {
   skills,
   certifications,
   design,
-  events,
+  events: getEvents(),
   setupItems
 };
 

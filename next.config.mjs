@@ -22,6 +22,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "img.youtube.com"
+      },
+      {
+        protocol: "http",
+        hostname: "deviatorsdce.tech"
       }
     ],
     minimumCacheTTL: 60,
