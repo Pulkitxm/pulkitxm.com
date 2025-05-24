@@ -167,3 +167,16 @@ export async function getSitemapUrls(): Promise<string[]> {
     return ["/"];
   }
 }
+
+export const isSameDomain = (url: string): boolean => {
+  try {
+    if (url.startsWith("/")) return true;
+
+    const urlObj = new URL(url);
+    const currentHostname = window.location.hostname;
+    return urlObj.hostname === currentHostname;
+  } catch (e) {
+    if (e) return false;
+  }
+  return false;
+};

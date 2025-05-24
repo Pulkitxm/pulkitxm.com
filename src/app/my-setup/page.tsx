@@ -96,7 +96,7 @@ export default function Setup() {
   };
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-slate-900 to-slate-950 p-4 text-slate-100">
+    <main>
       <div className="mx-auto max-w-6xl">
         <h1 className="mb-6 text-center text-4xl font-bold tracking-tight text-white">My Setup</h1>
 
@@ -285,9 +285,9 @@ export default function Setup() {
             <div
               key={index}
               className={cn(
-                "group relative cursor-pointer overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 p-4 backdrop-blur-sm transition-all duration-200 hover:border-slate-700 hover:bg-slate-800/50",
+                "group relative cursor-pointer overflow-hidden rounded-xl border border-slate-800 p-4 backdrop-blur-sm transition-all duration-200 hover:border-slate-700 hover:bg-black/50",
                 (focusedItem === index || hoveredItemId === index) &&
-                  "border-green-500/50 bg-slate-800/70 ring-1 ring-green-500/30"
+                  "border-green-500/50 bg-black/70 ring-1 ring-green-500/30"
               )}
               onMouseEnter={() => setHoveredItemId(index)}
               onMouseLeave={() => setHoveredItemId(null)}

@@ -6,6 +6,7 @@ import Experience from "@/components/landing/Experience";
 import Header from "@/components/landing/header";
 import Projects from "@/components/landing/Projects";
 import Skills from "@/components/landing/Skills";
+import SpecialHighlights from "@/components/landing/SpeciaHighlights";
 
 export default function LandingPage() {
   return (
@@ -17,6 +18,7 @@ export default function LandingPage() {
       <Skills />
       <Certifications />
       <Projects />
+      <SpecialHighlights />
       <Footer />
     </main>
   );

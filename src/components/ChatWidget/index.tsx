@@ -7,7 +7,8 @@ import { useState, useRef, useEffect, useCallback, KeyboardEvent, ChangeEvent } 
 
 import { getChatResponse, getSuggestionsForChat } from "@/actions/chat";
 import profile from "@/data/profile";
-import { formatMessage, getRandomLoadingText, addRandomEmoji, isSameDomain } from "@/lib/chatUtils";
+import { formatMessage, getRandomLoadingText, addRandomEmoji } from "@/lib/chatUtils";
+import { isSameDomain } from "@/lib/utils";
 import { Message, Suggestion } from "@/types/chat";
 
 import { ChatHeader } from "./ChatHeader";
