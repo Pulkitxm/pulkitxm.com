@@ -86,7 +86,7 @@ export type Profile = {
   sourceCodeUrl: string;
   email: string;
   links: Readonly<Record<string, string>>;
-  experience: readonly Experience[];
+  experience: Experience[];
   projects: readonly Project[];
   events: Promise<Event[]>;
   skills: Readonly<Record<string, string[]>>;
