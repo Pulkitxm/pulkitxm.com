@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import cors from "cors";
 import { createHash, randomBytes } from "crypto";
-import { ALLOWED_ORIGINS, IP_SALT, PORT } from "./constants";
+import { ALLOWED_ORIGINS, IP_SALT, PORT, PROD_APP } from "./constants";
 
 const app = express();
 
@@ -245,6 +245,10 @@ app.get("/health", (req: Request, res: Response) => {
     uniqueIPs: getUniqueIPCount(),
     uptime: process.uptime(),
   });
+});
+
+app.all("*", (req: Request, res: Response) => {
+  res.redirect(PROD_APP);
 });
 
 setInterval(cleanupStaleConnections, 5 * 60 * 1000);
