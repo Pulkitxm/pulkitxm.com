@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { PreFetchUrl } from "../PreFetchUrl";
 
 export default function CollabInviteLayer() {
-  const showFloatingCTA = useFeatureFlagEnabled("floating-cta");
+  const showFloatingCTA = useFeatureFlagEnabled("floating-cta") !== false;
   if (!showFloatingCTA) return null;
 
   return <CollabInviteLayerCX />;

@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, PenToolIcon } from "lucide-react";
+import { Menu, PenToolIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -12,6 +12,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { NAVIGATION_LINKS } from "@/data/pages";
 import { cn } from "@/lib/utils";
 
+import ActiveUsers from "./ActiveUsers";
 import { PreFetchUrl } from "./PreFetchUrl";
 
 export default function Navbar() {
@@ -131,9 +132,14 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
             href="/guestbook"
             className="flex items-center rounded bg-white px-3 py-1 text-sm text-black transition-colors hover:bg-gray-200"
           >
-            Sign my Guestbook
+            Guestbook
             <PenToolIcon className="ml-1 inline h-4 w-4" />
           </PreFetchUrl>
+        </li>
+        <li className="flex cursor-text items-center space-x-1 select-none" title="Active Visitors">
+          <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 transition-all duration-[10ms] ease-in-out" />
+          <ActiveUsers />
+          <UserIcon className="ml-1 h-4 w-4" />
         </li>
       </ul>
       <div className="relative h-0.5 w-full">
@@ -175,11 +181,17 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
           <Link
             href="/guestbook"
             onClick={() => setIsOpen(false)}
-            className="mt-2 flex items-center px-4 py-2 text-sm text-white transition-colors hover:bg-gray-800"
+            className="mt-2 flex items-center px-4 py-2 text-sm text-gray-400 transition-colors hover:bg-gray-800"
           >
             Sign my Guestbook
             <PenToolIcon className="ml-1 h-4 w-4" />
           </Link>
+          <div className="flex cursor-text items-center space-x-1 px-4 py-2 text-gray-400 select-none">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 transition-all duration-[10ms] ease-in-out" />
+            <ActiveUsers />
+            <span className="ml-1">Active Visitors</span>
+            <UserIcon className="ml-1 h-4 w-4" />
+          </div>
         </div>
       </SheetContent>
     </Sheet>
