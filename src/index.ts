@@ -95,10 +95,17 @@ function cleanupStaleConnections(): void {
   staleConnections.forEach((sessionId) => {
     const data = activeConnections.get(sessionId);
     if (data) {
+      if (data.socket.connected) {
+        data.socket.disconnect(true);
+        console.log(`Explicitly disconnected stale socket: ${sessionId}`);
+      }
+
       const hashedIP = hashIP(data.ipAddress);
       const currentCount = ipConnectionCount.get(hashedIP) || 0;
       if (currentCount > 0) {
         ipConnectionCount.set(hashedIP, currentCount - 1);
+      } else {
+        ipConnectionCount.delete(hashedIP);
       }
       activeConnections.delete(sessionId);
     }
@@ -219,9 +226,16 @@ io.on("connection", (socket) => {
 
       const connectionData = activeConnections.get(sessionId);
       if (connectionData) {
-        const currentCount = ipConnectionCount.get(hashedIP) || 0;
-        if (currentCount > 0) {
-          ipConnectionCount.set(hashedIP, currentCount - 1);
+        const ipToDecrement = socket.data.hashedIP || hashIP(connectionData.ipAddress);
+        const currentCount = ipConnectionCount.get(ipToDecrement);
+
+        if (typeof currentCount === "number" && currentCount > 0) {
+          ipConnectionCount.set(ipToDecrement, currentCount - 1);
+        } else if (typeof currentCount === "number" && currentCount <= 0) {
+          ipConnectionCount.delete(ipToDecrement);
+          console.warn(
+            `IP count for ${ipToDecrement} was already ${currentCount} or less upon disconnect for ${sessionId}.`
+          );
         }
 
         activeConnections.delete(sessionId);
