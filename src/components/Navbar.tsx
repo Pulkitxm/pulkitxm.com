@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, PenToolIcon, UserIcon } from "lucide-react";
+import { Menu, PenToolIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -136,10 +136,8 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
             <PenToolIcon className="ml-1 inline h-4 w-4" />
           </PreFetchUrl>
         </li>
-        <li className="flex cursor-text items-center space-x-1 select-none" title="Active Visitors">
-          <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 transition-all duration-[10ms] ease-in-out" />
+        <li>
           <ActiveUsers />
-          <UserIcon className="ml-1 h-4 w-4" />
         </li>
       </ul>
       <div className="relative h-0.5 w-full">
@@ -186,12 +184,7 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
             Sign my Guestbook
             <PenToolIcon className="ml-1 h-4 w-4" />
           </Link>
-          <div className="flex cursor-text items-center space-x-1 px-4 py-2 text-gray-400 select-none">
-            <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 transition-all duration-[10ms] ease-in-out" />
-            <ActiveUsers />
-            <span className="ml-1">Active Visitors</span>
-            <UserIcon className="ml-1 h-4 w-4" />
-          </div>
+          <ActiveUsers />
         </div>
       </SheetContent>
     </Sheet>
