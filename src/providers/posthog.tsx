@@ -10,9 +10,11 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
   const [shouldTrack, setShouldTrack] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("posthog") !== "false") {
+    if (localStorage.getItem("posthog") !== "false" || process.env.NODE_ENV === "development") {
       setShouldTrack(true);
+    }
 
+    if (localStorage.getItem("posthog") !== "false") {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY as string, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
         person_profiles: "identified_only",

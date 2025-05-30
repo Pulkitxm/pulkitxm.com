@@ -48,7 +48,7 @@ export default function Navbar() {
 }
 
 function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolean }) {
-  const useNavigation = useFeatureFlagEnabled("shortcut-navigation");
+  const useNavigation = useFeatureFlagEnabled("shortcut-navigation") !== false;
   const router = useRouter();
   const menuRef = useRef<HTMLUListElement>(null);
 
@@ -184,7 +184,9 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
             Sign my Guestbook
             <PenToolIcon className="ml-1 h-4 w-4" />
           </Link>
-          <ActiveUsers />
+          <div className="mt-2 flex items-center px-4 py-2 text-sm text-gray-400 transition-colors hover:bg-gray-800">
+            <ActiveUsers />
+          </div>
         </div>
       </SheetContent>
     </Sheet>

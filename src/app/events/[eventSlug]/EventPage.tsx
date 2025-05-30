@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import "photoswipe/dist/photoswipe.css";
 import ImageGallery from "@/components/ImageGallery";
 import { Event } from "@/types/profile";
 

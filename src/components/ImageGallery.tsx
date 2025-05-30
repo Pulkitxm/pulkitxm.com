@@ -5,12 +5,31 @@ import { StaticImageData } from "next/image";
 import { useRef } from "react";
 import { Gallery, Item } from "react-photoswipe-gallery";
 
+import "photoswipe/dist/photoswipe.css";
+
 export interface ImageItem {
   src: string;
   alt: string;
 }
 
 export default function ImageGallery({ images }: { images: StaticImageData[] }) {
+  if (images.length === 1)
+    return (
+      <Gallery>
+        <Item thumbnail={images[0].src} original={images[0].src} width={images[0].width} height={images[0].height}>
+          {({ ref, open }) => (
+            <img
+              src={images[0].src}
+              alt={"Gallery Image"}
+              ref={ref}
+              onClick={open}
+              className="cursor-pointer rounded-lg border object-cover"
+            />
+          )}
+        </Item>
+      </Gallery>
+    );
+
   return (
     <Gallery>
       <div className="w-full py-6">

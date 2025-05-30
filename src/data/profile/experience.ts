@@ -1,4 +1,5 @@
 import assets from "@/assets";
+import APIMarketExperience from "@/components/ExperienceDetails/API.market";
 import CrowdVolt from "@/components/ExperienceDetails/CrowdVolt";
 import DatawavelabsExperience from "@/components/ExperienceDetails/Datawavelabs";
 import GeeksForGeeks from "@/components/ExperienceDetails/GeeksForGeeks";
@@ -17,8 +18,10 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     url: "https://api.market",
     showOnHome: true,
     desc: "Working at API.market as a Software Engineer. Responsible for improveing user experience on the marketplace. Adding new features and improving the existing codebase. Implementing best practices and following the code quality standards.",
-    logo: assets.proffessionalThings.noveum.logo,
-    expType: EXP_TYPE.INTERNSHIP
+    expDetails: APIMarketExperience,
+    logo: assets.proffessionalThings.apiMarket.logo,
+    expType: EXP_TYPE.INTERNSHIP,
+    slug: "api.market"
   },
   {
     companyName: "CrowdVolt (YC W24)",

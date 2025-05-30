@@ -68,7 +68,13 @@ import NPLT_CSIR_1 from "@/assets/events/nptl-csir/img_1.webp";
 import NPLT_CSIR_2 from "@/assets/events/nptl-csir/img_2.webp";
 import NPLT_CSIR_3 from "@/assets/events/nptl-csir/img_3.webp";
 import NPLT_CSIR_4 from "@/assets/events/nptl-csir/img_4.webp";
-import NOVEUM_LOGO from "@/assets/exp/api.market/logo.webp";
+import API_MARKET_LOGO from "@/assets/exp/api.market/logo.webp";
+import API_MARKET_RESPONSIVENESS_COMPARISON from "@/assets/exp/api.market/resp-comparison.png";
+import API_MARKET_SELLER_DASH from "@/assets/exp/api.market/seller-dash.png";
+import API_MARKET_SHASHANK from "@/assets/exp/api.market/shashank.png";
+import API_MARKET_TRANSACTION_POPUP from "@/assets/exp/api.market/transaction-popup.png";
+import API_MARKET_WALLET from "@/assets/exp/api.market/wallet.png";
+import API_MARKET_WEBSITE from "@/assets/exp/api.market/website.png";
 import CROWDVOLT_LOGO from "@/assets/exp/crowdvolt/logo.webp";
 import CROWDVOLT_WEBSITE from "@/assets/exp/crowdvolt/website.webp";
 import DATAWAVELABS_DASHBOARD from "@/assets/exp/datawavelabs/datawaveDashboard.webp";
@@ -128,9 +134,6 @@ const assets = {
     fullStackOpen: FULL_STACK_OPEN_BADGE
   },
   proffessionalThings: {
-    noveum: {
-      logo: NOVEUM_LOGO
-    },
     datawavelabs: {
       logo: DATAWAVELABS_LOGO,
       datawaveRelievingLetter: "/datawave-relieving-letter.pdf",
@@ -158,6 +161,16 @@ const assets = {
       logo: CROWDVOLT_LOGO,
       crowdVoltOfferLetter: "/crowdvolt-offer-letter.pdf",
       website: CROWDVOLT_WEBSITE
+    },
+    apiMarket: {
+      logo: API_MARKET_LOGO,
+      apiMarketOfferLetter: "/api-market-offer-letter.pdf",
+      website: API_MARKET_WEBSITE,
+      shashank: API_MARKET_SHASHANK,
+      respComparison: API_MARKET_RESPONSIVENESS_COMPARISON,
+      sellerDash: API_MARKET_SELLER_DASH,
+      wallet: API_MARKET_WALLET,
+      transactionPopup: API_MARKET_TRANSACTION_POPUP
     }
   },
   designs: {

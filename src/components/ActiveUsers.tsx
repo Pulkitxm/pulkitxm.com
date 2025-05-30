@@ -30,6 +30,7 @@ export default function ActiveUsers() {
     <li className="flex cursor-text items-center space-x-1 select-none" title="Active Visitors">
       <div className="h-2 w-2 animate-pulse rounded-full bg-green-400 transition-all duration-[10ms] ease-in-out" />
       <ShowActiveUsers />
+      <span className="ml-1 md:hidden">Active Users</span>
       <UserIcon className="ml-1 h-4 w-4" />
     </li>
   );

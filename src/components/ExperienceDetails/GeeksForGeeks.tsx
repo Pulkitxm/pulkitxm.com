@@ -10,7 +10,7 @@ import { Experience } from "@/types/profile";
 export default async function GeeksForGeeks({ exp }: { exp: Experience }) {
   return (
     <div className="space-y-8">
-      <h1 className="text-primary mb-4 text-lg font-bold md:text-xl lg:text-2xl">
+      <h1 className="text-primary mb-4 text-lg font-bold md:text-xl lg:text-3xl">
         <span className="underline">{exp.position}</span>@
         <Link
           href={exp.url}
