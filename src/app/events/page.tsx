@@ -6,9 +6,9 @@ import JumpLink from "@/components/JumpLink";
 import { PreFetchUrl } from "@/components/PreFetchUrl";
 import profile from "@/data/profile";
 
-export default async function EventsPage() {
+export default function EventsPage() {
   const key = "event";
-  const events = await profile.events;
+  const events = profile.events;
 
   return (
     <main>

@@ -2,7 +2,6 @@ import { MetadataRoute } from "next";
 
 import { NAVIGATION_LINKS } from "@/data/pages";
 import profile from "@/data/profile";
-import { eventsForSitemap } from "@/data/profile/events";
 import { getToday } from "@/lib/config";
 import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 
@@ -46,9 +45,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  const eventRoutes: Route[] = eventsForSitemap.map((event) => ({
+  const eventRoutes: Route[] = profile.events.map((event) => ({
     url: `${baseUrl}/events/${event.slug}`,
-    lastModified: new Date(event.date),
+    lastModified: getToday(),
     changeFrequency: "monthly",
     priority: 0.7
   }));
