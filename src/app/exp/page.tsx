@@ -8,7 +8,7 @@ import { useRef } from "react";
 import { PreFetchUrl } from "@/components/PreFetchUrl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import profile from "@/data/profile";
 import { getToday } from "@/lib/config";
 import { formatDate, formatDuration } from "@/lib/utils";
@@ -146,23 +146,12 @@ export default function ExperienceTimeline() {
                             {exp.expType.valueOf()}
                           </Badge>
                           <div className="text-sm text-gray-400">
-                            {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
+                            {formatDate(exp.startDate)} -{" "}
+                            {exp.endDate ? (exp.endDate > getToday() ? "Present" : formatDate(exp.endDate)) : "Present"}
                           </div>
                         </div>
                         <div className="space-y-1">
                           <CardTitle className="text-xl font-bold text-white">{exp.position}</CardTitle>
-                          {group.experiences.length === 1 && (
-                            <CardDescription className="text-base text-gray-400">
-                              <Link
-                                href={exp.url ?? ""}
-                                rel="noopener noreferrer"
-                                target="_blank"
-                                className="hover:underline"
-                              >
-                                {exp.companyName}
-                              </Link>
-                            </CardDescription>
-                          )}
                         </div>
                       </CardHeader>
                       <CardContent className="space-y-3">

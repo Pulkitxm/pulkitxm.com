@@ -13,6 +13,7 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     companyName: "API.market",
     position: "Software Engineer",
     startDate: new Date("2025-03-25"), // 2025-03-25
+    endDate: new Date("2025-06-25"), // 2025- 06-25
     location: "San Francisco, CA, USA",
     roleType: "remote",
     url: "https://api.market",
