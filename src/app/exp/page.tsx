@@ -109,14 +109,12 @@ export default function ExperienceTimeline() {
             >
               <div className="relative mb-6">
                 <div className="absolute top-0 -left-10 h-6 w-6 rounded-full border-4 border-blue-500 bg-blue-100" />
-                <div className="mb-4 flex items-center space-x-4">
+                <div className="mb-4 flex items-center space-x-2">
                   {group.logo && (
                     <img
                       src={group.logo.src || "/placeholder.svg"}
                       alt={`${group.companyName} logo`}
-                      width={48}
-                      height={48}
-                      className="h-12 w-12 rounded-full border-2 object-contain p-1"
+                      className="-mt-2 size-12 rounded-full border-2 object-contain p-1"
                     />
                   )}
                   <div>
