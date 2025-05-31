@@ -152,10 +152,6 @@
   }
 }
 
-main {
-  @apply rounded-lg border-gray-700 p-5 md:border;
-}
-
 main,
 nav {
   animation: blurIn 1000ms forwards;

@@ -27,7 +27,7 @@ export default async function GuestbookPage() {
   }
 
   return (
-    <main className="py-12">
+    <>
       <div className="text-center">
         {session ? (
           <>
@@ -72,6 +72,6 @@ export default async function GuestbookPage() {
           <div className="mt-8 space-y-6"></div>
         </div>
       )}
-    </main>
+    </>
   );
 }

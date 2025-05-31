@@ -4,9 +4,13 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
 import { getGithubUsername } from "@/actions/gh";
+import assets from "@/assets";
 import { ImageComponent } from "@/components/ImageComponent";
 import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
+import { createMetadata } from "@/lib/utils";
 import { RES_TYPE } from "@/types/globals";
+
+import type { Metadata } from "next";
 
 export default async function GhFollowers() {
   let followersRes: RES_TYPE<
@@ -34,7 +38,7 @@ export default async function GhFollowers() {
   }
 
   return (
-    <main className="space-y-6 p-3 sm:p-5">
+    <>
       <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-zinc-900/90 to-zinc-800/90 p-6">
         <div className="absolute inset-0 bg-linear-to-br from-green-500/10 to-purple-500/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.1),transparent)]" />
@@ -104,8 +108,16 @@ export default async function GhFollowers() {
           <p className="text-sm text-zinc-300">No followers yet</p>
         </div>
       )}
-    </main>
+    </>
   );
 }
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = createMetadata({
+  title: "Github Followers",
+  description: "Explore the Github followers of my projects.",
+  image: assets.banner.ghFollowers.src,
+  path: "gh-followers",
+  keywords: ["github", "followers", "projects", "repositories"]
+});

@@ -26,7 +26,7 @@ const profile: Readonly<Profile> = {
     github: "https://github.com/Pulkitxm",
     linkedin: "https://www.linkedin.com/in/pulkitxm",
     x: "https://x.com/_pulkitxm",
-    blogPageUrl: "https://blogs.pulkitxm.com/",
+    blogPageUrl: "https://blogs.pulkitxm.com",
     discord: "http://discordapp.com/users/790426084994187304",
     blogs: "https://blogs.pulkitxm.com",
     npm: "https://www.npmjs.com/~pulkitxm"

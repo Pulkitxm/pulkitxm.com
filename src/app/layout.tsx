@@ -4,7 +4,9 @@ import NextTopLoader from "nextjs-toploader";
 import { Fragment } from "react";
 
 import assets from "@/assets";
+import AnimatedMain from "@/components/AnimatedMain";
 import ChatWidget from "@/components/ChatWidget";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import RedirectPopup from "@/components/RedirectPopup";
 import ScrollToTopButton from "@/components/ScrollTopTop";
@@ -101,7 +103,10 @@ export default function RootLayout({
           <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
             <Navbar />
             <ChatWidget />
-            {children}
+            <AnimatedMain className="rounded-lg border-gray-700 p-5 px-4 py-8 sm:px-6 md:border lg:px-8">
+              {children}
+              <Footer />
+            </AnimatedMain>
             <RedirectPopup />
             <ScrollToTopButton />
           </div>

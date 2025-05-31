@@ -4,10 +4,13 @@ import assets from "@/assets";
 import { HighlightComponent, LinkComponent, Section } from "@/components/AboutCx";
 import YoutubeEmbed from "@/components/YoutubeEmbed";
 import profile from "@/data/profile";
+import { createMetadata } from "@/lib/utils";
+
+import type { Metadata } from "next";
 
 export default function About() {
   return (
-    <main className="leading-relaxed">
+    <>
       <header className="mb-10">
         <h1 className="text-4xl font-bold">About Me</h1>
       </header>
@@ -131,6 +134,14 @@ export default function About() {
           />
         </div>
       </Section>
-    </main>
+    </>
   );
 }
+
+export const metadata: Metadata = createMetadata({
+  title: "About Pulkit",
+  description: "About Pulkit - Web Developer, Tech Enthusiast, and Blogger",
+  image: assets.banner.about.src,
+  path: "about",
+  keywords: ["about", "pulkit", "web developer", "blogger", "tech enthusiast"]
+});

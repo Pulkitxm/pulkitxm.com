@@ -28,7 +28,7 @@ export default function EventGalleryPage({ eventWithSlug }: { eventWithSlug: Eve
   }
 
   return (
-    <motion.main
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -39,6 +39,6 @@ export default function EventGalleryPage({ eventWithSlug }: { eventWithSlug: Eve
         <p className="mb-8 text-lg text-gray-600 sm:text-xl">{eventWithSlug.tagline}</p>
       </div>
       <ImageGallery images={eventWithSlug.images} />
-    </motion.main>
+    </motion.div>
   );
 }

@@ -88,6 +88,10 @@ const config: Config = {
         accordionUp: {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" }
+        },
+        blurIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" }
         }
       },
       animation: {
@@ -97,7 +101,8 @@ const config: Config = {
         slideInUp: "slideInUp 1s ease-out",
         gradientX: "gradientX 3s ease infinite",
         accordionDown: "accordionDown 0.2s ease-out",
-        accordionUp: "accordionUp 0.2s ease-out"
+        accordionUp: "accordionUp 0.2s ease-out",
+        blurIn: "blurIn 1000ms ease-in-out forwards"
       },
       gridTemplateColumns: {
         53: "repeat(53, minmax(0, 1fr))"
