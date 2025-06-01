@@ -28,7 +28,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "my-setup": 0.7
   };
 
-  // Main navigation routes
   const navigationRoutes: Route[] = NAVIGATION_LINKS.map(({ url }) => {
     const path = url.startsWith("/") ? url.slice(1) : url;
     return {
@@ -39,7 +38,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  // Add home route if not present
   if (!NAVIGATION_LINKS.some((link) => link.url === "/" || link.url === "")) {
     navigationRoutes.unshift({
       url: baseUrl,
@@ -49,7 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // Event routes
   const eventRoutes: Route[] = profile.events.map((event) => ({
     url: `${baseUrl}/events/${event.slug}`,
     lastModified: getToday(),
@@ -57,7 +54,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7
   }));
 
-  // Experience routes
   const experienceRoutes: Route[] = profile.experience.map((exp) => ({
     url: `${baseUrl}/experience/${exp.slug}`,
     lastModified: getToday(),
@@ -65,7 +61,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7
   }));
 
-  // Additional index pages
   const indexPages = [
     { path: "events", priority: 0.8 },
     { path: "experience", priority: 0.8 },
@@ -75,7 +70,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "my-setup", priority: 0.7 }
   ];
 
-  // Add index pages if not in navigation
   for (const { path, priority } of indexPages) {
     if (!NAVIGATION_LINKS.some((link) => link.url === `/${path}` || link.url === path)) {
       navigationRoutes.push({
@@ -87,7 +81,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // Add design routes if they exist
   const designRoutes: Route[] = [...profile.design.portfolioDesigns, ...profile.design.webDesigns].map((design) => ({
     url: `${baseUrl}/designs/${design.title.toLowerCase().replace(/\./g, "-")}`,
     lastModified: getToday(),

@@ -12,3 +12,4 @@ export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID ?? "";
 export const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET ?? "";
 export const DEVIATORS_WEBSITE = process.env.NEXT_PUBLIC_DEVIATORS_WEBSITE ?? "";
 export const WS_URL = process.env.NEXT_PUBLIC_WS_URL ?? "";
+export const ENCRYPTION_KEY = process.env.NEXT_PUBLIC_ENCRYPTION_KEY ?? "";

@@ -1,9 +1,11 @@
+import { unstable_cache } from "next/cache";
 import { NextResponse } from "next/server";
 
 import { CONTRIBUTION_GRAPH_SECRET } from "@/lib/constants";
 import { RES_TYPE } from "@/types/globals";
 
-export async function GET(): Promise<NextResponse<RES_TYPE<{ picUrl: string; username: string }[]>>> {
+const getFollowers = async (): Promise<RES_TYPE<{ picUrl: string; username: string }[]>> => {
+  console.log("🔄 Fetching fresh data from GitHub API...");
   try {
     const followers: { username: string; picUrl: string }[] = [];
     let page = 1;
@@ -52,18 +54,29 @@ export async function GET(): Promise<NextResponse<RES_TYPE<{ picUrl: string; use
     } while (hasMorePages);
 
     if (!followers.length) {
-      return NextResponse.json(
-        { status: "error", error: "No followers found or unable to fetch followers" },
-        { status: 500 }
-      );
+      return { status: "error" as const, error: "No followers found or unable to fetch followers" };
     }
 
-    return NextResponse.json({
-      status: "success",
+    return {
+      status: "success" as const,
       data: followers.sort((a, b) => a.username.localeCompare(b.username))
-    });
+    };
   } catch (e) {
     console.error(e);
-    return NextResponse.json({ status: "error", error: "Unable to fetch followers" }, { status: 500 });
+    return { status: "error" as const, error: "Unable to fetch followers" };
   }
+};
+
+const cachedGetFollowers = unstable_cache(getFollowers, ["github-followers", "api/gh/followers"], { revalidate: 3600 });
+
+export async function GET(): Promise<NextResponse<RES_TYPE<{ picUrl: string; username: string }[]>>> {
+  console.log("📥 Received request for followers data");
+  const result = await cachedGetFollowers();
+  console.log("✅ Sending response");
+
+  if (result.status === "error") {
+    return NextResponse.json(result, { status: 500 });
+  }
+
+  return NextResponse.json(result);
 }

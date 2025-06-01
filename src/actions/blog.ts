@@ -1,6 +1,7 @@
 "use server";
 
 import axios from "axios";
+import { unstable_cache } from "next/cache";
 
 import { BlogType, validateBlog } from "@/types/blog";
 
@@ -26,7 +27,7 @@ query Publication($id: ObjectId = "66213f8be5371b46eac0e05e") {
 }
 `;
 
-export async function getBlogs() {
+const getBlogsImpl = async () => {
   try {
     const res = await axios.post("https://gql.hashnode.com/", {
       query: GET_USER_ARTICLES
@@ -48,4 +49,6 @@ export async function getBlogs() {
     console.error(e);
     return [];
   }
-}
+};
+
+export const getBlogs = unstable_cache(getBlogsImpl, ["blogs"], { revalidate: 3600 });

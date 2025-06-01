@@ -1,6 +1,7 @@
 "use server";
 
 import { Octokit } from "@octokit/rest";
+import { unstable_cache } from "next/cache";
 
 import { getToday } from "@/lib/config";
 import { CONTRIBUTION_GRAPH_SECRET, MONTHS, REPO_NAME } from "@/lib/constants";
@@ -17,7 +18,7 @@ export async function getAuthenticatedOcto() {
   });
 }
 
-export async function isAuthenticated(_octokit: Octokit): Promise<RES_TYPE<boolean>> {
+const isAuthenticatedImpl = async (_octokit: Octokit): Promise<RES_TYPE<boolean>> => {
   try {
     const res = (await _octokit.auth()) as { type: "unauthenticated" | "token"; token?: string };
     return {
@@ -31,7 +32,9 @@ export async function isAuthenticated(_octokit: Octokit): Promise<RES_TYPE<boole
       error: "Failed to check authentication"
     };
   }
-}
+};
+
+export const isAuthenticated = unstable_cache(isAuthenticatedImpl, ["github-auth"], { revalidate: 3600 });
 
 const CONTRIBUTION_QUERY = `
 query($username: String!, $from: DateTime!, $to: DateTime!) {
@@ -51,7 +54,7 @@ query($username: String!, $from: DateTime!, $to: DateTime!) {
 }
 `;
 
-export async function getGithubUsername(): Promise<RES_TYPE<string>> {
+const getGithubUsernameImpl = async (): Promise<RES_TYPE<string>> => {
   try {
     const res = await isAuthenticated(octokit);
     if (res.status === "error") {
@@ -80,17 +83,21 @@ export async function getGithubUsername(): Promise<RES_TYPE<string>> {
       error: error instanceof Error ? error.message : "Failed to fetch GitHub username"
     };
   }
-}
+};
 
-export async function getGithubData({
-  from,
-  to,
-  monthsType = "number"
-}: {
+export const getGithubUsername = unstable_cache(getGithubUsernameImpl, ["github-username"], { revalidate: false });
+
+type GithubDataParams = {
   from: string;
   to: string;
   monthsType?: "string" | "number";
-}): Promise<RES_TYPE<CONTRIBUTION>> {
+};
+
+const getGithubDataImpl = async ({
+  from,
+  to,
+  monthsType = "number"
+}: GithubDataParams): Promise<RES_TYPE<CONTRIBUTION>> => {
   try {
     const res = await isAuthenticated(octokit);
     if (res.status === "error") {
@@ -176,11 +183,13 @@ export async function getGithubData({
       error: error instanceof Error ? error.message : "Failed to fetch GitHub data"
     };
   }
-}
+};
 
-export async function getPrsData(
-  props: ({ from: string; to: string } | { all: true }) & { select?: boolean }
-): Promise<RES_TYPE<PR[]>> {
+export const getGithubData = unstable_cache(getGithubDataImpl, ["github-data"], { revalidate: false });
+
+type PrsDataParams = ({ from: string; to: string } | { all: true }) & { select?: boolean };
+
+const getPrsDataImpl = async (props: PrsDataParams): Promise<RES_TYPE<PR[]>> => {
   try {
     const res = await isAuthenticated(octokit);
     if (res.status === "error") {
@@ -238,9 +247,11 @@ export async function getPrsData(
       error: error instanceof Error ? error.message : "Failed to fetch PRs"
     };
   }
-}
+};
 
-export async function getLatestWorkflow(): Promise<RES_TYPE<{ timeStamp: Date }>> {
+export const getPrsData = unstable_cache(getPrsDataImpl, ["github-prs"], { revalidate: 3600 });
+
+const getLatestWorkflowImpl = async (): Promise<RES_TYPE<{ timeStamp: Date }>> => {
   try {
     const res = await isAuthenticated(octokit);
     if (res.status === "error") {
@@ -274,4 +285,62 @@ export async function getLatestWorkflow(): Promise<RES_TYPE<{ timeStamp: Date }>
       data: { timeStamp: getToday() }
     };
   }
-}
+};
+
+export const getLatestWorkflow = unstable_cache(getLatestWorkflowImpl, ["github-workflow"], { revalidate: 3600 });
+
+const getFileLastModifiedImpl = async (path: string): Promise<RES_TYPE<Date>> => {
+  try {
+    const res = await isAuthenticated(octokit);
+    if (res.status === "error") {
+      return res;
+    }
+
+    if (!res.data) {
+      return {
+        status: "error",
+        error: "GitHub authentication failed"
+      };
+    }
+
+    const {
+      data: { login: username }
+    } = await octokit.rest.users.getAuthenticated();
+
+    const response = await octokit.repos.getContent({
+      owner: username,
+      repo: REPO_NAME,
+      path,
+      ref: "main"
+    });
+
+    if (Array.isArray(response.data)) {
+      return {
+        status: "error",
+        error: "Path is a directory"
+      };
+    }
+
+    const commitResponse = await octokit.repos.listCommits({
+      owner: username,
+      repo: REPO_NAME,
+      path,
+      per_page: 1
+    });
+
+    return {
+      status: "success",
+      data: new Date(commitResponse.data[0].commit.author?.date || getToday())
+    };
+  } catch (error) {
+    console.error("Error fetching file last modified date:", error);
+    return {
+      status: "error",
+      error: error instanceof Error ? error.message : "Failed to fetch file last modified date"
+    };
+  }
+};
+
+export const getFileLastModified = unstable_cache(getFileLastModifiedImpl, ["github-file-modified"], {
+  revalidate: false
+});

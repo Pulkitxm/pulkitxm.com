@@ -4,19 +4,36 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { getLatestWorkflow } from "@/actions/gh";
+import { getCachedData, setCachedData } from "@/lib/gh";
 import { formatTimeUpdatedAgo } from "@/lib/utils";
+
+interface WorkflowData {
+  timeStamp: Date;
+}
 
 export default function Footer() {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   useEffect(() => {
-    getLatestWorkflow().then((res) => {
+    const fetchWorkflowData = async () => {
+      const cacheKey = "github-workflow-last-updated";
+
+      const cached = await getCachedData<WorkflowData>(cacheKey);
+      if (cached) {
+        setLastUpdated(cached.timeStamp);
+        return;
+      }
+
+      const res = await getLatestWorkflow();
       if (res.status === "error") {
         setLastUpdated(null);
       } else {
         setLastUpdated(res.data.timeStamp);
+        setCachedData(cacheKey, res.data);
       }
-    });
+    };
+
+    fetchWorkflowData();
   }, []);
 
   return (
