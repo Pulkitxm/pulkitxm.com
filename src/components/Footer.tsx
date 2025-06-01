@@ -37,20 +37,30 @@ export default function Footer() {
   }, []);
 
   return (
-    <div className="mt-8 border-t border-gray-500 py-3 text-center opacity-70">
-      <p>Made with ❤️ by Pulkit</p>
-      <div className="flex items-center justify-center space-x-0.5">
-        <p className="mt-1 text-sm text-gray-300">© {new Date().getFullYear()} Pulkit. All rights reserved</p>
-        <p>|</p>
-        <p className="mt-1 text-sm text-gray-300">
-          <Link href="/sitemap.xml" className="hover:underline">
-            Sitemap
-          </Link>
+    <footer className="mt-12 border-t border-gray-800 py-8 text-center">
+      <div className="mx-auto max-w-4xl px-4">
+        <p className="text-lg font-medium text-gray-200">
+          Made with <span className="text-red-500">❤️</span> by Pulkit
+        </p>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-400">
+          <p>© {new Date().getFullYear()} Pulkit. All rights reserved</p>
+          <div className="flex items-center gap-4">
+            <Link href="/sitemap.xml" className="transition-colors hover:text-gray-200 hover:underline">
+              Sitemap
+            </Link>
+            <Link href="/feed.xml" className="transition-colors hover:text-gray-200 hover:underline">
+              RSS Feed
+            </Link>
+          </div>
+        </div>
+        <p
+          className={`mt-4 text-sm text-gray-500 transition-opacity duration-300 ${
+            lastUpdated === null ? "opacity-0" : "opacity-70"
+          }`}
+        >
+          Last updated {lastUpdated ? formatTimeUpdatedAgo(lastUpdated) : ""}
         </p>
       </div>
-      <p className={`mt-1 text-sm text-gray-500 ${lastUpdated === null ? "opacity-0" : ""}`}>
-        Last updated {lastUpdated ? formatTimeUpdatedAgo(lastUpdated) : ""}
-      </p>
-    </div>
+    </footer>
   );
 }
