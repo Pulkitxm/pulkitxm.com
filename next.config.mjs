@@ -26,6 +26,10 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "deviatorsdce.tech"
+      },
+      {
+        protocol: "https",
+        hostname: "pbs.twimg.com"
       }
     ],
     minimumCacheTTL: 60,

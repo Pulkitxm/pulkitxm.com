@@ -4,12 +4,16 @@ import Link from "next/link";
 import assets from "@/assets";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import profile from "@/data/profile";
 import { Experience } from "@/types/profile";
+
+import { Tweet } from "../Tweet";
 
 const crowdVoltExp = {
   docLink: assets.proffessionalThings.crowdVolt.crowdVoltOfferLetter,
   skills: ["NextJs", "TypeScript", "React", "TailwindCSS", "ESLint", "Prettier", "Git"],
-  image: assets.proffessionalThings.crowdVolt.website
+  image: assets.proffessionalThings.crowdVolt.website,
+  tweet: "https://x.com/_pulkitxm/status/1887001835669741636"
 };
 
 export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
@@ -102,6 +106,33 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
           />
         </CardContent>
       </Card>
+
+      <div className="flex items-center justify-center">
+        <Tweet
+          likes={485}
+          bookmarks={63}
+          comments={52}
+          retweets={9}
+          timestamp={"10:24 AM · Feb 5, 2025"}
+          views={"66k"}
+          content={
+            <div>
+              received my first full-time offer as a Software Engineer at a US-based startup. Huge thanks to @kirat_tw
+              bhaiya for the guidance and support—this wouldn’t have been possible without you! I’m currently in my
+              <br />
+              <br />
+              trial period.....Wish me luck🤞
+            </div>
+          }
+          link={crowdVoltExp.tweet}
+          user={{
+            name: profile.name,
+            profileLink: profile.links.x,
+            username: profile.x.username,
+            verified: true
+          }}
+        />
+      </div>
     </div>
   );
 }

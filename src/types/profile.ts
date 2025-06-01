@@ -75,22 +75,3 @@ export interface SetupItem {
   zoom: number;
   link: string;
 }
-
-export type Profile = {
-  name: string;
-  caption: string;
-  image: StaticImageData;
-  calendlyUrl: string;
-  githubUserName: string;
-  resumeLink: string;
-  sourceCodeUrl: string;
-  email: string;
-  links: Readonly<Record<string, string>>;
-  experience: Experience[];
-  projects: readonly Project[];
-  events: Event[];
-  skills: Readonly<Record<string, string[]>>;
-  certifications: readonly Certification[];
-  design: Design;
-  setupItems: readonly SetupItem[];
-};

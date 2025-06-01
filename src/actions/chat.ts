@@ -6,9 +6,8 @@ import OpenAI from "openai";
 import profile from "@/data/profile";
 import { getVectorStore } from "@/lib/loader";
 import { getSitemapUrls } from "@/lib/utils";
-import { Profile } from "@/types/profile";
 
-function formatProfileContext(profile: Profile): string {
+function formatProfileContext(): string {
   if (!profile) return "";
 
   const sections = [];
@@ -79,7 +78,7 @@ export async function getChatResponse(
 
     const contexts = store.nearest(qEmbedding, 5).join("\n---\n");
 
-    const profileContext = formatProfileContext(profile);
+    const profileContext = formatProfileContext();
 
     const systemPrompt = `
 You are ${botName}, an AI assistant for Pulkit's portfolio website. 

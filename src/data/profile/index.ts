@@ -3,7 +3,6 @@ import { FaHashnode, FaXTwitter } from "react-icons/fa6";
 import { RiNpmjsFill } from "react-icons/ri";
 
 import assets from "@/assets";
-import { Profile } from "@/types/profile";
 
 import { certifications } from "./certifications";
 import { design } from "./design";
@@ -13,7 +12,7 @@ import { projects } from "./projects";
 import { setupItems } from "./setup";
 import { skills } from "./skills";
 
-const profile: Readonly<Profile> = {
+const profile = {
   name: "Pulkit",
   caption: "Full Stack Developer & Open Source Enthusiast",
   image: assets.myImage,
@@ -31,6 +30,10 @@ const profile: Readonly<Profile> = {
     blogs: "https://blogs.pulkitxm.com",
     npm: "https://www.npmjs.com/~pulkitxm"
   },
+  x: {
+    username: "_pulkitxm",
+    pfp: "https://pbs.twimg.com/profile_images/1925253012307492864/X7eWOnYs_400x400.jpg"
+  },
   experience,
   projects,
   skills,
@@ -38,7 +41,7 @@ const profile: Readonly<Profile> = {
   design,
   events,
   setupItems
-};
+} as const;
 
 export default profile;
 
