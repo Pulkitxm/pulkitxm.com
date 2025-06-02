@@ -1,11 +1,11 @@
 "use client";
 
 import { CalendarDays, GitPullRequest, Loader2, Users2 } from "lucide-react";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getCurrentYear } from "@/lib/config";
+import { getCurrentYear, getToday } from "@/lib/config";
 import { MONTHS } from "@/lib/constants";
 import { getGithubContributionData, getGithubFollowers } from "@/lib/gh";
 
@@ -18,6 +18,7 @@ import type { CONTRIBUTION } from "@/types/github";
 import type React from "react";
 
 export function ContributionGraph(): React.ReactElement {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<{
     followers: number;
     contributions: Record<number, CONTRIBUTION>;
@@ -29,6 +30,7 @@ export function ContributionGraph(): React.ReactElement {
   const [selectedYear, setSelectedYear] = useState(getCurrentYear);
 
   const selectedYearData = useMemo(() => data.contributions[selectedYear], [data.contributions, selectedYear]);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const fetchYearData = useCallback(
     async (year: number) => {
@@ -82,6 +84,25 @@ export function ContributionGraph(): React.ReactElement {
     };
   }, [selectedYear, fetchYearData, fetchFollowers]);
 
+  const scrollToCurrentMonth = useCallback(() => {
+    if (isScrolled || !scrollContainerRef.current || selectedYear !== getToday().getFullYear()) return;
+    const currentMonth = getToday().getMonth();
+    const monthWidth =
+      scrollContainerRef.current?.querySelector(".month-container")?.getBoundingClientRect().width ?? 70;
+    const scrollPosition = monthWidth * currentMonth;
+    const containerWidth = scrollContainerRef.current.getBoundingClientRect().width;
+    const rightAlignedScrollPosition = scrollPosition - containerWidth + monthWidth;
+    scrollContainerRef.current.scrollTo({
+      left: Math.max(0, rightAlignedScrollPosition),
+      behavior: "smooth"
+    });
+    setIsScrolled(true);
+  }, [selectedYear, isScrolled]);
+
+  useEffect(() => {
+    scrollToCurrentMonth();
+  }, [scrollToCurrentMonth, selectedYear]);
+
   const renderStats = useMemo(() => {
     if (loading) {
       return (
@@ -132,10 +153,10 @@ export function ContributionGraph(): React.ReactElement {
       </CardHeader>
       <CardContent className="p-4 md:p-6">
         <div className="flex flex-col space-y-4">
-          <div className="-mx-4 overflow-x-auto pb-4 md:mx-0">
+          <div ref={scrollContainerRef} className="-mx-4 overflow-x-auto pb-4 md:mx-0">
             <div className="flex min-w-max px-4 py-2 md:px-0">
               {MONTHS.map((month, index) => (
-                <div key={month} className="flex flex-col" style={{ minWidth: "70px" }}>
+                <div key={month} className="month-container flex flex-col" style={{ minWidth: "70px" }}>
                   <div className="mb-2 px-1 text-center text-[10px] font-medium text-zinc-400 md:text-xs">{month}</div>
                   <MonthGrid
                     year={selectedYear}
