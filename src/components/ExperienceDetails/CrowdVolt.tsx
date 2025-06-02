@@ -84,8 +84,8 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
           <br />
           While my journey at CrowdVolt came to an unexpected end, I deeply value the experience and the lessons I
           learned. Every challenge was an opportunity to grow, and this experience reinforced my adaptability and
-          problem-solving skills. I’m grateful for the chance to work in a fast-paced, YC-backed startup environment,
-          and I look forward to applying these learnings in my next role.
+          problem-solving skills. I&apos;m grateful for the chance to work in a fast-paced, YC-backed startup
+          environment, and I look forward to applying these learnings in my next role.
         </p>
       </section>
 
@@ -116,13 +116,7 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
           timestamp={"10:24 AM · Feb 5, 2025"}
           views={"66k"}
           content={
-            <div>
-              received my first full-time offer as a Software Engineer at a US-based startup. Huge thanks to @kirat_tw
-              bhaiya for the guidance and support—this wouldn’t have been possible without you! I’m currently in my
-              <br />
-              <br />
-              trial period.....Wish me luck🤞
-            </div>
+            "received my first full-time offer as a Software Engineer at a US-based startup. Huge thanks to @kirat_tw bhaiya for the guidance and support—this wouldn't have been possible without you! I'm currently in my\n\n\ntrial period.....Wish me luck🤞"
           }
           link={crowdVoltExp.tweet}
           user={{

@@ -29,7 +29,7 @@ interface TweetProps {
   retweets: number | string;
   timestamp: string;
   views: number | string;
-  content: React.JSX.Element;
+  content: string;
   link: string;
   user: TweetUser;
 }
@@ -168,7 +168,9 @@ export const Tweet = memo(
             </Button>
           </header>
 
-          <div className="mb-3 text-base leading-relaxed break-words text-white sm:mb-4 sm:text-lg">{content}</div>
+          <div className="mb-3 text-base leading-relaxed break-words whitespace-pre-line text-white sm:mb-4 sm:text-lg">
+            {content}
+          </div>
           {(timestamp || views) && (
             <div className="mb-4 flex flex-wrap items-center gap-1 text-xs text-gray-500 sm:mb-5 sm:text-sm">
               {timestamp && <time>{timestamp}</time>}
