@@ -253,11 +253,9 @@ import EOS_ARCHITECTURE_DESIGN from "@/assets/projects/eosArchitecture.webp";
 import IMAGE_TWEAKER_PROJECT from "@/assets/projects/imageTweakerProject.webp";
 import USEE_FORM_PROJECT from "@/assets/projects/useeFormProject.webp";
 import VIDWAVE_PROJECT from "@/assets/projects/vidWaveProject.webp";
-import SETUP from "@/assets/setup.jpg";
 
 const assets = {
   myImage: MY_IMAGE,
-  setup: SETUP,
   resume: "https://pulkitxm.github.io/Pulkitxm/resume/resume.pdf",
   header: HEADER,
   contributions2023: CONTRIBUTIONS_2023,

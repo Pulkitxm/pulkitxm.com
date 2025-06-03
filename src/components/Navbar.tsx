@@ -38,7 +38,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="mb-6 w-full bg-black">
+    <nav className="mb-6 w-full">
       <div className={`${!isMobile ? "container" : ""} mx-auto px-4`}>
         {isMobile ? <MobileMenu isLinkActive={isLinkActive} /> : <LargeMenu isLinkActive={isLinkActive} />}
       </div>

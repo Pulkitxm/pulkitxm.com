@@ -100,10 +100,10 @@ export default function RootLayout({
             speed={200}
             shadow="0 0 10px #2299DD,0 0 5px #2299DD"
           />
-          <div className="mx-auto py-5 md:w-[800px] md:max-w-[800px] lg:py-8">
+          <div className="mx-auto pt-5 md:w-[800px] md:max-w-[800px] lg:py-8">
             <Navbar />
             <ChatWidget />
-            <AnimatedMain className="rounded-lg border-gray-700 p-5 px-4 py-8 sm:px-6 md:border lg:px-8">
+            <AnimatedMain className="rounded-lg border-gray-700 p-4 pb-0 sm:p-6 md:border lg:p-8">
               {children}
               <Footer />
             </AnimatedMain>

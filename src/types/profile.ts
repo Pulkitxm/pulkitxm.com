@@ -66,12 +66,3 @@ export type Event = {
   date: Date;
   tagline: string;
 };
-
-export interface SetupItem {
-  name: string;
-  description?: string;
-  x: number;
-  y: number;
-  zoom: number;
-  link: string;
-}

@@ -37,7 +37,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="mt-12 border-t border-gray-800 py-8 text-center">
+    <footer className="mt-12 border-t border-gray-800 pt-8 text-center">
       <div className="mx-auto max-w-4xl px-4">
         <p className="text-lg font-medium text-gray-200">
           Made with <span className="text-red-500">❤️</span> by Pulkit

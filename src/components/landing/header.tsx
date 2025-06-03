@@ -30,7 +30,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="mt-12 mb-5 pl-5 md:mt-24">
+      <div className="mt-12 mb-5 md:mt-24">
         <div className="mb-1 flex flex-wrap items-center gap-2">
           <p className="text-xl font-semibold text-white">{profile.name}</p>
           <Link
@@ -72,15 +72,11 @@ export default function Header() {
             </Link>
           </Button>
         </div>
-
-        <Link href="/my-setup" className="text-green-400 hover:underline">
-          View my setup
-        </Link>
       </div>
 
       <div
         onClick={copyCommand}
-        className="mx-5 mb-6 cursor-pointer rounded border border-green-900 bg-gray-900/50 px-4 py-2 transition-colors hover:bg-gray-800/60"
+        className="mb-6 cursor-pointer rounded border border-green-900 bg-gray-900/50 px-4 py-2 transition-colors hover:bg-gray-800/60"
       >
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">

@@ -24,8 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     experience: 0.8,
     guestbook: 0.6,
     blogs: 0.8,
-    designs: 0.8,
-    "my-setup": 0.7
+    designs: 0.8
   };
 
   const navigationRoutes: Route[] = NAVIGATION_LINKS.map(({ url }) => {
@@ -61,16 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7
   }));
 
-  const indexPages = [
-    { path: "events", priority: 0.8 },
-    { path: "experience", priority: 0.8 },
-    { path: "guestbook", priority: 0.6 },
-    { path: "blogs", priority: 0.8 },
-    { path: "designs", priority: 0.8 },
-    { path: "my-setup", priority: 0.7 }
-  ];
-
-  for (const { path, priority } of indexPages) {
+  for (const [path, priority] of Object.entries(priorityMap)) {
     if (!NAVIGATION_LINKS.some((link) => link.url === `/${path}` || link.url === path)) {
       navigationRoutes.push({
         url: `${baseUrl}/${path}`,

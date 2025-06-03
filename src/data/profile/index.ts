@@ -9,7 +9,6 @@ import { design } from "./design";
 import { events } from "./events";
 import { experience } from "./experience";
 import { projects } from "./projects";
-import { setupItems } from "./setup";
 import { skills } from "./skills";
 
 const profile = {
@@ -39,8 +38,7 @@ const profile = {
   skills,
   certifications,
   design,
-  events,
-  setupItems
+  events
 } as const;
 
 export default profile;

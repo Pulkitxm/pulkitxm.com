@@ -57,7 +57,7 @@ function CollabInviteLayerCX() {
                   e.preventDefault();
                   setShow(false);
                 }}
-                className="inline-flex items-center justify-center rounded-full text-[#00ff95] transition-colors"
+                className="inline-flex cursor-pointer items-center justify-center rounded-full text-[#00ff95] transition-colors"
                 aria-label="Close banner"
               >
                 <XIcon className="h-4 w-4" />

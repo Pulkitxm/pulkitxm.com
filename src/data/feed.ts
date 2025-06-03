@@ -162,18 +162,6 @@ export const generateRssFeed = () => {
     </item>`
       )
       .join("")}
-
-    <!-- Setup Items -->
-    <item>
-      <title><![CDATA[Development Setup]]></title>
-      <description><![CDATA[
-        ${profile.setupItems.map((item) => `${item.name}${item.description ? `: ${item.description}` : ""}`).join("\n")}
-      ]]></description>
-      <link>${NEXT_PUBLIC_API_URL}/setup</link>
-      <guid isPermaLink="true">${NEXT_PUBLIC_API_URL}/setup</guid>
-      <dc:creator><![CDATA[${profile.name}]]></dc:creator>
-      <pubDate>${new Date().toUTCString()}</pubDate>
-    </item>
   </channel>
 </rss>`;
 
