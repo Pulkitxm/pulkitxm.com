@@ -12,7 +12,7 @@ function formatProfileContext(): string {
 
   const sections = [];
 
-  const contactInfo = [`Name: ${profile.name || "Pulkit"}`, `Email: ${profile.email || ""}`];
+  const contactInfo = [`Name: ${profile.name || "Pulkit"}`, `Email: ${profile.contactEmail || ""}`];
   if (profile.links) {
     Object.entries(profile.links).forEach(([platform, url]) => {
       contactInfo.push(`${platform.charAt(0).toUpperCase() + platform.slice(1)}: ${url}`);
@@ -93,7 +93,7 @@ IMPORTANT: Format your responses using Markdown:
 - Include emojis where appropriate
 
 When providing contact information, always format it like this:
-- Email: ${profile.email} 📧
+- Email: ${profile.contactEmail} 📧
 - GitHub: [Pulkit's GitHub](${profile.links?.github})
 - LinkedIn: [Pulkit's LinkedIn](${profile.links?.linkedin})
 

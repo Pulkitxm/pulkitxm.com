@@ -17,8 +17,8 @@ export const generateRssFeed = () => {
     <pubDate>${new Date().toUTCString()}</pubDate>
     <copyright><![CDATA[Copyright ${new Date().getFullYear()}, ${profile.name}]]></copyright>
     <language><![CDATA[en-US]]></language>
-    <managingEditor><![CDATA[${profile.email} (${profile.name})]]></managingEditor>
-    <webMaster><![CDATA[${profile.email} (${profile.name})]]></webMaster>
+    <managingEditor><![CDATA[${profile.contactEmail} (${profile.name})]]></managingEditor>
+    <webMaster><![CDATA[${profile.contactEmail} (${profile.name})]]></webMaster>
     <ttl>60</ttl>
 
     <!-- Profile Information -->

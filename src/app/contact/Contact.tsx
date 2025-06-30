@@ -195,10 +195,10 @@ export default function Contact() {
           I&apos;m always open to exploring new collaborations and exciting opportunities. Whether it&apos;s a project
           idea, a job opportunity, or simply a chance to connect, feel free to reach out!
           <div className="mt-4 flex space-x-4">
-            {links.map(({ href, icon: Icon, label }) => {
+            {links.map(({ href, icon: Icon, label }, index) => {
               return (
                 <Link
-                  key={label}
+                  key={`${label}-${index}`}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -223,9 +223,9 @@ export default function Contact() {
             style={sliderStyle}
           ></div>
 
-          {Tabs.map(({ id, label, icon: Icon }) => (
+          {Tabs.map(({ id, label, icon: Icon }, index) => (
             <button
-              key={id}
+              key={`${id}-${index}`}
               type="button"
               className={`ring-offset-background focus-visible:ring-ring z-10 inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
                 isSelected === id ? "text-white" : "text-muted-foreground"
@@ -237,8 +237,8 @@ export default function Contact() {
             </button>
           ))}
         </div>
-        {Tabs.map(({ id, content }) => (
-          <div key={id} className={`mt-6 ${isSelected === id ? "block" : "hidden"}`}>
+        {Tabs.map(({ id, content }, index) => (
+          <div key={`${id}-${index}`} className={`mt-6 ${isSelected === id ? "block" : "hidden"}`}>
             {content}
           </div>
         ))}
@@ -248,10 +248,10 @@ export default function Contact() {
         <p className="text-base sm:text-lg">
           or mail me at{" "}
           <Link
-            href={`mailto:${profile.email}`}
+            href={`mailto:${profile.contactEmail}`}
             className="text-primary font-semibold underline-offset-4 transition-colors duration-200 hover:underline"
           >
-            {profile.email}
+            {profile.contactEmail}
           </Link>
         </p>
       </CardFooter>

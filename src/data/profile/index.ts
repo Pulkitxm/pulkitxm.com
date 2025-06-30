@@ -20,6 +20,7 @@ const profile = {
   calendlyUrl: "https://cal.com/pulkitxm",
   sourceCodeUrl: "https://github.com/Pulkitxm/pulkitxm.com",
   email: "kpulkit15234@gmail.com",
+  contactEmail: "hello@pulkitxm.com",
   links: {
     github: "https://github.com/Pulkitxm",
     linkedin: "https://www.linkedin.com/in/pulkitxm",
