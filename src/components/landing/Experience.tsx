@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { PreFetchUrl } from "@/components/PreFetchUrl";
 import profile from "@/data/profile";
+import { getToday } from "@/lib/config";
+import { Experience as ExperienceType } from "@/types/profile";
 
 import type { ElementType } from "react";
 
@@ -14,6 +16,37 @@ export default async function Experience() {
     });
   };
 
+  const experience = profile.experience
+    .filter((exp) => exp.showOnHome)
+    .reduce<
+      Pick<
+        ExperienceType,
+        "companyName" | "position" | "startDate" | "endDate" | "logo" | "slug" | "showOnHome" | "expDetails"
+      >[]
+    >((acc, exp) => {
+      const existingIndex = acc.findIndex((e) => e.slug === exp.slug);
+
+      if (existingIndex !== -1) {
+        acc[existingIndex] = {
+          ...exp,
+          endDate: acc[existingIndex].endDate
+        };
+      } else {
+        acc.push({
+          companyName: exp.companyName,
+          position: exp.position,
+          startDate: exp.startDate,
+          endDate: exp.endDate,
+          logo: exp.logo,
+          slug: exp.slug,
+          showOnHome: exp.showOnHome,
+          expDetails: exp.expDetails
+        });
+      }
+
+      return acc;
+    }, []);
+
   return (
     <div className="max-w-2xl pt-4 sm:pt-6">
       <Link href="/exp" className="mb-2 text-2xl font-bold tracking-tight text-white hover:underline sm:text-3xl">
@@ -22,7 +55,7 @@ export default async function Experience() {
       <p className="mb-8 text-sm text-gray-400">All my professional experiences as a shitty developer!</p>
 
       <div className="relative border-l-2 border-gray-700">
-        {profile.experience
+        {experience
           .filter((exp) => exp.showOnHome)
           .map((exp, index) => {
             const RenderCx: ElementType = exp.expDetails ? PreFetchUrl : "div";
@@ -62,7 +95,8 @@ export default async function Experience() {
                         <div className="flex items-center text-sm text-gray-400">
                           <CalendarIcon className="mr-1.5 h-4 w-4 text-gray-500" />
                           <span>
-                            {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : "Present"}
+                            {formatDate(exp.startDate)} -{" "}
+                            {exp.endDate ? (exp.endDate > getToday() ? "Present" : formatDate(exp.endDate)) : "Present"}
                           </span>
                         </div>
                       </div>

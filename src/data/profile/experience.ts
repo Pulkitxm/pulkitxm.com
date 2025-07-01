@@ -12,8 +12,21 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
   {
     companyName: "API.market",
     position: "Software Engineer",
+    startDate: new Date("2025-07-1"), // 2025-03-25
+    location: "San Francisco, CA, USA",
+    roleType: "remote",
+    url: "https://api.market",
+    showOnHome: true,
+    expDetails: APIMarketExperience,
+    logo: assets.proffessionalThings.apiMarket.logo,
+    expType: EXP_TYPE.FULL_TIME,
+    slug: "api.market"
+  },
+  {
+    companyName: "API.market",
+    position: "Software Engineer",
     startDate: new Date("2025-03-25"), // 2025-03-25
-    endDate: new Date("2025-06-25"), // 2025- 06-25
+    endDate: new Date("2025-06-30"), // 2025- 06-25
     location: "San Francisco, CA, USA",
     roleType: "remote",
     url: "https://api.market",

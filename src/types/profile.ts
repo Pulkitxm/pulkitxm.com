@@ -19,7 +19,7 @@ export type Experience = {
   url: string;
   slug: string;
   showOnHome?: boolean;
-  desc: string;
+  desc?: string;
   expDetails?: ({ exp }: { exp: Experience }) => JSX.Element | Promise<JSX.Element>;
   logo: StaticImageData;
   expType: EXP_TYPE;

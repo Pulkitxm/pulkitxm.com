@@ -160,9 +160,11 @@ export default function ExperienceTimeline() {
                         <Briefcase className="mr-2 h-4 w-4" />
                         {exp.roleType}
                       </div>
-                      <div className="w-full rounded-md border p-4">
-                        <p className="text-sm text-gray-400">{exp.desc}</p>
-                      </div>
+                      {exp.desc && (
+                        <div className="w-full rounded-md border p-4">
+                          <p className="text-sm text-gray-400">{exp.desc}</p>
+                        </div>
+                      )}
                     </CardContent>
                     {exp.expDetails && (
                       <CardFooter className="mt-auto pt-6">
