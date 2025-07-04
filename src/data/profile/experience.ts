@@ -98,3 +98,19 @@ export const experience: Experience[] = experienceWithoutSlug.map((exp) => ({
   ...exp,
   slug: exp.slug || getSlug(exp.companyName)
 }));
+
+export function getLastCompany(experiences: Experience[]): Experience | undefined {
+  const uniqueCompanies = new Map<string, Experience>();
+  for (const exp of experiences) {
+    uniqueCompanies.set(exp.companyName, exp);
+  }
+  return Array.from(uniqueCompanies.values()).pop();
+}
+
+export function getPreviousCompany(currentCompanyName: string): Experience | undefined {
+  const uniqueCompanies = new Map<string, Experience>();
+  for (const exp of experience) {
+    uniqueCompanies.set(exp.companyName, exp);
+  }
+  return Array.from(uniqueCompanies.values()).find((exp) => exp.companyName !== currentCompanyName);
+}

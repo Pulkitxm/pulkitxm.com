@@ -23,7 +23,7 @@ export default function ImageGallery({ images }: { images: StaticImageData[] }) 
               alt={"Gallery Image"}
               ref={ref}
               onClick={open}
-              className="cursor-pointer rounded-lg border object-cover"
+              className="size-full cursor-pointer rounded-lg border object-cover"
             />
           )}
         </Item>

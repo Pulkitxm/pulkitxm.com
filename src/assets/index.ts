@@ -216,10 +216,13 @@ import NPLT_CSIR_2 from "@/assets/events/nptl-csir/img_2.webp";
 import NPLT_CSIR_3 from "@/assets/events/nptl-csir/img_3.webp";
 import NPLT_CSIR_4 from "@/assets/events/nptl-csir/img_4.webp";
 import API_MARKET_LOGO from "@/assets/exp/api.market/logo.webp";
+import API_MARKET_VOUCHER_PUBLIC from "@/assets/exp/api.market/public-vouchers.png";
 import API_MARKET_RESPONSIVENESS_COMPARISON from "@/assets/exp/api.market/resp-comparison.png";
 import API_MARKET_SELLER_DASH from "@/assets/exp/api.market/seller-dash.png";
 import API_MARKET_SHASHANK from "@/assets/exp/api.market/shashank.png";
 import API_MARKET_TRANSACTION_POPUP from "@/assets/exp/api.market/transaction-popup.png";
+import API_MARKET_VOUCHER_TARGETED from "@/assets/exp/api.market/user-specific-vouchers.png";
+import API_MARKET_VOUCHER from "@/assets/exp/api.market/voucher.webp";
 import API_MARKET_WALLET from "@/assets/exp/api.market/wallet.png";
 import API_MARKET_WEBSITE from "@/assets/exp/api.market/website.png";
 import CROWDVOLT_LOGO from "@/assets/exp/crowdvolt/logo.webp";
@@ -315,7 +318,13 @@ const assets = {
       respComparison: API_MARKET_RESPONSIVENESS_COMPARISON,
       sellerDash: API_MARKET_SELLER_DASH,
       wallet: API_MARKET_WALLET,
-      transactionPopup: API_MARKET_TRANSACTION_POPUP
+      transactionPopup: API_MARKET_TRANSACTION_POPUP,
+      voucher: API_MARKET_VOUCHER,
+      vouchers: {
+        targeted: API_MARKET_VOUCHER_TARGETED,
+        public: API_MARKET_VOUCHER_PUBLIC
+      },
+      newHeroSection: "https://jz9qfoze3c.ufs.sh/f/VQYLejfhDIPapkKFgGYjuslkZKv3Mw0IEADTQY9LUCqcNyt1"
     }
   },
   designs: {
