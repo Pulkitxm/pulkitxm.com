@@ -1,4 +1,5 @@
 export const skills: Readonly<Record<string, string[]>> = {
+  "Agents & LLMs": ["Claude", "Cursor AI Pro", "T3.Chat"],
   Languages: ["JavaScript", "TypeScript", "Python", "Java", "SQL"],
   "Libraries & Frameworks": [
     "React",
