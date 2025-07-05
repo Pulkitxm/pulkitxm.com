@@ -160,9 +160,7 @@ export function ContributionGraph(): React.ReactElement {
             <div className="flex min-w-max px-4 py-2 md:px-0">
               {MONTHS.map((month, index) => (
                 <div key={month} className="month-container flex flex-col" style={{ minWidth: "70px" }}>
-                  <div className="text-muted-foreground mb-2 px-1 text-center text-[10px] font-medium md:text-xs">
-                    {month}
-                  </div>
+                  <div className="mb-2 px-1 text-center text-[10px] font-medium md:text-xs">{month}</div>
                   <MonthGrid
                     year={selectedYear}
                     month={index}

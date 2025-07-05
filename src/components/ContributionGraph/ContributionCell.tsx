@@ -44,7 +44,7 @@ const getContributionColor = (count: number) => {
 export const ContributionCell: React.FC<ContributionCellProps> = React.memo(
   ({ date, contributionCount, isLoading, isToday, isJoinedDate }) => {
     const cellClass = cn(
-      "m-px h-[10px] w-[10px] rounded-[2px] transition-all duration-200 ease-in-out hover:scale-125 md:h-4 md:w-4",
+      "m-px h-[10px] w-[10px] rounded-[2px] border transition-all duration-200 ease-in-out hover:scale-125 md:h-4 md:w-4",
       isLoading
         ? "bg-muted"
         : isToday
