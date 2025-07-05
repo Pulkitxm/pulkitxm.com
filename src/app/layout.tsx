@@ -13,6 +13,7 @@ import ScrollToTopButton from "@/components/ScrollTopTop";
 import FloatingCTA from "@/components/ui/floating-cta";
 import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 import { PostHogProvider } from "@/providers/posthog";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import type { Metadata } from "next";
 
@@ -85,33 +86,35 @@ export default function RootLayout({
   const isDevMode = process.env.NODE_ENV === "development";
   const Wrapper = isDevMode ? Fragment : PostHogProvider;
   return (
-    <html lang="en" suppressHydrationWarning className="light">
-      <body className={`${GeistSans.className} dark min-h-screen`}>
-        <Wrapper>
-          <FloatingCTA />
-          <NextTopLoader
-            color="#00d72d"
-            initialPosition={0.08}
-            crawlSpeed={200}
-            height={3}
-            crawl={true}
-            showSpinner={false}
-            easing="ease"
-            speed={200}
-            shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-          />
-          <div className="mx-auto pt-5 md:w-[800px] md:max-w-[800px] lg:py-8">
-            <Navbar />
-            <ChatWidget />
-            <AnimatedMain className="rounded-lg border-gray-700 p-4 pb-0 sm:p-6 md:border lg:p-8">
-              {children}
-              <Footer />
-            </AnimatedMain>
-            <RedirectPopup />
-            <ScrollToTopButton />
-          </div>
-        </Wrapper>
-      </body>
+    <html lang="en" suppressHydrationWarning>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
+        <body className={`${GeistSans.className} min-h-screen`}>
+          <Wrapper>
+            <FloatingCTA />
+            <NextTopLoader
+              color="#00d72d"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={3}
+              crawl={true}
+              showSpinner={false}
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+            />
+            <div className="mx-auto pt-5 md:w-[800px] md:max-w-[800px] lg:py-8">
+              <Navbar />
+              <ChatWidget />
+              <AnimatedMain className="rounded-lg border-gray-700 p-4 pb-0 sm:p-6 md:border lg:p-8">
+                {children}
+                <Footer />
+              </AnimatedMain>
+              <RedirectPopup />
+              <ScrollToTopButton />
+            </div>
+          </Wrapper>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

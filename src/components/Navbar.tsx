@@ -13,6 +13,7 @@ import { NAVIGATION_LINKS } from "@/data/pages";
 import { cn } from "@/lib/utils";
 
 import { PreFetchUrl } from "./PreFetchUrl";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -131,9 +132,12 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
             href="/guestbook"
             className="flex items-center rounded bg-white px-3 py-1 text-sm text-black transition-colors hover:bg-gray-200"
           >
-            Sign my Guestbook
+            Guestbook
             <PenToolIcon className="ml-1 inline h-4 w-4" />
           </PreFetchUrl>
+        </li>
+        <li>
+          <ThemeToggle />
         </li>
       </ul>
       <div className="relative h-0.5 w-full">
@@ -180,6 +184,7 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
             Sign my Guestbook
             <PenToolIcon className="ml-1 h-4 w-4" />
           </Link>
+          <ThemeToggle />
         </div>
       </SheetContent>
     </Sheet>

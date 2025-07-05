@@ -11,6 +11,24 @@
   }
 }
 
+@keyframes slide-in-from-top {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes slide-in-from-top-smooth {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @layer utilities {
   .masonry {
     column-count: 1;
@@ -147,11 +165,99 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
+@supports (view-transition-name: theme-transition) {
+  ::view-transition-new(theme-transition) {
+    clip-path: inset(0 0 100% 0);
+    animation: slide-in-from-top 0.6s forwards linear;
+    will-change: clip-path;
+    pointer-events: none;
+  }
+
+  ::view-transition-old(theme-transition) {
+    animation: none;
+    pointer-events: none;
+  }
+
+  ::view-transition {
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    transition: color-scheme 400ms ease;
+  }
+}
+
 nav {
   animation: blurIn 1000ms forwards;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+body,
+div,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+textarea,
+select,
+a,
+li,
+td,
+th {
+  transition:
+    color 400ms ease,
+    background-color 400ms ease,
+    border-color 400ms ease;
+}
+
+html {
+  transition: color-scheme 400ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+.theme-debug {
+  @apply bg-red-500 p-2 text-white;
+}
+
+.dark .theme-debug {
+  @apply bg-blue-500;
 }

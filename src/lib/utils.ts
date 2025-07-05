@@ -180,3 +180,7 @@ export const isSameDomain = (url: string): boolean => {
   }
   return false;
 };
+
+export function supportsViewTransitions(): boolean {
+  return typeof document !== "undefined" && "startViewTransition" in document;
+}
