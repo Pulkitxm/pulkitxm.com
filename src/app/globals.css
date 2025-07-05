@@ -219,30 +219,6 @@ html {
   @apply bg-muted-foreground/50;
 }
 
-body,
-div,
-span,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-button,
-input,
-textarea,
-select,
-a,
-li,
-td,
-th {
-  transition:
-    color 400ms ease,
-    background-color 400ms ease,
-    border-color 400ms ease;
-}
-
 html {
   transition: color-scheme 400ms ease;
 }

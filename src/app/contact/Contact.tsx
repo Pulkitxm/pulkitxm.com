@@ -59,11 +59,11 @@ export default function Contact() {
         content: (
           <form onSubmit={handleSendMessage} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-gray-300">
+              <Label htmlFor="name" className="text-foreground">
                 Name
               </Label>
               <div className="relative">
-                <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <User className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                 <Input
                   type="text"
                   value={formInputs.name}
@@ -73,7 +73,7 @@ export default function Contact() {
                       name: e.target.value
                     }))
                   }
-                  className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
+                  className="border-border bg-background/50 text-foreground placeholder:text-muted-foreground pl-10"
                   placeholder="John Doe"
                   required
                 />
@@ -81,11 +81,11 @@ export default function Contact() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-300">
+              <Label htmlFor="email" className="text-foreground">
                 Email
               </Label>
               <div className="relative">
-                <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <Mail className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                 <Input
                   type="email"
                   value={formInputs.email}
@@ -95,7 +95,7 @@ export default function Contact() {
                       email: e.target.value
                     }))
                   }
-                  className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
+                  className="border-border bg-background/50 text-foreground placeholder:text-muted-foreground pl-10"
                   placeholder="john@example.com"
                   required
                 />
@@ -103,11 +103,11 @@ export default function Contact() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="message" className="text-gray-300">
+              <Label htmlFor="message" className="text-foreground">
                 Message
               </Label>
               <div className="relative">
-                <MessageSquare className="absolute top-3 left-3 h-4 w-4 text-gray-400" />
+                <MessageSquare className="text-muted-foreground absolute top-3 left-3 h-4 w-4" />
                 <Textarea
                   value={formInputs.message}
                   onChange={(e) =>
@@ -116,7 +116,7 @@ export default function Contact() {
                       message: e.target.value
                     }))
                   }
-                  className="min-h-[120px] border-white/10 bg-white/5 pl-10 text-white placeholder:text-gray-400"
+                  className="border-border bg-background/50 text-foreground placeholder:text-muted-foreground min-h-[120px] pl-10"
                   placeholder="Your message here..."
                   required
                 />
@@ -125,7 +125,7 @@ export default function Contact() {
 
             <Button
               type="submit"
-              className="w-full bg-white text-black hover:bg-white/90"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
               disabled={isSubmitting || isSubmitted}
             >
               {isSubmitting ? (
@@ -188,10 +188,10 @@ export default function Contact() {
   }, []);
 
   return (
-    <Card className="bg-background overflow-hidden border-none text-white">
+    <Card className="border-border text-card-foreground overflow-hidden shadow-xl">
       <CardHeader className="space-y-1 px-6 py-8">
         <CardTitle className="text-2xl font-bold sm:text-3xl">Get in Touch</CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardDescription className="text-muted-foreground">
           I&apos;m always open to exploring new collaborations and exciting opportunities. Whether it&apos;s a project
           idea, a job opportunity, or simply a chance to connect, feel free to reach out!
           <div className="mt-4 flex space-x-4">
@@ -202,7 +202,7 @@ export default function Contact() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="hover:text-foreground transition-colors"
                 >
                   <Icon className="h-7 w-7" />
                   <span className="sr-only">{label}</span>
@@ -219,7 +219,7 @@ export default function Contact() {
           ref={tabsRef}
         >
           <div
-            className="absolute top-1 bottom-1 rounded-md bg-[#ffffff1a] transition-all duration-300 ease-in-out"
+            className="bg-primary/20 absolute top-1 bottom-1 rounded-md transition-all duration-300 ease-in-out"
             style={sliderStyle}
           ></div>
 
@@ -228,7 +228,7 @@ export default function Contact() {
               key={`${id}-${index}`}
               type="button"
               className={`ring-offset-background focus-visible:ring-ring z-10 inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
-                isSelected === id ? "text-white" : "text-muted-foreground"
+                isSelected === id ? "text-foreground" : "text-muted-foreground"
               }`}
               onClick={() => setIsSelected(id)}
             >
@@ -244,7 +244,7 @@ export default function Contact() {
         ))}
       </CardContent>
 
-      <CardFooter className="from-primary/5 to-primary/10 flex items-center justify-center bg-linear-to-r p-6 px-6 py-4">
+      <CardFooter className="from-primary/5 to-primary/10 flex items-center justify-center bg-gradient-to-r p-6 px-6 py-4">
         <p className="text-base sm:text-lg">
           or mail me at{" "}
           <Link

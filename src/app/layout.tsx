@@ -88,7 +88,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
-        <body className={`${GeistSans.className} min-h-screen`}>
+        <body
+          className={`${GeistSans.className} selection:bg-primary/20 selection:text-primary-foreground dark:selection:bg-primary/30 min-h-screen bg-[#f3f0ef] dark:bg-black`}
+        >
           <Wrapper>
             <FloatingCTA />
             <NextTopLoader
@@ -102,10 +104,10 @@ export default function RootLayout({
               speed={200}
               shadow="0 0 10px #2299DD,0 0 5px #2299DD"
             />
-            <div className="mx-auto pt-5 md:w-[800px] md:max-w-[800px] lg:py-8">
+            <div className="mx-auto mb-4 pt-5 md:mb-0 md:w-[800px] md:max-w-[800px] lg:py-8">
               <Navbar />
               <ChatWidget />
-              <AnimatedMain className="rounded-lg border-gray-700 p-4 pb-0 sm:p-6 md:border lg:p-8">
+              <AnimatedMain className="rounded-lg border-gray-300 p-4 pb-0 sm:p-6 md:border lg:p-8 dark:border-gray-700">
                 {children}
                 <Footer />
               </AnimatedMain>

@@ -117,7 +117,7 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
               href={link.url}
               className={cn(
                 "relative flex items-center justify-between px-2 py-1 text-sm transition-colors duration-200",
-                isLinkActive(link.url) ? "text-white" : "text-[#c6c6c6] hover:text-gray-200"
+                isLinkActive(link.url) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               )}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(-1)}
@@ -130,7 +130,7 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
         <li>
           <PreFetchUrl
             href="/guestbook"
-            className="flex items-center rounded bg-white px-3 py-1 text-sm text-black transition-colors hover:bg-gray-200"
+            className="bg-primary text-primary-foreground hover:bg-primary/80 flex items-center rounded px-3 py-1 text-sm transition-colors"
           >
             Guestbook
             <PenToolIcon className="ml-1 inline h-4 w-4" />
@@ -141,7 +141,7 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
         </li>
       </ul>
       <div className="relative h-0.5 w-full">
-        <div className="absolute h-full bg-white transition-all duration-300 ease-in-out" style={underlineStyle} />
+        <div className="bg-primary absolute h-full transition-all duration-300 ease-in-out" style={underlineStyle} />
       </div>
     </div>
   );
@@ -153,13 +153,13 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
+        <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
           <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[240px] bg-black p-0">
-        <SheetTitle className="bg-gray-900 p-4 text-white">Menu</SheetTitle>
+      <SheetContent side="left" className="bg-background w-[240px] p-0">
+        <SheetTitle className="bg-card text-foreground p-4">Menu</SheetTitle>
         <div className="flex flex-col py-4">
           {NAVIGATION_LINKS.map((link, index) => (
             <Link
@@ -169,8 +169,8 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
               className={cn(
                 "px-4 py-2 text-sm transition-colors duration-200",
                 isLinkActive(link.url)
-                  ? "bg-gray-800 text-white"
-                  : "text-gray-400 hover:bg-gray-800 hover:text-gray-200"
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
               {link.title}
@@ -179,7 +179,7 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
           <Link
             href="/guestbook"
             onClick={() => setIsOpen(false)}
-            className="mt-2 flex items-center px-4 py-2 text-sm text-gray-400 transition-colors hover:bg-gray-800"
+            className="text-muted-foreground hover:bg-muted hover:text-foreground mt-2 flex items-center px-4 py-2 text-sm transition-colors"
           >
             Sign my Guestbook
             <PenToolIcon className="ml-1 h-4 w-4" />
