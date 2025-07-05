@@ -87,12 +87,14 @@ export default function ExperienceTimeline() {
         className="mb-16 flex flex-col items-center justify-center gap-2 text-center text-5xl font-bold tracking-tight"
       >
         <span className="text-primary">My Experience</span>
-        <span className="text-xl text-gray-400">Total Professional Experience: {formatDuration(totalExperience)}</span>
+        <span className="muted-foreground text-xl">
+          Total Professional Experience: {formatDuration(totalExperience)}
+        </span>
       </motion.h1>
 
       <div className="relative" ref={containerRef}>
         <motion.div
-          className="absolute top-0 bottom-0 left-0 w-0.5 bg-gray-700"
+          className="bg-border absolute top-0 bottom-0 left-0 w-0.5 dark:bg-gray-700"
           style={{ scaleY, transformOrigin: "top" }}
         />
 
@@ -105,17 +107,17 @@ export default function ExperienceTimeline() {
             className="relative mb-12 ml-8"
           >
             <div className="relative mb-6">
-              <div className="absolute top-0 -left-10 h-6 w-6 rounded-full border-4 border-blue-500 bg-blue-100" />
+              <div className="border-primary bg-background absolute top-0 -left-10 h-6 w-6 rounded-full border-4 dark:bg-gray-900" />
               <div className="mb-4 flex items-center space-x-2">
                 {group.logo && (
                   <img
                     src={group.logo.src || "/placeholder.svg"}
                     alt={`${group.companyName} logo`}
-                    className="-mt-2 size-12 rounded-full border-2 object-contain p-1"
+                    className="bg-background -mt-2 size-12 rounded-full border object-contain p-1 dark:bg-gray-900"
                   />
                 )}
                 <div>
-                  <h2 className="text-2xl font-bold text-white">
+                  <h2 className="text-foreground text-2xl font-bold">
                     <Link
                       href={group.companyUrl ?? ""}
                       rel="noopener noreferrer"
@@ -133,42 +135,42 @@ export default function ExperienceTimeline() {
               {group.experiences.map((exp, expIndex) => (
                 <div key={exp.slug} className="relative">
                   {group.experiences.length > 1 && expIndex < group.experiences.length - 1 && (
-                    <div className="absolute top-full left-4 h-4 w-0.5 bg-gray-600" />
+                    <div className="bg-border absolute top-full left-4 h-4 w-0.5 dark:bg-gray-600" />
                   )}
 
-                  <Card className="group bg-background relative ml-2 flex h-full flex-col border-gray-800 transition-all duration-300 hover:border-gray-700 hover:shadow-xl hover:shadow-gray-900/20">
+                  <Card className="bg-background relative ml-2 flex h-full flex-col border shadow-lg transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-900/20">
                     <CardHeader className="space-y-4">
                       <div className="flex items-start justify-between">
-                        <Badge variant="outline" className="border-gray-700 bg-gray-800 text-white">
+                        <Badge variant="outline" className="bg-muted text-foreground border">
                           {exp.expType.valueOf()}
                         </Badge>
-                        <div className="text-sm text-gray-400">
+                        <div className="muted-foreground flex items-center text-sm">
                           {formatDate(exp.startDate)} -{" "}
                           {exp.endDate ? (exp.endDate > getToday() ? "Present" : formatDate(exp.endDate)) : "Present"}
                         </div>
                       </div>
                       <div className="space-y-1">
-                        <CardTitle className="text-xl font-bold text-white">{exp.position}</CardTitle>
+                        <CardTitle className="text-foreground text-xl font-bold">{exp.position}</CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <div className="flex items-center text-sm text-gray-400">
+                      <div className="muted-foreground flex items-center text-sm">
                         <MapPin className="mr-2 h-4 w-4" />
                         {exp.location}
                       </div>
-                      <div className="flex items-center text-sm text-gray-400">
+                      <div className="muted-foreground flex items-center text-sm">
                         <Briefcase className="mr-2 h-4 w-4" />
                         {exp.roleType}
                       </div>
                       {exp.desc && (
-                        <div className="w-full rounded-md border p-4">
-                          <p className="text-sm text-gray-400">{exp.desc}</p>
+                        <div className="bg-muted w-full rounded-md border p-4">
+                          <p className="muted-foreground text-sm">{exp.desc}</p>
                         </div>
                       )}
                     </CardContent>
                     {exp.expDetails && (
                       <CardFooter className="mt-auto pt-6">
-                        <Button className="w-full bg-gray-800 text-white transition-colors hover:bg-gray-700" asChild>
+                        <Button className="bg-muted text-foreground hover:bg-accent w-full transition-colors" asChild>
                           <PreFetchUrl
                             href={`/exp/${exp.slug}`}
                             rel="noopener noreferrer"

@@ -3,9 +3,9 @@ import profile from "@/data/profile";
 
 export default function Component() {
   return (
-    <section className="bg-background w-full py-12" id="skills">
+    <section className="w-full py-12" id="skills">
       <div className="container pr-4 md:pr-6">
-        <h2 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Skills</h2>
+        <h2 className="text-foreground mb-2 text-2xl font-bold tracking-tight sm:text-3xl">Skills</h2>
         <div className="space-y-4">
           {Object.entries(profile.skills).map(([category, skills]) => (
             <div key={category}>

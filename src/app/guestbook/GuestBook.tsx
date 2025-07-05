@@ -75,17 +75,17 @@ function ActionDialog({
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
         transition={{ type: "spring", duration: 0.3 }}
-        className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800 dark:text-white"
+        className="bg-background dark:bg-input/30 dark:text-foreground w-full max-w-md rounded-lg p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="mb-4 text-lg font-semibold">{dialogContent.title}</h3>
-        <p className="mb-6 text-gray-600 dark:text-gray-300">{dialogContent.message}</p>
+        <p className="text-muted-foreground mb-6">{dialogContent.message}</p>
         <div className="flex justify-end gap-3">
           <Button
             variant="outline"
             onClick={onClose}
             disabled={loading}
-            className="hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
+            className="hover:bg-muted dark:bg-input/30 dark:text-foreground dark:hover:bg-input/50"
           >
             Cancel
           </Button>
@@ -93,7 +93,7 @@ function ActionDialog({
             variant="destructive"
             onClick={onConfirm}
             disabled={loading}
-            className="bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
+            className="bg-destructive hover:bg-destructive/90 dark:bg-destructive/60 dark:hover:bg-destructive/80"
           >
             {loading ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -352,7 +352,9 @@ function UserImages({ guestbookMessagesInOrder }: { guestbookMessagesInOrder: Gu
             alt={guest.user.name}
             width={40}
             height={40}
-            className="relative h-8 w-8 rounded-full border-2 border-white sm:h-9 sm:w-9 md:h-10 md:w-10 dark:border-gray-800"
+            className={
+              "border-background dark:border-input/30 relative h-8 w-8 rounded-full border-2 sm:h-9 sm:w-9 md:h-10 md:w-10"
+            }
             style={{
               marginLeft: index > 0 ? "-13px" : "0",
               zIndex: 10 - index
@@ -361,7 +363,9 @@ function UserImages({ guestbookMessagesInOrder }: { guestbookMessagesInOrder: Gu
         ))}
       {guestbookMessagesInOrder.length > imagesToShow && (
         <div
-          className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 font-medium text-gray-800 sm:h-9 sm:w-9 md:h-10 md:w-10 dark:bg-gray-700 dark:text-gray-200"
+          className={
+            "bg-muted text-muted-foreground relative flex h-8 w-8 items-center justify-center rounded-full font-medium sm:h-9 sm:w-9 md:h-10 md:w-10"
+          }
           style={{ marginLeft: "-13px", zIndex: 0 }}
         >
           <span className="text-xs sm:text-sm">+{guestbookMessagesInOrder.length - imagesToShow}</span>

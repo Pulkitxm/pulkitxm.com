@@ -11,7 +11,7 @@ export default async function Certifications() {
   return (
     <section className="mb-12">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Certifications</h2>
+        <h2 className="text-foreground text-2xl font-bold tracking-tight sm:text-3xl">Certifications</h2>
         <p className="text-muted-foreground text-sm">I have completed the following certifications.</p>
       </div>
       <div className="mt-4 grid gap-6 sm:grid-cols-2">
@@ -34,7 +34,7 @@ function Certificate({ certification }: { certification: Certification }) {
       rel="noopener noreferrer"
       id={key + "-" + certification.slug}
     >
-      <Card className="hover:bg-muted/50 h-full overflow-hidden transition-colors">
+      <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl">
         <CardHeader className="border-b p-0">
           <div className="relative h-48 w-full sm:h-56 md:h-64">
             <img

@@ -36,13 +36,13 @@ function CollabInviteLayerCX() {
             stiffness: 260,
             damping: 20
           }}
-          className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#1a1a1a] border-b-[#4fa17f80] bg-[#0a0a0ae3] shadow-2xl shadow-[#4fa17f80]"
+          className="border-border dark:bg-background/95 sticky top-0 z-50 w-full overflow-hidden border-b bg-[#756050] shadow-lg"
         >
           <div className="mx-auto flex max-w-(--breakpoint-xl) items-center justify-between px-4 py-2 md:px-6">
             <div className="flex-1" />
             <PreFetchUrl
               href="/contact"
-              className="cursor-pointer text-center text-sm font-medium text-green-400 md:text-base"
+              className="cursor-pointer text-center text-sm font-medium text-white md:text-base dark:text-green-400"
               onClick={() => {
                 setShow(false);
               }}
@@ -57,7 +57,7 @@ function CollabInviteLayerCX() {
                   e.preventDefault();
                   setShow(false);
                 }}
-                className="inline-flex cursor-pointer items-center justify-center rounded-full text-[#00ff95] transition-colors"
+                className="inline-flex cursor-pointer items-center justify-center rounded-full text-white transition-colors dark:text-[#00ff95]"
                 aria-label="Close banner"
               >
                 <XIcon className="h-4 w-4" />

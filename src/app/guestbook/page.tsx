@@ -14,8 +14,8 @@ export default async function GuestbookPage() {
     if (dbMessages.status === "error")
       return (
         <div>
-          <h1 className="text-3xl font-bold text-white sm:text-4xl">Error loading messages</h1>
-          <p className="mt-3 text-lg text-gray-400">Please try again later.</p>
+          <h1 className="text-foreground text-3xl font-bold sm:text-4xl">Error loading messages</h1>
+          <p className="text-muted-foreground mt-3 text-lg">Please try again later.</p>
         </div>
       );
 
@@ -31,17 +31,19 @@ export default async function GuestbookPage() {
       <div className="text-center">
         {session ? (
           <>
-            <h1 className="text-3xl font-bold text-white sm:text-4xl">
+            <h1 className="text-foreground text-3xl font-bold sm:text-4xl">
               Hi {session.user?.name}, thanks for stopping by!
             </h1>
-            <p className="mt-3 text-lg text-gray-400">Feel free to leave a message in my guestbook.</p>
+            <p className="text-muted-foreground mt-3 text-lg">Feel free to leave a message in my guestbook.</p>
           </>
         ) : (
           <>
-            <h1 className="text-3xl font-bold text-white sm:text-4xl">
+            <h1 className="text-foreground text-3xl font-bold sm:text-4xl">
               Hi there, would you like to sign my guestbook?
             </h1>
-            <p className="mt-3 text-lg text-gray-400">Sign in to leave a message and let me know you were here!</p>
+            <p className="text-muted-foreground mt-3 text-lg">
+              Sign in to leave a message and let me know you were here!
+            </p>
           </>
         )}
       </div>
@@ -62,7 +64,7 @@ export default async function GuestbookPage() {
                 width={32}
                 height={32}
               />
-              <span className="font-medium text-white">{session.user?.name}</span>
+              <span className="text-foreground font-medium">{session.user?.name}</span>
             </div>
             <LogoutButton />
           </div>

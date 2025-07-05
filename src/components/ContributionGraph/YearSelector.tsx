@@ -30,13 +30,13 @@ export const YearSelector: React.FC<YearSelectorProps> = ({ selectedYear, onYear
     <div className="year-select relative">
       <button
         onClick={() => setShowYearSelect(!showYearSelect)}
-        className="flex items-center space-x-2 rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1.5 transition-colors hover:bg-zinc-700"
+        className="border-border bg-background hover:bg-muted flex items-center space-x-2 rounded-md border px-3 py-1.5 transition-colors"
       >
-        <span className="text-sm text-zinc-100">{selectedYear}</span>
-        <ChevronDown className="h-4 w-4 text-zinc-300" />
+        <span className="text-foreground text-sm">{selectedYear}</span>
+        <ChevronDown className="text-muted-foreground h-4 w-4" />
       </button>
       {showYearSelect && (
-        <div className="absolute left-0 z-50 mt-1 w-32 rounded-md border border-zinc-800 bg-zinc-900 py-1 shadow-lg md:left-[-25%]">
+        <div className="border-border bg-popover absolute left-0 z-50 mt-1 w-32 rounded-md border py-1 shadow-lg md:left-[-25%]">
           {getAvailableYears().map((year) => (
             <button
               key={year}
@@ -45,8 +45,8 @@ export const YearSelector: React.FC<YearSelectorProps> = ({ selectedYear, onYear
                 setShowYearSelect(false);
               }}
               className={cn(
-                "w-full px-3 py-1.5 text-left text-sm transition-colors hover:bg-zinc-800",
-                year === selectedYear ? "text-emerald-500" : "text-zinc-100"
+                "hover:bg-muted w-full px-3 py-1.5 text-left text-sm transition-colors",
+                year === selectedYear ? "text-primary font-semibold" : "text-foreground"
               )}
             >
               {year}

@@ -21,18 +21,18 @@ export default async function BlogListing() {
         <Link
           href={profile.links.blogPageUrl}
           target="_blank"
-          className="text-2xl font-bold underline sm:text-3xl md:text-4xl"
+          className="foreground hover:text-primary text-2xl font-bold underline sm:text-3xl md:text-4xl"
         >
           Blogs ({profile.links.blogPageUrl.split("//")[1]})
         </Link>
-        <Badge variant="secondary" className="text-sm">
+        <Badge variant="secondary" className="bg-muted text-muted-foreground border-border border text-sm">
           {sortedBlogs.length}
         </Badge>
       </div>
 
       <div className="grid gap-4 sm:gap-6">
         {sortedBlogs.length === 0 ? (
-          <p className="text-center text-gray-500">No blogs found.</p>
+          <p className="text-muted-foreground text-center">No blogs found.</p>
         ) : (
           sortedBlogs.map((blog, index) => <Blog key={index} blog={blog} />)
         )}
@@ -43,19 +43,21 @@ export default async function BlogListing() {
 
 function Blog({ blog }: { blog: BlogType }) {
   return (
-    <Card className="bg-background">
+    <Card className="bg-background -border border-border shadow-xl dark:border">
       <CardContent className="p-4 sm:p-6">
         <Link
           href={blog.url}
           target="_blank"
-          className="block"
+          className="group block"
           rel="noopener noreferrer"
           aria-label={`Read ${blog.title}`}
         >
-          <h2 className="mb-2 text-lg font-semibold text-gray-300 sm:text-xl">{blog.title}</h2>
+          <h2 className="text-foreground group-hover:text-primary mb-2 text-lg font-semibold transition-colors sm:text-xl">
+            {blog.title}
+          </h2>
         </Link>
 
-        <div className="mb-2 flex flex-wrap items-center gap-3 text-sm text-gray-400 sm:gap-6">
+        <div className="text-muted-foreground mb-2 flex flex-wrap items-center gap-3 text-sm sm:gap-6">
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4" />
             <span>{blog.readTimeInMinutes} min read</span>
@@ -78,7 +80,7 @@ function Blog({ blog }: { blog: BlogType }) {
           </div>
         </div>
 
-        <p className="text-gray-400">{blog.brief}</p>
+        <p className="text-muted-foreground">{blog.brief}</p>
       </CardContent>
     </Card>
   );

@@ -32,12 +32,12 @@ export default function Header() {
 
       <div className="mt-12 mb-5 md:mt-24">
         <div className="mb-1 flex flex-wrap items-center gap-2">
-          <p className="text-xl font-semibold text-white">{profile.name}</p>
+          <p className="text-foreground text-xl font-semibold">{profile.name}</p>
           <Link
             href={`https://github.com/sponsors/${profile.githubUserName}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-md border border-[#363b42] bg-[#21262d] px-3 py-[5px] text-sm font-medium text-white no-underline transition-colors duration-150 hover:bg-[#30363d]"
+            className="border-border bg-background text-foreground hover:bg-muted inline-flex items-center rounded-md border px-3 py-[5px] text-sm font-medium no-underline transition-colors duration-150"
           >
             <svg
               aria-hidden="true"
@@ -56,16 +56,16 @@ export default function Header() {
           </Link>
         </div>
 
-        <p className="text-sm text-gray-300">{profile.caption}</p>
+        <p className="text-muted-foreground text-sm">{profile.caption}</p>
 
         <div className="my-3 flex flex-wrap items-center gap-3">
           {links.map(({ href, icon: Icon }, index) => (
             <Link key={index} href={href} target="_blank" aria-label={`Link to ${href}`}>
-              <Icon className="h-5 w-5 cursor-pointer text-gray-300 hover:text-gray-400" />
+              <Icon className="text-muted-foreground hover:text-foreground h-5 w-5 cursor-pointer" />
             </Link>
           ))}
 
-          <Button asChild variant="outline" size="sm" className="border-gray-800 hover:bg-gray-800">
+          <Button asChild variant="outline" size="sm" className="border-border hover:bg-muted">
             <Link href={profile.resumeLink} target="_blank">
               <FileText className="mr-2 h-4 w-4" />
               Resume
@@ -76,16 +76,20 @@ export default function Header() {
 
       <div
         onClick={copyCommand}
-        className="mb-6 cursor-pointer rounded border border-green-900 bg-gray-900/50 px-4 py-2 transition-colors hover:bg-gray-800/60"
+        className="bg-muted hover:bg-muted/70 mb-6 cursor-pointer rounded border border-green-900 px-4 py-2 transition-colors"
       >
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <Terminal className="h-4 w-4 text-green-400" />
-            <code className="font-mono text-sm text-green-400">npx pulkitxm</code>
+            <Terminal className="h-4 w-4 text-green-600 dark:text-green-400" />
+            <code className="font-mono text-sm text-green-600 dark:text-green-400">npx pulkitxm</code>
           </div>
           <div className="flex items-center gap-1">
-            <span className="text-xs text-gray-400">Try my interactive CLI</span>
-            {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4 text-gray-400" />}
+            <span className="text-muted-foreground text-xs">Try my interactive CLI</span>
+            {copied ? (
+              <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+            ) : (
+              <Copy className="text-muted-foreground h-4 w-4" />
+            )}
           </div>
         </div>
       </div>

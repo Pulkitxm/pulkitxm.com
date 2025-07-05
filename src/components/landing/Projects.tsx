@@ -8,8 +8,8 @@ import JumpLink from "../JumpLink";
 export default async function Projects() {
   return (
     <div>
-      <h1 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Projects</h1>
-      <p className="text-sm text-gray-400">Some of my cool side projects</p>
+      <h1 className="text-foreground mb-2 text-2xl font-bold tracking-tight sm:text-3xl">Projects</h1>
+      <p className="text-muted-foreground text-sm">Some of my cool side projects</p>
 
       <div className="grid w-full gap-4 p-2 sm:grid-cols-2">
         {profile.projects.map((project, index) => (
@@ -26,14 +26,14 @@ function Project({ project }: { project: ProjectType }) {
     <Link
       href={project.url}
       target="_blank"
-      className="group flex w-full flex-col rounded-lg border border-gray-700 p-3"
+      className="group border-border flex w-full flex-col rounded-lg border p-3 shadow-lg transition-all duration-300 hover:shadow-xl"
       rel="noopener noreferrer"
       id={key + "-" + project.slug}
     >
       <div className="w-full grow overflow-hidden rounded-lg brightness-90">
         <img
           src={project.image.src}
-          className="h-full w-full scale-110 rounded-lg object-contain brightness-90 transition-transform duration-300 group-hover:scale-100"
+          className="h-full w-full rounded-lg object-contain brightness-90 transition-transform duration-300"
           width={500}
           height={300}
           alt={project.name}
@@ -42,8 +42,8 @@ function Project({ project }: { project: ProjectType }) {
       </div>
       <div className="flex items-end justify-between">
         <div>
-          <p className="mt-2 text-lg font-bold text-gray-200">{project.name}</p>
-          <p className="text-sm text-gray-300">{project.tagline}</p>
+          <p className="text-foreground mt-2 text-lg font-bold">{project.name}</p>
+          <p className="text-muted-foreground text-sm">{project.tagline}</p>
         </div>
         <JumpLink
           path="/"

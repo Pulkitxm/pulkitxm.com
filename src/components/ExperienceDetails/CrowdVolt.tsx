@@ -109,12 +109,12 @@ export default function CrowdVoltExperience({ exp }: { exp: Experience }) {
 
       <div className="flex items-center justify-center">
         <Tweet
-          likes={485}
+          likes={478}
           bookmarks={63}
           comments={52}
           retweets={9}
           timestamp={"10:24 AM · Feb 5, 2025"}
-          views={"66k"}
+          views={"66.2k"}
           content={
             "received my first full-time offer as a Software Engineer at a US-based startup. Huge thanks to @kirat_tw bhaiya for the guidance and support—this wouldn't have been possible without you! I'm currently in my\n\n\ntrial period.....Wish me luck🤞"
           }

@@ -188,7 +188,7 @@ export default function Contact() {
   }, []);
 
   return (
-    <Card className="border-border text-card-foreground overflow-hidden shadow-xl">
+    <Card className="border-border text-card-foreground overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
       <CardHeader className="space-y-1 px-6 py-8">
         <CardTitle className="text-2xl font-bold sm:text-3xl">Get in Touch</CardTitle>
         <CardDescription className="text-muted-foreground">

@@ -128,12 +128,11 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
           </li>
         ))}
         <li>
-          <PreFetchUrl
-            href="/guestbook"
-            className="bg-primary text-primary-foreground hover:bg-primary/80 flex items-center rounded px-3 py-1 text-sm transition-colors"
-          >
-            Guestbook
-            <PenToolIcon className="ml-1 inline h-4 w-4" />
+          <PreFetchUrl href="/guestbook" className="flex items-center rounded text-sm">
+            <Button variant="default">
+              Guestbook
+              <PenToolIcon className="ml-1 inline h-4 w-4" />
+            </Button>
           </PreFetchUrl>
         </li>
         <li>

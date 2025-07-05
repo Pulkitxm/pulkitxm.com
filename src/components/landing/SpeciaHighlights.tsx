@@ -55,8 +55,8 @@ export default function SpecialHighlights() {
 
   return (
     <div className="mt-12 mb-6 rounded-xl">
-      <h2 className="mb-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Beyond the Resume</h2>
-      <p className="mb-8 text-sm text-gray-400">What doesn&apos;t fit on a CV, but matters just as much.</p>
+      <h2 className="text-foreground mb-2 text-2xl font-bold tracking-tight sm:text-3xl">Beyond the Resume</h2>
+      <p className="text-muted-foreground mb-8 text-sm">What doesn&apos;t fit on a CV, but matters just as much.</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2">
         {highlights.map((item, idx) => {
           const Wrapper = item.link ? Link : "div";
@@ -65,12 +65,14 @@ export default function SpecialHighlights() {
               key={idx}
               href={item.link || ""}
               target={isSameDomain(item.link || "") ? "_self" : "_blank"}
-              className={`group relative flex items-start gap-4 rounded-lg border border-gray-700/50 p-4 backdrop-blur-sm transition-all ${item.link ? "hover:border-gray-600 hover:bg-gray-800/30" : ""}`}
+              className={
+                "group border-border relative flex items-start gap-4 rounded-lg border p-4 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl"
+              }
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 transition-all group-hover:from-gray-700 group-hover:to-gray-800 group-hover:text-white">
+              <div className="bg-muted text-muted-foreground group-hover:text-foreground flex h-10 w-10 items-center justify-center rounded-lg transition-all">
                 {item.icon}
               </div>
-              <div className="text-base font-medium text-gray-200 group-hover:text-white">{item.title}</div>
+              <div className="text-foreground group-hover:text-foreground text-base font-medium">{item.title}</div>
             </Wrapper>
           );
         })}

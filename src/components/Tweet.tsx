@@ -68,14 +68,14 @@ const UserInfo = memo(({ user }: { user: TweetUser }) => (
     </Link>
     <div className="flex min-w-0 flex-1 flex-col">
       <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
-        <h3 className="truncate text-base font-semibold text-white sm:text-lg sm:font-bold">{user.name}</h3>
+        <h3 className="truncate text-base font-semibold sm:text-lg sm:font-bold dark:text-neutral-100">{user.name}</h3>
         {user.verified && <VerifiedIcon />}
       </div>
       <Link
         href={user.profileLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="truncate text-sm text-gray-500 transition-colors hover:text-gray-400 focus:text-gray-400 focus:outline-none"
+        className="truncate text-sm transition-colors hover:text-neutral-700 focus:text-neutral-700 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
         onClick={(e) => e.stopPropagation()}
       >
         @{user.username}
@@ -117,7 +117,7 @@ const ActionButton = memo(
         variant="ghost"
         size="sm"
         className={cn(
-          "group/btn flex cursor-pointer items-center gap-1.5 rounded p-0 text-gray-500 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:outline-none",
+          "group/btn flex cursor-pointer items-center gap-1.5 rounded p-0 transition-all duration-200 hover:bg-neutral-100 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-800",
           hoverColor
         )}
         onClick={handleClick}
@@ -143,15 +143,10 @@ export const Tweet = memo(
     }, []);
 
     return (
-      <Link
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-      >
+      <Link href={link} target="_blank" rel="noopener noreferrer" className="block rounded-lg focus:outline-none">
         <Card
           className={cn(
-            "group relative mx-auto w-full max-w-2xl cursor-pointer border-2 border-gray-800 bg-black p-4 text-white transition-all duration-200 hover:bg-gray-950/50 sm:p-6"
+            "group relative mx-auto w-full max-w-2xl cursor-pointer border-2 bg-white p-4 text-neutral-900 shadow-lg transition-all duration-200 hover:bg-neutral-50 hover:shadow-xl sm:p-6 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-900/50"
           )}
         >
           <header className="mb-3 flex items-start justify-between gap-2 sm:gap-4">
@@ -160,7 +155,7 @@ export const Tweet = memo(
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 flex-shrink-0 cursor-pointer rounded text-gray-500 transition-all duration-200 hover:bg-gray-800/50 hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none sm:h-8 sm:w-8"
+              className="h-7 w-7 flex-shrink-0 cursor-pointer rounded transition-all duration-200 hover:bg-neutral-100 hover:text-neutral-900 focus:ring-2 focus:ring-blue-500 focus:outline-none sm:h-8 sm:w-8 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
               onClick={handleMoreClick}
               aria-label="More options"
             >
@@ -168,29 +163,29 @@ export const Tweet = memo(
             </Button>
           </header>
 
-          <div className="mb-3 text-base leading-relaxed break-words whitespace-pre-line text-white sm:mb-4 sm:text-lg">
+          <div className="mb-3 text-base leading-relaxed break-words whitespace-pre-line sm:mb-4 sm:text-lg dark:text-neutral-100">
             {content}
           </div>
           {(timestamp || views) && (
-            <div className="mb-4 flex flex-wrap items-center gap-1 text-xs text-gray-500 sm:mb-5 sm:text-sm">
+            <div className="mb-4 flex flex-wrap items-center gap-1 text-xs sm:mb-5 sm:text-sm dark:text-neutral-400">
               {timestamp && <time>{timestamp}</time>}
               {views && (
                 <>
                   <span aria-hidden="true"> · </span>
-                  <span className="font-semibold text-white tabular-nums">{views}</span>
+                  <span className="font-semibold tabular-nums dark:text-neutral-100">{views}</span>
                   <span> Views</span>
                 </>
               )}
             </div>
           )}
 
-          <footer className="border-t border-gray-800/50 pt-3 sm:pt-4">
+          <footer className="border-t pt-3 sm:pt-4 dark:border-neutral-800">
             <div className="flex items-center justify-between">
               <nav className="flex items-center gap-4 sm:gap-8" aria-label="Tweet actions">
                 <ActionButton
                   icon={MessageCircle}
                   count={comments}
-                  hoverColor="hover:text-blue-400 focus:text-blue-400"
+                  hoverColor="hover:text-blue-500 dark:hover:text-blue-400 focus:text-blue-500 dark:focus:text-blue-400"
                   action="comment"
                   ariaLabel={`Reply. ${comments} replies`}
                 />
@@ -198,7 +193,7 @@ export const Tweet = memo(
                 <ActionButton
                   icon={Repeat2}
                   count={retweets}
-                  hoverColor="hover:text-green-400 focus:text-green-400"
+                  hoverColor="hover:text-green-600 dark:hover:text-green-400 focus:text-green-600 dark:focus:text-green-400"
                   action="retweet"
                   ariaLabel={`Retweet. ${retweets} retweets`}
                 />
@@ -206,7 +201,7 @@ export const Tweet = memo(
                 <ActionButton
                   icon={Heart}
                   count={likes}
-                  hoverColor="hover:text-red-400 focus:text-red-400"
+                  hoverColor="hover:text-red-500 dark:hover:text-red-400 focus:text-red-500 dark:focus:text-red-400"
                   action="like"
                   ariaLabel={`Like. ${likes} likes`}
                 />
@@ -214,7 +209,7 @@ export const Tweet = memo(
                 <ActionButton
                   icon={Bookmark}
                   count={bookmarks}
-                  hoverColor="hover:text-blue-400 focus:text-blue-400"
+                  hoverColor="hover:text-blue-500 dark:hover:text-blue-400 focus:text-blue-500 dark:focus:text-blue-400"
                   action="bookmark"
                   ariaLabel={`Bookmark. ${bookmarks} bookmarks`}
                 />
@@ -223,7 +218,7 @@ export const Tweet = memo(
               <Button
                 variant="ghost"
                 size="sm"
-                className="cursor-pointer rounded p-0 text-gray-500 transition-all duration-200 hover:text-blue-400 focus:text-blue-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="cursor-pointer rounded p-0 transition-all duration-200 hover:text-blue-500 focus:text-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-neutral-400 dark:hover:text-blue-400 dark:focus:text-blue-400"
                 onClick={handleShareClick}
                 aria-label="Share tweet"
               >

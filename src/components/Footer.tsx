@@ -40,9 +40,9 @@ export default function Footer() {
     <footer className="border-border mt-12 border-t pt-8 text-center">
       <div className="mx-auto max-w-4xl px-4">
         <p className="text-foreground text-lg font-medium">
-          Made with <span className="text-red-500">❤️</span> by Pulkit
+          Made with <span className="text-primary">❤️</span> by Pulkit
         </p>
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-400">
+        <div className="text-muted-foreground mt-4 flex flex-wrap items-center justify-center gap-4 text-sm">
           <p className="text-muted-foreground">© {new Date().getFullYear()} Pulkit. All rights reserved</p>
           <div className="flex items-center gap-4">
             <Link

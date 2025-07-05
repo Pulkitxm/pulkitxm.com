@@ -118,19 +118,22 @@ export function ContributionGraph(): React.ReactElement {
 
     return (
       <>
-        <div className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
+        <div className="text-muted-foreground flex items-center space-x-2 text-xs md:text-sm">
           <CalendarDays className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
           <span>
             <strong>{selectedYearData.contributions.totalContributions}</strong> contributions
           </span>
         </div>
-        <PreFetchUrl href="/gh-followers" className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
+        <PreFetchUrl
+          href="/gh-followers"
+          className="text-muted-foreground flex items-center space-x-2 text-xs md:text-sm"
+        >
           <Users2 className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
           <span className="hover:underline">
             <strong>{data.followers}</strong> followers
           </span>
         </PreFetchUrl>
-        <PreFetchUrl href="/prs" className="flex items-center space-x-2 text-xs text-zinc-300 md:text-sm">
+        <PreFetchUrl href="/prs" className="text-muted-foreground flex items-center space-x-2 text-xs md:text-sm">
           <GitPullRequest className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
           <span className="hover:underline">
             <strong>{selectedYearData.prs}</strong> Pull Requests
@@ -141,10 +144,10 @@ export function ContributionGraph(): React.ReactElement {
   }, [loading, selectedYearData, data.followers]);
 
   return (
-    <Card className="w-full max-w-full border-zinc-700 bg-black/60 shadow-xl backdrop-blur-md md:max-w-6xl">
-      <CardHeader className="border-b border-zinc-700 px-4 py-3 md:px-6">
-        <CardTitle className="flex flex-col items-start justify-between space-y-2 md:flex-row md:items-center md:space-y-0">
-          <div className="flex items-center gap-2 text-xl font-bold text-zinc-100 md:text-2xl">
+    <Card className="border-border bg-background w-full max-w-full shadow-xl backdrop-blur-md md:max-w-6xl">
+      <CardHeader className="border-border border-b px-4 py-3 md:px-6">
+        <CardTitle className="text-foreground flex flex-col items-start justify-between space-y-2 md:flex-row md:items-center md:space-y-0">
+          <div className="text-foreground flex items-center gap-2 text-xl font-bold md:text-2xl">
             GitHub Contributions
             <Loader2 className={`text-emerald-400 ${loading ? "block" : "hidden"} md:h-6 md:w-6 md:animate-spin`} />
           </div>
@@ -157,7 +160,9 @@ export function ContributionGraph(): React.ReactElement {
             <div className="flex min-w-max px-4 py-2 md:px-0">
               {MONTHS.map((month, index) => (
                 <div key={month} className="month-container flex flex-col" style={{ minWidth: "70px" }}>
-                  <div className="mb-2 px-1 text-center text-[10px] font-medium text-zinc-400 md:text-xs">{month}</div>
+                  <div className="text-muted-foreground mb-2 px-1 text-center text-[10px] font-medium md:text-xs">
+                    {month}
+                  </div>
                   <MonthGrid
                     year={selectedYear}
                     month={index}
@@ -168,7 +173,7 @@ export function ContributionGraph(): React.ReactElement {
               ))}
             </div>
           </div>
-          <div className="flex flex-col items-start justify-between space-y-2 rounded-lg bg-zinc-800/50 p-3 min-[400px]:flex-row min-[400px]:space-y-0 md:items-center md:p-4">
+          <div className="bg-muted flex flex-col items-start justify-between space-y-2 rounded-lg p-3 min-[400px]:flex-row min-[400px]:space-y-0 md:items-center md:p-4">
             {renderStats}
           </div>
         </div>
