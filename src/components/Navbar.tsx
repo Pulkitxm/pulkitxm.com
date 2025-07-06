@@ -151,7 +151,7 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
+      <SheetTrigger>
         <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
           <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
@@ -183,7 +183,11 @@ function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boole
             Sign my Guestbook
             <PenToolIcon className="ml-1 h-4 w-4" />
           </Link>
-          <ThemeToggle />
+          <div className="text-muted-foreground hover:bg-muted hover:text-foreground mt-2 flex items-center px-4 text-sm transition-colors">
+            <ThemeToggle simple>
+              {(theme) => <span className="ml-2">{theme === "dark" ? "Dark" : "Light"} Mode</span>}
+            </ThemeToggle>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
