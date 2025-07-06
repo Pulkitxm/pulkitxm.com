@@ -5,16 +5,19 @@ import { useTheme } from "next-themes";
 import { Fragment, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 
 export function ThemeToggle({
   simple,
   className,
-  children
+  children,
+  dual
 }: {
   simple?: boolean;
   className?: string;
   children?: (theme: "light" | "dark") => React.ReactNode;
+  dual?: boolean;
 }) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -23,8 +26,8 @@ export function ThemeToggle({
     setMounted(true);
   }, []);
 
-  const handleThemeToggle = async () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
+  const handleThemeToggle = async (_newTheme?: "light" | "dark") => {
+    const newTheme = _newTheme ?? (theme === "dark" ? "light" : "dark");
 
     const update = () => {
       setTheme(newTheme);
@@ -63,26 +66,57 @@ export function ThemeToggle({
   return (
     <WrapperCx
       className="flex cursor-pointer items-center gap-2 select-none"
-      onClick={children ? handleThemeToggle : undefined}
+      onClick={children ? () => handleThemeToggle(theme === "dark" ? "light" : "dark") : undefined}
     >
       {children && children(theme === "dark" ? "dark" : "light")}
-      <ButtonCx
-        variant="ghost"
-        size="icon"
-        onClick={children ? undefined : handleThemeToggle}
-        className={cn(
-          "h-9 w-9 cursor-pointer transition-colors",
-          simple ? "" : "hover:bg-gray-200 dark:hover:bg-gray-700",
-          className
-        )}
-        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-      >
-        {theme === "dark" ? (
-          <Moon className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-        ) : (
-          <Sun className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-        )}
-      </ButtonCx>
+      {dual ? (
+        <Tabs value={theme === "dark" ? "dark" : "light"} className="w-auto">
+          <TabsList className="bg-muted flex gap-1 rounded-lg p-1">
+            <TabsTrigger
+              value="light"
+              className="h-8 cursor-pointer items-center gap-1 px-3 py-1.5 text-xs"
+              aria-label="Switch to light mode"
+              onClick={() => {
+                if (!children) {
+                  handleThemeToggle("light");
+                }
+              }}
+            >
+              <Sun className="h-4 w-4" /> Light
+            </TabsTrigger>
+            <TabsTrigger
+              value="dark"
+              className="h-8 cursor-pointer items-center gap-1 px-3 py-1.5 text-xs"
+              aria-label="Switch to dark mode"
+              onClick={() => {
+                if (!children) {
+                  handleThemeToggle("dark");
+                }
+              }}
+            >
+              <Moon className="h-4 w-4" /> Dark
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ) : (
+        <ButtonCx
+          variant="ghost"
+          size="icon"
+          onClick={children ? undefined : () => handleThemeToggle(theme === "dark" ? "light" : "dark")}
+          className={cn(
+            "h-9 w-9 cursor-pointer transition-colors",
+            simple ? "" : "hover:bg-gray-200 dark:hover:bg-gray-700",
+            className
+          )}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        >
+          {theme === "dark" ? (
+            <Moon className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+          ) : (
+            <Sun className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+          )}
+        </ButtonCx>
+      )}
     </WrapperCx>
   );
 }

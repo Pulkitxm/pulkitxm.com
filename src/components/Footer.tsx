@@ -7,6 +7,8 @@ import { getLatestWorkflow } from "@/actions/gh";
 import { getCachedData, setCachedData } from "@/lib/gh";
 import { formatTimeUpdatedAgo } from "@/lib/utils";
 
+import { ThemeToggle } from "./theme-toggle";
+
 interface WorkflowData {
   timeStamp: Date;
 }
@@ -57,6 +59,9 @@ export default function Footer() {
             >
               RSS Feed
             </Link>
+            <div>
+              <ThemeToggle dual />
+            </div>
           </div>
         </div>
         <p
