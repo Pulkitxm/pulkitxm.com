@@ -9,7 +9,7 @@ import { getCurrentYear, getToday } from "@/lib/config";
 import { MONTHS } from "@/lib/constants";
 import { getGithubContributionData, getGithubFollowers } from "@/lib/gh";
 
-import { PreFetchUrl } from "../PreFetchUrl";
+import { PreviewLink } from "../PreviewLink";
 
 import { MonthGrid } from "./MonthGrid";
 import { YearSelector } from "./YearSelector";
@@ -124,7 +124,7 @@ export function ContributionGraph(): React.ReactElement {
             <strong>{selectedYearData.contributions.totalContributions}</strong> contributions
           </span>
         </div>
-        <PreFetchUrl
+        <PreviewLink
           href="/gh-followers"
           className="text-muted-foreground flex items-center space-x-2 text-xs md:text-sm"
         >
@@ -132,13 +132,13 @@ export function ContributionGraph(): React.ReactElement {
           <span className="hover:underline">
             <strong>{data.followers}</strong> followers
           </span>
-        </PreFetchUrl>
-        <PreFetchUrl href="/prs" className="text-muted-foreground flex items-center space-x-2 text-xs md:text-sm">
+        </PreviewLink>
+        <PreviewLink href="/prs" className="text-muted-foreground flex items-center space-x-2 text-xs md:text-sm">
           <GitPullRequest className="h-4 w-4 text-emerald-400 md:h-5 md:w-5" />
           <span className="hover:underline">
             <strong>{selectedYearData.prs}</strong> Pull Requests
           </span>
-        </PreFetchUrl>
+        </PreviewLink>
       </>
     );
   }, [loading, selectedYearData, data.followers]);

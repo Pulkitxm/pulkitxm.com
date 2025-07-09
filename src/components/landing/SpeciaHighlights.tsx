@@ -1,11 +1,12 @@
 "use client";
 
 import { Trophy, Rocket, Medal, Target, Brain, Award } from "lucide-react";
-import Link from "next/link";
 import { FaXTwitter, FaGithub } from "react-icons/fa6";
 
 import profile from "@/data/profile";
 import { isSameDomain } from "@/lib/utils";
+
+import { PreviewLink } from "../PreviewLink";
 
 export default function SpecialHighlights() {
   const highlights: {
@@ -59,7 +60,7 @@ export default function SpecialHighlights() {
       <p className="text-muted-foreground mb-8 text-sm">What doesn&apos;t fit on a CV, but matters just as much.</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2">
         {highlights.map((item, idx) => {
-          const Wrapper = item.link ? Link : "div";
+          const Wrapper = item.link ? PreviewLink : "div";
           return (
             <Wrapper
               key={idx}
