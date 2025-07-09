@@ -124,6 +124,7 @@ interface PreviewLinkProps {
   children?: React.ReactNode;
   className?: string;
   preFetch?: boolean;
+  underline?: boolean;
 }
 
 function PreviewSkeleton() {
@@ -502,8 +503,8 @@ InternalPreview.displayName = "InternalPreview";
 export const PreviewLink = forwardRef<
   HTMLAnchorElement,
   PreviewLinkProps & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof PreviewLinkProps>
->(({ href, children, className: _className, preFetch, ...props }, ref) => {
-  const className = cn("px-0.5", _className);
+>(({ href, children, className: _className, preFetch, underline, ...props }, ref) => {
+  const className = cn("px-0.5", _className, underline && "underline");
   const router = useRouter();
 
   const isTouchDevice = useMemo(() => (typeof window !== "undefined" ? "ontouchstart" in window : false), []);
@@ -653,10 +654,7 @@ export const PreviewLink = forwardRef<
           }
         }}
         href={href}
-        className={cn(
-          "px-0.5 text-gray-900 underline decoration-gray-400 underline-offset-4 transition-colors duration-200 hover:decoration-gray-900 dark:text-gray-100 dark:decoration-gray-500 dark:hover:decoration-gray-100",
-          className
-        )}
+        className={className}
         target={isInternal ? "_self" : "_blank"}
         rel={isInternal ? "" : "noopener noreferrer"}
         onMouseMove={handleMouseMove}

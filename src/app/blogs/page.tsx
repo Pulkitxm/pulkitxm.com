@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { getBlogs } from "@/actions/blog";
 import assets from "@/assets";
+import { PreviewLink } from "@/components/PreviewLink";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import profile from "@/data/profile";
@@ -45,7 +46,7 @@ function Blog({ blog }: { blog: BlogType }) {
   return (
     <Card className="bg-background -border border-border shadow-xl dark:border">
       <CardContent className="p-4 sm:p-6">
-        <Link
+        <PreviewLink
           href={blog.url}
           target="_blank"
           className="group block"
@@ -55,7 +56,7 @@ function Blog({ blog }: { blog: BlogType }) {
           <h2 className="text-foreground group-hover:text-primary mb-2 text-lg font-semibold transition-colors sm:text-xl">
             {blog.title}
           </h2>
-        </Link>
+        </PreviewLink>
 
         <div className="text-muted-foreground mb-2 flex flex-wrap items-center gap-3 text-sm sm:gap-6">
           <div className="flex items-center gap-2">
