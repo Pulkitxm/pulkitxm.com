@@ -67,13 +67,13 @@ export default function SpecialHighlights() {
               href={item.link || ""}
               target={isSameDomain(item.link || "") ? "_self" : "_blank"}
               className={
-                "group border-border relative flex items-start gap-4 rounded-lg border p-4 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl"
+                "group border-border flex items-start gap-4 rounded-lg border p-4 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl"
               }
             >
               <div className="bg-muted text-muted-foreground group-hover:text-foreground flex h-10 w-10 items-center justify-center rounded-lg transition-all">
                 {item.icon}
               </div>
-              <div className="text-foreground group-hover:text-foreground text-base font-medium">{item.title}</div>
+              {item.title}
             </Wrapper>
           );
         })}

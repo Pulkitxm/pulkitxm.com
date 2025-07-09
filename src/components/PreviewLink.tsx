@@ -9,7 +9,7 @@ import { useState, useEffect, useCallback, forwardRef, useRef, useMemo, memo } f
 import profile from "@/data/profile";
 import { NEXT_PUBLIC_API_URL } from "@/lib/constants";
 import { getCachedData, setCachedData } from "@/lib/gh";
-import { cn, getOgImageFromUrl, formatDate } from "@/lib/utils";
+import { cn, getOgImageFromUrl, formatDate, isSameDomain } from "@/lib/utils";
 
 import type { OgData } from "@/types/og";
 
@@ -60,19 +60,6 @@ function truncateUrl(url: string, maxLength = 50): string {
   const start = url.slice(0, maxLength / 2);
   const end = url.slice(-maxLength / 2);
   return `${start}...${end}`;
-}
-
-function isSameDomain(url: string): boolean {
-  try {
-    if (!url.startsWith("http://") && !url.startsWith("https://")) {
-      return true;
-    }
-    const urlObj = new URL(url);
-    const currentDomain = typeof window !== "undefined" ? window.location.hostname : "localhost";
-    return urlObj.hostname === currentDomain;
-  } catch {
-    return true;
-  }
 }
 
 function getOptimalPosition(element: HTMLElement): {
@@ -222,7 +209,7 @@ const ExternalPreview = memo(({ url }: { url: string }) => {
     <Card className="w-80 shadow-xl">
       <CardHeader>
         <div className="mb-1 flex items-center gap-2">
-          {ogData.favicon && <img src={ogData.favicon || "/placeholder.svg"} alt="" className="h-4 w-4 rounded" />}
+          {ogData.favicon && <img src={ogData.favicon} alt="" className="h-4 w-4 rounded" />}
           <h3 className="line-clamp-1 text-sm font-semibold text-gray-900 dark:text-gray-100">
             {ogData.title || "Untitled"}
           </h3>
@@ -236,7 +223,7 @@ const ExternalPreview = memo(({ url }: { url: string }) => {
         {ogData.image && (
           <div className="relative mb-3 h-32 w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800">
             <img
-              src={ogData.image || "/placeholder.svg"}
+              src={ogData.image}
               alt={ogData.title || "Preview"}
               className="h-full w-full object-cover transition-transform"
             />
@@ -369,7 +356,7 @@ const InternalPreview = memo(({ url }: { url: string }) => {
         <CardContent>
           <div className="relative mb-3 h-32 w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800">
             <img
-              src={ogImage.src || "/placeholder.svg"}
+              src={ogImage.src}
               alt={`${experience.companyName} experience`}
               className="h-full w-full object-cover"
             />
@@ -444,11 +431,7 @@ const InternalPreview = memo(({ url }: { url: string }) => {
         </CardHeader>
         <CardContent>
           <div className="relative mb-3 h-32 w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800">
-            <img
-              src={ogImage.src || "/placeholder.svg"}
-              alt="GitHub Followers"
-              className="h-full w-full object-cover"
-            />
+            <img src={ogImage.src} alt="GitHub Followers" className="h-full w-full object-cover" />
           </div>
           <p className="line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
             Explore the GitHub community and followers who support open source contributions and development journey.
