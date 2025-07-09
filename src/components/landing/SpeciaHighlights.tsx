@@ -1,11 +1,12 @@
 "use client";
 
 import { Trophy, Rocket, Medal, Target, Brain, Award } from "lucide-react";
-import Link from "next/link";
 import { FaXTwitter, FaGithub } from "react-icons/fa6";
 
 import profile from "@/data/profile";
 import { isSameDomain } from "@/lib/utils";
+
+import { PreviewLink } from "../PreviewLink";
 
 export default function SpecialHighlights() {
   const highlights: {
@@ -59,20 +60,20 @@ export default function SpecialHighlights() {
       <p className="text-muted-foreground mb-8 text-sm">What doesn&apos;t fit on a CV, but matters just as much.</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2">
         {highlights.map((item, idx) => {
-          const Wrapper = item.link ? Link : "div";
+          const Wrapper = item.link ? PreviewLink : "div";
           return (
             <Wrapper
               key={idx}
               href={item.link || ""}
               target={isSameDomain(item.link || "") ? "_self" : "_blank"}
               className={
-                "group border-border relative flex items-start gap-4 rounded-lg border p-4 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl"
+                "group border-border flex items-start gap-4 rounded-lg border p-4 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl"
               }
             >
               <div className="bg-muted text-muted-foreground group-hover:text-foreground flex h-10 w-10 items-center justify-center rounded-lg transition-all">
                 {item.icon}
               </div>
-              <div className="text-foreground group-hover:text-foreground text-base font-medium">{item.title}</div>
+              {item.title}
             </Wrapper>
           );
         })}

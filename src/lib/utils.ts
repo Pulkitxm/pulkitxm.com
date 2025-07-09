@@ -1,6 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
+import { StaticImageData } from "next/image";
 import { twMerge } from "tailwind-merge";
 import { parseStringPromise } from "xml2js";
+
+import assets from "@/assets";
 
 import { NEXT_PUBLIC_API_URL } from "./constants";
 
@@ -183,4 +186,47 @@ export const isSameDomain = (url: string): boolean => {
 
 export function supportsViewTransitions(): boolean {
   return typeof document !== "undefined" && "startViewTransition" in document;
+}
+
+export function getOgImageFromUrl(url: string): StaticImageData {
+  let path: string;
+
+  if (url.startsWith("/")) {
+    path = url;
+  } else {
+    try {
+      const ogImageUrl = new URL(url);
+      path = ogImageUrl.pathname;
+    } catch {
+      path = url.startsWith("/") ? url : `/${url}`;
+    }
+  }
+
+  if (path === "/") return assets.banner.home;
+
+  if (path === "/about") return assets.banner.about;
+
+  if (path === "/blogs") return assets.banner.blogs;
+
+  if (path === "/contact") return assets.banner.contact;
+
+  if (path === "/designs") return assets.banner.designs;
+
+  if (path.startsWith("/exp")) return assets.banner.experience;
+
+  if (path.startsWith("/events")) return assets.banner.events;
+
+  if (path === "/guestbook") return assets.banner.guestbook;
+
+  if (path === "/prs") return assets.banner.prs;
+
+  if (path === "/resume") return assets.banner.resume;
+
+  if (path === "/gh-followers") return assets.banner.ghFollowers;
+
+  return assets.banner.home;
+}
+
+export function getUniqueId(): string {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }

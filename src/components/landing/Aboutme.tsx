@@ -3,7 +3,7 @@ import { LiaLinkSolid } from "react-icons/lia";
 import profile from "@/data/profile";
 
 import { LinkComponent } from "../AboutCx";
-import { PreFetchUrl } from "../PreFetchUrl";
+import { PreviewLink } from "../PreviewLink";
 
 export default function Aboutme() {
   return (
@@ -22,13 +22,13 @@ export default function Aboutme() {
           I&apos;m working remotely with exciting technologies and always looking to learn more.
         </p>
 
-        <PreFetchUrl
+        <PreviewLink
           href="/about"
           className="text-primary hover:text-primary/80 mt-2 inline-flex items-center font-medium transition-colors hover:underline"
         >
           Read more about my journey
           <LiaLinkSolid className="h-5 w-5" />
-        </PreFetchUrl>
+        </PreviewLink>
       </div>
     </section>
   );

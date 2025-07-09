@@ -2,10 +2,10 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { MapPin, Briefcase } from "lucide-react";
-import Link from "next/link";
 import { useRef } from "react";
 
 import { PreFetchUrl } from "@/components/PreFetchUrl";
+import { PreviewLink } from "@/components/PreviewLink";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
@@ -118,14 +118,14 @@ export default function ExperienceTimeline() {
                 )}
                 <div>
                   <h2 className="text-foreground text-2xl font-bold">
-                    <Link
+                    <PreviewLink
                       href={group.companyUrl ?? ""}
                       rel="noopener noreferrer"
                       target="_blank"
                       className="hover:underline"
                     >
                       {group.companyName}
-                    </Link>
+                    </PreviewLink>
                   </h2>
                 </div>
               </div>

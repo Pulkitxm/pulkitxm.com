@@ -8,6 +8,8 @@ import assets from "@/assets";
 import { Button } from "@/components/ui/button";
 import profile, { links } from "@/data/profile";
 
+import { PreviewLink } from "../PreviewLink";
+
 export default function Header() {
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -33,7 +35,7 @@ export default function Header() {
       <div className="mt-12 mb-5 md:mt-24">
         <div className="mb-1 flex flex-wrap items-center gap-2">
           <p className="text-foreground text-xl font-semibold">{profile.name}</p>
-          <Link
+          <PreviewLink
             href={`https://github.com/sponsors/${profile.githubUserName}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -53,7 +55,7 @@ export default function Header() {
               />
             </svg>
             Sponsor
-          </Link>
+          </PreviewLink>
         </div>
 
         <p className="text-muted-foreground text-sm">{profile.caption}</p>

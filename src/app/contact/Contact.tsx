@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState, useRef, useMemo } from "react";
 
 import { sendEmail } from "@/actions/email";
+import { PreviewLink } from "@/components/PreviewLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -188,16 +189,16 @@ export default function Contact() {
   }, []);
 
   return (
-    <Card className="border-border text-card-foreground overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
-      <CardHeader className="space-y-1 px-6 py-8">
+    <Card className="border-border text-card-foreground shadow-lg transition-all duration-300 hover:shadow-xl">
+      <CardHeader className="space-y-1 px-6 py-8 pb-2">
         <CardTitle className="text-2xl font-bold sm:text-3xl">Get in Touch</CardTitle>
         <CardDescription className="text-muted-foreground">
           I&apos;m always open to exploring new collaborations and exciting opportunities. Whether it&apos;s a project
           idea, a job opportunity, or simply a chance to connect, feel free to reach out!
-          <div className="mt-4 flex space-x-4">
+          <div className="mt-2 flex space-x-4">
             {links.map(({ href, icon: Icon, label }, index) => {
               return (
-                <Link
+                <PreviewLink
                   key={`${label}-${index}`}
                   href={href}
                   target="_blank"
@@ -206,7 +207,7 @@ export default function Contact() {
                 >
                   <Icon className="h-7 w-7" />
                   <span className="sr-only">{label}</span>
-                </Link>
+                </PreviewLink>
               );
             })}
           </div>
