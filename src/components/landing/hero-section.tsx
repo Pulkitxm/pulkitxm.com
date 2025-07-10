@@ -2,7 +2,7 @@
 
 import { Check, Copy, FileText, Terminal } from "lucide-react";
 import Link from "next/link";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 import assets from "@/assets";
 import { Button } from "@/components/ui/button";
@@ -11,19 +11,36 @@ import profile, { links } from "@/data/profile";
 import { PreviewLink } from "../PreviewLink";
 
 export default function Header() {
-  const [copied, setCopied] = useState<boolean>(false);
+  const [copied, setCopied] = useState(false);
 
-  const copyCommand = useCallback(() => {
-    navigator.clipboard.writeText("npx pulkitxm");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }, []);
+  const copyCommand = async () => {
+    try {
+      await navigator.clipboard.writeText("npx pulkitxm");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error("Failed to copy command:", error);
+    }
+  };
+
+  const socialLinkLabels: Record<string, string> = {
+    github: "Visit Pulkit's GitHub profile",
+    linkedin: "Visit Pulkit's LinkedIn profile",
+    discord: "Connect with Pulkit on Discord",
+    x: "Follow Pulkit on X (Twitter)",
+    blogs: "Read Pulkit's blog posts",
+    npm: "View Pulkit's NPM packages"
+  };
 
   return (
     <>
       <div className="relative">
         <div className="block">
-          <img src={assets.header.src} className="w-full rounded-lg object-cover" alt="Hacktoberfest 2021" />
+          <img
+            src={assets.header.src}
+            className="h-32 w-full rounded-lg object-cover md:h-48"
+            alt="Hacktoberfest 2021"
+          />
           <div className="absolute -bottom-10 left-5 md:-bottom-20">
             <div className="border-background bg-background relative size-20 overflow-hidden rounded-full border-4 md:size-40">
               <img src={profile.image.src} className="rounded-full object-cover" alt="Profile picture" />
@@ -40,6 +57,7 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className="border-border bg-background text-foreground hover:bg-muted inline-flex items-center rounded-md border px-3 py-[5px] text-sm font-medium no-underline transition-colors duration-150"
+            aria-label="Sponsor Pulkit on GitHub"
           >
             <svg
               aria-hidden="true"
@@ -61,14 +79,17 @@ export default function Header() {
         <p className="text-muted-foreground text-sm">{profile.caption}</p>
 
         <div className="my-3 flex flex-wrap items-center gap-3">
-          {links.map(({ href, icon: Icon }, index) => (
-            <Link key={index} href={href} target="_blank" aria-label={`Link to ${href}`}>
-              <Icon className="text-muted-foreground hover:text-foreground h-5 w-5 cursor-pointer" />
-            </Link>
-          ))}
+          {links.map(({ href, icon: Icon, label }, index) => {
+            const ariaLabel = socialLinkLabels[label.toLowerCase()] || `Visit Pulkit's ${label} profile`;
+            return (
+              <Link key={index} href={href} target="_blank" aria-label={ariaLabel}>
+                <Icon className="text-muted-foreground hover:text-foreground h-5 w-5 cursor-pointer" />
+              </Link>
+            );
+          })}
 
           <Button asChild variant="outline" size="sm" className="border-border hover:bg-muted">
-            <Link href={profile.resumeLink} target="_blank">
+            <Link href={profile.resumeLink} target="_blank" aria-label="Download Pulkit's resume">
               <FileText className="mr-2 h-4 w-4" />
               Resume
             </Link>
@@ -78,19 +99,28 @@ export default function Header() {
 
       <div
         onClick={copyCommand}
-        className="bg-muted hover:bg-muted/70 mb-6 cursor-pointer rounded border border-green-900 px-4 py-2 transition-colors"
+        className="bg-muted hover:bg-muted/70 mb-6 cursor-pointer rounded border border-green-700 px-4 py-2 transition-colors dark:border-green-600"
+        role="button"
+        tabIndex={0}
+        aria-label="Copy npx command to clipboard"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            copyCommand();
+          }
+        }}
       >
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <Terminal className="h-4 w-4 text-green-600 dark:text-green-400" />
-            <code className="font-mono text-sm text-green-600 dark:text-green-400">npx pulkitxm</code>
+            <Terminal className="h-4 w-4 text-green-700 dark:text-green-300" aria-hidden="true" />
+            <code className="font-mono text-sm text-green-700 dark:text-green-300">npx pulkitxm</code>
           </div>
           <div className="flex items-center gap-1">
             <span className="text-muted-foreground text-xs">Try my interactive CLI</span>
             {copied ? (
-              <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <Check className="h-4 w-4 text-green-700 dark:text-green-300" aria-hidden="true" />
             ) : (
-              <Copy className="text-muted-foreground h-4 w-4" />
+              <Copy className="text-muted-foreground h-4 w-4" aria-hidden="true" />
             )}
           </div>
         </div>

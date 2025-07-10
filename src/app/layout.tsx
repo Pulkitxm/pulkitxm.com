@@ -4,7 +4,6 @@ import NextTopLoader from "nextjs-toploader";
 import { Fragment } from "react";
 
 import assets from "@/assets";
-import AnimatedMain from "@/components/AnimatedMain";
 import ChatWidget from "@/components/ChatWidget";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -58,8 +57,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pulkit | Full-Stack Developer & Tech Enthusiast",
     description: "Explore Pulkit's portfolio showcasing innovative web development projects and technical expertise.",
-    creator: "@pulkitxm",
-    images: [assets.banner.home.src]
+    images: [assets.banner.home.src],
+    creator: "@_pulkitxm"
   },
   robots: {
     index: true,
@@ -72,8 +71,8 @@ export const metadata: Metadata = {
       "max-snippet": -1
     }
   },
-  alternates: {
-    canonical: NEXT_PUBLIC_API_URL
+  verification: {
+    google: "your-google-verification-code"
   },
   category: "technology"
 };
@@ -89,7 +88,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
         <body
-          className={`${GeistSans.className} selection:bg-primary/20 selection:text-primary-foreground dark:selection:bg-primary/30 min-h-screen bg-[#f3f0ef] dark:bg-black`}
+          className={`${GeistSans.className} selection:bg-primary/20 selection:text-primary-foreground dark:selection:bg-primary/30 min-h-screen bg-[#f5f3f2] dark:bg-gray-950`}
         >
           <Wrapper>
             <FloatingCTA />
@@ -105,12 +104,19 @@ export default function RootLayout({
               shadow="0 0 10px #2299DD,0 0 5px #2299DD"
             />
             <div className="mx-auto mb-4 pt-5 md:mb-0 md:w-[800px] md:max-w-[800px] lg:py-8">
-              <Navbar />
+              <header>
+                <Navbar />
+              </header>
               <ChatWidget />
-              <AnimatedMain className="rounded-lg border-gray-300 p-4 pb-0 sm:p-6 md:border lg:p-8 dark:border-gray-700">
+              <main
+                className="rounded-lg border-gray-300 p-4 pb-0 sm:p-6 md:border lg:p-8 dark:border-gray-700"
+                id="main-content"
+                role="main"
+                aria-label="Main content"
+              >
                 {children}
                 <Footer />
-              </AnimatedMain>
+              </main>
               <RedirectPopup />
               <ScrollToTopButton />
             </div>

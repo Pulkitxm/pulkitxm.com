@@ -39,35 +39,40 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="border-border mt-12 border-t pt-8 text-center">
+    <footer className="border-border mt-12 border-t pt-8 text-center" role="contentinfo">
       <div className="mx-auto max-w-4xl px-4">
         <p className="text-foreground text-lg font-medium">
-          Made with <span className="text-primary">❤️</span> by Pulkit
+          Made with{" "}
+          <span className="text-primary" aria-label="love">
+            ❤️
+          </span>{" "}
+          by Pulkit
         </p>
         <div className="text-muted-foreground mt-4 flex flex-wrap items-center justify-center gap-4 text-sm">
           <p className="text-muted-foreground">© {new Date().getFullYear()} Pulkit. All rights reserved</p>
-          <div className="flex items-center gap-4">
+          <nav className="flex items-center gap-4" aria-label="Footer navigation">
             <Link
               href="/sitemap.xml"
-              className="text-muted-foreground hover:text-foreground transition-colors hover:underline"
+              className="text-muted-foreground hover:text-foreground focus:outline-primary transition-colors hover:underline focus:outline-2 focus:outline-offset-2"
             >
               Sitemap
             </Link>
             <Link
               href="/feed.xml"
-              className="text-muted-foreground hover:text-foreground transition-colors hover:underline"
+              className="text-muted-foreground hover:text-foreground focus:outline-primary transition-colors hover:underline focus:outline-2 focus:outline-offset-2"
             >
               RSS Feed
             </Link>
             <div>
               <ThemeToggle dual />
             </div>
-          </div>
+          </nav>
         </div>
         <p
           className={`text-muted-foreground mt-4 text-sm transition-opacity duration-300 ${
-            lastUpdated === null ? "opacity-0" : "opacity-70"
+            lastUpdated === null ? "opacity-0" : "opacity-90"
           }`}
+          aria-live="polite"
         >
           Last updated {lastUpdated ? formatTimeUpdatedAgo(lastUpdated) : ""}
         </p>

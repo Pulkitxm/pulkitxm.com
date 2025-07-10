@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Gallery, Item } from "react-photoswipe-gallery";
 
 import assets from "@/assets";
+import { PreviewLink } from "@/components/PreviewLink";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -77,9 +78,9 @@ export default function APIMarketExperience({ exp }: { exp: Experience }) {
         <div>
           <p className="text-muted-foreground text-base leading-relaxed">
             After my sudden departure from the{" "}
-            <Link href={`/exp/${previousCompany?.slug}`} className="underline">
+            <PreviewLink href={`/exp/${previousCompany?.slug}`} className="underline">
               previous company
-            </Link>
+            </PreviewLink>
             , I was going through a rough patch. One of my most trusted mentors recommended me to{" "}
             <span className="underline">API.market</span>, and I couldn&apos;t be more grateful. The referral led me to
             a team I genuinely admire. The work, culture, and people here have been incredibly motivating and
@@ -244,9 +245,9 @@ const apiMarketExp = {
           <p className="mb-4 text-base">
             During our product launch, we had a plan to give 100 vouchers worth $5 each to all the production people who
             came to our website. Additionally, when we had a
-            <Link href={"https://devolympus.deviatorsdce.tech"} target="_blank" className="mx-0.5 underline">
+            <PreviewLink href={"https://devolympus.deviatorsdce.tech"} target="_blank" className="underline">
               hackathon on our campus
-            </Link>
+            </PreviewLink>
             , we wanted to provide vouchers for participants. With these requirements in mind, we developed a
             comprehensive voucher system where users could claim public vouchers and the money would be credited into
             their wallet, which they could then utilize on the platform.

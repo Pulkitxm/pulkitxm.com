@@ -41,9 +41,11 @@ function JumpLinkContent({ path, url, className }: JumpLinkProps) {
     }
   }, [queryParam, url]);
 
+  const linkLabel = `Link to ${url.key} ${url.id.replace(/-/g, " ")}`;
+
   return (
-    <Link href={`${path}?${url.key}=${url.id}`} className={className?.master}>
-      <Link2 className={className?.child} />
+    <Link href={`${path}?${url.key}=${url.id}`} className={className?.master} aria-label={linkLabel} title={linkLabel}>
+      <Link2 className={className?.child} aria-hidden="true" />
     </Link>
   );
 }

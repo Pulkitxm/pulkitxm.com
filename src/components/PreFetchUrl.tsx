@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useCallback, useRef, useEffect } from "react";
 
+import { cn } from "@/lib/utils";
+
 interface PreFetchUrlProps {
   href: string;
   rel?: string;
@@ -14,6 +16,8 @@ interface PreFetchUrlProps {
   onMouseEnter?: () => void;
   onTouchStart?: () => void;
   onMouseLeave?: () => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLAnchorElement>) => void;
+  role?: string;
 }
 
 export function PreFetchUrl({
@@ -25,7 +29,9 @@ export function PreFetchUrl({
   className,
   onMouseEnter,
   onTouchStart,
-  onMouseLeave
+  onMouseLeave,
+  onKeyDown,
+  role
 }: PreFetchUrlProps) {
   const router = useRouter();
   const [isPrefetched, setIsPrefetched] = useState(false);
@@ -70,11 +76,13 @@ export function PreFetchUrl({
       href={href}
       rel={rel}
       target={target}
-      className={className}
+      className={cn(className, "outline-none select-none")}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onTouchStart={onTouchStart}
       onMouseLeave={handleMouseLeave}
+      onKeyDown={onKeyDown}
+      role={role}
     >
       {children}
     </Link>

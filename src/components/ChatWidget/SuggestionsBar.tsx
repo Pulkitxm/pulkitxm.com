@@ -33,6 +33,7 @@ export const SuggestionsBar: FC<SuggestionsBarProps> = ({
             key={index}
             onClick={() => onSuggestionClick(suggestion)}
             className="rounded-full bg-green-700 px-3 py-1 text-xs text-green-300 transition-colors hover:bg-green-600 focus:outline-none"
+            aria-label={`Use suggestion: ${suggestion}`}
           >
             {suggestion}
           </button>
@@ -45,8 +46,9 @@ export const SuggestionsBar: FC<SuggestionsBarProps> = ({
           onClick={onToggleSort}
           className="flex h-7 w-7 items-center justify-center rounded-full bg-green-700 text-green-300 transition-colors hover:bg-green-600"
           title={sortAlphabetically ? "Sort by relevance" : "Sort alphabetically"}
+          aria-label={sortAlphabetically ? "Sort by relevance" : "Sort alphabetically"}
         >
-          <ArrowDownUp size={14} />
+          <ArrowDownUp size={14} aria-hidden="true" />
         </motion.button>
         <motion.button
           whileHover={buttonHoverAnimation}
@@ -58,8 +60,9 @@ export const SuggestionsBar: FC<SuggestionsBarProps> = ({
             loadingSuggestions ? "bg-gray-600 text-gray-400" : "bg-green-700 text-green-300 hover:bg-green-600"
           )}
           title="Generate new suggestions"
+          aria-label="Generate new suggestions"
         >
-          <RefreshCw size={14} className={cn(loadingSuggestions && "animate-spin")} />
+          <RefreshCw size={14} className={cn(loadingSuggestions && "animate-spin")} aria-hidden="true" />
         </motion.button>
       </div>
     </div>

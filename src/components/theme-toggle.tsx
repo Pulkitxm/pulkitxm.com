@@ -55,7 +55,7 @@ export function ThemeToggle({
 
   if (!mounted) {
     return (
-      <ButtonCx variant="ghost" size="icon" className="h-9 w-9">
+      <ButtonCx variant="ghost" size="icon" className="h-9 w-9" aria-label="Loading theme toggle">
         <div className="h-4 w-4 animate-pulse rounded bg-gray-300" />
       </ButtonCx>
     );
@@ -70,31 +70,22 @@ export function ThemeToggle({
     >
       {children && children(theme === "dark" ? "dark" : "light")}
       {dual ? (
-        <Tabs value={theme === "dark" ? "dark" : "light"} className="w-auto">
+        <Tabs
+          value={theme === "dark" ? "dark" : "light"}
+          className="w-auto"
+          aria-label="Theme selection"
+          onValueChange={(value) => {
+            if (!children) {
+              handleThemeToggle(value as "light" | "dark");
+            }
+          }}
+        >
           <TabsList className="bg-muted flex gap-1 rounded-lg p-1">
-            <TabsTrigger
-              value="light"
-              className="h-8 cursor-pointer items-center gap-1 px-3 py-1.5 text-xs"
-              aria-label="Switch to light mode"
-              onClick={() => {
-                if (!children) {
-                  handleThemeToggle("light");
-                }
-              }}
-            >
-              <Sun className="h-4 w-4" /> Light
+            <TabsTrigger value="light" className="h-8 cursor-pointer items-center gap-1 px-3 py-1.5 text-xs">
+              <Sun className="h-4 w-4" aria-hidden="true" /> Light
             </TabsTrigger>
-            <TabsTrigger
-              value="dark"
-              className="h-8 cursor-pointer items-center gap-1 px-3 py-1.5 text-xs"
-              aria-label="Switch to dark mode"
-              onClick={() => {
-                if (!children) {
-                  handleThemeToggle("dark");
-                }
-              }}
-            >
-              <Moon className="h-4 w-4" /> Dark
+            <TabsTrigger value="dark" className="h-8 cursor-pointer items-center gap-1 px-3 py-1.5 text-xs">
+              <Moon className="h-4 w-4" aria-hidden="true" /> Dark
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -111,9 +102,9 @@ export function ThemeToggle({
           aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
         >
           {theme === "dark" ? (
-            <Moon className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+            <Moon className="h-4 w-4 text-gray-600 dark:text-gray-300" aria-hidden="true" />
           ) : (
-            <Sun className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+            <Sun className="h-4 w-4 text-gray-600 dark:text-gray-300" aria-hidden="true" />
           )}
         </ButtonCx>
       )}
