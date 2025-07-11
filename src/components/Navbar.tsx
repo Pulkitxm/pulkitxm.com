@@ -16,6 +16,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
+  const [show, setShow] = useState(false);
 
   const pathname = usePathname();
   const cleanPathname = useMemo(() => pathname.replace(/\/$/, ""), [pathname]);
@@ -31,22 +32,29 @@ export default function Navbar() {
   );
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (!show) setShow(true);
+    };
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  }, [show]);
 
   return (
     <nav className="mb-6 w-full">
       <div className={`${!isMobile ? "container" : ""} mx-auto px-4`}>
-        {isMobile ? <MobileMenu isLinkActive={isLinkActive} /> : <LargeMenu isLinkActive={isLinkActive} />}
+        {isMobile ? (
+          <MobileMenu isLinkActive={isLinkActive} show={show} />
+        ) : (
+          <LargeMenu isLinkActive={isLinkActive} show={show} />
+        )}
       </div>
     </nav>
   );
 }
 
-function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolean }) {
+function LargeMenu({ isLinkActive, show }: { isLinkActive: (linkUrl: string) => boolean; show: boolean }) {
   const router = useRouter();
   const menuRef = useRef<HTMLUListElement>(null);
 
@@ -105,7 +113,7 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
   }, [activeIndex, hoveredIndex]);
 
   return (
-    <div className="flex flex-col">
+    <div className={cn("flex flex-col", !show && "invisible")}>
       <ul ref={menuRef} className="flex items-center justify-end space-x-4">
         {NAVIGATION_LINKS.map((link, index) => (
           <li key={index}>
@@ -142,13 +150,17 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
   );
 }
 
-function MobileMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolean }) {
+function MobileMenu({ isLinkActive, show }: { isLinkActive: (linkUrl: string) => boolean; show: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>
-        <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="icon"
+          className={cn("text-muted-foreground hover:text-foreground", !show && "invisible")}
+        >
           <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
