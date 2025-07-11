@@ -67,7 +67,7 @@ function ActionDialog({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md dark:bg-black/80"
       onClick={onClose}
     >
       <motion.div
@@ -75,17 +75,17 @@ function ActionDialog({
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
         transition={{ type: "spring", duration: 0.3 }}
-        className="bg-background dark:bg-input/30 dark:text-foreground w-full max-w-md rounded-lg p-6 shadow-lg"
+        className="border-border w-full max-w-md rounded-xl border bg-white/95 p-6 shadow-2xl dark:bg-neutral-900/95"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="mb-4 text-lg font-semibold">{dialogContent.title}</h3>
+        <h3 className="text-foreground mb-4 text-lg font-semibold">{dialogContent.title}</h3>
         <p className="text-muted-foreground mb-6">{dialogContent.message}</p>
         <div className="flex justify-end gap-3">
           <Button
             variant="outline"
             onClick={onClose}
             disabled={loading}
-            className="hover:bg-muted dark:bg-input/30 dark:text-foreground dark:hover:bg-input/50"
+            className="hover:bg-muted dark:hover:bg-neutral-800"
           >
             Cancel
           </Button>
@@ -93,7 +93,7 @@ function ActionDialog({
             variant="destructive"
             onClick={onConfirm}
             disabled={loading}
-            className="bg-destructive hover:bg-destructive/90 dark:bg-destructive/60 dark:hover:bg-destructive/80"
+            className="bg-destructive hover:bg-destructive/90 dark:bg-red-700 dark:hover:bg-red-800"
           >
             {loading ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

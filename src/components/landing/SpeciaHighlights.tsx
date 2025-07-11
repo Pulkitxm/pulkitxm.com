@@ -15,7 +15,7 @@ export default function SpecialHighlights() {
     link?: string;
   }[] = [
     {
-      title: "340+ GitHub Followers",
+      title: "350+ GitHub Followers",
       icon: <FaGithub className="h-5 w-5" />,
       link: profile.links.github
     },
