@@ -15,6 +15,7 @@ interface WorkflowData {
 
 export default function Footer() {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [displayTime, setDisplayTime] = useState<string>("");
 
   useEffect(() => {
     const fetchWorkflowData = async () => {
@@ -37,6 +38,20 @@ export default function Footer() {
 
     fetchWorkflowData();
   }, []);
+
+  useEffect(() => {
+    if (!lastUpdated) return;
+
+    const updateDisplayTime = () => {
+      setDisplayTime(formatTimeUpdatedAgo(lastUpdated));
+    };
+
+    updateDisplayTime();
+
+    const interval = setInterval(updateDisplayTime, 1000);
+
+    return () => clearInterval(interval);
+  }, [lastUpdated]);
 
   return (
     <footer className="border-border mt-12 border-t pt-8 text-center">
@@ -71,7 +86,7 @@ export default function Footer() {
             lastUpdated === null ? "opacity-0" : "opacity-100"
           }`}
         >
-          Last updated {lastUpdated ? formatTimeUpdatedAgo(lastUpdated) : ""}
+          Last updated {displayTime}
         </p>
       </div>
     </footer>

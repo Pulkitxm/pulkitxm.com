@@ -71,7 +71,7 @@ export function ThemeToggle({
 
   return (
     <WrapperCx
-      className="flex cursor-pointer items-center gap-2 select-none"
+      className={WrapperCx === "div" ? "flex cursor-pointer items-center gap-2 select-none" : ""}
       onClick={children ? () => handleThemeToggle(theme === "dark" ? "light" : "dark") : undefined}
     >
       {children && children(theme === "dark" ? "dark" : "light")}
