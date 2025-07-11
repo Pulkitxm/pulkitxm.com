@@ -45,7 +45,9 @@ export default function Footer() {
           Made with <span className="text-primary">❤️</span> by Pulkit
         </p>
         <div className="text-muted-foreground mt-4 flex flex-wrap items-center justify-center gap-4 text-sm">
-          <p className="text-muted-foreground">© {new Date().getFullYear()} Pulkit. All rights reserved</p>
+          <p className="text-muted-foreground" suppressHydrationWarning>
+            © {new Date().getFullYear()} Pulkit. All rights reserved
+          </p>
           <div className="flex items-center gap-4">
             <Link
               href="/sitemap.xml"
@@ -66,7 +68,7 @@ export default function Footer() {
         </div>
         <p
           className={`text-muted-foreground mt-4 text-sm transition-opacity duration-300 ${
-            lastUpdated === null ? "opacity-0" : "opacity-70"
+            lastUpdated === null ? "opacity-0" : "opacity-100"
           }`}
         >
           Last updated {lastUpdated ? formatTimeUpdatedAgo(lastUpdated) : ""}

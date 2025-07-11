@@ -84,7 +84,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
         <body
-          className={`${GeistSans.className} selection:bg-primary/20 selection:text-primary-foreground dark:selection:bg-primary/30 min-h-screen bg-[#f5f3f2] dark:bg-gray-950`}
+          className={`${GeistSans.className} selection:bg-primary/30 selection:text-primary-foreground dark:selection:bg-primary/40 min-h-screen bg-[#f5f3f2] dark:bg-gray-950`}
         >
           <Wrapper>
             <FloatingCTA />

@@ -218,6 +218,8 @@ export default function Contact() {
         <div
           className="bg-muted text-muted-foreground relative grid h-9 w-full grid-cols-2 items-center justify-center rounded-lg p-1"
           ref={tabsRef}
+          role="tablist"
+          aria-label="Contact options"
         >
           <div
             className="bg-primary/20 absolute top-1 bottom-1 rounded-md transition-all duration-300 ease-in-out"
@@ -228,10 +230,29 @@ export default function Contact() {
             <button
               key={`${id}-${index}`}
               type="button"
+              role="tab"
+              aria-selected={isSelected === id}
+              aria-controls={`tabpanel-${id}`}
+              id={`tab-${id}`}
+              tabIndex={isSelected === id ? 0 : -1}
               className={`ring-offset-background focus-visible:ring-ring z-10 inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
                 isSelected === id ? "text-foreground" : "text-muted-foreground"
               }`}
               onClick={() => setIsSelected(id)}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+                  e.preventDefault();
+                  const currentIndex = Tabs.findIndex((tab) => tab.id === id);
+                  const nextIndex =
+                    e.key === "ArrowLeft"
+                      ? (currentIndex - 1 + Tabs.length) % Tabs.length
+                      : (currentIndex + 1) % Tabs.length;
+                  setIsSelected(Tabs[nextIndex].id);
+                  setTimeout(() => {
+                    document.getElementById(`tab-${Tabs[nextIndex].id}`)?.focus();
+                  }, 0);
+                }
+              }}
             >
               <Icon className="mr-2 h-4 w-4" />
               {label}
@@ -239,7 +260,13 @@ export default function Contact() {
           ))}
         </div>
         {Tabs.map(({ id, content }, index) => (
-          <div key={`${id}-${index}`} className={`mt-6 ${isSelected === id ? "block" : "hidden"}`}>
+          <div
+            key={`${id}-${index}`}
+            id={`tabpanel-${id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${id}`}
+            className={`mt-6 ${isSelected === id ? "block" : "hidden"}`}
+          >
             {content}
           </div>
         ))}

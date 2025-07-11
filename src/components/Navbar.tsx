@@ -42,7 +42,7 @@ export default function Navbar() {
   }, [show]);
 
   return (
-    <nav className="mb-6 w-full">
+    <nav className="mb-6 w-full" suppressHydrationWarning>
       <div className={`${!isMobile ? "container" : ""} mx-auto px-4`}>
         {isMobile ? (
           <MobileMenu isLinkActive={isLinkActive} show={show} />

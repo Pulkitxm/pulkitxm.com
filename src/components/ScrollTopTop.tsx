@@ -50,6 +50,7 @@ export default function ScrollToTopButton() {
       onClick={scrollToTop}
       aria-label="Scroll to top"
       type="button"
+      suppressHydrationWarning
     >
       <ArrowUp className="h-5 w-5" />
     </Button>
