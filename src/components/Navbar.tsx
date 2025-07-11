@@ -4,7 +4,6 @@ import { Menu, PenToolIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useFeatureFlagEnabled } from "posthog-js/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -48,7 +47,6 @@ export default function Navbar() {
 }
 
 function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolean }) {
-  const useNavigation = useFeatureFlagEnabled("shortcut-navigation") !== false;
   const router = useRouter();
   const menuRef = useRef<HTMLUListElement>(null);
 
@@ -83,11 +81,9 @@ function LargeMenu({ isLinkActive }: { isLinkActive: (linkUrl: string) => boolea
   );
 
   useEffect(() => {
-    if (!useNavigation) return;
-
     window.addEventListener("keydown", handleKeyboardNavigation);
     return () => window.removeEventListener("keydown", handleKeyboardNavigation);
-  }, [handleKeyboardNavigation, useNavigation]);
+  }, [handleKeyboardNavigation]);
 
   useEffect(() => {
     if (menuRef.current) {

@@ -2,33 +2,18 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { XIcon } from "lucide-react";
-import { useFeatureFlagEnabled } from "posthog-js/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { PreFetchUrl } from "../PreFetchUrl";
 
-export default function CollabInviteLayer() {
-  const showFloatingCTA = useFeatureFlagEnabled("floating-cta") !== false;
-  if (!showFloatingCTA) return null;
-
-  return <CollabInviteLayerCX />;
-}
-
-function CollabInviteLayerCX() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const hideCta = localStorage.getItem("hideCta") == "true";
-      setShow(!hideCta);
-    }, 1000);
-  }, []);
+export default function FloatingCTA() {
+  const [show, setShow] = useState(true);
 
   return (
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ height: 0, opacity: 0 }}
+          initial={{ height: "auto", opacity: 1 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{
@@ -36,7 +21,7 @@ function CollabInviteLayerCX() {
             stiffness: 260,
             damping: 20
           }}
-          className="border-border dark:bg-background/95 sticky top-0 z-50 w-full overflow-hidden border-b bg-[#756050] shadow-lg"
+          className="border-border dark:bg-background/95 sticky top-0 z-50 w-full overflow-hidden border-b bg-[#756050] shadow-2xl dark:shadow-[#4fa17f80]"
         >
           <div className="mx-auto flex max-w-(--breakpoint-xl) items-center justify-between px-4 py-2 md:px-6">
             <div className="flex-1" />

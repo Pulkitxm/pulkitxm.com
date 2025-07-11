@@ -80,17 +80,12 @@ export default function ExperienceTimeline() {
 
   return (
     <>
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="mb-16 flex flex-col items-center justify-center gap-2 text-center text-5xl font-bold tracking-tight"
-      >
+      <h1 className="mb-16 flex flex-col items-center justify-center gap-2 text-center text-5xl font-bold tracking-tight">
         <span className="text-primary">My Experience</span>
         <span className="muted-foreground text-xl">
           Total Professional Experience: {formatDuration(totalExperience)}
         </span>
-      </motion.h1>
+      </h1>
 
       <div className="relative" ref={containerRef}>
         <motion.div
@@ -98,14 +93,8 @@ export default function ExperienceTimeline() {
           style={{ scaleY, transformOrigin: "top" }}
         />
 
-        {groupedExperiences.map((group, groupIndex) => (
-          <motion.div
-            key={group.companyName}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: groupIndex * 0.1 }}
-            className="relative mb-12 ml-8"
-          >
+        {groupedExperiences.map((group) => (
+          <div key={group.companyName} className="relative mb-12 ml-8">
             <div className="relative mb-6">
               <div className="border-primary bg-background absolute top-0 -left-10 h-6 w-6 rounded-full border-4 dark:bg-gray-900" />
               <div className="mb-4 flex items-center space-x-2">
@@ -185,7 +174,7 @@ export default function ExperienceTimeline() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </>
