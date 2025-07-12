@@ -10,7 +10,7 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
   slug?: Experience["slug"];
 })[] = [
   {
-    companyName: "API.market",
+    companyName: "MagicAPI",
     position: "Software Engineer",
     startDate: new Date("2025-07-1"), // 2025-03-25
     location: "San Francisco, CA, USA",
@@ -20,10 +20,10 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     expDetails: APIMarketExperience,
     logo: assets.proffessionalThings.apiMarket.logo,
     expType: EXP_TYPE.FULL_TIME,
-    slug: "api.market"
+    slug: ["magicapi", "api.market"]
   },
   {
-    companyName: "API.market",
+    companyName: "MagicAPI",
     position: "Software Engineer",
     startDate: new Date("2025-03-25"), // 2025-03-25
     endDate: new Date("2025-06-30"), // 2025- 06-25
@@ -35,7 +35,7 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     expDetails: APIMarketExperience,
     logo: assets.proffessionalThings.apiMarket.logo,
     expType: EXP_TYPE.INTERNSHIP,
-    slug: "api.market"
+    slug: ["magicapi", "api.market"]
   },
   {
     companyName: "CrowdVolt (YC W24)",
@@ -49,7 +49,7 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
     desc: "Worked at CrowdVolt as a Software Engineer, responsible for maintaining the web application, implementing new features, and improving the existing codebase. Grateful for the experience and the opportunity to learn and grow with the team.",
     expDetails: CrowdVolt,
     logo: assets.proffessionalThings.crowdVolt.logo,
-    slug: "crowdvolt",
+    slug: ["crowdvolt", "crowdvolt-2"],
     expType: EXP_TYPE.FULL_TIME
   },
   {
@@ -96,7 +96,7 @@ const experienceWithoutSlug: (Omit<Experience, "slug"> & {
 
 export const experience: Experience[] = experienceWithoutSlug.map((exp) => ({
   ...exp,
-  slug: exp.slug || getSlug(exp.companyName)
+  slug: exp.slug || [getSlug(exp.companyName)]
 }));
 
 export function getLastCompany(experiences: Experience[]): Experience | undefined {

@@ -31,7 +31,7 @@ export async function getEventsData(): Promise<Event[]> {
 
 export async function getExperienceBySlug(slug: string): Promise<Experience | null> {
   const experiences = await getExperienceData();
-  return experiences.find((e) => e.slug === slug) || null;
+  return experiences.find((e) => e.slug.includes(slug)) || null;
 }
 
 export async function getEventBySlug(slug: string): Promise<Event | null> {

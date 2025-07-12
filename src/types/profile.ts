@@ -17,7 +17,7 @@ export type Experience = {
   location: string;
   roleType: string;
   url: string;
-  slug: string;
+  slug: string[];
   showOnHome?: boolean;
   desc?: string;
   expDetails?: ({ exp }: { exp: Experience }) => JSX.Element | Promise<JSX.Element>;

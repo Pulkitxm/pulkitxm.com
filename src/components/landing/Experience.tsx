@@ -24,7 +24,7 @@ export default async function Experience() {
         "companyName" | "position" | "startDate" | "endDate" | "logo" | "slug" | "showOnHome" | "expDetails"
       >[]
     >((acc, exp) => {
-      const existingIndex = acc.findIndex((e) => e.slug === exp.slug);
+      const existingIndex = acc.findIndex((e) => e.slug[0] === exp.slug[0]);
 
       if (existingIndex !== -1) {
         acc[existingIndex] = {
@@ -61,7 +61,7 @@ export default async function Experience() {
             const RenderCx: ElementType = exp.expDetails ? PreFetchUrl : "div";
             return (
               <RenderCx
-                {...(exp.expDetails ? { href: `/exp/${exp.slug}` } : {})}
+                {...(exp.expDetails ? { href: `/exp/${exp.slug[0]}` } : {})}
                 key={index}
                 className="mb-5 ml-6 block last:mb-0"
               >

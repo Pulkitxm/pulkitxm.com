@@ -122,7 +122,7 @@ export default function ExperienceTimeline() {
 
             <div className="space-y-4">
               {group.experiences.map((exp, expIndex) => (
-                <div key={exp.slug} className="relative">
+                <div key={exp.slug[0]} className="relative">
                   {group.experiences.length > 1 && expIndex < group.experiences.length - 1 && (
                     <div className="bg-border absolute top-full left-4 h-4 w-0.5 dark:bg-gray-600" />
                   )}
@@ -161,7 +161,7 @@ export default function ExperienceTimeline() {
                       <CardFooter className="mt-auto pt-6">
                         <Button className="bg-muted text-foreground hover:bg-accent w-full transition-colors" asChild>
                           <PreFetchUrl
-                            href={`/exp/${exp.slug}`}
+                            href={`/exp/${exp.slug[0]}`}
                             rel="noopener noreferrer"
                             className="flex items-center justify-center"
                           >
